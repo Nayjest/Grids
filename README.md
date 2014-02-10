@@ -1,4 +1,4 @@
 Grids
 =====
 
-Gerids framework for Laravel
+Grids framework for Laravel
