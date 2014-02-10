@@ -25,7 +25,8 @@ abstract class AbstractDataSetRenderer implements DataSetRendererInterface
         }
     }
 
-    public function getProvider($name = null) {
+    public function getProvider($name = null)
+    {
         if (!$name) {
             return $this->providers[0];
         } else {
@@ -33,11 +34,12 @@ abstract class AbstractDataSetRenderer implements DataSetRendererInterface
         }
     }
 
-    public function getViewData() {
-
-        foreach($this->providers as $provider) {
-
-        }
+    protected function fetch($providerName = null)
+    {
+        return $this->getProvider($providerName)->fetch(
+            $this->pagination->getOffset(),
+            $this->pagination->getPageSize()
+        );
     }
 
     abstract public function render();

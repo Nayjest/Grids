@@ -10,5 +10,5 @@ interface ColumnInterface
 
     public function renderHeader();
 
-    public function render($field);
+    public function render($row);
 } 

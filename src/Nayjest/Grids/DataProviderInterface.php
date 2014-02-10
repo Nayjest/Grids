@@ -17,4 +17,6 @@ interface DataProviderInterface
 
     public function setSorter(SorterInterface $sorter);
 
+    //public function setRequiredColumns(array $columnNames);
+
 } 

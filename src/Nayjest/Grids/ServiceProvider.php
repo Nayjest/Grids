@@ -1,8 +1,8 @@
 <?php namespace Nayjest\Grids;
 
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
-class GridsServiceProvider extends ServiceProvider {
+class ServiceProvider extends BaseServiceProvider {
 
 	/**
 	 * Indicates if loading of the provider is deferred.

@@ -17,6 +17,8 @@ class AbstractDataProvider
      */
     protected $sorter;
 
+    protected $requiredColumns;
+
     public function addFilter(FilterInterface $filter)
     {
         $this->filters[] = $filter;
@@ -27,5 +29,14 @@ class AbstractDataProvider
         $this->sorter = $sorter;
     }
 
+//    public function setRequiredColumns(array $columns)
+//    {
+//        $this->requiredColumns = $columns;
+//    }
+//
+//    protected function getRequiredColumns()
+//    {
+//        return $this->requiredColumns;
+//    }
 
 } 

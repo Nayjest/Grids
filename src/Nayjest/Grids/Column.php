@@ -34,9 +34,22 @@ class Column implements ColumnInterface
         return (string)$this->getLabel();
     }
 
-    public function render($field)
+    public function render($row)
     {
+        return $this->renderInternal(
+            $this->extractRowData($row)
+        );
+    }
+
+    protected function renderInternal($field) {
         return (string)$field;
+    }
+
+    protected function extractRowData($row) {
+        if (isset($row[$this->name])) {
+            return $row[$this->name];
+        };
+        throw new \Exception("Error rendering grid: Row does not contain data for '{$this->name}' column");
     }
 
 } 
