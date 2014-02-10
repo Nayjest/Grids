@@ -1,10 +1,10 @@
 {
     "name": "nayjest/grids",
-    "description": "",
+    "description": "Grids framework for Laravel",
     "authors": [
         {
             "name": "Vitalii [Nayjest] Stepanenko",
-            "email": ""
+            "email": "gmail@vitaliy.in"
         }
     ],
     "require": {
@@ -16,7 +16,7 @@
             "src/migrations"
         ],
         "psr-0": {
-            "Nayjest\\Grids\\": "src/"
+            "Nayjest\\Grids\\": "src/Nayjest/Grids"
         }
     },
     "minimum-stability": "stable"
