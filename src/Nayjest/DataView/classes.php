@@ -268,6 +268,7 @@ class Builder
     }
 }
 
+# @outdated
 class DataProviderBuilder extends Builder
 {
     public function getClass()
@@ -287,5 +288,16 @@ class Facade
     public function make($config)
     {
         return $this->create($config)->render();
+    }
+}
+
+class BuilderBlueprints {
+    public function dataProvider() {
+        return [
+            'getClass' => function($src) {
+                    if ($this->get('table')) return 'DqlDataProvider';
+                    if ($this->get('model')) return 'EloquentlDataProvider';
+                }
+        ];
     }
 }
