@@ -1,4 +1,4 @@
-Grids
+DataView
 =====
 
 Grids framework for Laravel
@@ -11,7 +11,7 @@ Best way to install this package is using composer.
 ```
 "repositories": [
     {
-        "url": "https://github.com/Nayjest/Grids.git",
+        "url": "https://github.com/Nayjest/DataView.git",
         "type": "git"
     }
 ],
@@ -19,7 +19,7 @@ Best way to install this package is using composer.
 * Step 2: Add dependency to "require" section
 ```
 "require": {
-    "nayjest/grids": "*"
+    "nayjest/data-view": "*"
 },
 ```
 * Step 3: run "composer update" command
