@@ -1,4 +1,4 @@
-<?php namespace Nayjest\Grids;
+<?php namespace Nayjest\DataView;
 
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
@@ -18,7 +18,7 @@ class ServiceProvider extends BaseServiceProvider {
 	 */
 	public function boot()
 	{
-		$this->package('nayjest/grids');
+		$this->package('nayjest/data-view');
 	}
 
 	/**

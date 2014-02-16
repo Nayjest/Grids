@@ -1,5 +1,5 @@
 {
-    "name": "nayjest/grids",
+    "name": "nayjest/data-view",
     "description": "Grids framework for Laravel",
     "authors": [
         {
@@ -16,7 +16,7 @@
             "src/migrations"
         ],
         "psr-0": {
-            "Nayjest\\Grids": "src"
+            "Nayjest\\DataView": "src"
         }
     },
     "minimum-stability": "stable"
