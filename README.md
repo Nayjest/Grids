@@ -30,4 +30,6 @@ Best way to install this package is using composer.
 ## License
 
 
-MIT
+© 2014 Vitalii Stepanenko
+
+Licensed under the MIT License
