@@ -1,22 +1,22 @@
 {
-    "name": "nayjest/data-view",
-    "description": "Grids framework for Laravel",
+    "name": "nayjest/grids",
+    "description": "",
     "authors": [
         {
             "name": "Vitalii [Nayjest] Stepanenko",
-            "email": "gmail@vitaliy.in"
+            "email": "v.stepanenko@globo-tech.com"
         }
     ],
     "require": {
-        "php": ">=5.5.0",
-        "illuminate/support": "4.1.*"
+        "php": ">=5.4.0",
+        "illuminate/support": "4.2.*"
     },
     "autoload": {
         "classmap": [
             "src/migrations"
         ],
         "psr-0": {
-            "Nayjest\\DataView": "src"
+            "Nayjest\\Grids\\": "src/"
         }
     },
     "minimum-stability": "stable"
