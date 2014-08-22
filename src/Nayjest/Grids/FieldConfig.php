@@ -78,6 +78,10 @@ class FieldConfig
         return $this->is_sortable;
     }
 
+    /**
+     * @param boolean $is_sortable
+     * @return $this
+     */
     public function setIsSortable($is_sortable)
     {
         $this->is_sortable = $is_sortable;

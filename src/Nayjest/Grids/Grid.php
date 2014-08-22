@@ -1,8 +1,8 @@
 <?php
 namespace Nayjest\Grids;
 
-use \Redirect;
-use \View;
+use Event;
+use View;
 
 class Grid
 {
@@ -10,24 +10,30 @@ class Grid
     const SORT_ASC = 'ASC';
     const SORT_DESC = 'DESC';
 
-    /**
-     * @var GridConfig
-     */
+    const EVENT_PREPARE  = 'grid.prepare';
+
+    /** @var GridConfig */
     protected $config;
 
+    /** @var bool  */
     protected $prepared = false;
 
+    /** @var  Sorter */
     protected $sorter;
 
+    /** @var  GridInputProcessor */
     protected $input_processor;
 
-    protected $filters;
+    protected $filtering;
 
     public function __construct(GridConfig $config)
     {
         $this->config = $config;
     }
 
+    /**
+     * @return string
+     */
     protected function getMainTemplate()
     {
         return $this->config->getTemplate() . '.grid';
@@ -50,6 +56,7 @@ class Grid
         $this->getFiltering()->apply();
         $this->prepareColumns();
         $this->getSorter()->apply();
+        Event::fire(self::EVENT_PREPARE, $this);
         $this->prepared = true;
     }
 
@@ -100,6 +107,9 @@ class Grid
         });
     }
 
+    /**
+     * @return Sorter
+     */
     public function getSorter()
     {
         if (null === $this->sorter) {
@@ -108,6 +118,9 @@ class Grid
         return $this->sorter;
     }
 
+    /**
+     * @return GridInputProcessor
+     */
     public function getInputProcessor()
     {
         if (null === $this->input_processor) {
@@ -116,6 +129,9 @@ class Grid
         return $this->input_processor;
     }
 
+    /**
+     * @return GridConfig
+     */
     public function getConfig()
     {
         return $this->config;
@@ -146,10 +162,10 @@ class Grid
 
     public function getFiltering()
     {
-        if ($this->filters === null) {
-            $this->filters = new Filtering($this);
+        if ($this->filtering === null) {
+            $this->filtering = new Filtering($this);
         }
-        return $this->filters;
+        return $this->filtering;
     }
 
     public function renderFilter(FilterConfig $filter)

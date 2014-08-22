@@ -100,7 +100,16 @@ class GridConfig
      */
     public function getColumns()
     {
+        if (null === $this->columns) {
+            $this->columns = new Collection;
+        }
         return $this->columns;
+    }
+
+    public function addColumn(FieldConfig $column)
+    {
+        $this->columns->push($column);
+        return $this;
     }
 
     public function setPageSize($page_size)

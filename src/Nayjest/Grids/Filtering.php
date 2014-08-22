@@ -63,7 +63,7 @@ class Filtering
         }
     }
 
-    protected function getFilter($id_or_config)
+    public function getFilter($id_or_config)
     {
         if ($id_or_config instanceof FilterConfig) {
             $id_or_config = $id_or_config->getId();
