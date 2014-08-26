@@ -9,7 +9,7 @@
 namespace Nayjest\Grids;
 
 
-abstract class DataRow
+abstract class DataRow implements IDataRow
 {
 
     protected $src;
@@ -31,11 +31,6 @@ abstract class DataRow
 
     public function getCellValue(FieldConfig $field)
     {
-        $value =  $this->extractCellValue($field);
-        if ($f = $field->getCallback()) {
-            return call_user_func($f, $value);
-        } else {
-            return $value;
-        }
+        return $this->extractCellValue($field);
     }
 } 

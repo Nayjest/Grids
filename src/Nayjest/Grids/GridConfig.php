@@ -20,6 +20,8 @@ class GridConfig
     /** @var Collection|FilterConfig[] $filters */
     protected $filters;
 
+    protected $totals = [];
+
     /**
      * @param string $template
      * @return $this
@@ -106,12 +108,30 @@ class GridConfig
         return $this->columns;
     }
 
+    /**
+     * @param $name
+     * @return null|FieldConfig
+     */
+    public function getColumn($name)
+    {
+        foreach ($this->getColumns() as $column) {
+            if ($column->getName() === $name) {
+                return $column;
+            }
+        }
+
+    }
+
     public function addColumn(FieldConfig $column)
     {
         $this->columns->push($column);
         return $this;
     }
 
+    /**
+     * @param int $page_size
+     * @return $this
+     */
     public function setPageSize($page_size)
     {
         $this->page_size = (int)$page_size;
@@ -121,6 +141,24 @@ class GridConfig
     public function getPageSize()
     {
         return $this->page_size;
+    }
+
+    /**
+     * @param array $column_names
+     * @return $this
+     */
+    public function setTotals(array $column_names)
+    {
+        $this->totals = $column_names;
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getTotals()
+    {
+        return $this->totals;
     }
 
 } 

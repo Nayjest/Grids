@@ -1,22 +1,17 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: User
- * Date: 27.05.14
- * Time: 16:18
- */
-
 namespace Nayjest\Grids;
 
-abstract class DataProvider {
+use Input;
+
+abstract class DataProvider
+{
+    const EVENT_FETCH_ROW = 'grid.dp.fetch_row';
 
     protected $src;
 
     protected $index = 0;
 
     protected $page_size = 100;
-
-
 
     public function __construct($src)
     {
@@ -42,6 +37,21 @@ abstract class DataProvider {
         return $this;
     }
 
+    /**
+     * @todo support for multiple pagination
+     */
+    public function getCurrentPage()
+    {
+        return (int)Input::get('page', 1) ? : 1;
+
+    }
+
+    protected function getRowId()
+    {
+        $offset = ($this->getCurrentPage() - 1) * $this->page_size;
+        return $offset + $this->index;
+    }
+
     abstract public function orderBy($field_name, $direction);
 
     abstract public function filter($field_name, $operator, $value);
@@ -53,21 +63,11 @@ abstract class DataProvider {
      */
     abstract public function getPaginator();
 
+    /** @return DataRow|null */
     abstract public function getRow();
-//    {
-//        if ($this->index < $this->count()) {
-//            $this->index++;
-//            return new DataRow(next($this->src));
-//        } else {
-//            return null;
-//        }
-//    }
 
     /**
      * @return int
      */
     abstract public function count();
-//    {
-//        return count($this->src);
-//    }
 } 

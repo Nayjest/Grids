@@ -8,8 +8,8 @@
 
 namespace Nayjest\Grids;
 
-
 use Illuminate\Database\Eloquent\Builder;
+use Event;
 
 class EloquentDataProvider extends DataProvider {
 
@@ -74,7 +74,9 @@ class EloquentDataProvider extends DataProvider {
             $this->index++;
             $item = $this->iterator->current();
             $this->iterator->next();
-            return new EloquentDataRow($item, $this->index);
+            $row = new EloquentDataRow($item, $this->getRowId());
+            Event::fire(self::EVENT_FETCH_ROW, [$row, $this]);
+            return $row;
         } else {
             return null;
         }

@@ -68,19 +68,31 @@
 </thead>
 <?php # ========== TABLE BODY ========== ?>
 <tbody>
-<?php /** @var Nayjest\Grids\DataRow $row **/ ?>
 <?php while($row = $data->getRow()): ?>
     <tr>
         <?php /** @var Nayjest\Grids\FieldConfig $column **/ ?>
         <?php foreach($columns as $column): ?>
         <td>
-            <?= $row->getCellValue($column) ?>
+            <?= $column->getValue($row) ?>
         </td>
         <?php endforeach ?>
     </tr>
 <?php endwhile; ?>
 </tbody>
 <tfoot>
+<?php if($row = $grid->getTotalsRow()): ?>
+    <tr>
+        <?php foreach($columns as $column): ?>
+            <td>
+                <?= $row->uses($column)?$column->getValue($row):'' ?>
+            </td>
+        <?php endforeach ?>
+    </tr>
+    <tr>
+        <td colspan="<?= $columns->count() ?>">
+            <?= $grid->links()  ?>
+        </td>
+    </tr>
+<?php endif ?>
 </tfoot>
 </table>
-<?= $grid->links()  ?>

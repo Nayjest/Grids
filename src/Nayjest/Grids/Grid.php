@@ -11,6 +11,7 @@ class Grid
     const SORT_DESC = 'DESC';
 
     const EVENT_PREPARE  = 'grid.prepare';
+    const EVENT_CREATE = 'grid.create';
 
     /** @var GridConfig */
     protected $config;
@@ -26,9 +27,13 @@ class Grid
 
     protected $filtering;
 
+    /** @var  TotalsDataRow|null */
+    protected $totals_row;
+
     public function __construct(GridConfig $config)
     {
         $this->config = $config;
+        Event::fire(self::EVENT_CREATE, $this);
     }
 
     /**
@@ -37,6 +42,14 @@ class Grid
     protected function getMainTemplate()
     {
         return $this->config->getTemplate() . '.grid';
+    }
+
+    /**
+     * @return TotalsDataRow|null
+     */
+    public function getTotalsRow()
+    {
+        return $this->totals_row;
     }
 
     protected function prepare()
@@ -56,8 +69,26 @@ class Grid
         $this->getFiltering()->apply();
         $this->prepareColumns();
         $this->getSorter()->apply();
+        $this->prepareTotals();
         Event::fire(self::EVENT_PREPARE, $this);
         $this->prepared = true;
+    }
+
+    protected function prepareTotals()
+    {
+        $cfg = $this->getConfig();
+        $field_names = $cfg->getTotals();
+        if (!empty($field_names)) {
+            $fields = $cfg->getColumns()->filter(
+                function(FieldConfig $field) use ($field_names) {
+                    return in_array($field->getName(), $field_names);
+                }
+            );
+            $this->totals_row = new TotalsDataRow(
+                $fields,
+                $cfg->getDataProvider()
+            );
+        }
     }
 
     protected function prepareColumns()
