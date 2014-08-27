@@ -1,16 +1,11 @@
 <?php
 namespace Nayjest\Grids\Components\Base;
 
-use View;
-
-trait TRenderableRegistry
+trait TRegistryView
 {
-    use TRenderable {
-        TRenderable::render as protected renderTemplate;
+    use TComponentView {
+        TComponentView::render as protected renderTemplate;
     }
-    use TRegistry;
-
-    protected $render_section;
 
     /**
      * @return string
@@ -46,34 +41,4 @@ trait TRenderableRegistry
             return $this->renderComponents();
         }
     }
-
-    protected function getViewData()
-    {
-        return $this->grid->getViewData() + [
-            'component' => $this,
-            'components' => $this->getComponents(),
-        ];
-    }
-
-    /**
-     * @todo copypaste from TRenderableComponent
-     * @return string
-     */
-    public function getTemplate()
-    {
-        $grid_tpl = $this->grid->getConfig()->getTemplate();
-        return str_replace('*.',"$grid_tpl.", $this->template);
-    }
-
-    public function getRenderSection()
-    {
-        return $this->render_section;
-    }
-
-    public function setRenderSection($section_name)
-    {
-        $this->render_section = $section_name;
-        return $this;
-    }
-
 }

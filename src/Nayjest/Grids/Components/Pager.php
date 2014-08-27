@@ -3,21 +3,14 @@ namespace Nayjest\Grids\Components;
 
 
 use Nayjest\Grids\Components\Base\IRenderableComponent;
-use Nayjest\Grids\Components\Base\TRenderableComponent;
-use Nayjest\Grids\ArrayDataRow;
-use Nayjest\Grids\DataProvider;
-use Nayjest\Grids\DataRow;
-use Nayjest\Grids\FieldConfig;
-use Nayjest\Grids\IdFieldConfig;
-use Nayjest\Grids\Grid;
+use Nayjest\Grids\Components\Base\TComponent;
+use Nayjest\Grids\Components\Base\TComponentView;
 use Event;
-use Illuminate\Support\Collection;
 
 class Pager implements IRenderableComponent
 {
-    use TRenderableComponent {
-        TRenderableComponent::initialize as protected initializeComponent;
-    }
+    use TComponent;
+    use TComponentView;
 
     public function __construct()
     {

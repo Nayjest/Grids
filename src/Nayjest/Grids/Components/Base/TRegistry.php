@@ -6,10 +6,6 @@ use Nayjest\Grids\Grid;
 
 trait TRegistry
 {
-    use TComponent {
-        TComponent::initialize as private componentInitialize;
-    }
-
     protected $components;
 
     /**
@@ -70,9 +66,8 @@ trait TRegistry
         return $component;
     }
 
-    public function initialize(Grid $grid)
+    public function initializeComponents(Grid $grid)
     {
-        $this->componentInitialize($grid);
         foreach ($this->getComponents() as $component) {
             $component->initialize($grid);
         }

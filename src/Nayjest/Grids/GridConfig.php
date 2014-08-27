@@ -2,12 +2,14 @@
 namespace Nayjest\Grids;
 
 use Illuminate\Support\Collection;
+use Nayjest\Grids\Components\Base\TComponent;
 use Nayjest\Grids\Components\Base\TRegistry;
 use Nayjest\Grids\Components\Base\IRegistry;
 
 class GridConfig implements IRegistry
 {
     use TRegistry;
+    use TComponent;
 
     protected  $template = 'grids::default';
 

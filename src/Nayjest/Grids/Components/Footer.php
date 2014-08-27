@@ -3,11 +3,15 @@ namespace Nayjest\Grids\Components;
 
 use Nayjest\Grids\Components\Base\IRegistry;
 use Nayjest\Grids\Components\Base\IRenderableComponent;
-use Nayjest\Grids\Components\Base\TRenderableRegistry;
+use Nayjest\Grids\Components\Base\TComponent;
+use Nayjest\Grids\Components\Base\TRegistry;
+use Nayjest\Grids\Components\Base\TRegistryView;
 
 class Footer implements IRenderableComponent, IRegistry
 {
-    use TRenderableRegistry;
+    use TComponent;
+    use TRegistry;
+    use TRegistryView;
 
     const SECTION_BEGIN = 'footer.section_begin';
     const SECTION_END = 'footer.section_end';

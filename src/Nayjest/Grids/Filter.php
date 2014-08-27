@@ -9,7 +9,7 @@
 namespace Nayjest\Grids;
 
 use Nayjest\Grids\Components\Base\TComponent;
-use Nayjest\Grids\Components\Base\TRenderableComponent;
+use Nayjest\Grids\Components\Base\TComponentView;
 use View;
 
 class Filter

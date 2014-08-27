@@ -3,7 +3,7 @@ namespace Nayjest\Grids\Components\Base;
 
 use Nayjest\Grids\Grid;
 
-interface IComponent
+interface IComponent extends ITaggable
 {
     /**
      * @param IRegistry $parent
@@ -32,13 +32,4 @@ interface IComponent
      * @return $this
      */
     public function setName($name);
-
-    public function getTags();
-
-    public function setTags(array $tag_names);
-
-    public function hasTag($tag_name);
-
-    public function hasTags(array $tag_names);
-
 }

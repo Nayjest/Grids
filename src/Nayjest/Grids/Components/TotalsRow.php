@@ -3,7 +3,8 @@ namespace Nayjest\Grids\Components;
 
 
 use Nayjest\Grids\Components\Base\IRenderableComponent;
-use Nayjest\Grids\Components\Base\TRenderableComponent;
+use Nayjest\Grids\Components\Base\TComponent;
+use Nayjest\Grids\Components\Base\TComponentView;
 use Nayjest\Grids\ArrayDataRow;
 use Nayjest\Grids\DataProvider;
 use Nayjest\Grids\DataRow;
@@ -15,9 +16,10 @@ use Illuminate\Support\Collection;
 
 class TotalsRow  extends ArrayDataRow implements IRenderableComponent
 {
-    use TRenderableComponent {
-        TRenderableComponent::initialize as protected initializeComponent;
+    use TComponent {
+        TComponent::initialize as protected initializeComponent;
     }
+    use TComponentView;
 
     /** @var \Illuminate\Support\Collection|FieldConfig[] */
     protected $fields;

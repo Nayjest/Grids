@@ -1,12 +1,11 @@
 <?php
 namespace Nayjest\Grids\Components\Base;
 
-trait TRenderableComponent
+trait TComponentView
 {
     use TRenderable {
         TRenderable::getTemplate as private getTemplateInternal;
     }
-    use TComponent;
 
     protected $render_section;
 
@@ -33,6 +32,5 @@ trait TRenderableComponent
         $this->render_section = $section_name;
         return $this;
     }
-
 
 }

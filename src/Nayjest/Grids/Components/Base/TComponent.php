@@ -5,14 +5,14 @@ use Nayjest\Grids\Grid;
 
 trait TComponent
 {
+    use TTaggable;
+
     protected $parent;
 
     /** @var Grid */
     protected $grid;
 
     protected $name;
-
-    protected $tags = [];
 
     public function attachTo(IRegistry $parent)
     {
@@ -27,6 +27,9 @@ trait TComponent
     public function initialize(Grid $grid)
     {
         $this->grid = $grid;
+        if (method_exists($this, 'initializeComponents')) {
+            $this->initializeComponents($grid);
+        }
     }
 
     public function getName()
@@ -40,27 +43,4 @@ trait TComponent
         return $this;
     }
 
-    public function getTags()
-    {
-        return $this->tags;
-    }
-
-    public function setTags(array $tags)
-    {
-        $this->tags = $tags;
-    }
-
-    public function hasTag($tag_name)
-    {
-        return in_array($tag_name, $this->tags);
-    }
-
-    public function hasTags(array $tag_names)
-    {
-        foreach ($tag_names as $tag) {
-            if ($this->hasTag($tag)) continue;
-            return false;
-        }
-        return true;
-    }
 }

@@ -3,11 +3,15 @@ namespace Nayjest\Grids\Components;
 
 use Nayjest\Grids\Components\Base\IRegistry;
 use Nayjest\Grids\Components\Base\IRenderableComponent;
-use Nayjest\Grids\Components\Base\TRenderableRegistry;
+use Nayjest\Grids\Components\Base\TComponent;
+use Nayjest\Grids\Components\Base\TRegistry;
+use Nayjest\Grids\Components\Base\TRegistryView;
 
 class Header implements IRenderableComponent, IRegistry
 {
-    use TRenderableRegistry;
+    use TComponent;
+    use TRegistry;
+    use TRegistryView;
 
     const SECTION_BEGIN = 'header.section_begin';
     const SECTION_END = 'header.section_end';

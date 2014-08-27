@@ -3,11 +3,15 @@ namespace Nayjest\Grids\Components;
 
 use Nayjest\Grids\Components\Base\IRegistry;
 use Nayjest\Grids\Components\Base\IRenderableComponent;
-use Nayjest\Grids\Components\Base\TRenderableRegistry;
+use Nayjest\Grids\Components\Base\TComponent;
+use Nayjest\Grids\Components\Base\TRegistry;
+use Nayjest\Grids\Components\Base\TRegistryView;
 
 class FiltersRow implements IRenderableComponent, IRegistry
 {
-    use TRenderableRegistry;
+    use TComponent;
+    use TRegistry;
+    use TRegistryView;
 
     public function __construct()
     {
