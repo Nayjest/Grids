@@ -8,12 +8,12 @@
 
 namespace Nayjest\Grids;
 
+use Nayjest\Grids\Components\Base\TComponent;
+use Nayjest\Grids\Components\Base\TRenderableComponent;
 use View;
 
 class Filter
 {
-
-    protected $grid;
 
     protected $config;
 
