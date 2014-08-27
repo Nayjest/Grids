@@ -179,6 +179,14 @@ class Grid
         return $this->getConfig()->getComponentByName('footer');
     }
 
+    /**
+     * @return Components\Footer
+     */
+    public function header()
+    {
+        return $this->getConfig()->getComponentByName('header');
+    }
+
     public function getFiltering()
     {
         if ($this->filtering === null) {
