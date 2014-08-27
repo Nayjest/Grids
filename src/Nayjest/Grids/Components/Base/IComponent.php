@@ -22,6 +22,8 @@ interface IComponent extends ITaggable
      */
     public function initialize(Grid $grid);
 
+    public function prepare();
+
     /**
      * @return string|null
      */

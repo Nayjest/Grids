@@ -40,10 +40,6 @@ echo $component->renderComponents(Header::SECTION_BEGIN);
             <?php endif ?>
         </th>
     <?php endforeach ?>
-    <?php # ========== ACTIONS COLUMN ========== ?>
-    <?php if($grid->hasActionsColumn()): ?>
-        <th>Actions</th>
-    <?php endif ?>
 </tr>
 <?= $component->renderComponents(HEADER::SECTION_END) ?>
 </thead>

@@ -73,4 +73,11 @@ trait TRegistry
         }
     }
 
+    public function prepareComponents()
+    {
+        foreach ($this->getComponents() as $component) {
+            $component->prepare();
+        }
+    }
+
 }

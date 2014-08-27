@@ -1,3 +1,4 @@
+<form>
 <?php
 /** @var Nayjest\Grids\DataProvider $data **/
 /** @var Nayjest\Grids\Grid $grid **/
@@ -19,3 +20,4 @@
 </tbody>
 <?= $grid->footer() ?>
 </table>
+</form>

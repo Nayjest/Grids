@@ -30,8 +30,8 @@ class Grid
     public function __construct(GridConfig $config)
     {
         $this->config = $config;
-        Event::fire(self::EVENT_CREATE, $this);
         $this->initializeComponents();
+        Event::fire(self::EVENT_CREATE, $this);
     }
 
     /**
@@ -56,6 +56,7 @@ class Grid
 
         $cfg->getDataProvider()
             ->setPageSize($cfg->getPageSize());
+        $this->getConfig()->prepare();
         //$this->getInputProcessor()->applyChanges();
         $this->getFiltering()->apply();
         $this->prepareColumns();
@@ -180,7 +181,7 @@ class Grid
     }
 
     /**
-     * @return Components\Footer
+     * @return Components\Header
      */
     public function header()
     {
@@ -204,11 +205,6 @@ class Grid
             $this->getFilterTemplate($filter),
             $data
         );
-    }
-
-    public function hasActionsColumn()
-    {
-        return $this->getFiltering()->available();
     }
 
     public function __toString()

@@ -43,4 +43,11 @@ trait TComponent
         return $this;
     }
 
+    public function prepare()
+    {
+        if (method_exists($this, 'initializeComponents')) {
+            $this->prepareComponents();
+        }
+    }
+
 }

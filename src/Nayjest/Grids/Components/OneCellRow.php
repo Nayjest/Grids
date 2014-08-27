@@ -5,6 +5,8 @@ use Nayjest\Grids\Components\Base\RenderableRegistry;
 
 class OneCellRow extends RenderableRegistry
 {
+    protected $name = 'one_cell_row';
+
     public function render()
     {
         $colspan = $this->grid->getConfig()->getColumns()->count();
