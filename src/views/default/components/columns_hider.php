@@ -85,20 +85,6 @@
             //this.cookiePath = "{{ parse_url(URL::current())['path'] }}";
         };
         ColumnHider.prototype.defaultValues = {
-            views: true,
-            hosts: true,
-            regs: true,
-            gamers: true,
-            rounds: true,
-            first_deposits: true,
-            deposits: true,
-            withdraws: true,
-            qualified_players: true
-            <?php if (rebills_view_allowed()): ?>
-            ,
-            rebills_looses: false,
-            rebills_profit: false
-            <?php endif ?>
         };
         ColumnHider.prototype.getValues = function () {
             var json;
