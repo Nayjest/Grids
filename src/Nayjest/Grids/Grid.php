@@ -27,13 +27,11 @@ class Grid
 
     protected $filtering;
 
-    /** @var  TotalsDataRow|null */
-    protected $totals_row;
-
     public function __construct(GridConfig $config)
     {
         $this->config = $config;
         Event::fire(self::EVENT_CREATE, $this);
+        $this->initializeComponents();
     }
 
     /**
@@ -44,13 +42,6 @@ class Grid
         return $this->config->getTemplate() . '.grid';
     }
 
-    /**
-     * @return TotalsDataRow|null
-     */
-    public function getTotalsRow()
-    {
-        return $this->totals_row;
-    }
 
     protected function prepare()
     {
@@ -69,26 +60,13 @@ class Grid
         $this->getFiltering()->apply();
         $this->prepareColumns();
         $this->getSorter()->apply();
-        $this->prepareTotals();
         Event::fire(self::EVENT_PREPARE, $this);
         $this->prepared = true;
     }
 
-    protected function prepareTotals()
+    protected function initializeComponents()
     {
-        $cfg = $this->getConfig();
-        $field_names = $cfg->getTotals();
-        if (!empty($field_names)) {
-            $fields = $cfg->getColumns()->filter(
-                function(FieldConfig $field) use ($field_names) {
-                    return in_array($field->getName(), $field_names);
-                }
-            );
-            $this->totals_row = new TotalsDataRow(
-                $fields,
-                $cfg->getDataProvider()
-            );
-        }
+        $this->getConfig()->initialize($this);
     }
 
     protected function prepareColumns()
@@ -100,6 +78,8 @@ class Grid
 
     /**
      * Provides unique name for each grid on the page
+     *
+     * @return null
      */
     protected function provideName()
     {
@@ -191,6 +171,14 @@ class Grid
         );
     }
 
+    /**
+     * @return Components\Footer
+     */
+    public function footer()
+    {
+        return $this->getConfig()->getComponentByName('footer');
+    }
+
     public function getFiltering()
     {
         if ($this->filtering === null) {
@@ -208,18 +196,6 @@ class Grid
             $this->getFilterTemplate($filter),
             $data
         );
-    }
-
-    public function links()
-    {
-        return $this->config
-            ->getDataProvider()
-            ->getPaginator()
-            ->appends(
-                $this->getInputProcessor()->getKey(),
-                $this->getInputProcessor()->getInput()
-            )
-            ->links();
     }
 
     public function hasActionsColumn()

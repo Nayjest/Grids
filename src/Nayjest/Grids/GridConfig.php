@@ -2,9 +2,13 @@
 namespace Nayjest\Grids;
 
 use Illuminate\Support\Collection;
+use Nayjest\Grids\Components\Base\TRegistry;
+use Nayjest\Grids\Components\Base\IRegistry;
 
-class GridConfig
+class GridConfig implements IRegistry
 {
+    use TRegistry;
+
     protected  $template = 'grids::default';
 
     /** @var FieldConfig[]|Collection  */
@@ -15,12 +19,8 @@ class GridConfig
 
     protected $page_size = 50;
 
-    protected $name;
-
     /** @var Collection|FilterConfig[] $filters */
     protected $filters;
-
-    protected $totals = [];
 
     /**
      * @param string $template
@@ -29,17 +29,6 @@ class GridConfig
     public function setTemplate($template)
     {
         $this->template = $template;
-        return $this;
-    }
-
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    public function setName($name)
-    {
-        $this->name = $name;
         return $this;
     }
 
@@ -141,24 +130,6 @@ class GridConfig
     public function getPageSize()
     {
         return $this->page_size;
-    }
-
-    /**
-     * @param array $column_names
-     * @return $this
-     */
-    public function setTotals(array $column_names)
-    {
-        $this->totals = $column_names;
-        return $this;
-    }
-
-    /**
-     * @return array
-     */
-    public function getTotals()
-    {
-        return $this->totals;
     }
 
 } 

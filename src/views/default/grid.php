@@ -79,6 +79,7 @@
     </tr>
 <?php endwhile; ?>
 </tbody>
+<?php /*
 <tfoot>
 <?php if($row = $grid->getTotalsRow()): ?>
     <tr>
@@ -95,4 +96,6 @@
     </tr>
 <?php endif ?>
 </tfoot>
+ */ ?>
+<?= $grid->footer() ?>
 </table>
