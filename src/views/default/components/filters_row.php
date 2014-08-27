@@ -3,7 +3,7 @@
     <tr>
         <form>
             <?php foreach($columns as $column): ?>
-                <td>
+                <td class="column-<?= $column->getName() ?>">
                     <?php if ($column->hasFilters()): ?>
                         <?php foreach($column->getFilters() as $filter): ?>
                             <?= $grid->getFiltering()->render($filter) ?>

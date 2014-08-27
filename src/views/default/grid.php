@@ -2,7 +2,7 @@
 /** @var Nayjest\Grids\DataProvider $data **/
 /** @var Nayjest\Grids\Grid $grid **/
 ?>
-<table class="table table-striped">
+<table class="table table-striped" id="<?= $grid->getConfig()->getName() ?>">
 <?= $grid->header() ?>
 <?php # ========== TABLE BODY ========== ?>
 <tbody>
@@ -10,7 +10,7 @@
     <tr>
         <?php /** @var Nayjest\Grids\FieldConfig $column **/ ?>
         <?php foreach($columns as $column): ?>
-        <td>
+        <td  class="column-<?= $column->getName() ?>">
             <?= $column->getValue($row) ?>
         </td>
         <?php endforeach ?>
