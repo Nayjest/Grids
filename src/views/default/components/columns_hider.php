@@ -4,6 +4,7 @@
         id="<?= $component->getId('btn') ?>"
         class="btn btn-default"
         data-toggle="popover"
+        type="button"
         data-placement="bottom"
         >
         <span class="glyphicon glyphicon-eye-open"></span>
