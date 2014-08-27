@@ -1,27 +1,16 @@
 <?php
 namespace Nayjest\Grids\Components;
 
-use Nayjest\Grids\Components\Base\IRegistry;
-use Nayjest\Grids\Components\Base\IRenderableComponent;
-use Nayjest\Grids\Components\Base\TComponent;
-use Nayjest\Grids\Components\Base\TRegistry;
-use Nayjest\Grids\Components\Base\TRegistryView;
+use Nayjest\Grids\Components\Base\RenderableRegistry;
 
-class Footer implements IRenderableComponent, IRegistry
+class Footer extends RenderableRegistry
 {
-    use TComponent;
-    use TRegistry;
-    use TRegistryView;
-
     const SECTION_BEGIN = 'footer.section_begin';
     const SECTION_END = 'footer.section_end';
     const SECTION_IN_ROW = null;
 
-    public function __construct()
-    {
-        $this->template = '*.components.footer';
-        $this->name = 'footer';
-    }
+    protected $template = '*.components.footer';
+    protected $name = 'footer';
 
     public function getBeginComponents()
     {
@@ -37,5 +26,4 @@ class Footer implements IRenderableComponent, IRegistry
     {
         return $this->getSectionComponents(self::SECTION_IN_ROW);
     }
-
 }

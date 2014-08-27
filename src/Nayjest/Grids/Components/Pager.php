@@ -1,22 +1,13 @@
 <?php
 namespace Nayjest\Grids\Components;
 
+use Nayjest\Grids\Components\Base\RenderableComponent;
 
-use Nayjest\Grids\Components\Base\IRenderableComponent;
-use Nayjest\Grids\Components\Base\TComponent;
-use Nayjest\Grids\Components\Base\TComponentView;
-use Event;
-
-class Pager implements IRenderableComponent
+class Pager extends RenderableComponent
 {
-    use TComponent;
-    use TComponentView;
 
-    public function __construct()
-    {
-        $this->template = '*.components.pager';
-        $this->name = 'pager';
-    }
+    protected $template = '*.components.pager';
+    protected $name = 'pager';
 
     public function links()
     {

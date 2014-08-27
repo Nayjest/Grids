@@ -1,27 +1,16 @@
 <?php
 namespace Nayjest\Grids\Components;
 
-use Nayjest\Grids\Components\Base\IRegistry;
-use Nayjest\Grids\Components\Base\IRenderableComponent;
-use Nayjest\Grids\Components\Base\TComponent;
-use Nayjest\Grids\Components\Base\TRegistry;
-use Nayjest\Grids\Components\Base\TRegistryView;
+use Nayjest\Grids\Components\Base\RenderableRegistry;
 
-class Header implements IRenderableComponent, IRegistry
+class Header extends RenderableRegistry
 {
-    use TComponent;
-    use TRegistry;
-    use TRegistryView;
-
     const SECTION_BEGIN = 'header.section_begin';
     const SECTION_END = 'header.section_end';
     const SECTION_IN_ROW = null;
 
-    public function __construct()
-    {
-        $this->template = '*.components.header';
-        $this->name = 'header';
-    }
+    protected $template = '*.components.header';
+    protected $name = 'header';
 
     public function getBeginComponents()
     {
@@ -37,5 +26,4 @@ class Header implements IRenderableComponent, IRegistry
     {
         return $this->getSectionComponents(self::SECTION_IN_ROW);
     }
-
 }
