@@ -6,10 +6,11 @@ use Nayjest\Grids\Components\Base\RenderableComponent;
 class Pager extends RenderableComponent
 {
 
-    protected $template = '*.components.pager';
-    protected $name = 'pager';
+    public function render() {
+        return $this->links();
+    }
 
-    public function links()
+    protected function links()
     {
         return $this->grid->getConfig()
             ->getDataProvider()
