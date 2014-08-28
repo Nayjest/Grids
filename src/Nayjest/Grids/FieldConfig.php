@@ -40,6 +40,8 @@ class FieldConfig
     /** @var  callable */
     protected $callback;
 
+    protected $is_hidden = false;
+
     public function getOrder()
     {
         return $this->order;
@@ -60,6 +62,21 @@ class FieldConfig
     {
         $this->name = $name;
         return $this;
+    }
+
+    public function isHidden()
+    {
+        return $this->is_hidden;
+    }
+
+    public function hide()
+    {
+        $this->is_hidden = true;
+    }
+
+    public function show()
+    {
+        $this->is_hidden = false;
     }
 
     public function getLabel()

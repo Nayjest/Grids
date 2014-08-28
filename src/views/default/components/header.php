@@ -8,7 +8,10 @@ echo $component->renderComponents(Header::SECTION_BEGIN);
     <?php /** @var Nayjest\Grids\FieldConfig $column **/ ?>
     <?php # ========== COLUMN HEADERS ========== ?>
     <?php foreach($columns as $column): ?>
-        <th  class="column-<?= $column->getName() ?>">
+        <th
+            class="column-<?= $column->getName() ?>"
+            <?= $column->isHidden()?'style="display:none"':'' ?>
+            >
             <?php # ========== COLUMN HEADER ========== ?>
             <?= $column->getLabel() ?>
 

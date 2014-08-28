@@ -11,7 +11,10 @@
     <tr>
         <?php /** @var Nayjest\Grids\FieldConfig $column **/ ?>
         <?php foreach($columns as $column): ?>
-        <td  class="column-<?= $column->getName() ?>">
+        <td
+            class="column-<?= $column->getName() ?>"
+            <?= $column->isHidden()?'style="display:none"':'' ?>
+            >
             <?= $column->getValue($row) ?>
         </td>
         <?php endforeach ?>

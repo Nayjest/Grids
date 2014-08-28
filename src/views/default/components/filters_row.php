@@ -2,7 +2,10 @@
 <?php if($grid->getFiltering()->available()): ?>
     <tr>
             <?php foreach($columns as $column): ?>
-                <td class="column-<?= $column->getName() ?>">
+                <td
+                    class="column-<?= $column->getName() ?>"
+                    <?= $column->isHidden()?'style="display:none"':'' ?>
+                    >
                     <?php if ($column->hasFilters()): ?>
                         <?php foreach($column->getFilters() as $filter): ?>
                             <?= $grid->getFiltering()->render($filter) ?>

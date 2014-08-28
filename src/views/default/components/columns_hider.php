@@ -84,12 +84,11 @@
             this.tableSelector = tableSelector;
             //this.cookiePath = "{{ parse_url(URL::current())['path'] }}";
         };
-        ColumnHider.prototype.defaultValues = {
-        };
+        ColumnHider.prototype.defaultValues = <?= json_encode($component->getColumnsVisibility()) ?>;
         ColumnHider.prototype.getValues = function () {
             var json;
             if (!this.values) {
-                if (json = cookie.get('show_columns')) {
+                if (json = cookie.get('<?=$component->getId('cookie')?>')) {
                     this.values = JSON.parse(json);
                 } else {
                     this.values = this.defaultValues;
@@ -114,7 +113,7 @@
 
         ColumnHider.prototype.saveValues = function() {
             cookie.set(
-                'show_columns',
+                '<?=$component->getId('cookie')?>',
                 JSON.stringify(this.getValues()),
                 {path: '/'}
             );
@@ -169,7 +168,7 @@
                 self.setupInputs();
                 self.updateInputs();
             });
-            this.setupTable();
+            //this.setupTable();
         }
         ColumnHider.prototype.setupTable = function () {
             var values = this.getValues();
