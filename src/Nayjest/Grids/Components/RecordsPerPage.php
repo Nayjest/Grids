@@ -42,7 +42,7 @@ class RecordsPerPage extends RenderableComponent
             ->getInputProcessor()
             ->getFilterValue('records_per_page');
         if ($from_input === null) {
-            return 50;
+            return $this->grid->getConfig()->getPageSize();
         } else {
             return $from_input;
         }
