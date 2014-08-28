@@ -11,7 +11,7 @@ class ColumnsHider extends RenderableComponent
 
     protected $name = 'columns_hider';
 
-    protected $hidden_by_default = null;
+    protected $hidden_by_default = [];
 
     public function setHiddenByDefault($column_names)
     {
