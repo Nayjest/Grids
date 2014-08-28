@@ -42,7 +42,7 @@ abstract class DataProvider
      */
     public function getCurrentPage()
     {
-        return (int)Input::get('page', 1) ? : 1;
+        return $this->getPaginator()->getCurrentPage();
 
     }
 
@@ -62,6 +62,11 @@ abstract class DataProvider
      * @return \Illuminate\Pagination\Paginator
      */
     abstract public function getPaginator();
+
+    /**
+     * @return \Illuminate\Pagination\Factory
+     */
+    abstract public function getPaginationFactory();
 
     /** @return DataRow|null */
     abstract public function getRow();
