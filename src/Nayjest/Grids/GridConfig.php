@@ -118,7 +118,7 @@ class GridConfig implements IRegistry
 
     public function getCachingTime()
     {
-        return $this->chaching_time;
+        return $this->caching_time;
     }
 
     public function setCachingTime($minutes)
