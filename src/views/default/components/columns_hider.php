@@ -148,7 +148,7 @@
 
         ColumnHider.prototype.updateColumnVisibility = function (name, visible) {
             var $els = this.getColumnElements(name);
-            visible ? $els.show('slow') : $els.hide('slow');
+            visible ? $els.show(0) : $els.hide(0);
         }
 
         ColumnHider.prototype.setupInputs = function () {
