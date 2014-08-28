@@ -57,6 +57,18 @@ class GridInputProcessor
         return $html;
     }
 
+    public function getUniqueRequestId()
+    {
+        $cookies_str = '';
+        foreach ($_COOKIE as $key => $val) {
+            if (strpos($key, $this->getKey()) !== false) {
+                $cookies_str .= $key . json_encode($val);
+            }
+        }
+
+        return md5($cookies_str . $this->getKey() . json_encode($this->getInput()));
+    }
+
     public function setSorting(FieldConfig $column, $direction)
     {
         $this->input['sort'] = [

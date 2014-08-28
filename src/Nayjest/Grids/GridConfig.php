@@ -24,6 +24,9 @@ class GridConfig implements IRegistry
     /** @var Collection|FilterConfig[] $filters */
     protected $filters;
 
+    /** @var int */
+    protected $caching_time = 0;
+
     /**
      * @param string $template
      * @return $this
@@ -111,6 +114,17 @@ class GridConfig implements IRegistry
             }
         }
 
+    }
+
+    public function getCachingTime()
+    {
+        return $this->chaching_time;
+    }
+
+    public function setCachingTime($minutes)
+    {
+        $this->caching_time = $minutes;
+        return $this;
     }
 
     public function addColumn(FieldConfig $column)

@@ -2,6 +2,7 @@
 namespace Nayjest\Grids;
 
 use Event;
+use Cache;
 use View;
 
 class Grid
@@ -164,12 +165,30 @@ class Grid
      */
     public function render()
     {
-        $this->prepare();
-        $this->config->getDataProvider()->reset();
-        return View::make(
-            $this->getMainTemplate(),
-            $this->getViewData()
-        );
+        $key = $this->getInputProcessor()->getUniqueRequestId();
+        $caching_time = $this->config->getCachingTime();
+        if ($caching_time and ($output = Cache::get($key))) {
+            return $output;
+        } else {
+            $this->prepare();
+//        if ($dp = Cache::get($key)) {
+//            $this->config->setDataProvider($dp);
+//        } else {
+//            $dp = $this->config->getDataProvider();
+//            $dp->reset(); # performs query
+//            Cache::put($key, $dp, 5);
+//        }
+            $dp = $this->config->getDataProvider();
+            $dp->reset(); # performs query
+            $output = View::make(
+                $this->getMainTemplate(),
+                $this->getViewData()
+            )->render();
+            if ($caching_time) {
+                Cache::put($key, $output, $caching_time);
+            }
+            return  $output;
+        }
     }
 
     /**
