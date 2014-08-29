@@ -6,5 +6,9 @@ interface IDataRow
 {
     public function getId();
 
-    public function getCellValue(FieldConfig $field);
+    /**
+     * @param string|FieldConfig $field
+     * @return mixed
+     */
+    public function getCellValue($field);
 } 

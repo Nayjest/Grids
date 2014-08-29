@@ -12,9 +12,8 @@ namespace Nayjest\Grids;
 class EloquentDataRow extends DataRow
 {
 
-    protected function extractCellValue(FieldConfig $field)
+    protected function extractCellValue($field_name)
     {
-        $field_name = $field->getName();
         return  $this->src->{$field_name};
     }
 } 

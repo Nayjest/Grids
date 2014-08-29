@@ -40,7 +40,7 @@ class Grid
      */
     protected function getMainTemplate()
     {
-        return $this->config->getTemplate() . '.grid';
+        return $this->config->getMainTemplate();
     }
 
 

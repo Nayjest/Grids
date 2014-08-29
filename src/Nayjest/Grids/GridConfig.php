@@ -27,6 +27,8 @@ class GridConfig implements IRegistry
     /** @var int */
     protected $caching_time = 0;
 
+    protected $main_template = '*.grid';
+
     /**
      * @param string $template
      * @return $this
@@ -36,6 +38,18 @@ class GridConfig implements IRegistry
         $this->template = $template;
         return $this;
     }
+
+    public function setMainTemplate($template)
+    {
+        $this->main_template = $template;
+        return $this;
+    }
+
+    public function getMainTemplate()
+    {
+        return str_replace('*.',"$this->template.", $this->main_template);
+    }
+
 
     /**
      * @param Collection|FilterConfig[] $filters

@@ -27,10 +27,15 @@ abstract class DataRow implements IDataRow
         return $this->id;
     }
 
-    abstract protected function extractCellValue(FieldConfig $field);
+    abstract protected function extractCellValue($field_name);
 
-    public function getCellValue(FieldConfig $field)
+    /**
+     * @param FieldConfig|string $field
+     * @return mixed
+     */
+    public function getCellValue($field)
     {
-        return $this->extractCellValue($field);
+        $field_name = $field instanceof FieldConfig ? $field->getName() : $field;
+        return $this->extractCellValue($field_name);
     }
 } 
