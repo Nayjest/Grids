@@ -27,6 +27,11 @@ abstract class DataRow implements IDataRow
         return $this->id;
     }
 
+    public function getSrc()
+    {
+        return $this->src;
+    }
+
     abstract protected function extractCellValue($field_name);
 
     /**
