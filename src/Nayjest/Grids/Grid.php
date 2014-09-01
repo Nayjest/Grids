@@ -31,6 +31,10 @@ class Grid
     public function __construct(GridConfig $config)
     {
         $this->config = $config;
+        if ($config->getName() === null) {
+            $this->provideName();
+        }
+
         $this->initializeComponents();
         Event::fire(self::EVENT_CREATE, $this);
     }
@@ -50,11 +54,6 @@ class Grid
             return;
         }
         $cfg = $this->config;
-
-        if ($cfg->getName() === null) {
-            $this->provideName();
-        }
-
         $cfg->getDataProvider()
             ->setPageSize($cfg->getPageSize());
         $this->getConfig()->prepare();
