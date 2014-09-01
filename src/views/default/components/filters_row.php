@@ -1,4 +1,6 @@
-<?php # ========== FILTERS ROW ========== ?>
+<?php # ========== FILTERS ROW ==========
+/** @var Nayjest\Grids\Components\FiltersRow $component */
+?>
 <?php if($grid->getFiltering()->available()): ?>
     <tr>
             <?php foreach($columns as $column): ?>
@@ -11,6 +13,7 @@
                             <?= $grid->getFiltering()->render($filter) ?>
                         <?php endforeach ?>
                     <?php endif ?>
+                    <?= $component->renderComponents('filters_row_column_' . $column->getName()) ?>
                 </td>
             <?php endforeach ?>
             <?= $grid->getInputProcessor()->getSortingHiddenInputsHtml() ?>
