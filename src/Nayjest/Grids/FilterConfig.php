@@ -11,12 +11,18 @@ namespace Nayjest\Grids;
 class FilterConfig
 {
     const OPERATOR_LIKE  = 'like';
-    const OPERATOR_EQUAL = '=';
+    const OPERATOR_EQ = '=';
+    const OPERATOR_NOT_EQ = '<>';
+    const OPERATOR_GT = '>';
+    const OPERATOR_LS = '<';
+    const OPERATOR_LSE = '<=';
+    const OPERATOR_GTE = '>';
+
 
     /** @var  FieldConfig */
     protected $column;
 
-    protected $operator = FilterConfig::OPERATOR_EQUAL;
+    protected $operator = FilterConfig::OPERATOR_EQ;
 
     protected $template = '*.input';
 
