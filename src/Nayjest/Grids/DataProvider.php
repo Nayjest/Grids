@@ -3,6 +3,10 @@ namespace Nayjest\Grids;
 
 use Input;
 
+/**
+ * Class DataProvider
+ * @package Nayjest\Grids
+ */
 abstract class DataProvider
 {
     const EVENT_FETCH_ROW = 'grid.dp.fetch_row';
@@ -46,12 +50,21 @@ abstract class DataProvider
 
     }
 
+    /**
+     * @return int row id starting from 1, considering pagination
+     */
     protected function getRowId()
     {
         $offset = ($this->getCurrentPage() - 1) * $this->page_size;
         return $offset + $this->index;
     }
 
+    /**
+     * Sets data sorting
+     *
+     * @param string $field_name
+     * @param $direction
+     */
     abstract public function orderBy($field_name, $direction);
 
     abstract public function filter($field_name, $operator, $value);
