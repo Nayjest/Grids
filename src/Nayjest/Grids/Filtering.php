@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: user
- * Date: 20.08.2014
- * Time: 20:24
- */
-
 namespace Nayjest\Grids;
 
 use Illuminate\Support\Collection;
@@ -13,7 +6,7 @@ use View;
 
 class Filtering
 {
-    /** @var Grid  */
+    /** @var Grid */
     protected $grid;
 
     protected $filters;
@@ -37,7 +30,7 @@ class Filtering
     protected function createFilters()
     {
         $filters = [];
-        foreach($this->grid->getConfig()->getColumns() as $column) {
+        foreach ($this->grid->getConfig()->getColumns() as $column) {
             if ($column->hasFilters()) {
                 foreach ($column->getFilters() as $filter_config) {
                     $filters[$filter_config->getId()] = new Filter(

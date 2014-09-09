@@ -1,16 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: user
- * Date: 20.08.2014
- * Time: 19:46
- */
-
 namespace Nayjest\Grids;
 
 class FilterConfig
 {
-    const OPERATOR_LIKE  = 'like';
+    const OPERATOR_LIKE = 'like';
     const OPERATOR_EQ = '=';
     const OPERATOR_NOT_EQ = '<>';
     const OPERATOR_GT = '>';
@@ -108,12 +101,12 @@ class FilterConfig
 
     public function getName()
     {
-       if (null === $this->name) {
-           if ($this->column) {
-               $this->name = $this->column->getName();
-           }
-       }
-       return $this->name;
+        if (null === $this->name) {
+            if ($this->column) {
+                $this->name = $this->column->getName();
+            }
+        }
+        return $this->name;
     }
 
     public function setName($name)
@@ -129,7 +122,7 @@ class FilterConfig
 
     public function getId()
     {
-        return $this->getName() .'-'. $this->getOperator();
+        return $this->getName() . '-' . $this->getOperator();
     }
 
 } 

@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: user
- * Date: 19.08.2014
- * Time: 20:57
- */
-
 namespace Nayjest\Grids;
 
 use Illuminate\Support\Collection;
@@ -81,7 +74,7 @@ class FieldConfig
 
     public function getLabel()
     {
-        return $this->label?:$this->name;
+        return $this->label ? : $this->name;
     }
 
     public function setLabel($label)

@@ -1,18 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: User
- * Date: 27.05.14
- * Time: 16:18
- */
-
 namespace Nayjest\Grids;
 
 use Illuminate\Database\Eloquent\Builder;
 use Event;
 
-class EloquentDataProvider extends DataProvider {
-
+class EloquentDataProvider extends DataProvider
+{
 
 
     protected $collection;

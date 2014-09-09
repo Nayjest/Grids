@@ -11,13 +11,13 @@ class GridConfig implements IRegistry
     use TRegistry;
     use TComponent;
 
-    protected  $template = 'grids::default';
+    protected $template = 'grids::default';
 
-    /** @var FieldConfig[]|Collection  */
-    protected  $columns = [];
+    /** @var FieldConfig[]|Collection */
+    protected $columns = [];
 
     /** @var  DataProvider $data_provider */
-    protected  $data_provider;
+    protected $data_provider;
 
     protected $page_size = 50;
 
@@ -47,7 +47,7 @@ class GridConfig implements IRegistry
 
     public function getMainTemplate()
     {
-        return str_replace('*.',"$this->template.", $this->main_template);
+        return str_replace('*.', "$this->template.", $this->main_template);
     }
 
 

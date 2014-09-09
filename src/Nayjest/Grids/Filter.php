@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: user
- * Date: 20.08.2014
- * Time: 19:46
- */
-
 namespace Nayjest\Grids;
 
 use Nayjest\Grids\Components\Base\TComponent;
@@ -72,7 +65,7 @@ class Filter
     {
         $filter_tpl = $this->config->getTemplate();
         $grid_tpl = $this->grid->getConfig()->getTemplate();
-        return str_replace('*.',"$grid_tpl.filters.", $filter_tpl);
+        return str_replace('*.', "$grid_tpl.filters.", $filter_tpl);
     }
 
     public function apply()
@@ -85,8 +78,8 @@ class Filter
             $func($value, $this->grid->getConfig()->getDataProvider());
             return;
         }
-        if($this->config->getOperator() === FilterConfig::OPERATOR_LIKE) {
-            if(strpos($value,'%') === false) {
+        if ($this->config->getOperator() === FilterConfig::OPERATOR_LIKE) {
+            if (strpos($value, '%') === false) {
                 $value = "%$value%";
             }
         }

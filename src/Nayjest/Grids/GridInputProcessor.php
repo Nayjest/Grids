@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: user
- * Date: 20.08.2014
- * Time: 17:24
- */
-
 namespace Nayjest\Grids;
 
 use Input;
@@ -41,7 +34,7 @@ class GridInputProcessor
 
     public function getSorting()
     {
-        return $_=& $this->input['sort'];
+        return $_ =& $this->input['sort'];
     }
 
     public function getSortingHiddenInputsHtml()

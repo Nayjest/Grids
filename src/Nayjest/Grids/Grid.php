@@ -11,13 +11,13 @@ class Grid
     const SORT_ASC = 'ASC';
     const SORT_DESC = 'DESC';
 
-    const EVENT_PREPARE  = 'grid.prepare';
+    const EVENT_PREPARE = 'grid.prepare';
     const EVENT_CREATE = 'grid.create';
 
     /** @var GridConfig */
     protected $config;
 
-    /** @var bool  */
+    /** @var bool */
     protected $prepared = false;
 
     /** @var  Sorter */
@@ -186,7 +186,7 @@ class Grid
             if ($caching_time) {
                 Cache::put($key, $output, $caching_time);
             }
-            return  $output;
+            return $output;
         }
     }
 

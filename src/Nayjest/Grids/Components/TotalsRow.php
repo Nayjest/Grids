@@ -1,7 +1,6 @@
 <?php
 namespace Nayjest\Grids\Components;
 
-
 use Nayjest\Grids\Components\Base\IRenderableComponent;
 use Nayjest\Grids\Components\Base\TComponent;
 use Nayjest\Grids\Components\Base\TComponentView;
@@ -12,9 +11,8 @@ use Nayjest\Grids\FieldConfig;
 use Nayjest\Grids\IdFieldConfig;
 use Nayjest\Grids\Grid;
 use Illuminate\Support\Facades\Event;
-use Illuminate\Support\Collection;
 
-class TotalsRow  extends ArrayDataRow implements IRenderableComponent
+class TotalsRow extends ArrayDataRow implements IRenderableComponent
 {
     use TComponent {
         TComponent::initialize as protected initializeComponent;
@@ -44,9 +42,9 @@ class TotalsRow  extends ArrayDataRow implements IRenderableComponent
     {
         $field_names = $this->field_names;
         $this->fields = $this->grid->getConfig()->getColumns()->filter(
-                function(FieldConfig $field) use ($field_names) {
-                    return in_array($field->getName(), $field_names);
-                }
+            function (FieldConfig $field) use ($field_names) {
+                return in_array($field->getName(), $field_names);
+            }
         );
     }
 
@@ -54,16 +52,17 @@ class TotalsRow  extends ArrayDataRow implements IRenderableComponent
     {
         Event::listen(
             DataProvider::EVENT_FETCH_ROW,
-            function(DataRow $row, DataProvider $provider) use($dp) {
-                if($dp !== $provider) return;
-                foreach($this->fields as $field) {
+            function (DataRow $row, DataProvider $provider) use ($dp) {
+                if ($dp !== $provider) return;
+                foreach ($this->fields as $field) {
                     $this->src[$field->getName()] += $row->getCellValue($field);
                 }
             }
         );
     }
 
-    public function initialize(Grid $grid) {
+    public function initialize(Grid $grid)
+    {
         $this->initializeComponent($grid);
         $this->provideFields();
         $this->listen(

@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: user
- * Date: 20.08.2014
- * Time: 19:46
- */
-
 namespace Nayjest\Grids;
 
 class SelectFilterConfig extends FilterConfig
