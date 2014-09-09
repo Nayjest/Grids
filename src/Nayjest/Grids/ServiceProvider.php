@@ -1,9 +1,10 @@
 <?php namespace Nayjest\Grids;
 
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
-use Nayjest\Common\ViewsIntegration;
+use Route;
 
-class ServiceProvider extends BaseServiceProvider {
+class ServiceProvider extends BaseServiceProvider
+{
 
     /**
      * Indicates if loading of the provider is deferred.
@@ -20,8 +21,7 @@ class ServiceProvider extends BaseServiceProvider {
     public function boot()
     {
         $this->package('nayjest/grids');
-        \Route::controller('grids','Nayjest\Grids\Controller');
-        ViewsIntegration::apply('grids');
+        Route::controller('grids', 'Nayjest\Grids\Controller');
     }
 
     /**
