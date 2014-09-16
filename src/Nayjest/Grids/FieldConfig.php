@@ -65,11 +65,13 @@ class FieldConfig
     public function hide()
     {
         $this->is_hidden = true;
+        return $this;
     }
 
     public function show()
     {
         $this->is_hidden = false;
+        return $this;
     }
 
     public function getLabel()
