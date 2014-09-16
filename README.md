@@ -1,7 +1,7 @@
 Grids
 =====
 
-Grids framework for Laravel
+Grids framework for Laravel 4.2
 
 ## Installation
 
