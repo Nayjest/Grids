@@ -1,7 +1,6 @@
 <?php
 namespace Nayjest\Grids\Components;
 
-use Cookie;
 use Nayjest\Grids\Components\Base\RenderableComponent;
 
 class ColumnsHider extends RenderableComponent
@@ -12,6 +11,8 @@ class ColumnsHider extends RenderableComponent
     protected $name = 'columns_hider';
 
     protected $hidden_by_default = [];
+
+    protected $title = 'Columns';
 
     public function setHiddenByDefault($column_names)
     {
@@ -51,6 +52,17 @@ class ColumnsHider extends RenderableComponent
         }
         $grid_name = $this->grid->getConfig()->getName();
         return "{$grid_name}-columns_hider{$name}";
+    }
+
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    public function setTitle($title)
+    {
+        $this->title = $title;
+        return $this;
     }
 
     public function prepare()

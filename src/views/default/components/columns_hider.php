@@ -8,14 +8,15 @@
         data-placement="bottom"
         >
         <span class="glyphicon glyphicon-eye-open"></span>
-        Show/hide columns
+        Columns
+        <span class="caret"></span>
     </button>
     <div id="<?= $component->getId('menu-content') ?>" style="display: none">
         <ul>
             <li>
                 <label>
                     <input type="checkbox" name="all">
-                    <b><?= t('Show/Hide all') ?></b>
+                    <b>Show/Hide all</b>
                 </label>
             </li>
             <?php foreach($columns as $column):
