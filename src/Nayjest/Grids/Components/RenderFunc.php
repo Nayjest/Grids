@@ -1,9 +1,7 @@
 <?php
 namespace Nayjest\Grids\Components;
 
-use Illuminate\Pagination\Paginator;
 use Nayjest\Grids\Components\Base\RenderableComponent;
-use Nayjest\Grids\Grid;
 
 class RenderFunc extends RenderableComponent
 {
