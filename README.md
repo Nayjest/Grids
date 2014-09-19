@@ -5,7 +5,7 @@ Grids framework for Laravel 4.2
 
 ## Installation
 
-Best way to install this package is using composer.
+### Installation with composer
 
 * Step 1: Add git url to composer.json file in your project:
 ```
