@@ -14,7 +14,7 @@ class GridConfig implements IRegistry
     protected $template = 'grids::default';
 
     /** @var FieldConfig[]|Collection */
-    protected $columns = [];
+    protected $columns = null;
 
     /** @var  DataProvider $data_provider */
     protected $data_provider;
@@ -143,6 +143,9 @@ class GridConfig implements IRegistry
 
     public function addColumn(FieldConfig $column)
     {
+        if ($this->columns === null) {
+            $this->setColumns([]);
+        }
         $this->columns->push($column);
         return $this;
     }
