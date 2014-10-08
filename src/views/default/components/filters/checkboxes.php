@@ -15,12 +15,14 @@ $id = uniqid();
         >
         <?php foreach($component->getVariants() as $val => $label): ?>
             <li style="white-space: nowrap">
-                <input
-                    type="checkbox"
-                    <?php if(!empty($value[$val])) echo "checked='checked'" ?>
-                    name="<?= $component->getInputName() ?>[<?= $val ?>]"
-                    />
-                <span><?= $label ?></span>
+                <label>
+                    <input
+                        type="checkbox"
+                        <?php if(!empty($value[$val])) echo "checked='checked'" ?>
+                        name="<?= $component->getInputName() ?>[<?= $val ?>]"
+                        >
+                    <span><?= $label ?></span>
+                </label>
             </li>
         <?php endforeach ?>
     </ul>

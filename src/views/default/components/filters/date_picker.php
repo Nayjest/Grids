@@ -9,9 +9,10 @@ $id = uniqid();
     class="form-control input-sm"
     style="display: inline; width: 85px; margin-right: 10px"
     name="<?= $component->getInputName() ?>"
+    type="text"
     value="<?= $component->getValue() ?>"
     id="<?= $id ?>"
-    />
+    >
 <script>
     $(function(){
         $('#<?= $id ?>').datepicker({format: 'yyyy-mm-dd'});
