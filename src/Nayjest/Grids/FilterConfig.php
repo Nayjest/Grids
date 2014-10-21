@@ -64,7 +64,7 @@ class FilterConfig
     }
 
     /**
-     * @param callable $func
+     * @param callable $func($value, $data_provider)
      * @return $this
      */
     public function setFilteringFunc($func)
