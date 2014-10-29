@@ -2,6 +2,7 @@
     "name": "nayjest/grids",
     "description": "Grids for Laravel",
     "keywords": ["grid","tables","html","laravel"],
+    "license": "MIT",
     "authors": [
         {
             "name": "Vitalii [Nayjest] Stepanenko",
