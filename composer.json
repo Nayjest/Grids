@@ -1,6 +1,7 @@
 {
     "name": "nayjest/grids",
     "description": "Grids for Laravel",
+    "keywords": ["grid","tables","html","laravel"],
     "authors": [
         {
             "name": "Vitalii [Nayjest] Stepanenko",
