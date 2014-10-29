@@ -1,10 +1,10 @@
 {
     "name": "nayjest/grids",
-    "description": "",
+    "description": "Grids for Laravel",
     "authors": [
         {
             "name": "Vitalii [Nayjest] Stepanenko",
-            "email": "v.stepanenko@globo-tech.com"
+            "email": "mail@vitaliy.in"
         }
     ],
     "require": {
