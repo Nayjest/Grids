@@ -86,7 +86,6 @@ Grids framework for Laravel 4.2
                                 ->setName('country')
                                 ->setOptions(get_countries_list())
                         )
-                        ->setCallback('geoip_country_name_by_code')
                     ,
                     (new FieldConfig)
                         ->setName('registration_date')
