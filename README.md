@@ -46,18 +46,15 @@ Grids framework for Laravel
         # Instantiate & Configure Grid
         $grid = new Grid(
             (new GridConfig)
-            
                 # Grids name used as html id, caching key, filtering GET params prefix, etc
                 # If not specified, unique value based on file name & line of code will be generated
                 ->setName('my_report')
-                
                 # See all supported data providers in sources
                 ->setDataProvider(new EloquentDataProvider($query))
                 # Setup caching, value in minutes, turned off in debug mode
                 ->setCachingTime(5) 
-                
+                # Setup table columns
                 ->setColumns([
-                    
                     # simple results numbering, not related to table PK or any obtained data
                     new IdFieldConfig,
                     (new FieldConfig)
@@ -118,16 +115,18 @@ Grids framework for Laravel
                         ->setIsSortable(true)
                     ,
                 ])
+                # Setup additional grid components
                 ->setComponents([
                     # Renders table header (table>thead)
                     (new Header)
+                        # Setup inherited components
                         ->setComponents([
                             # Add this if you have filters for automatic placing to this row
                             new FiltersRow,
                             # Row with additional controls
                             (new OneCellRow)
                                 ->setComponents([
-                                    # Control for selecting quantity of records per page
+                                    # Control for specifying quantity of records displayed on page
                                     (new RecordsPerPage)
                                         ->setVariants([
                                             50,
@@ -149,6 +148,7 @@ Grids framework for Laravel
                                         ->setTagName('button')
                                         ->setAttributes([
                                             'type' => 'submit',
+                                            # Some bootstrap classes
                                             'class' => 'btn btn-primary'
                                         ])
                                         ->setContent('Filter')
@@ -160,15 +160,16 @@ Grids framework for Laravel
                     # Renders table footer (table>tfoot)
                     (new Footer)
                         ->addComponent(
-                            # TotalsRow calculates totals on current page (max, min, sum, average value, etc)
-                            # and renders results as table row
+                            # TotalsRow component calculates totals on current page (max, min, sum, average value, etc)
+                            # and renders results as table row.
+                            # By default 'sum' algorithm used.
                             new TotalsRow([
                                 'comments',
                                 'posts',
                             ])
                         )
                         ->addComponent(
-                            # Renders row with one cell with colspan equal to table columns count
+                            # Renders row containing one cell with colspan attribute equal to the table columns count
                             (new OneCellRow)
                                 # Pagination control
                                 ->addComponent(new Pager)
@@ -176,14 +177,18 @@ Grids framework for Laravel
                 ])
         );
         
-        # Finally you need to render grid somewhere in view:
+        # Step 3.
+        # Render grid (preferred in view)
         
         <?php echo $grid->render(); ?>
-        # or
+        
+        # Example below will also work as Grid class implements __toString method.
+        # Note that you can't forward Exceptions through __toString method on account of PHP limitations.
+        # Therefore you can preliminarily render grid in debug reasons and pass the resutls to a view.
         <?php echo $grid; ?>
-        # or just
+        
+        # And the shortest way:
         <?= $grid ?>
-        #
 ```
 
 ## License
