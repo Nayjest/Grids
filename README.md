@@ -1,7 +1,12 @@
 Grids
 =====
 
-Grids framework for Laravel 4.2
+Grids framework for Laravel
+
+## Requirements
+
+* Laravel 4.2+
+* php 5.4+
 
 ## Installation
 
@@ -29,20 +34,30 @@ Grids framework for Laravel 4.2
 *Example*
 
 ```php
-        # 1. Let's take Laravel query as data provider
+        # Step 1. 
+        # Let's take a Laravel query as data provider
+        # Some params may be predefined, other can be controlled using grid components         
         $query = (new User)
             ->newQuery()
             ->with('posts')
             ->where('role', '=', User::ROLE_AUTHOR);
-        # 2. Configure grid
+        
+        # Step 2. 
+        # Instantiate & Configure Grid
         $grid = new Grid(
             (new GridConfig)
-                # used as html id, caching key, filtering GET params prefix, etc
-                # optional
+            
+                # Grids name used as html id, caching key, filtering GET params prefix, etc
+                # If not specified, unique value based on file name & line of code will be generated
                 ->setName('my_report')
+                
+                # See all supported data providers in sources
                 ->setDataProvider(new EloquentDataProvider($query))
-                ->setCachingTime(5) # in minutes, turned off in debug mode
+                # Setup caching, value in minutes, turned off in debug mode
+                ->setCachingTime(5) 
+                
                 ->setColumns([
+                    
                     # simple results numbering, not related to table PK or any obtained data
                     new IdFieldConfig,
                     (new FieldConfig)
@@ -104,7 +119,7 @@ Grids framework for Laravel 4.2
                     ,
                 ])
                 ->setComponents([
-                    # Required to draw table headers
+                    # Renders table header (table>thead)
                     (new Header)
                         ->setComponents([
                             # Add this if you have filters for automatic placing to this row
@@ -142,17 +157,20 @@ Grids framework for Laravel 4.2
                                 ->setRenderSection(Header::SECTION_BEGIN)
                         ])
                     ,
+                    # Renders table footer (table>tfoot)
                     (new Footer)
                         ->addComponent(
-                            # totals, by default -- SUM
+                            # TotalsRow calculates totals on current page (max, min, sum, average value, etc)
+                            # and renders results as table row
                             new TotalsRow([
                                 'comments',
                                 'posts',
                             ])
                         )
-                        # Pagination
                         ->addComponent(
+                            # Renders row with one cell with colspan equal to table columns count
                             (new OneCellRow)
+                                # Pagination control
                                 ->addComponent(new Pager)
                         )
                 ])
