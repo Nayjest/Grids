@@ -16,6 +16,15 @@ Grids framework for Laravel
 * Extensibility & flexibility through components support
 * Ready controls allowing to change appearance (dropdown for specifying records per page, control that shows/hides columns, etc)
 
+## Upcoming features
+* Everything will be a component (filters, columns, etc)
+* Autodetecting columns based on Eloquent model (if not specified)
+* Builtin output formatters for different column types
+* Using simple php arrays to configure grids
+* Working with json data sources via ajax
+
+[Ask more features](https://github.com/Nayjest/Grids/issues). You are welcome!
+
 ## Requirements
 
 * Laravel 4.2+
@@ -23,7 +32,7 @@ Grids framework for Laravel
 
 ## Installation
 
-#### Installation with composer
+#### Using [Composer](https://getcomposer.org)
 
 * Step 1: Add git url to composer.json file in your project:
 ```
@@ -34,13 +43,15 @@ Grids framework for Laravel
     }
 ],
 ```
-* Step 2: Add dependency to "require" section
+[upd]: This step isn't required now, package already published on [packagist](https://packagist.org/packages/nayjest/grids)
+
+* Step 2: Add dependency to "require" section of your composer.json
 ```
 "require": {
     "nayjest/grids": "dev-master"
 },
 ```
-* Step 3: run "composer update" command
+* Step 3: Run "composer update" command
 
 ## Usage
 
