@@ -15,6 +15,9 @@ use Nayjest\Grids\Components\TotalsRow;
                     case \Nayjest\Grids\Components\TotalsRow::OPERTATION_SUM:
                         $label = '∑';
                         break;
+                    case \Nayjest\Grids\Components\TotalsRow::OPERATION_COUNT:
+                        $label = 'Count';
+                        break;
                     case \Nayjest\Grids\Components\TotalsRow::OPERATION_AVG:
                         $label = 'Avg.';
                         break;

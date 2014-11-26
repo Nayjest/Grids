@@ -22,6 +22,7 @@ class TotalsRow extends ArrayDataRow implements IRenderableComponent
 
     const OPERTATION_SUM = 'sum';
     const OPERATION_AVG = 'avg';
+    const OPERATION_COUNT = 'count';
     //const OPERATION_MAX = 'max';
     //const OPERATION_MIN = 'min';
 
@@ -69,8 +70,12 @@ class TotalsRow extends ArrayDataRow implements IRenderableComponent
                     $name = $field->getName();
                     $operation = $this->getFieldOperation($name);
                     switch($operation) {
+
                         case self::OPERTATION_SUM:
                             $this->src[$name] += $row->getCellValue($field);
+                            break;
+                        case self::OPERATION_COUNT:
+                            $this->src[$name] = $this->rows_processed;
                             break;
                         case self::OPERATION_AVG:
                             if (empty($this->src["{$name}_sum"])) {
