@@ -3,6 +3,19 @@ Grids
 
 Grids framework for Laravel
 
+## Features
+* Support of themes (sets of templates for grid components) and templates for individual components
+* Twitter Bootstrap v3 used by default
+* Filtering
+* Sorting
+* Caching
+* Totals calculation (sum, average value, records count, etc)
+* Pagination
+* Working with different data providers (php array, Eloquent model/Query builder)
+* Smart input handling allows to avoid conflicts with get parameters & easily place few interactive grids on same page
+* Extensibility & flexibility through components support
+* Ready controls allowing to change appearance (dropdown for specifying records per page, control that shows/hides columns, etc)
+
 ## Requirements
 
 * Laravel 4.2+
