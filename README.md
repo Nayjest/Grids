@@ -23,7 +23,6 @@ Grids framework for Laravel
 * Using simple php arrays to configure grids
 * Working with json data sources via ajax
 * Example application with Laravel 5
-* Unit tests
 
 [Ask more features](https://github.com/Nayjest/Grids/issues). You are welcome!
 
