@@ -177,8 +177,8 @@ class Grid
 //            $dp->reset(); # performs query
 //            Cache::put($key, $dp, 5);
 //        }
-            $dp = $this->config->getDataProvider();
-            $dp->reset(); # performs query
+            $provider = $this->config->getDataProvider();
+            $provider->reset();
             $output = View::make(
                 $this->getMainTemplate(),
                 $this->getViewData()
