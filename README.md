@@ -24,7 +24,7 @@ Grids framework for Laravel
 * Working with json data sources via ajax
 * Demo application with Laravel 5
 
-[Ask more features](https://github.com/Nayjest/Grids/issues). You are welcome!
+[Ask for more features](https://github.com/Nayjest/Grids/issues). You are welcome!
 
 ## Requirements
 
@@ -35,36 +35,27 @@ Grids framework for Laravel
 
 #### Installation using [Composer](https://getcomposer.org)
 
-##### Step 1: Add git url to composer.json file in your project:
-```javascript
-"repositories": [
-    {
-        "url": "https://github.com/Nayjest/Grids.git",
-        "type": "git"
-    }
-],
-```
-[upd]: This step isn't required now, package already published on [packagist](https://packagist.org/packages/nayjest/grids)
-
-##### Step 2: Add dependency to "require" section of your composer.json
+##### Step 1: Declare dependency
+Add nayjest/grids to "require" section of your composer.json
 ```javascript
 "require": {
     "nayjest/grids": "~0.3"
 },
 ```
 
-##### Step 3: Update dependencies
+##### Step 2: Update dependencies
 Run following command:
 ```bash    
-php composer.phar
+php composer.phar update
 ```
 
-##### Step 4: Register Grids service provider in your Laravel application
-Just add following line:
+##### Step 3: Register service provider in Laravel application
+Add following line:
 ```php
 'Nayjest\Grids\ServiceProvider'
 ```
 to 'providers' section of app/config/app.php file
+
 ## Usage
 
 #####Example
