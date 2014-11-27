@@ -32,9 +32,9 @@ Grids framework for Laravel
 
 ## Installation
 
-#### Using [Composer](https://getcomposer.org)
+#### Installation using [Composer](https://getcomposer.org)
 
-* Step 1: Add git url to composer.json file in your project:
+##### Step 1: Add git url to composer.json file in your project:
 ```
 "repositories": [
     {
@@ -45,14 +45,20 @@ Grids framework for Laravel
 ```
 [upd]: This step isn't required now, package already published on [packagist](https://packagist.org/packages/nayjest/grids)
 
-* Step 2: Add dependency to "require" section of your composer.json
+##### Step 2: Add dependency to "require" section of your composer.json
 ```
 "require": {
     "nayjest/grids": "dev-master"
 },
 ```
-* Step 3: Run "composer update" command
+##### Step 3: Run "composer update" command from your project directory
 
+##### Step 4: Register Grids service provider in your Laravel application
+Just add following line:
+```php
+'Nayjest\Grids\ServiceProvider'
+```
+to 'providers' section of app/config/app.php file
 ## Usage
 
 *Example*
