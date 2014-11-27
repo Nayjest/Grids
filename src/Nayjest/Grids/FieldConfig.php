@@ -201,8 +201,8 @@ class FieldConfig
      */
     public function getValue(DataRow $row)
     {
-        if ($f = $this->getCallback()) {
-            return call_user_func($f, $row->getCellValue($this), $row);
+        if ($function = $this->getCallback()) {
+            return call_user_func($function, $row->getCellValue($this), $row);
         } else {
             return $row->getCellValue($this);
         }
