@@ -220,6 +220,7 @@ to 'providers' section of app/config/app.php file
         # And the shortest way:
         <?= $grid ?>
 ```
+Note that class names in example used without namespaces therefore you must import it before. 
 
 ## License
 
