@@ -27,7 +27,7 @@ Grids framework for Laravel
 
 ## Requirements
 
-* Laravel 4.2+
+* Laravel 4.X / 5.X
 * php 5.4+
 
 ## Installation
@@ -35,7 +35,7 @@ Grids framework for Laravel
 #### Installation using [Composer](https://getcomposer.org)
 
 ##### Step 1: Add git url to composer.json file in your project:
-```
+```javascript
 "repositories": [
     {
         "url": "https://github.com/Nayjest/Grids.git",
@@ -46,12 +46,17 @@ Grids framework for Laravel
 [upd]: This step isn't required now, package already published on [packagist](https://packagist.org/packages/nayjest/grids)
 
 ##### Step 2: Add dependency to "require" section of your composer.json
-```
+```javascript
 "require": {
-    "nayjest/grids": "dev-master"
+    "nayjest/grids": "~0.3"
 },
 ```
-##### Step 3: Run "composer update" command from your project directory
+
+##### Step 3: Update dependencies
+Run following command:
+```bash    
+php composer.phar
+```
 
 ##### Step 4: Register Grids service provider in your Laravel application
 Just add following line:
