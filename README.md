@@ -225,7 +225,20 @@ to 'providers' section of app/config/app.php file
         # And the shortest way:
         <?= $grid ?>
 ```
-Note that class names in example used without namespaces therefore you must import it before. 
+#####Notes
+* Class names in example used without namespaces therefore you must import it before
+* Grids does not includes Twitter Bootstrap css/js files to your layout. You need to do it manually.
+Quick links:
+```html
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+```
 
 ## License
 
