@@ -22,6 +22,8 @@ Grids framework for Laravel
 * Builtin output formatters for different column types
 * Using simple php arrays to configure grids
 * Working with json data sources via ajax
+* Example application with Laravel 5
+* Unit tests
 
 [Ask more features](https://github.com/Nayjest/Grids/issues). You are welcome!
 
@@ -66,7 +68,7 @@ Just add following line:
 to 'providers' section of app/config/app.php file
 ## Usage
 
-*Example*
+#####Example
 
 ```php
         # Step 1. 
