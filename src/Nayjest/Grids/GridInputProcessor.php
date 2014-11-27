@@ -96,11 +96,13 @@ class GridInputProcessor
 
     public function getUrl()
     {
-        if (null !== $qs = $this->getQueryString()) {
-            $qs = '?' . $qs;
+        if (null !== $query_string = $this->getQueryString()) {
+            $query_string = '?' . $query_string;
         }
-        $r = Request::instance();
-        $p = $r->getSchemeAndHttpHost() . $r->getBaseUrl() . $r->getPathInfo();
-        return $p . $qs;
+        $request = Request::instance();
+        return $request->getSchemeAndHttpHost()
+            . $request->getBaseUrl()
+            . $request->getPathInfo()
+            . $query_string;
     }
 }
