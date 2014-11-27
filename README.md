@@ -3,6 +3,8 @@ Grids
 
 Grids framework for Laravel
 
+[![Circle CI](https://circleci.com/gh/Nayjest/Grids/tree/master.svg?style=svg)](https://circleci.com/gh/Nayjest/Grids/tree/master)
+
 ## Features
 * Support of themes (sets of templates for grid components) and templates for individual components
 * Twitter Bootstrap v3 used by default
