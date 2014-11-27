@@ -7,8 +7,14 @@ use Form;
 
 class GridInputProcessor
 {
+    /**
+     * @var Grid
+     */
     protected $grid;
 
+    /**
+     * @var array
+     */
     protected $input;
 
     public function __construct(Grid $grid)
@@ -97,10 +103,4 @@ class GridInputProcessor
         $p = $r->getSchemeAndHttpHost() . $r->getBaseUrl() . $r->getPathInfo();
         return $p . $qs;
     }
-
-    public function applyChanges()
-    {
-
-
-    }
-} 
+}
