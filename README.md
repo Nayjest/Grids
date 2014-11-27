@@ -22,7 +22,7 @@ Grids framework for Laravel
 * Builtin output formatters for different column types
 * Using simple php arrays to configure grids
 * Working with json data sources via ajax
-* Example application with Laravel 5
+* Demo application with Laravel 5
 
 [Ask more features](https://github.com/Nayjest/Grids/issues). You are welcome!
 
