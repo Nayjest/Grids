@@ -24,7 +24,7 @@ Grids framework for Laravel
 * Working with json data sources via ajax
 * Demo application with Laravel 5
 
-[Ask more features](https://github.com/Nayjest/Grids/issues). You are welcome!
+[Ask for more features](https://github.com/Nayjest/Grids/issues). You are welcome!
 
 ## Requirements
 
