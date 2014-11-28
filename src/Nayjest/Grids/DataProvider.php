@@ -1,8 +1,6 @@
 <?php
 namespace Nayjest\Grids;
 
-use Input;
-
 /**
  * Class DataProvider
  * @package Nayjest\Grids
@@ -41,13 +39,16 @@ abstract class DataProvider
         return $this;
     }
 
-    /**
-     * @todo support for multiple pagination
-     */
     public function getCurrentPage()
     {
-        return $this->getPaginator()->getCurrentPage();
-
+        $paginator = $this->getPaginator();
+        if (method_exists($paginator, 'getCurrentPage')) {
+            # Laravel 4 compatibility
+            return $paginator->getCurrentPage();
+        } else {
+            # Laravel 5
+            return $paginator->currentPage();
+        }
     }
 
     /**

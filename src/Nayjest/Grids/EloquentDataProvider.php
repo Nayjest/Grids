@@ -3,6 +3,7 @@ namespace Nayjest\Grids;
 
 use Illuminate\Database\Eloquent\Builder;
 use Event;
+use Illuminate\Support\Collection;
 
 class EloquentDataProvider extends DataProvider
 {
@@ -32,7 +33,17 @@ class EloquentDataProvider extends DataProvider
     public function getCollection()
     {
         if (!$this->collection) {
-            $this->collection = $this->getPaginator()->getCollection();
+            $paginator = $this->getPaginator();
+            if (method_exists($paginator, 'getCollection')) {
+                # Laravel 4 compatibility
+                $this->collection = $paginator->getCollection();
+            } else {
+                # Laravel 5
+                $this->collection = Collection::make(
+                    $this->getPaginator()->items()
+                );
+            }
+
         }
         return $this->collection;
     }

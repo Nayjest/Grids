@@ -1,12 +1,8 @@
 <?php
 namespace Nayjest\Grids;
 
-use BaseController;
-use Carbon\Carbon;
-use DB;
-use Input;
+use Illuminate\Routing\Controller as BaseController;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-use View;
 
 class Controller extends BaseController
 {
@@ -15,4 +11,4 @@ class Controller extends BaseController
     {
         throw new HttpException("404");
     }
-} 
+}
