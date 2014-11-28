@@ -13,5 +13,4 @@ class IdFieldConfig extends FieldConfig
     {
         return $row->getId();
     }
-
 }

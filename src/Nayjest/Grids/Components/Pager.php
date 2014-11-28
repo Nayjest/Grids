@@ -62,5 +62,4 @@ class Pager extends RenderableComponent
         $this->input_key = $grid->getInputProcessor()->getKey();
         $this->setupPaginationForReading();
     }
-
 }

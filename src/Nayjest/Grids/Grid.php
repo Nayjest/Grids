@@ -229,5 +229,4 @@ class Grid
     {
         return (string)$this->render();
     }
-
 } 

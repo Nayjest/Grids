@@ -17,23 +17,36 @@ class RecordsPerPage extends RenderableComponent
 
     protected $template = '*.components.records_per_page';
 
+    /**
+     * @return array|int[]
+     */
     public function getVariants()
     {
         return array_combine(array_values($this->variants),array_values($this->variants));
     }
 
+    /**
+     * @param array|int[] $variants
+     * @return $this
+     */
     public function setVariants(array $variants)
     {
         $this->variants = $variants;
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getInputName()
     {
         $key = $this->grid->getInputProcessor()->getKey();
         return "{$key}[filters][records_per_page]";
     }
 
+    /**
+     * @return int|null
+     */
     public function getValue()
     {
         $from_input = $this
@@ -53,5 +66,4 @@ class RecordsPerPage extends RenderableComponent
         if (!$value or !is_numeric($value)) return;
         $this->grid->getConfig()->getDataProvider()->setPageSize($value);
     }
-
 } 
