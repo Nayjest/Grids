@@ -22,5 +22,7 @@
 <?php endwhile; ?>
 </tbody>
 <?= $grid->footer() ?>
+<?php # Hidden input for submitting form by pressing enter if there are no other submits ?>
+<input type="submit" style="visibility: hidden;" />
 </table>
 </form>
