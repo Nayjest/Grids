@@ -1,17 +1,15 @@
 <?php
 namespace Nayjest\Grids\Components;
 
-use Nayjest\Grids\Components\Base\IComponent;
-use Nayjest\Grids\Components\Base\IRenderableComponent;
 use Nayjest\Grids\Components\Base\RenderableComponent;
-use Nayjest\Grids\Components\Base\TComponent;
 
-class ShowingRecords extends RenderableComponent {
+class ShowingRecords extends RenderableComponent
+{
 
     protected $template = '*.components.showing_records';
 
     /**
-     * Adds $from, $to, $total to view data
+     * Passing $from, $to, $total to view
      * @return mixed
      */
     protected function getViewData()
@@ -25,6 +23,6 @@ class ShowingRecords extends RenderableComponent {
         $to = $paginator->getTo();
         $total = $paginator->getTotal();
 
-        return parent::getViewData() + compact('from','to','total');
+        return parent::getViewData() + compact('from', 'to', 'total');
     }
 }
