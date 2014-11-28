@@ -5,6 +5,7 @@ Grids framework for Laravel
 
 [![Code Climate](https://codeclimate.com/github/Nayjest/Grids/badges/gpa.svg)](https://codeclimate.com/github/Nayjest/Grids)
 [![Circle CI](https://circleci.com/gh/Nayjest/Grids/tree/master.svg?style=svg)](https://circleci.com/gh/Nayjest/Grids/tree/master)
+![Release](https://img.shields.io/github/release/nayjest/grids.svg)
 
 
 ## Features
