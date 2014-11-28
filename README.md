@@ -34,6 +34,7 @@ Grids framework for Laravel
 ## Requirements
 
 * Laravel 4.X / 5.X
+* illuminate/html package if you use Laravel5.X
 * php 5.4+
 
 ## Installation
@@ -60,6 +61,14 @@ Add following line:
 'Nayjest\Grids\ServiceProvider'
 ```
 to 'providers' section of app/config/app.php file
+
+##### Additional setup for Laravel 5
+You need to add "illuminate/html" to composer dependencies of your application,
+register service provider 'Illuminate\Html\HtmlServiceProvider' and add aliases in app/config/app.php file:
+```php
+    'Form'  => 'Illuminate\Html\FormFacade',
+    'HTML'  => 'Illuminate\Html\HtmlFacade',
+```
 
 ## Usage
 
@@ -236,6 +245,7 @@ Quick links:
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 ```
+* Nayjest\Grids\Components\Pager component works only with Laravel 4.X, for Laravel 5 use Nayjest\Grids\Components\Laravel5\Pager
 
 ## License
 
