@@ -63,7 +63,7 @@ Add following line:
 to 'providers' section of app/config/app.php file
 
 ##### Additional setup for Laravel 5
-You need to add ""illuminate/html" to composer dependencies of your application,
+You need to add "illuminate/html" to composer dependencies of your application,
 register service provider 'Illuminate\Html\HtmlServiceProvider' and add aliases:
 ```php
     'Form'  => 'Illuminate\Html\FormFacade',
