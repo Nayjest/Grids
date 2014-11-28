@@ -35,12 +35,15 @@ class TotalsRow extends ArrayDataRow implements IRenderableComponent
 
     protected $rows_processed = 0;
 
-    public function __construct(array $field_names = [])
+    /**
+     * @param array|string[] $fieldNames
+     */
+    public function __construct(array $fieldNames = [])
     {
         $this->template = '*.components.totals';
         $this->name = 'totals';
 
-        $this->field_names = $field_names;
+        $this->field_names = $fieldNames;
         $this->id = 'Totals';
         $this->src = [];
         foreach ($this->field_names as $name) {
@@ -59,12 +62,12 @@ class TotalsRow extends ArrayDataRow implements IRenderableComponent
         );
     }
 
-    protected function listen(DataProvider $dp)
+    protected function listen(DataProvider $provider)
     {
         Event::listen(
             DataProvider::EVENT_FETCH_ROW,
-            function (DataRow $row, DataProvider $provider) use ($dp) {
-                if ($dp !== $provider) return;
+            function (DataRow $row, DataProvider $provider) use ($provider) {
+                if ($provider !== $provider) return;
                 $this->rows_processed++;
                 foreach ($this->fields as $field) {
                     $name = $field->getName();

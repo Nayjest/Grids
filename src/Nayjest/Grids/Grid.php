@@ -85,10 +85,10 @@ class Grid
     protected function provideName()
     {
         $bt_len = 10;
-        $bt = debug_backtrace(null, $bt_len);
+        $backtrace = debug_backtrace(null, $bt_len);
         $str = '';
         for ($id = 2; $id < $bt_len; $id++) {
-            $trace = isset($bt[$id]) ? $bt[$id] : [];
+            $trace = isset($backtrace[$id]) ? $backtrace[$id] : [];
             if (empty($trace['class']) or !$this instanceof $trace['class']) {
                 # may be closure
                 if (isset($trace['file']) and isset($trace['line'])) {

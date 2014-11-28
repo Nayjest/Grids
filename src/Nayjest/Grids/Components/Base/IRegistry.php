@@ -12,14 +12,33 @@ use Nayjest\Grids\Grid;
  */
 interface IRegistry
 {
+    /**
+     * @return \Illuminate\Support\Collection|IComponent[]|array
+     */
     public function getComponents();
 
+    /**
+     * @param string $name
+     * @return IComponent|null
+     */
     public function getComponentByName($name);
 
+    /**
+     * @param IComponent $component
+     * @return $this
+     */
     public function addComponent(IComponent $component);
 
+    /**
+     * @param \Illuminate\Support\Collection|IComponent[]|array $components
+     * @return mixed
+     */
     public function setComponents($components);
 
-    public function makeComponent($class_name);
+    /**
+     * @param string $class
+     * @return IComponent
+     */
+    public function makeComponent($class);
 
 }
