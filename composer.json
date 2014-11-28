@@ -13,6 +13,9 @@
         "php": ">=5.4.0",
         "illuminate/support": ">=4.2"
     },
+    "suggest": {
+        "illuminate/html": "Needed to work with Laravel 5.X"
+    },
     "autoload": {
         "classmap": [
             "src/migrations"
