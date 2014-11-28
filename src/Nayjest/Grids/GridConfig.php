@@ -151,12 +151,12 @@ class GridConfig implements IRegistry
     }
 
     /**
-     * @param int $page_size
+     * @param int $pageSize
      * @return $this
      */
-    public function setPageSize($page_size)
+    public function setPageSize($pageSize)
     {
-        $this->page_size = (int)$page_size;
+        $this->page_size = (int)$pageSize;
         return $this;
     }
 

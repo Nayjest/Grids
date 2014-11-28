@@ -32,9 +32,9 @@ class Filtering
         $filters = [];
         foreach ($this->grid->getConfig()->getColumns() as $column) {
             if ($column->hasFilters()) {
-                foreach ($column->getFilters() as $filter_config) {
-                    $filters[$filter_config->getId()] = new Filter(
-                        $filter_config,
+                foreach ($column->getFilters() as $filterConfig) {
+                    $filters[$filterConfig->getId()] = new Filter(
+                        $filterConfig,
                         $column,
                         $this->grid
                     );
@@ -56,16 +56,16 @@ class Filtering
         }
     }
 
-    public function getFilter($id_or_config)
+    public function getFilter($idOrConfig)
     {
-        if ($id_or_config instanceof FilterConfig) {
-            $id_or_config = $id_or_config->getId();
+        if ($idOrConfig instanceof FilterConfig) {
+            $idOrConfig = $idOrConfig->getId();
         }
-        return $this->getFilters()[$id_or_config];
+        return $this->getFilters()[$idOrConfig];
     }
 
-    public function render($filter_id_or_config)
+    public function render($filterIdOrConfig)
     {
-        return $this->getFilter($filter_id_or_config)->render();
+        return $this->getFilter($filterIdOrConfig)->render();
     }
 } 

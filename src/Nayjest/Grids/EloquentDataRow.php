@@ -5,10 +5,14 @@ namespace Nayjest\Grids;
 class EloquentDataRow extends DataRow
 {
 
-    protected function extractCellValue($field_name)
+    /**
+     * @param string $fieldName
+     * @return mixed
+     */
+    protected function extractCellValue($fieldName)
     {
-        if (strpos($field_name, '.') !== false) {
-            $parts = explode('.', $field_name);
+        if (strpos($fieldName, '.') !== false) {
+            $parts = explode('.', $fieldName);
             $res = $this->src;
             foreach ($parts as $part) {
                 $res = $res->{$part};
@@ -18,7 +22,7 @@ class EloquentDataRow extends DataRow
             }
             return $res;
         } else {
-            return $this->src->{$field_name};
+            return $this->src->{$fieldName};
         }
     }
 } 

@@ -33,15 +33,15 @@ trait TRegistry
     }
 
     /**
-     * @param string|string[] $tag_names
+     * @param string|string[] $tagNames
      *
      * @return Collection|IComponent[]
      */
-    public function getTagged($tag_names)
+    public function getTagged($tagNames)
     {
         return $this->getComponents()->filter(
-            function (IComponent $component) use ($tag_names) {
-                return is_array($tag_names) ? $component->hasTags($tag_names) : $component->hasTag($tag_names);
+            function (IComponent $component) use ($tagNames) {
+                return is_array($tagNames) ? $component->hasTags($tagNames) : $component->hasTag($tagNames);
             }
         );
     }
@@ -59,9 +59,9 @@ trait TRegistry
         return $this;
     }
 
-    public function makeComponent($class_name)
+    public function makeComponent($class)
     {
-        $component = new $class_name;
+        $component = new $class;
         $this->addComponent($component);
         return $component;
     }

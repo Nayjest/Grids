@@ -88,14 +88,14 @@ class EloquentDataProvider extends DataProvider
         return $this->getCollection()->count();
     }
 
-    public function orderBy($field_name, $direction)
+    public function orderBy($fieldName, $direction)
     {
-        $this->src->orderBy($field_name, $direction);
+        $this->src->orderBy($fieldName, $direction);
     }
 
-    public function filter($field_name, $operator, $value)
+    public function filter($fieldName, $operator, $value)
     {
-        $this->src->where($field_name, $operator, $value);
+        $this->src->where($fieldName, $operator, $value);
     }
 
 } 

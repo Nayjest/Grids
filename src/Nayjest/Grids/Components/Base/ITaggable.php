@@ -5,9 +5,9 @@ interface ITaggable
 {
     public function getTags();
 
-    public function setTags(array $tag_names);
+    public function setTags(array $tagNames);
 
-    public function hasTag($tag_name);
+    public function hasTag($tagName);
 
-    public function hasTags(array $tag_names);
+    public function hasTags(array $tagNames);
 }

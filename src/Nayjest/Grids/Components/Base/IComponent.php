@@ -3,6 +3,15 @@ namespace Nayjest\Grids\Components\Base;
 
 use Nayjest\Grids\Grid;
 
+/**
+ * Interface IComponent
+ *
+ * Interface of Grid component.
+ * Basically, component is an object that can be attached
+ * to grid components hierarchy and react to initialize & prepare calls.
+ *
+ * @package Nayjest\Grids\Components\Base
+ */
 interface IComponent extends ITaggable
 {
     /**

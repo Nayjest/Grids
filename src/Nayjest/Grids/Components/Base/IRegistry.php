@@ -3,6 +3,13 @@ namespace Nayjest\Grids\Components\Base;
 
 use Nayjest\Grids\Grid;
 
+/**
+ * Interface IRegistry
+ *
+ * Interface of Grid components registry
+ *
+ * @package Nayjest\Grids\Components\Base
+ */
 interface IRegistry
 {
     public function getComponents();

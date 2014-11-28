@@ -25,7 +25,7 @@ abstract class DataRow implements IDataRow
         return $this->src;
     }
 
-    abstract protected function extractCellValue($field_name);
+    abstract protected function extractCellValue($fieldName);
 
     /**
      * @param FieldConfig|string $field
@@ -33,7 +33,7 @@ abstract class DataRow implements IDataRow
      */
     public function getCellValue($field)
     {
-        $field_name = $field instanceof FieldConfig ? $field->getName() : $field;
-        return $this->extractCellValue($field_name);
+        $fieldName = $field instanceof FieldConfig ? $field->getName() : $field;
+        return $this->extractCellValue($fieldName);
     }
 } 

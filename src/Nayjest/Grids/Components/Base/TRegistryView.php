@@ -10,21 +10,21 @@ trait TRegistryView
     /**
      * @return string
      */
-    public function renderComponents($section_name = null)
+    public function renderComponents($sectionName = null)
     {
         $output = '';
-        $components = $this->getSectionComponents($section_name);
+        $components = $this->getSectionComponents($sectionName);
         foreach ($components as $component) {
             $output .= $component->render();
         }
         return $output;
     }
 
-    public function getSectionComponents($section_name)
+    public function getSectionComponents($sectionName)
     {
         return $this->getComponents()->filter(
-            function (IComponent $component) use ($section_name) {
-                return $component instanceof IRenderableComponent and $component->getRenderSection() === $section_name;
+            function (IComponent $component) use ($sectionName) {
+                return $component instanceof IRenderableComponent and $component->getRenderSection() === $sectionName;
             }
         );
     }

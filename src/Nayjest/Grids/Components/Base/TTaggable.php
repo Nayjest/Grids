@@ -6,24 +6,40 @@ trait TTaggable
 {
     protected $tags = [];
 
+    /**
+     * @return array
+     */
     public function getTags()
     {
         return $this->tags;
     }
 
+    /**
+     * @param array $tags
+     * @return $this
+     */
     public function setTags(array $tags)
     {
         $this->tags = $tags;
+        return $this;
     }
 
-    public function hasTag($tag_name)
+    /**
+     * @param string $tagName
+     * @return bool
+     */
+    public function hasTag($tagName)
     {
-        return in_array($tag_name, $this->tags);
+        return in_array($tagName, $this->tags);
     }
 
-    public function hasTags(array $tag_names)
+    /**
+     * @param array|string[] $tagNames
+     * @return bool
+     */
+    public function hasTags(array $tagNames)
     {
-        foreach ($tag_names as $tag) {
+        foreach ($tagNames as $tag) {
             if ($this->hasTag($tag)) continue;
             return false;
         }

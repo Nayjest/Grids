@@ -91,12 +91,12 @@ class FieldConfig
     }
 
     /**
-     * @param boolean $is_sortable
+     * @param boolean $isSortable
      * @return $this
      */
-    public function setIsSortable($is_sortable)
+    public function setIsSortable($isSortable)
     {
-        $this->is_sortable = $is_sortable;
+        $this->is_sortable = $isSortable;
         return $this;
     }
 
@@ -109,12 +109,12 @@ class FieldConfig
     }
 
     /**
-     * @param null|string $sort_order null|Grid::SORT_ASC|Grid::SORT_DESC
+     * @param null|string $sortOrder null|Grid::SORT_ASC|Grid::SORT_DESC
      * @return $this
      */
-    public function setSorting($sort_order)
+    public function setSorting($sortOrder)
     {
-        $this->sorting = $sort_order;
+        $this->sorting = $sortOrder;
         return $this;
     }
 
@@ -153,8 +153,8 @@ class FieldConfig
     public function setFilters($filters)
     {
         $this->filters = Collection::make($filters);
-        foreach ($this->filters as $filter_config) {
-            $filter_config->attach($this);
+        foreach ($this->filters as $filterConfig) {
+            $filterConfig->attach($this);
         }
 
         return $this;

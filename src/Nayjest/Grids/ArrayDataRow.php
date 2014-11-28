@@ -4,10 +4,10 @@ namespace Nayjest\Grids;
 class ArrayDataRow extends DataRow
 {
 
-    protected function extractCellValue($field_name)
+    protected function extractCellValue($fieldName)
     {
-        if (strpos($field_name, '.') !== false) {
-            $parts = explode('.', $field_name);
+        if (strpos($fieldName, '.') !== false) {
+            $parts = explode('.', $fieldName);
             $res = $this->src;
             foreach ($parts as $part) {
                 if (isset($res[$part])) {
@@ -18,7 +18,7 @@ class ArrayDataRow extends DataRow
             }
             return $res;
         } else {
-            return $this->src[$field_name];
+            return $this->src[$fieldName];
         }
     }
 } 

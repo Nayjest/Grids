@@ -27,9 +27,9 @@ trait TComponentView
         return $this->render_section;
     }
 
-    public function setRenderSection($section_name)
+    public function setRenderSection($sectionName)
     {
-        $this->render_section = $section_name;
+        $this->render_section = $sectionName;
         return $this;
     }
 

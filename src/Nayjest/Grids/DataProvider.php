@@ -32,12 +32,12 @@ abstract class DataProvider
     }
 
     /**
-     * @param int $page_size
+     * @param int $pageSize
      * @return $this
      */
-    public function setPageSize($page_size)
+    public function setPageSize($pageSize)
     {
-        $this->page_size = $page_size;
+        $this->page_size = $pageSize;
         return $this;
     }
 
@@ -62,12 +62,12 @@ abstract class DataProvider
     /**
      * Sets data sorting
      *
-     * @param string $field_name
+     * @param string $fieldName
      * @param $direction
      */
-    abstract public function orderBy($field_name, $direction);
+    abstract public function orderBy($fieldName, $direction);
 
-    abstract public function filter($field_name, $operator, $value);
+    abstract public function filter($fieldName, $operator, $value);
 
     abstract public function getCollection();
 

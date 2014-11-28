@@ -14,17 +14,27 @@ class ColumnsHider extends RenderableComponent
 
     protected $title = 'Columns';
 
-    public function setHiddenByDefault($column_names)
+    /**
+     * @param array|string[] $columnNames
+     * @return $this
+     */
+    public function setHiddenByDefault(array $columnNames)
     {
-        $this->hidden_by_default = $column_names;
+        $this->hidden_by_default = $columnNames;
         return $this;
     }
 
+    /**
+     * @return array|string[]
+     */
     public function getHiddenByDefault()
     {
         return $this->hidden_by_default;
     }
 
+    /**
+     * @return array columnName => boolean
+     */
     public function getColumnsVisibility()
     {
         $key = $this->getId('cookie');
@@ -45,6 +55,10 @@ class ColumnsHider extends RenderableComponent
         return $res;
     }
 
+    /**
+     * @param $name
+     * @return string
+     */
     public function getId($name)
     {
         if ($name) {
@@ -54,11 +68,18 @@ class ColumnsHider extends RenderableComponent
         return "{$grid_name}-columns_hider{$name}";
     }
 
+    /**
+     * @return string
+     */
     public function getTitle()
     {
         return $this->title;
     }
 
+    /**
+     * @param $title
+     * @return $this
+     */
     public function setTitle($title)
     {
         $this->title = $title;

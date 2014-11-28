@@ -133,11 +133,13 @@ class TotalsRow extends ArrayDataRow implements IRenderableComponent
     }
 
     /**
-     * @param array $field_names
+     * @param array $fieldNames
+     * @return $this
      */
-    public function setFieldNames($field_names)
+    public function setFieldNames(array $fieldNames)
     {
-        $this->field_names = $field_names;
+        $this->field_names = $fieldNames;
+        return $this;
     }
 
     /**
@@ -149,11 +151,12 @@ class TotalsRow extends ArrayDataRow implements IRenderableComponent
     }
 
     /**
-     * @param array $field_operations
+     * @param array $fieldOperations
+     * @return $this
      */
-    public function setFieldOperations(array $field_operations)
+    public function setFieldOperations(array $fieldOperations)
     {
-        $this->field_operations = $field_operations;
+        $this->field_operations = $fieldOperations;
         return $this;
     }
 
@@ -165,12 +168,14 @@ class TotalsRow extends ArrayDataRow implements IRenderableComponent
         return $this->field_operations;
     }
 
+
     /**
-     * @return mixed
+     * @param string $fieldName
+     * @return string
      */
-    public function getFieldOperation($field_name)
+    public function getFieldOperation($fieldName)
     {
-        return isset($this->field_operations[$field_name])?$this->field_operations[$field_name]:self::OPERTATION_SUM;
+        return isset($this->field_operations[$fieldName])?$this->field_operations[$fieldName]:self::OPERTATION_SUM;
     }
 
 

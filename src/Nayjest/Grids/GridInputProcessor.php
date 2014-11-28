@@ -76,10 +76,10 @@ class GridInputProcessor
         return $this;
     }
 
-    public function getFilterValue($filter_name)
+    public function getFilterValue($filterName)
     {
-        if (isset($this->input['filters'][$filter_name])) {
-            return $this->input['filters'][$filter_name];
+        if (isset($this->input['filters'][$filterName])) {
+            return $this->input['filters'][$filterName];
         } else {
             return null;
         }
