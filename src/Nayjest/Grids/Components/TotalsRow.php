@@ -85,7 +85,10 @@ class TotalsRow extends ArrayDataRow implements IRenderableComponent
                                 $this->src["{$name}_sum"] = 0;
                             }
                             $this->src["{$name}_sum"] += $row->getCellValue($field);
-                            $this->src[$name] = $this->src["{$name}_sum"] / $this->rows_processed;
+                            $this->src[$name] = round(
+                                $this->src["{$name}_sum"] / $this->rows_processed,
+                                2
+                            );
                             break;
                         default:
                             throw new Exception("TotalsRow:Unknown aggregation operation.");
