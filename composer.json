@@ -1,7 +1,7 @@
 {
     "name": "nayjest/grids",
     "description": "Grids for Laravel",
-    "keywords": ["grid","tables","html","laravel"],
+    "keywords": ["grid", "tables", "html", "laravel", "database", "eloquent"],
     "license": "MIT",
     "authors": [
         {
