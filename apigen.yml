@@ -1,0 +1,14 @@
+# inline code examples typically contains tables or code snippets
+allowed-html: b,i,a,ul,ol,li,p,br,var,samp,kbd,tt,table,thead,tbody,tr,td,pre,code
+# we want to search everything!
+autocomplete: classes,constants,functions,methods,properties,classconstants
+# privates are useful to know for developers
+access-levels: public,protected,private
+# even internals are useful to know for developers
+internal: yes
+# the php lib is already documented on php.net
+php: false
+# the doc should contain deprecated to not differ from source
+deprecated: true
+# useful for developers AND users to know
+todo: true
