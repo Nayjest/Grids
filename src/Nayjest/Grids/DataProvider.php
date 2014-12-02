@@ -30,6 +30,8 @@ abstract class DataProvider
     }
 
     /**
+     * Sets page size
+     *
      * @param int $pageSize
      * @return $this
      */
@@ -39,6 +41,11 @@ abstract class DataProvider
         return $this;
     }
 
+    /**
+     * Returns current page number (starting from 1 by default)
+     *
+     * @return int
+     */
     public function getCurrentPage()
     {
         $paginator = $this->getPaginator();
@@ -68,6 +75,14 @@ abstract class DataProvider
      */
     abstract public function orderBy($fieldName, $direction);
 
+    /**
+     * Performs filtering
+     *
+     * @param string $fieldName
+     * @param string $operator
+     * @param mixed $value
+     * @return $this
+     */
     abstract public function filter($fieldName, $operator, $value);
 
     abstract public function getCollection();
@@ -82,7 +97,12 @@ abstract class DataProvider
      */
     abstract public function getPaginationFactory();
 
-    /** @return DataRow|null */
+    /**
+     * Fetches one row and moves internal pointer forward.
+     * When last row fetched, returns null
+     *
+     * @return DataRow|null
+     */
     abstract public function getRow();
 
     /**

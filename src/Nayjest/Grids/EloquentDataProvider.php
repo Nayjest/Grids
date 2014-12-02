@@ -102,11 +102,13 @@ class EloquentDataProvider extends DataProvider
     public function orderBy($fieldName, $direction)
     {
         $this->src->orderBy($fieldName, $direction);
+        return $this;
     }
 
     public function filter($fieldName, $operator, $value)
     {
         $this->src->where($fieldName, $operator, $value);
+        return $this;
     }
 
 } 

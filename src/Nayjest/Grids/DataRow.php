@@ -1,7 +1,13 @@
 <?php
 namespace Nayjest\Grids;
 
-
+/**
+ * Class DataRow
+ *
+ * Abstract class for IDataRow implementations
+ *
+ * @package Nayjest\Grids
+ */
 abstract class DataRow implements IDataRow
 {
 
@@ -9,17 +15,33 @@ abstract class DataRow implements IDataRow
 
     protected $id;
 
+    /**
+     * @param $src
+     * @param int $id
+     */
     public function __construct($src, $id)
     {
         $this->src = $src;
         $this->id = $id;
     }
 
+    /**
+     * Returns row id.
+     *
+     * It's row number starting from 1, considering pagination
+     *
+     * @return mixed
+     */
     public function getId()
     {
         return $this->id;
     }
 
+    /**
+     * Returns row data source
+     *
+     * @return mixed
+     */
     public function getSrc()
     {
         return $this->src;
@@ -28,6 +50,8 @@ abstract class DataRow implements IDataRow
     abstract protected function extractCellValue($fieldName);
 
     /**
+     * Returns value of specified column from row
+     *
      * @param FieldConfig|string $field
      * @return mixed
      */
