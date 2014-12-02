@@ -1,6 +1,10 @@
 <?php
 namespace Nayjest\Grids\Components\Base;
 
+/**
+ * Interface ITaggable
+ * @package Nayjest\Grids\Components\Base
+ */
 interface ITaggable
 {
     public function getTags();
