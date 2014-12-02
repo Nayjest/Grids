@@ -1,17 +1,22 @@
 {
     "name": "nayjest/grids",
-    "description": "Grids for Laravel",
+    "description": "Grids for Laravel framework",
     "keywords": ["grid", "tables", "html", "laravel", "database", "eloquent"],
+    "homepage": "https://github.com/Nayjest/Grids",
+    "type": "library",
     "license": "MIT",
     "authors": [
         {
             "name": "Vitalii [Nayjest] Stepanenko",
-            "email": "mail@vitaliy.in"
+            "email": "mail@vitaliy.in",
+            "role": "Developer"
         }
     ],
     "require": {
         "php": ">=5.4.0",
         "illuminate/support": ">=4.2"
+    },
+    "require-dev": {
     },
     "suggest": {
         "illuminate/html": "Needed to work with Laravel 5.X"
@@ -23,6 +28,11 @@
         "psr-0": {
             "Nayjest\\Grids\\": "src/"
         }
+    },
+    "support": {
+        "email": "mail@vitaliy.in",
+        "source": "https://github.com/Nayjest/Grids",
+        "issues": "https://github.com/Nayjest/Grids/issues"
     },
     "minimum-stability": "stable"
 }
