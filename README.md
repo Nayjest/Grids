@@ -61,7 +61,7 @@ Add following line:
 ```php
 'Nayjest\Grids\ServiceProvider'
 ```
-to 'providers' section of app/config/app.php file
+to 'providers' section of app/config/app.php file.
 
 ##### Additional setup for Laravel 5
 You need to add "illuminate/html" to composer dependencies of your application,
@@ -234,7 +234,7 @@ register service provider 'Illuminate\Html\HtmlServiceProvider' and add aliases 
 ```
 #####Notes
 * Class names in example used without namespaces therefore you must import it before
-* Grids does not includes Twitter Bootstrap css/js files to your layout. You need to do it manually.
+* Grids does not includes Twitter Bootstrap css/js files to your layout. You need to do it manually
 Quick links:
 ```html
 <!-- Latest compiled and minified CSS -->
@@ -253,4 +253,4 @@ Quick links:
 
 © 2014 Vitalii Stepanenko
 
-Licensed under the MIT License
+Licensed under the MIT License.
