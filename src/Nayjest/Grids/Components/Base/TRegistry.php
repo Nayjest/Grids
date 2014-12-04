@@ -76,7 +76,11 @@ trait TRegistry
      */
     public function addComponents($components)
     {
-        $this->getComponents()->merge($components);
+        echo 'before';
+        $this->setComponents(
+            $this->getComponents()->merge($components)
+        );
+        echo 'ok';
         return $this;
     }
 
