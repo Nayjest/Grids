@@ -9,12 +9,23 @@ trait TRegistry
     protected $components;
 
     /**
+     * Components in registry by default
+     *
+     * Override this method
+     * @return array
+     */
+    protected function getDefaultComponents()
+    {
+        return [];
+    }
+
+    /**
      * @return Collection|IComponent[]
      */
-    public function getComponents()
+    final public function getComponents()
     {
         if ($this->components === null) {
-            $this->components = new Collection;
+            $this->components = new Collection($this->getDefaultComponents());
         }
         return $this->components;
     }
@@ -56,6 +67,16 @@ trait TRegistry
     public function setComponents($components)
     {
         $this->components = Collection::make($components);
+        return $this;
+    }
+
+    /**
+     * @param  Collection|\Illuminate\Support\Contracts\ArrayableInterface|array  $components
+     * @return $this
+     */
+    public function addComponents($components)
+    {
+        $this->getComponents()->merge($components);
         return $this;
     }
 

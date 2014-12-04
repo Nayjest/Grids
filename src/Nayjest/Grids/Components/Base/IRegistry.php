@@ -44,6 +44,14 @@ interface IRegistry
     public function setComponents($components);
 
     /**
+     * Adds components to collection
+     *
+     * @param \Illuminate\Support\Collection|IComponent[]|array $components
+     * @return $this
+     */
+    public function addComponents($components);
+
+    /**
      * Creates component be class name,
      * attaches it to children collection
      * and returns this component as result
