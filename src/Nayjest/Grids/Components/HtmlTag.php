@@ -99,6 +99,11 @@ class HtmlTag extends RenderableRegistry
         return $this->attributes;
     }
 
+    /**
+     * Renders opening tag
+     *
+     * @return string
+     */
     public function renderOpeningTag()
     {
         return '<'
@@ -107,11 +112,21 @@ class HtmlTag extends RenderableRegistry
         . '>';
     }
 
+    /**
+     * Renders closing tag
+     *
+     * @return string
+     */
     public function renderClosingTag()
     {
         return "</$this->tag_name>";
     }
 
+    /**
+     * Renders tag if no template specified
+     *
+     * @return string
+     */
     protected function renderWithoutTemplate()
     {
         $this->is_rendered = true;
@@ -123,12 +138,15 @@ class HtmlTag extends RenderableRegistry
         . $this->renderClosingTag();
     }
 
+    /**
+     * Renders component
+     *
+     * @return \Illuminate\View\View|string
+     */
     public function render()
     {
-        if ($this->getTemplate()) {
-            return $this->renderTemplate();
-        } else {
-            return $this->renderWithoutTemplate();
-        }
+        return $this->getTemplate() ?
+            $this->renderTemplate() : $this->renderWithoutTemplate();
+
     }
 }
