@@ -1,8 +1,8 @@
-<thead>
 <?php
-use \Nayjest\Grids\Components\Header;
-/** @var Header $component */
-echo $component->renderComponents(Header::SECTION_BEGIN);
+use \Nayjest\Grids\Components\THead;
+/** @var THead $component */
+echo $component->renderOpeningTag()
+     . $component->renderComponents($component::SECTION_BEGIN)
 ?>
 <tr>
     <?php /** @var Nayjest\Grids\FieldConfig $column **/ ?>
@@ -44,5 +44,6 @@ echo $component->renderComponents(Header::SECTION_BEGIN);
         </th>
     <?php endforeach ?>
 </tr>
-<?= $component->renderComponents(HEADER::SECTION_END) ?>
-</thead>
+<?= $component->renderComponents(THead::SECTION_END)
+    . $component->renderClosingTag()
+?>

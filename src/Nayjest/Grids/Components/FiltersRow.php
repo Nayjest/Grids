@@ -14,5 +14,5 @@ class FiltersRow extends RenderableRegistry
 {
     protected $template = '*.components.filters_row';
     protected $name = 'filters_row';
-    protected $render_section = Header::SECTION_END;
+    protected $render_section = THead::SECTION_END;
 }

@@ -3,6 +3,8 @@ namespace Nayjest\Grids;
 
 use Event;
 use Cache;
+use Nayjest\Grids\Components\TFoot;
+use Nayjest\Grids\Components\THead;
 use View;
 
 class Grid
@@ -191,19 +193,19 @@ class Grid
     }
 
     /**
-     * @return Components\Footer
+     * @return TFoot|null
      */
     public function footer()
     {
-        return $this->getConfig()->getComponentByName('footer');
+        return $this->getConfig()->getComponentByName('tfoot');
     }
 
     /**
-     * @return Components\Header
+     * @return THead|null
      */
     public function header()
     {
-        return $this->getConfig()->getComponentByName('header');
+        return $this->getConfig()->getComponentByName('thead');
     }
 
     public function getFiltering()

@@ -160,7 +160,7 @@ register service provider 'Illuminate\Html\HtmlServiceProvider' and add aliases 
                 # Setup additional grid components
                 ->setComponents([
                     # Renders table header (table>thead)
-                    (new Header)
+                    (new THead)
                         # Setup inherited components
                         ->setComponents([
                             # Add this if you have filters for automatic placing to this row
@@ -196,11 +196,11 @@ register service provider 'Illuminate\Html\HtmlServiceProvider' and add aliases 
                                         ->setContent('Filter')
                                 ])
                                 # Components may have some placeholders for rendering children there.
-                                ->setRenderSection(Header::SECTION_BEGIN)
+                                ->setRenderSection(THead::SECTION_BEGIN)
                         ])
                     ,
                     # Renders table footer (table>tfoot)
-                    (new Footer)
+                    (new TFoot)
                         ->addComponent(
                             # TotalsRow component calculates totals on current page (max, min, sum, average value, etc)
                             # and renders results as table row.
