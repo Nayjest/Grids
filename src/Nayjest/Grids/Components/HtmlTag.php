@@ -1,44 +1,134 @@
 <?php
 namespace Nayjest\Grids\Components;
 
+use HTML;
 use Nayjest\Grids\Components\Base\RenderableRegistry;
 
 class HtmlTag extends RenderableRegistry
 {
-    protected $tag_name = 'div';
+    const SECTION_BEGIN = 'begin';
+    const SECTION_END = 'end';
+
+    protected $tag_name;
 
     protected $content;
 
+    /**
+     * HTML tag attributes.
+     * Keys are attribute names and values are attribute values.
+     * @var array
+     */
     protected $attributes = [];
 
+    /**
+     * Returns component name.
+     * If empty, tag_name will be used instead
+     *
+     * @return string|null
+     */
+    public function getName()
+    {
+        return $this->name ?: $this->getTagName();
+    }
+
+    /**
+     * @param string $name
+     * @return $this
+     */
     public function setTagName($name)
     {
         $this->tag_name = $name;
         return $this;
     }
 
+    /**
+     * @return string
+     */
+    public function getTagName()
+    {
+        return $this->tag_name ?: $this->suggestTagName();
+    }
+
+    private function suggestTagName()
+    {
+        $class_name = get_class($this);
+        $parts = explode('\\', $class_name);
+        $base_name = array_pop($parts);
+        return ($base_name === 'HtmlTag') ? 'div' : strtolower($base_name);
+    }
+
+    /**
+     * @param string $content
+     * @return $this
+     */
     public function setContent($content)
     {
         $this->content = $content;
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    /**
+     * Sets html tag attributes.
+     * Keys are attribute names and values are attribute values.
+     *
+     * @param array $attributes
+     * @return $this
+     */
     public function setAttributes(array $attributes = [])
     {
         $this->attributes = $attributes;
         return $this;
     }
 
+    /**
+     * Returns html tag attributes.
+     * Keys are attribute names and values are attribute values.
+     *
+     * @return array
+     */
+    public function getAttributes()
+    {
+        return $this->attributes;
+    }
+
+    public function renderOpeningTag()
+    {
+        return '<'
+        . $this->getTagName()
+        . HTML::attributes($this->getAttributes())
+        . '>';
+    }
+
+    public function renderClosingTag()
+    {
+        return "</$this->tag_name>";
+    }
+
+    protected function renderWithoutTemplate()
+    {
+        $this->is_rendered = true;
+        return $this->renderOpeningTag()
+        . $this->renderComponents(self::SECTION_BEGIN)
+        . $this->getContent()
+        . $this->renderComponents(null)
+        . $this->renderComponents(self::SECTION_END)
+        . $this->renderClosingTag();
+    }
 
     public function render()
     {
-        $out = "<$this->tag_name";
-        foreach ($this->attributes as $key => $val) {
-            $out .= " $key=\"$val\" ";
+        if ($this->getTemplate()) {
+            return $this->renderTemplate();
+        } else {
+            return $this->renderWithoutTemplate();
         }
-        $out.= '>';
-        $out.= $this->content?:$this->renderComponents();
-        $out.= "</$this->tag_name>";
-        return $out;
     }
 }
