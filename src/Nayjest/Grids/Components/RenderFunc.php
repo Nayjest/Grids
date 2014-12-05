@@ -27,7 +27,7 @@ class RenderFunc extends RenderableComponent
 
     public function render()
     {
-        return call_user_func($this->func, $this->grid);
+        return call_user_func($this->func, $this->grid, $this);
     }
 
 }

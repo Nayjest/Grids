@@ -15,6 +15,8 @@ class GridConfig implements IRegistry
     use TRegistry;
     use TComponent;
 
+    const SECTION_DO_NOT_RENDER = 'not_render';
+
     protected $template = 'grids::default';
 
     /** @var FieldConfig[]|Collection */
@@ -41,10 +43,9 @@ class GridConfig implements IRegistry
     public function getRowComponent()
     {
         if (!$this->row_component) {
-            $this->row_component = new Tr();
-            if ($this->grid) {
-                $this->row_component->initialize($this->grid);
-            }
+            $this->row_component = (new Tr)
+                ->setRenderSection(self::SECTION_DO_NOT_RENDER);
+            $this->addComponent($this->row_component);
         }
         return $this->row_component;
     }
@@ -55,6 +56,8 @@ class GridConfig implements IRegistry
     public function setRowComponent(IRenderableComponent $row_component)
     {
         $this->row_component = $row_component;
+        $this->addComponent($row_component);
+        $row_component->setRenderSection(self::SECTION_DO_NOT_RENDER);
         return $this;
     }
 
