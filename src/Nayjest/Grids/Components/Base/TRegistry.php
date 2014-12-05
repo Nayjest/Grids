@@ -25,7 +25,7 @@ trait TRegistry
     final public function getComponents()
     {
         if ($this->components === null) {
-            $this->components = new Collection($this->getDefaultComponents());
+            $this->setComponents($this->getDefaultComponents());
         }
         return $this->components;
     }
@@ -41,6 +41,26 @@ trait TRegistry
                 return $component;
             }
         }
+    }
+
+    /**
+     * @param string $name
+     * @return null|IComponent
+     */
+    public function getComponentByNameRecursive($name)
+    {
+        foreach ($this->getComponents() as $component) {
+            if ($component->getName() === $name) {
+                return $component;
+            }
+            if ($component instanceof TRegistry) {
+                if ($res = $component->getComponentByNameRecursive($name)) {
+                    return $res;
+                }
+            }
+
+        }
+        return null;
     }
 
     /**
@@ -64,9 +84,16 @@ trait TRegistry
         return $this;
     }
 
+    /**
+     * @param \Illuminate\Support\Collection|IComponent[]|array $components
+     * @return $this
+     */
     public function setComponents($components)
     {
         $this->components = Collection::make($components);
+        foreach ($components as $component) {
+            $component->attachTo($this);
+        }
         return $this;
     }
 
@@ -76,11 +103,9 @@ trait TRegistry
      */
     public function addComponents($components)
     {
-        echo 'before';
         $this->setComponents(
             $this->getComponents()->merge($components)
         );
-        echo 'ok';
         return $this;
     }
 
