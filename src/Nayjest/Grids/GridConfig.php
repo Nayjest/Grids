@@ -55,6 +55,7 @@ class GridConfig implements IRegistry
     public function setRowComponent(IRenderableComponent $row_component)
     {
         $this->row_component = $row_component;
+        return $this;
     }
 
     /**
