@@ -3,5 +3,11 @@ namespace Nayjest\Grids\Components;
 
 class TFoot extends HtmlTag
 {
-    protected $template = '*.components.tfoot';
+    protected function getDefaultComponents()
+    {
+        return [
+            (new OneCellRow)
+                ->addComponent(new Pager)
+        ];
+    }
 }
