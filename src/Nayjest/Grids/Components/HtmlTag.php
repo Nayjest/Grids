@@ -8,6 +8,8 @@ class HtmlTag extends RenderableRegistry
 {
     const SECTION_BEGIN = 'begin';
     const SECTION_END = 'end';
+    const SECTION_BEFORE = 'before';
+    const SECTION_AFTER = 'after';
 
     protected $tag_name;
 
@@ -130,12 +132,15 @@ class HtmlTag extends RenderableRegistry
     protected function renderWithoutTemplate()
     {
         $this->is_rendered = true;
-        return $this->renderOpeningTag()
-        . $this->renderComponents(self::SECTION_BEGIN)
-        . $this->getContent()
-        . $this->renderComponents(null)
-        . $this->renderComponents(self::SECTION_END)
-        . $this->renderClosingTag();
+        return
+            $this->renderComponents(self::SECTION_BEFORE)
+            . $this->renderOpeningTag()
+            . $this->renderComponents(self::SECTION_BEGIN)
+            . $this->getContent()
+            . $this->renderComponents(null)
+            . $this->renderComponents(self::SECTION_END)
+            . $this->renderClosingTag()
+            . $this->renderComponents(self::SECTION_AFTER);
     }
 
     /**
