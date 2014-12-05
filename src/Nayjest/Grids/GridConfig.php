@@ -2,9 +2,13 @@
 namespace Nayjest\Grids;
 
 use Illuminate\Support\Collection;
+use Nayjest\Grids\Components\Base\IRenderableComponent;
 use Nayjest\Grids\Components\Base\TComponent;
 use Nayjest\Grids\Components\Base\TRegistry;
 use Nayjest\Grids\Components\Base\IRegistry;
+use Nayjest\Grids\Components\TFoot;
+use Nayjest\Grids\Components\THead;
+use Nayjest\Grids\Components\Tr;
 
 class GridConfig implements IRegistry
 {
@@ -28,6 +32,43 @@ class GridConfig implements IRegistry
     protected $caching_time = 0;
 
     protected $main_template = '*.grid';
+
+    protected $row_component;
+
+    /**
+     * @return IRenderableComponent
+     */
+    public function getRowComponent()
+    {
+        if (!$this->row_component) {
+            $this->row_component = new Tr();
+            if ($this->grid) {
+                $this->row_component->initialize($this->grid);
+            }
+        }
+        return $this->row_component;
+    }
+
+    /**
+     * @param mixed $row_component
+     */
+    public function setRowComponent(IRenderableComponent $row_component)
+    {
+        $this->row_component = $row_component;
+    }
+
+    /**
+     * Components in registry by default
+     *
+     * @return array
+     */
+    protected function getDefaultComponents()
+    {
+        return [
+            new THead,
+            new TFoot
+        ];
+    }
 
     /**
      * @param string $template
