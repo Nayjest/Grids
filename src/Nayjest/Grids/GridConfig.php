@@ -45,6 +45,9 @@ class GridConfig implements IRegistry
         if (!$this->row_component) {
             $this->row_component = (new Tr)
                 ->setRenderSection(self::SECTION_DO_NOT_RENDER);
+            if ($this->grid) {
+                $this->row_component->initialize($this->grid);
+            }
             $this->addComponent($this->row_component);
         }
         return $this->row_component;
