@@ -46,7 +46,7 @@ Grids framework for Laravel
 Add nayjest/grids to "require" section of your composer.json
 ```javascript
 "require": {
-    "nayjest/grids": "~0.3"
+    "nayjest/grids": "~0.4"
 },
 ```
 
@@ -247,6 +247,53 @@ Quick links:
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 ```
 * Nayjest\Grids\Components\Pager component works only with Laravel 4.X, for Laravel 5 use Nayjest\Grids\Components\Laravel5\Pager
+
+
+## Upgrade guide
+
+### From 0.3.X to 0.4
+
+1. Use THead & TFoot instead of Header & Footer components
+2. If you have customized grid view (grid.php), refactor it using changes in default view
+3. Some components became default, so you don't need to add it to configuration
+
+Default components hierarchy:
+```
+- GridConfig
+    - THead
+        - ColumnHeadersRow
+        - FiltersRow
+    - TFoot
+        - OneCellRow
+            - Pager
+        
+```
+For adding components to default one, resolve it by name and use addComponent / addComponents methods.
+
+Example:
+```php
+...
+(new GridConfig)
+    ->setDataProvider($provider)
+    ->getComponentByName(THead::NAME)
+        ->getComponentByName(FiltersRow::NAME)
+            ->addComponent(
+                (new HtmlTag)
+                    ->setTagName('button')
+                    ->setContent('Filter')
+                    ->setAttributes([
+                        'type' => 'submit',
+                        'class' => 'btn btn-success btn-sm'
+                    ])
+                    ->setRenderSection('filters_row_column_Actions')
+            )
+            ->getParent()
+        ->getParent()
+    ->setColumns([
+...    
+```
+
+Note that setComponents method rewrites defaults.
 
 ## License
 
