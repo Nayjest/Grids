@@ -57,7 +57,12 @@ class Grid
         }
         $cfg = $this->config;
         $cfg->getDataProvider()
-            ->setPageSize($cfg->getPageSize());
+            ->setPageSize(
+                $cfg->getPageSize()
+            )
+            ->setCurrentPage(
+                $this->getInputProcessor()->getValue('page', 1)
+            );
         $this->getConfig()->prepare();
         //$this->getInputProcessor()->applyChanges();
         $this->getFiltering()->apply();

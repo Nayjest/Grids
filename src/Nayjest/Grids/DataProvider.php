@@ -15,6 +15,8 @@ abstract class DataProvider
 
     protected $page_size = 100;
 
+    protected $current_page = 1;
+
     public function __construct($src)
     {
         $this->src = $src;
@@ -42,20 +44,21 @@ abstract class DataProvider
     }
 
     /**
+     * @param int $current_page
+     */
+    public function setCurrentPage($current_page)
+    {
+        $this->current_page = $current_page;
+    }
+
+    /**
      * Returns current page number (starting from 1 by default)
      *
      * @return int
      */
     public function getCurrentPage()
     {
-        $paginator = $this->getPaginator();
-        if (method_exists($paginator, 'getCurrentPage')) {
-            # Laravel 4 compatibility
-            return $paginator->getCurrentPage();
-        } else {
-            # Laravel 5
-            return $paginator->currentPage();
-        }
+        return $this->current_page;
     }
 
     /**
@@ -106,6 +109,9 @@ abstract class DataProvider
     abstract public function getRow();
 
     /**
+     * Count of records on current page
+     * @todo rename to something like recordsOnPage
+     * @deprecated
      * @return int
      */
     abstract public function count();
