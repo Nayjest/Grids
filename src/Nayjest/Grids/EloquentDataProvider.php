@@ -28,7 +28,7 @@ class EloquentDataProvider extends DataProvider
     }
 
     /**
-     * @return \Illuminate\Pagination\Paginator
+     * @return Collection
      */
     public function getCollection()
     {
