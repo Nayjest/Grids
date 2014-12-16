@@ -46,8 +46,8 @@ class ColumnsHider extends RenderableComponent
         $res = [];
         foreach ($this->grid->getConfig()->getColumns() as $column) {
             $name = $column->getName();
-            if (isset($from_cookie[$name]) and $from_cookie[$name]) {
-                $res[$name] = true;
+            if (isset($from_cookie[$name])) {
+                $res[$name] = (boolean)$from_cookie[$name];
             } else {
                 $res[$name] = !in_array($name, $this->getHiddenByDefault());
             }
