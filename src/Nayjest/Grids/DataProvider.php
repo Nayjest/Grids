@@ -17,12 +17,17 @@ abstract class DataProvider
 
     protected $current_page = 1;
 
+    /**
+     * @param mixed $src data source
+     */
     public function __construct($src)
     {
         $this->src = $src;
     }
 
     /**
+     * Sets the internal pointer first element
+     *
      * @return $this
      */
     public function reset()
@@ -44,11 +49,13 @@ abstract class DataProvider
     }
 
     /**
-     * @param int $current_page
+     * Sets current page number. Page numeration starts from 1
+     *
+     * @param int $currentPage
      */
-    public function setCurrentPage($current_page)
+    public function setCurrentPage($currentPage)
     {
-        $this->current_page = $current_page;
+        $this->current_page = $currentPage;
     }
 
     /**
@@ -88,6 +95,11 @@ abstract class DataProvider
      */
     abstract public function filter($fieldName, $operator, $value);
 
+    /**
+     * Returns collection of raw data items
+     *
+     * @return \Illuminate\Support\Collection
+     */
     abstract public function getCollection();
 
     /**

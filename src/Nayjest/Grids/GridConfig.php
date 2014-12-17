@@ -54,13 +54,14 @@ class GridConfig implements IRegistry
     }
 
     /**
-     * @param mixed $row_component
+     * @param IRenderableComponent $rowComponent
+     * @return $this
      */
-    public function setRowComponent(IRenderableComponent $row_component)
+    public function setRowComponent(IRenderableComponent $rowComponent)
     {
-        $this->row_component = $row_component;
-        $this->addComponent($row_component);
-        $row_component->setRenderSection(self::SECTION_DO_NOT_RENDER);
+        $this->row_component = $rowComponent;
+        $this->addComponent($rowComponent);
+        $rowComponent->setRenderSection(self::SECTION_DO_NOT_RENDER);
         return $this;
     }
 

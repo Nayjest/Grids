@@ -1,14 +1,14 @@
 <?php
 namespace Nayjest\Grids\Components;
 
-use Nayjest\Grids\DataRow;
+use Nayjest\Grids\IDataRow;
 
 class Tr extends HtmlTag
 {
     protected $data_row;
 
     /**
-     * @return mixed
+     * @return IDataRow
      */
     public function getDataRow()
     {
@@ -16,15 +16,20 @@ class Tr extends HtmlTag
     }
 
     /**
-     * @param DataRow $data_row
+     * @param IDataRow $dataRow
      * @return $this
      */
-    public function setDataRow($data_row)
+    public function setDataRow(IDataRow $dataRow)
     {
-        $this->data_row = $data_row;
+        $this->data_row = $dataRow;
         return $this;
     }
 
+    /**
+     * Renders row cells
+     *
+     * @return string
+     */
     protected function renderCells()
     {
         $row = $this->getDataRow();
@@ -38,6 +43,11 @@ class Tr extends HtmlTag
         return $out;
     }
 
+    /**
+     * Returns tag content
+     *
+     * @return null|string
+     */
     public function getContent()
     {
         return $this->getDataRow() ? $this->renderCells() : parent::getContent();

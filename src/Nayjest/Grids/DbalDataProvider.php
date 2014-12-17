@@ -154,11 +154,11 @@ class DbalDataProvider extends DataProvider
     }
 
     /**
-     * @param boolean $exec_using_laravel
+     * @param boolean $execUsingLaravel
      */
-    public function setExecUsingLaravel($exec_using_laravel)
+    public function setExecUsingLaravel($execUsingLaravel)
     {
-        $this->exec_using_laravel = $exec_using_laravel;
+        $this->exec_using_laravel = $execUsingLaravel;
     }
 
 }
