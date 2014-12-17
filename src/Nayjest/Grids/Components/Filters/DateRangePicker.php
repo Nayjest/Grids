@@ -25,7 +25,12 @@ class DateRangePicker extends Filter
     protected $template = '*.components.filters.date_range_picker';
 
     /**
-     * @return mixed
+     * Returns javascript options
+     *
+     * Available options:
+     * @see https://github.com/dangrossman/bootstrap-daterangepicker#options
+     *
+     * @return array
      */
     public function getJsOptions()
     {
@@ -36,11 +41,16 @@ class DateRangePicker extends Filter
     }
 
     /**
-     * @param mixed $js_options
+     * Sets javascript options
+     *
+     * Available options:
+     * @see https://github.com/dangrossman/bootstrap-daterangepicker#options
+     *
+     * @param array $options
      */
-    public function setJsOptions($js_options)
+    public function setJsOptions($options)
     {
-        $this->js_options = $js_options;
+        $this->js_options = $options;
     }
 
     public function getStartValue()
@@ -75,6 +85,14 @@ class DateRangePicker extends Filter
         return [$this->getStartValue(), $this->getEndValue()];
     }
 
+    /**
+     * Returns default javascript options
+     *
+     * Available options:
+     * @see https://github.com/dangrossman/bootstrap-daterangepicker#options
+     *
+     * @return array
+     */
     protected function getDefaultJsOptions()
     {
         $carbon = new Carbon();
@@ -128,6 +146,11 @@ class DateRangePicker extends Filter
         return $this->getDefaultValue()[1];
     }
 
+    /**
+     * Returns default filter value as [$startDate, $endDate]
+     *
+     * @return array
+     */
     public function getDefaultValue()
     {
         return is_array($this->default_value) ? $this->default_value : [
