@@ -17,6 +17,13 @@ class DbalDataProvider extends DataProvider
     /** @var  $iterator \ArrayIterator */
     protected $iterator;
 
+    /**
+     * Set true if Laravel query logging required.
+     * Fails when using Connection::PARAM_INT_ARRAY parameters
+     * @var bool
+     */
+    protected $exec_using_laravel = false;
+
     public function __construct(QueryBuilder $src)
     {
         $this->src = $src;
@@ -41,9 +48,12 @@ class DbalDataProvider extends DataProvider
                     ($this->getCurrentPage() - 1) * $this->page_size
                 )
                 ->setMaxResults($this->page_size);
-            $this->collection = Collection::make(
-                DB::select($query, $query->getParameters())
-            );
+            if ($this->isExecUsingLaravel()) {
+                $res = DB::select($query, $query->getParameters());
+            } else {
+                $res = $query->execute()->fetchAll(\PDO::FETCH_OBJ);
+            }
+            $this->collection = Collection::make($res);
         }
         return $this->collection;
     }
@@ -130,9 +140,25 @@ class DbalDataProvider extends DataProvider
 
     public function filter($fieldName, $operator, $value)
     {
-        $this->src->where("$fieldName $operator :$fieldName");
+        $this->src->andWhere("$fieldName $operator :$fieldName");
         $this->src->setParameter($fieldName, $value);
         return $this;
     }
 
-} 
+    /**
+     * @return boolean
+     */
+    public function isExecUsingLaravel()
+    {
+        return $this->exec_using_laravel;
+    }
+
+    /**
+     * @param boolean $exec_using_laravel
+     */
+    public function setExecUsingLaravel($exec_using_laravel)
+    {
+        $this->exec_using_laravel = $exec_using_laravel;
+    }
+
+}
