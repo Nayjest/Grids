@@ -9,7 +9,7 @@ class FilterConfig
     const OPERATOR_GT = '>';
     const OPERATOR_LS = '<';
     const OPERATOR_LSE = '<=';
-    const OPERATOR_GTE = '>';
+    const OPERATOR_GTE = '>=';
 
 
     /** @var  FieldConfig */
