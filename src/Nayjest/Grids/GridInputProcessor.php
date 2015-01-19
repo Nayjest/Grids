@@ -95,6 +95,12 @@ class GridInputProcessor
         }
     }
 
+    public function setValue($key, $value)
+    {
+        $this->input[$key] = $value;
+        return $this;
+    }
+
     public function getQueryString()
     {
         $params = $_GET;
