@@ -53,7 +53,7 @@ trait TRegistry
             if ($component->getName() === $name) {
                 return $component;
             }
-            if ($component instanceof TRegistry) {
+            if ($component instanceof TRegistry || $component instanceof RenderableRegistry) {
                 if ($res = $component->getComponentByNameRecursive($name)) {
                     return $res;
                 }
