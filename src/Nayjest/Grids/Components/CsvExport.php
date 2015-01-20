@@ -7,12 +7,13 @@ use Event;
 use Illuminate\Http\Response;
 use Nayjest\Grids\Components\Base\RenderableComponent;
 use Nayjest\Grids\Components\THead;
+use Nayjest\Grids\DataProvider;
+use Nayjest\Grids\EloquentDataRow;
 use Nayjest\Grids\Grid;
 
 /**
  * @author: Vitaliy Ofat <i@vitaliy-ofat.com>
  */
-
 class CsvExport extends RenderableComponent
 {
     const NAME = 'csv_export';
@@ -45,13 +46,13 @@ class CsvExport extends RenderableComponent
      */
     public function initialize(Grid $grid)
     {
-        Event::listen(Grid::EVENT_CREATE, function(Grid $grid){
+        parent::initialize($grid);
+        Event::listen(Grid::EVENT_CREATE, function (Grid $grid) {
             $this->grid = $grid;
-            if($grid->getInputProcessor()->getValue(static::INPUT_PARAM, false)) {
+            if ($grid->getInputProcessor()->getValue(static::INPUT_PARAM, false)) {
                 $this->renderCsv();
             }
         });
-        parent::initialize($grid);
     }
 
     /**
@@ -69,13 +70,13 @@ class CsvExport extends RenderableComponent
      */
     public function getFileName()
     {
-        return $this->fileName.static::CSV_EXT;
+        return $this->fileName . static::CSV_EXT;
     }
 
     protected function setCsvHeaders(Response $response)
     {
         $response->header('Content-Type', 'application/csv');
-        $response->header('Content-Disposition', 'attachment; filename='.$this->getFileName());
+        $response->header('Content-Disposition', 'attachment; filename=' . $this->getFileName());
         $response->header('Pragma', 'no-cache');
     }
 
@@ -83,10 +84,13 @@ class CsvExport extends RenderableComponent
     {
         $key = $this->grid->getInputProcessor()->getUniqueRequestId();
         $caching_time = $this->grid->getConfig()->getCachingTime();
+
         if ($caching_time and ($output = Cache::get($key))) {
             $this->output = $output;
         } else {
-            $this->prepare();
+            set_time_limit(0);
+            $this->grid->getConfig()->getDataProvider()->setPageSize(PHP_INT_MAX);
+            $this->grid->getConfig()->initialize($this->grid);
 
             $provider = $this->grid->getConfig()->getDataProvider();
             $provider->reset();
@@ -109,25 +113,26 @@ class CsvExport extends RenderableComponent
 
     protected function escapeString($str)
     {
-        return '"'.str_replace('"', '\'', strip_tags(html_entity_decode($str))).'"';
+        return '"' . str_replace('"', '\'', strip_tags(html_entity_decode($str))) . '"';
     }
 
     protected function renderHeader()
     {
-        foreach($this->grid->getConfig()->getColumns() as $column)
-        {
-            $this->output .= $this->escapeString($column->getLabel()).static::CSV_DELIMITER;
+        foreach ($this->grid->getConfig()->getColumns() as $column) {
+            if (!$column->isHidden()) {
+                $this->output .= $this->escapeString($column->getLabel()) . static::CSV_DELIMITER;
+            }
         }
         $this->output .= PHP_EOL;
     }
 
     protected function renderBody()
     {
-        while($row = $this->grid->getConfig()->getDataProvider()->getRow())
-        {
-            foreach($this->grid->getConfig()->getColumns() as $column)
-            {
-                $this->output .= $this->escapeString($column->getValue($row)).static::CSV_DELIMITER;
+        while ($row = $this->grid->getConfig()->getDataProvider()->getRow()) {
+            foreach ($this->grid->getConfig()->getColumns() as $column) {
+                if (!$column->isHidden()) {
+                    $this->output .= $this->escapeString($column->getValue($row)) . static::CSV_DELIMITER;
+                }
             }
             $this->output .= PHP_EOL;
         }
