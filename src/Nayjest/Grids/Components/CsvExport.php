@@ -89,6 +89,9 @@ class CsvExport extends RenderableComponent
             $this->output = $output;
         } else {
             set_time_limit(0);
+            // force to prepare columns hider component
+            $this->grid->getConfig()->getComponentByNameRecursive('columns_hider')->prepare();
+
             $this->grid->getConfig()->getDataProvider()->setPageSize(PHP_INT_MAX);
             $this->grid->getConfig()->initialize($this->grid);
 
