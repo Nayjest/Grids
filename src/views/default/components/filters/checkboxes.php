@@ -14,6 +14,29 @@ $id = uniqid();
         style="padding: 10px"
         >
         <?php foreach($component->getVariants() as $val => $label): ?>
+            <?php if(is_array($label)):?>
+            <li>
+                <a href="#" data-target="#collapse<?=$val?>" class="collapsible">
+                    <i class="glyphicon glyphicon-plus"></i>
+                    <?= $label['name'] ?>
+                </a>
+
+                <div class="collapse<?= !empty(array_intersect(array_keys($label['values']), array_keys($value))) ? ' in' : '' ?>" id="collapse<?=$val?>">
+                    <?php foreach($label['values'] as $option_val=>$option_label):?>
+                        <div>
+                        <label>
+                            <input
+                                type="checkbox"
+                                <?php if(!empty($value[$option_val])) echo "checked='checked'" ?>
+                                name="<?= $component->getInputName() ?>[<?= $option_val ?>]"
+                                >
+                            <span><?= $option_label ?></span>
+                        </label>
+                        </div>
+                    <?php endforeach ?>
+                </div>
+            </li>
+            <?php else:?>
             <li style="white-space: nowrap">
                 <label>
                     <input
@@ -24,6 +47,7 @@ $id = uniqid();
                     <span><?= $label ?></span>
                 </label>
             </li>
+            <?php endif ?>
         <?php endforeach ?>
     </ul>
 </div>
@@ -36,7 +60,12 @@ $id = uniqid();
         });
         $('<?= $id ?> input').change(function($input) {
             console.log($input)
-        })
+        });
+        $('.collapsible').click(function(e){
+            $(this).next('.collapse').toggleClass('in');
+            $(this).find('i').toggleClass('glyphicon-plus').toggleClass('glyphicon-minus');
+            e.preventDefault();
+        });
     });
 
 </script>
