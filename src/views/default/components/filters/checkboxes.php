@@ -1,6 +1,7 @@
 <?php
 /** @var Nayjest\Grids\Components\SelectFilter $component */
 $value = $component->getValue();
+is_array($value) or $value = [];
 $id = uniqid();
 ?>
 <div class="btn-group">
@@ -17,7 +18,7 @@ $id = uniqid();
             <?php if(is_array($label)):?>
             <?php
                 $class = '';
-                if(!empty(array_intersect(array_keys($label['values']), array_keys($value)))) {
+                if(array_intersect(array_keys($label['values']), array_keys($value))) {
                     $class = ' in';
                 }
             ?>
