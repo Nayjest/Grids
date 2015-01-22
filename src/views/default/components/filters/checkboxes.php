@@ -15,13 +15,19 @@ $id = uniqid();
         >
         <?php foreach($component->getVariants() as $val => $label): ?>
             <?php if(is_array($label)):?>
+            <?php
+                $class = '';
+                if(!empty(array_intersect(array_keys($label['values']), array_keys($value)))) {
+                    $class = ' in';
+                }
+            ?>
             <li>
                 <a href="#" data-target="#collapse<?=$val?>" class="collapsible">
                     <i class="glyphicon glyphicon-plus"></i>
                     <?= $label['name'] ?>
                 </a>
 
-                <div class="collapse<?= !empty(array_intersect(array_keys($label['values']), array_keys($value))) ? ' in' : '' ?>" id="collapse<?=$val?>">
+                <div class="collapse<?=$class?>" id="collapse<?=$val?>">
                     <?php foreach($label['values'] as $option_val=>$option_label):?>
                         <div>
                         <label>
