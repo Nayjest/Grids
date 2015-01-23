@@ -14,6 +14,17 @@ $id = uniqid();
         id="<?=$id ?>"
         style="padding: 10px"
         >
+        <li>
+            <div>
+                <label>
+                    <input
+                        type="checkbox"
+                        class="checkAll"
+                        >
+                    <span><u>Check All</u></span>
+                </label>
+            </div>
+        </li>
         <?php foreach($component->getVariants() as $val => $label): ?>
             <?php if(is_array($label)):?>
             <?php
@@ -29,6 +40,15 @@ $id = uniqid();
                 </a>
 
                 <div class="collapse<?=$class?>" id="collapse<?=$val?>">
+                    <div>
+                        <label>
+                            <input
+                                type="checkbox"
+                                class="checkGroup"
+                                >
+                            <span><u>Check Group</u></span>
+                        </label>
+                    </div>
                     <?php foreach($label['values'] as $option_val=>$option_label):?>
                         <div>
                         <label>
@@ -65,14 +85,39 @@ $id = uniqid();
                 e.stopPropagation();
             }
         });
-        $('<?= $id ?> input').change(function($input) {
-            console.log($input)
+        $('#<?= $id ?> input').change(function(){
+            var $this = $(this);
+            setTimeout(function(){
+                var isCheckedGroup = true;
+                $this.closest('li').find('input[type=checkbox]').not('.checkGroup').each(function(){
+                    isCheckedGroup = isCheckedGroup && $(this).prop('checked');
+                });
+                $this.closest('li').find('.checkGroup').prop('checked', isCheckedGroup);
+            }, 50);
+            setTimeout(isCheckedAll,50);
         });
         $('.collapsible').click(function(e){
             $(this).next('.collapse').toggleClass('in');
             $(this).find('i').toggleClass('glyphicon-plus').toggleClass('glyphicon-minus');
             e.preventDefault();
         });
+        $('.checkAll').change(function(e){
+            var checked = $(this).prop('checked');
+            $(this).closest('ul').find('input[type=checkbox]').prop('checked', checked);
+        });
+        $('.checkGroup').change(function(e){
+            var checked = $(this).prop('checked');
+            $(this).closest('li').find('input[type=checkbox]').prop('checked', checked);
+            setTimeout(isCheckedAll,50);
+        });
+
+        var isCheckedAll = function() {
+            var isChecked = true;
+            $('#<?= $id ?> input[type=checkbox]').not('.checkAll').each(function(){
+                isChecked = isChecked && $(this).prop('checked');
+            });
+            $('#<?= $id ?> .checkAll').prop('checked', isChecked);
+        };
     });
 
 </script>
