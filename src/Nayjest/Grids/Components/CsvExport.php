@@ -91,7 +91,7 @@ class CsvExport extends RenderableComponent
 
         //@todo: send headers by laravel response class
         header('Content-Type: text/csv');
-        header('Content-Disposition: attachement; filename="'. $this->getFileName() .'"');
+        header('Content-Disposition: attachment; filename="'. $this->getFileName() .'"');
         header("Pragma: no-cache");
 
         set_time_limit(0);
