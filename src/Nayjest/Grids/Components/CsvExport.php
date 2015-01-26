@@ -20,6 +20,7 @@ class CsvExport extends RenderableComponent
     const INPUT_PARAM = 'csv';
     const CSV_DELIMITER = ';';
     const CSV_EXT = '.csv';
+    const ROWS_PER_TIME = 5000;
 
     protected $template = '*.components.csv_export';
     protected $name = CsvExport::NAME;
@@ -82,41 +83,57 @@ class CsvExport extends RenderableComponent
 
     protected function renderCsv()
     {
+        //@todo: implement caching
         $key = $this->grid->getInputProcessor()->getUniqueRequestId();
         $caching_time = $this->grid->getConfig()->getCachingTime();
 
-        if ($caching_time and ($output = Cache::get($key))) {
-            $this->output = $output;
-        } else {
-            set_time_limit(0);
-            // force to prepare columns hider component
-            $this->grid->getConfig()->getComponentByNameRecursive('columns_hider')->prepare();
+        $f = fopen('php://output', 'w');
 
-            $this->grid->getConfig()->getDataProvider()->setPageSize(PHP_INT_MAX);
-            $this->grid->getConfig()->initialize($this->grid);
+        //@todo: send headers by laravel response class
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachement; filename="'. $this->getFileName() .'"');
+        header("Pragma: no-cache");
 
-            $provider = $this->grid->getConfig()->getDataProvider();
-            $provider->reset();
+        set_time_limit(0);
+        // force to prepare columns hider component
+        $this->grid->getConfig()->getComponentByNameRecursive('columns_hider')->prepare();
 
-            $this->output = '';
-            $this->renderHeader();
-            $this->renderBody();
+        $this->grid->getConfig()->initialize($this->grid);
+        /**
+         * @var $provider \Nayjest\Grids\EloquentDataProvider
+         */
+        $provider = $this->grid->getConfig()->getDataProvider();
+        $query = $provider->getBuilder()->getQuery();
 
-            if ($caching_time) {
-                Cache::put($key, $this->output, $caching_time);
+        $pageNum = 1;
+        $rowIndex = 1;
+        do {
+            $rows = $query->forPage($pageNum, static::ROWS_PER_TIME)->get();
+
+            foreach($rows as $row) {
+                $output = [];
+                $dataRow = new EloquentDataRow($row, $rowIndex);
+                foreach ($this->grid->getConfig()->getColumns() as $column) {
+                    if (!$column->isHidden()) {
+                        $output[] = $this->escapeString( $column->getValue($dataRow) );
+                    }
+                }
+                fputcsv($f, $output);
+                $rowIndex++;
             }
-        }
+            $pageNum++;
 
-        $response = \Response::make($this->output);
-        $this->setCsvHeaders($response);
-        $response->send();
+        } while(count($rows) == static::ROWS_PER_TIME);
 
-        \App::terminate(\Request::instance(), $response);
+        fclose($f);
+
+        //@todo: make exit throw laravel app
+        exit;
     }
 
     protected function escapeString($str)
     {
-        return '"' . str_replace('"', '\'', strip_tags(html_entity_decode($str))) . '"';
+        return str_replace('"', '\'', strip_tags(html_entity_decode($str)));
     }
 
     protected function renderHeader()
