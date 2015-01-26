@@ -50,7 +50,7 @@ class Grid
     }
 
 
-    protected function prepare()
+    public function prepare()
     {
         if ($this->prepared === true) {
             return;

@@ -95,9 +95,7 @@ class CsvExport extends RenderableComponent
         header("Pragma: no-cache");
 
         set_time_limit(0);
-        // force to prepare columns hider component
-        $this->grid->getConfig()->getComponentByNameRecursive('columns_hider')->prepare();
-
+        $this->grid->prepare();
         $this->grid->getConfig()->initialize($this->grid);
         /**
          * @var $provider \Nayjest\Grids\EloquentDataProvider
