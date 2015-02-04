@@ -298,6 +298,6 @@ Note that setComponents method rewrites defaults.
 ## License
 
 
-© 2014 Vitalii Stepanenko
+© 2014 &mdash; 2015 Vitalii Stepanenko
 
 Licensed under the MIT License.
