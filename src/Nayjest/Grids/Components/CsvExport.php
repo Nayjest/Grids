@@ -83,10 +83,6 @@ class CsvExport extends RenderableComponent
 
     protected function renderCsv()
     {
-        //@todo: implement caching
-        $key = $this->grid->getInputProcessor()->getUniqueRequestId();
-        $caching_time = $this->grid->getConfig()->getCachingTime();
-
         $f = fopen('php://output', 'w');
 
         //@todo: send headers by laravel response class
@@ -103,8 +99,10 @@ class CsvExport extends RenderableComponent
         $provider = $this->grid->getConfig()->getDataProvider();
         $query = $provider->getBuilder()->getQuery();
 
+        $this->renderHeader($f);
+
         $pageNum = 1;
-        $rowIndex = 1;
+        $rowIndex = 2;
         do {
             $rows = $query->forPage($pageNum, static::ROWS_PER_TIME)->get();
 
@@ -134,26 +132,15 @@ class CsvExport extends RenderableComponent
         return str_replace('"', '\'', strip_tags(html_entity_decode($str)));
     }
 
-    protected function renderHeader()
+    protected function renderHeader($f)
     {
+        $output = [];
         foreach ($this->grid->getConfig()->getColumns() as $column) {
             if (!$column->isHidden()) {
-                $this->output .= $this->escapeString($column->getLabel()) . static::CSV_DELIMITER;
+                $output[] = $this->escapeString($column->getLabel());
             }
         }
-        $this->output .= PHP_EOL;
-    }
-
-    protected function renderBody()
-    {
-        while ($row = $this->grid->getConfig()->getDataProvider()->getRow()) {
-            foreach ($this->grid->getConfig()->getColumns() as $column) {
-                if (!$column->isHidden()) {
-                    $this->output .= $this->escapeString($column->getValue($row)) . static::CSV_DELIMITER;
-                }
-            }
-            $this->output .= PHP_EOL;
-        }
+        fputcsv($f, $output);
     }
 
 }
