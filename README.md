@@ -203,16 +203,18 @@ register service provider 'Illuminate\Html\HtmlServiceProvider' and add aliases 
                     # Renders table footer (table>tfoot)
                     (new TFoot)
                         ->addComponent(
-                            # TotalsRow component calculates totals on current page (max, min, sum, average value, etc)
+                            # TotalsRow component calculates totals on current page
+                            # (max, min, sum, average value, etc)
                             # and renders results as table row.
-                            # By default 'sum' algorithm used.
+                            # By default there is a sum.
                             new TotalsRow([
                                 'comments',
                                 'posts',
                             ])
                         )
                         ->addComponent(
-                            # Renders row containing one cell with colspan attribute equal to the table columns count
+                            # Renders row containing one cell 
+                            # with colspan attribute equal to the table columns count
                             (new OneCellRow)
                                 # Pagination control
                                 ->addComponent(new Pager)
