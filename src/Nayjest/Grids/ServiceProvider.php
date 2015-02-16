@@ -20,7 +20,10 @@ class ServiceProvider extends BaseServiceProvider
      */
     public function boot()
     {
-        $this->package('nayjest/grids');
+        # only for Laravel 4
+        if (method_exists($this, 'package')) {
+            $this->package('nayjest/grids');
+        }
         Route::controller('grids', 'Nayjest\Grids\Controller');
     }
 
