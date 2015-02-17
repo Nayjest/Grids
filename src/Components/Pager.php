@@ -1,6 +1,8 @@
 <?php
 namespace Nayjest\Grids\Components;
 
+use Exception;
+use Illuminate\Foundation\Application;
 use Illuminate\Pagination\Paginator;
 use Nayjest\Grids\Components\Base\RenderableComponent;
 use Nayjest\Grids\Grid;
@@ -16,6 +18,13 @@ class Pager extends RenderableComponent
     protected $input_key;
 
     protected $previous_page_name;
+
+    public function __construct()
+    {
+        if (version_compare(Application::VERSION, '5', '>')) {
+            throw new Exception(get_class($this) . " designed for usage only with Laravel 4.X");
+        }
+    }
 
     public function render() {
 
