@@ -1,7 +1,7 @@
 {
     "name": "nayjest/grids",
-    "description": "Grids for Laravel framework",
-    "keywords": ["grid", "tables", "html", "laravel", "database", "eloquent"],
+    "description": "Grids for Laravel 4 & Laravel 5 frameworks",
+    "keywords": ["grid", "tables", "html", "laravel", "database", "eloquent", "laravel 5"],
     "homepage": "https://github.com/Nayjest/Grids",
     "type": "library",
     "license": "MIT",
