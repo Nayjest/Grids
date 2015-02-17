@@ -1,5 +1,6 @@
 <?php namespace Nayjest\Grids;
 
+use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 use Route;
 
@@ -20,8 +21,9 @@ class ServiceProvider extends BaseServiceProvider
      */
     public function boot()
     {
-        # only for Laravel 4
-        if (method_exists($this, 'package')) {
+
+        # only for Laravel 4 & some of 5-dev
+        if (version_compare(Application::VERSION, '5.0.0', '<')) {
             $this->package('nayjest/grids');
         }
         Route::controller('grids', 'Nayjest\Grids\Controller');
