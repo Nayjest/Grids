@@ -22,9 +22,6 @@
         "illuminate/html": "Needed to work with Laravel 5.X"
     },
     "autoload": {
-        "classmap": [
-            "src/migrations"
-        ],
         "psr-4": {
             "Nayjest\\Grids\\": "src/"
         }
