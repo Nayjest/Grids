@@ -326,6 +326,14 @@ Example:
 
 Note that setComponents method rewrites components structure provided by defaults.
 
+## Contributing
+
+Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
+
+## Security
+
+If you discover any security related issues, please email mail@vitaliy.in instead of using the issue tracker.
+
 ## License
 
 © 2014 &mdash; 2015 Vitalii Stepanenko
