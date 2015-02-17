@@ -330,4 +330,6 @@ Note that setComponents method rewrites components structure provided by default
 
 © 2014 &mdash; 2015 Vitalii Stepanenko
 
-Licensed under the MIT License.
+Licensed under the MIT License. 
+
+Please see [License File](LICENSE) for more information.
