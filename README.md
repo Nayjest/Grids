@@ -41,32 +41,53 @@ Grids framework for Laravel
 
 ## Installation
 
-#### Installation using [Composer](https://getcomposer.org)
+##### Step 1: Install package using [Composer](https://getcomposer.org)
 
-##### Step 1: Declare dependency
 Add nayjest/grids to "require" section of your composer.json
+
 ```javascript
 "require": {
-    "nayjest/grids": "~0.4"
+    "nayjest/grids": "~0.5"
 },
 ```
 
-##### Step 2: Update dependencies
-Run following command:
+For Laravel 5 you also need to add "illuminate/html":
+
+```javascript
+"require": {
+    "nayjest/grids": "~0.5",
+    "illuminate/html": "~5"
+},
+```
+
+Then install dependencies.
 ```bash    
-php composer.phar update
+php composer.phar install
 ```
 
-##### Step 3: Register service provider in Laravel application
-Add following line:
+Instead of editing composer.json and executing _composer install_ you can just run following command:
+
+For Laravel 4
+```bash    
+php composer.phar require nayjest/grids
+```
+For Laravel 5
+```bash    
+php composer.phar require nayjest/grids illuminate/html
+```
+
+##### Step 2: Laravel setup
+Add following line to 'providers' section of app/config/app.php file:
 ```php
-'Nayjest\Grids\ServiceProvider'
+'Nayjest\Grids\ServiceProvider',
 ```
-to 'providers' section of app/config/app.php file.
+For Laravel 5 you also need to add "illuminate/html" service provider:
+```php
+'Nayjest\Grids\ServiceProvider',
+'Illuminate\Html\HtmlServiceProvider',
+```
 
-##### Additional setup for Laravel 5
-You need to add "illuminate/html" to composer dependencies of your application,
-register service provider 'Illuminate\Html\HtmlServiceProvider' and add aliases in app/config/app.php file:
+It's recommended to add facade aliases for "illuminate/html"  (not required by grids package):
 ```php
     'Form'  => 'Illuminate\Html\FormFacade',
     'HTML'  => 'Illuminate\Html\HtmlFacade',
