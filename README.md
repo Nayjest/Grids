@@ -104,163 +104,163 @@ It's recommended to add facade aliases for "illuminate/html"  (not required by g
 See example below
 
 ```php
-        # Let's take a Eloquent query as data provider
-        # Some params may be predefined, other can be controlled using grid components         
-        $query = (new User)
-            ->newQuery()
-            ->with('posts')
-            ->where('role', '=', User::ROLE_AUTHOR);
-        
-        # Instantiate & Configure Grid
-        $grid = new Grid(
-            (new GridConfig)
-                # Grids name used as html id, caching key, filtering GET params prefix, etc
-                # If not specified, unique value based on file name & line of code will be generated
-                ->setName('my_report')
-                # See all supported data providers in sources
-                ->setDataProvider(new EloquentDataProvider($query))
-                # Setup caching, value in minutes, turned off in debug mode
-                ->setCachingTime(5) 
-                # Setup table columns
-                ->setColumns([
-                    # simple results numbering, not related to table PK or any obtained data
-                    new IdFieldConfig,
-                    (new FieldConfig)
+# Let's take a Eloquent query as data provider
+# Some params may be predefined, other can be controlled using grid components         
+$query = (new User)
+    ->newQuery()
+    ->with('posts')
+    ->where('role', '=', User::ROLE_AUTHOR);
+
+# Instantiate & Configure Grid
+$grid = new Grid(
+    (new GridConfig)
+        # Grids name used as html id, caching key, filtering GET params prefix, etc
+        # If not specified, unique value based on file name & line of code will be generated
+        ->setName('my_report')
+        # See all supported data providers in sources
+        ->setDataProvider(new EloquentDataProvider($query))
+        # Setup caching, value in minutes, turned off in debug mode
+        ->setCachingTime(5) 
+        # Setup table columns
+        ->setColumns([
+            # simple results numbering, not related to table PK or any obtained data
+            new IdFieldConfig,
+            (new FieldConfig)
+                ->setName('login')
+                # will be displayed in table heder
+                ->setLabel('Login')
+                # That's all what you need for filtering. 
+                # It will create controls, process input 
+                # and filter results (in case of EloquentDataProvider -- modify SQL query)
+                ->addFilter(
+                    (new FilterConfig)
                         ->setName('login')
-                        # will be displayed in table heder
-                        ->setLabel('Login')
-                        # That's all what you need for filtering. 
-                        # It will create controls, process input 
-                        # and filter results (in case of EloquentDataProvider -- modify SQL query)
-                        ->addFilter(
-                            (new FilterConfig)
-                                ->setName('login')
-                                ->setOperator(FilterConfig::OPERATOR_LIKE)
-                        )
-                        # optional, 
-                        # use to prettify output in table cell 
-                        # or print any data located not in results field matching column name
-                        ->setCallback(function ($val, EloquentDataRow $row) {
-                            if ($val) {
-                                $icon  = "<span class='glyphicon glyphicon-user'></span>&nbsp;";
-                                $user = $row->getSrc();
-                                return $icon . HTML::linkRoute('users.profile', $val, [$user->id]);
-                            }
-                        })
-                        # sorting buttons will be added to header, DB query will be modified
-                        ->setIsSortable(true)
-                    ,
-                    (new FieldConfig)
-                        ->setName('status')
-                        ->setLabel('Status')
-                        ->addFilter(
-                            (new SelectFilterConfig)
-                                ->setOptions(User::getStatuses())
-                        )
-                    ,
-                    (new FieldConfig)
+                        ->setOperator(FilterConfig::OPERATOR_LIKE)
+                )
+                # optional, 
+                # use to prettify output in table cell 
+                # or print any data located not in results field matching column name
+                ->setCallback(function ($val, EloquentDataRow $row) {
+                    if ($val) {
+                        $icon  = "<span class='glyphicon glyphicon-user'></span>&nbsp;";
+                        $user = $row->getSrc();
+                        return $icon . HTML::linkRoute('users.profile', $val, [$user->id]);
+                    }
+                })
+                # sorting buttons will be added to header, DB query will be modified
+                ->setIsSortable(true)
+            ,
+            (new FieldConfig)
+                ->setName('status')
+                ->setLabel('Status')
+                ->addFilter(
+                    (new SelectFilterConfig)
+                        ->setOptions(User::getStatuses())
+                )
+            ,
+            (new FieldConfig)
+                ->setName('country')
+                ->setLabel('Country')
+                ->addFilter(
+                    (new SelectFilterConfig)
                         ->setName('country')
-                        ->setLabel('Country')
-                        ->addFilter(
-                            (new SelectFilterConfig)
-                                ->setName('country')
-                                ->setOptions(get_countries_list())
-                        )
-                    ,
-                    (new FieldConfig)
-                        ->setName('registration_date')
-                        ->setLabel('Registration date')
-                        ->setIsSortable(true)
-                    ,
-                    (new FieldConfig)
-                        ->setName('comments_count')
-                        ->setLabel('Comments')
-                        ->setIsSortable(true)
-                    ,
-                    (new FieldConfig)
-                        ->setName('posts_count')
-                        ->setLabel('Posts')
-                        ->setIsSortable(true)
-                    ,
-                ])
-                # Setup additional grid components
+                        ->setOptions(get_countries_list())
+                )
+            ,
+            (new FieldConfig)
+                ->setName('registration_date')
+                ->setLabel('Registration date')
+                ->setIsSortable(true)
+            ,
+            (new FieldConfig)
+                ->setName('comments_count')
+                ->setLabel('Comments')
+                ->setIsSortable(true)
+            ,
+            (new FieldConfig)
+                ->setName('posts_count')
+                ->setLabel('Posts')
+                ->setIsSortable(true)
+            ,
+        ])
+        # Setup additional grid components
+        ->setComponents([
+            # Renders table header (table>thead)
+            (new THead)
+                # Setup inherited components
                 ->setComponents([
-                    # Renders table header (table>thead)
-                    (new THead)
-                        # Setup inherited components
+                    # Add this if you have filters for automatic placing to this row
+                    new FiltersRow,
+                    # Row with additional controls
+                    (new OneCellRow)
                         ->setComponents([
-                            # Add this if you have filters for automatic placing to this row
-                            new FiltersRow,
-                            # Row with additional controls
-                            (new OneCellRow)
-                                ->setComponents([
-                                    # Control for specifying quantity of records displayed on page
-                                    (new RecordsPerPage)
-                                        ->setVariants([
-                                            50,
-                                            100,
-                                            1000
-                                        ])
-                                    ,
-                                    # Control to show/hide rows in table
-                                    (new ColumnsHider)
-                                        ->setHiddenByDefault([
-                                            'activated_at',
-                                            'updated_at',
-                                            'registration_ip',
-                                        ])
-                                    ,
-                                    # Submit button for filters. 
-                                    # Place it anywhere in the grid (grid is rendered inside form by default).
-                                    (new HtmlTag)
-                                        ->setTagName('button')
-                                        ->setAttributes([
-                                            'type' => 'submit',
-                                            # Some bootstrap classes
-                                            'class' => 'btn btn-primary'
-                                        ])
-                                        ->setContent('Filter')
+                            # Control for specifying quantity of records displayed on page
+                            (new RecordsPerPage)
+                                ->setVariants([
+                                    50,
+                                    100,
+                                    1000
                                 ])
-                                # Components may have some placeholders for rendering children there.
-                                ->setRenderSection(THead::SECTION_BEGIN)
+                            ,
+                            # Control to show/hide rows in table
+                            (new ColumnsHider)
+                                ->setHiddenByDefault([
+                                    'activated_at',
+                                    'updated_at',
+                                    'registration_ip',
+                                ])
+                            ,
+                            # Submit button for filters. 
+                            # Place it anywhere in the grid (grid is rendered inside form by default).
+                            (new HtmlTag)
+                                ->setTagName('button')
+                                ->setAttributes([
+                                    'type' => 'submit',
+                                    # Some bootstrap classes
+                                    'class' => 'btn btn-primary'
+                                ])
+                                ->setContent('Filter')
                         ])
-                    ,
-                    # Renders table footer (table>tfoot)
-                    (new TFoot)
-                        ->addComponent(
-                            # TotalsRow component calculates totals on current page
-                            # (max, min, sum, average value, etc)
-                            # and renders results as table row.
-                            # By default there is a sum.
-                            new TotalsRow([
-                                'comments',
-                                'posts',
-                            ])
-                        )
-                        ->addComponent(
-                            # Renders row containing one cell 
-                            # with colspan attribute equal to the table columns count
-                            (new OneCellRow)
-                                # Pagination control
-                                ->addComponent(new Pager)
-                        )
+                        # Components may have some placeholders for rendering children there.
+                        ->setRenderSection(THead::SECTION_BEGIN)
                 ])
-        );
+            ,
+            # Renders table footer (table>tfoot)
+            (new TFoot)
+                ->addComponent(
+                    # TotalsRow component calculates totals on current page
+                    # (max, min, sum, average value, etc)
+                    # and renders results as table row.
+                    # By default there is a sum.
+                    new TotalsRow([
+                        'comments',
+                        'posts',
+                    ])
+                )
+                ->addComponent(
+                    # Renders row containing one cell 
+                    # with colspan attribute equal to the table columns count
+                    (new OneCellRow)
+                        # Pagination control
+                        ->addComponent(new Pager)
+                )
+        ])
+);
 ```
 
 #### Step 2. Render grid
 ```
-        <?php echo $grid->render(); ?>
-        
-        # Example below will also work as Grid class implements __toString method.
-        # Note that you can't forward Exceptions through __toString method on account of PHP limitations.
-        # Therefore you can preliminarily render grid in debug reasons and then pass resutls to view.
-        <?php echo $grid; ?>
-        
-        # or shorter
-        <?= $grid ?>
-        # or using blade syntax (Laravel 5)
-        {!! $grid !!}
+<?php echo $grid->render(); ?>
+
+# Example below will also work as Grid class implements __toString method.
+# Note that you can't forward Exceptions through __toString method on account of PHP limitations.
+# Therefore you can preliminarily render grid in debug reasons and then pass resutls to view.
+<?php echo $grid; ?>
+
+# or shorter
+<?= $grid ?>
+# or using blade syntax (Laravel 5)
+{!! $grid !!}
 ```        
 
 ####Notes
