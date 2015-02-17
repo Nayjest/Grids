@@ -99,18 +99,18 @@ It's recommended to add facade aliases for "illuminate/html"  (not required by g
 
 ## Usage
 
-#####Example
+#### Step 1. Instantiate & Configure grid
+
+See example below
 
 ```php
-        # Step 1. 
-        # Let's take a Laravel query as data provider
+        # Let's take a Eloquent query as data provider
         # Some params may be predefined, other can be controlled using grid components         
         $query = (new User)
             ->newQuery()
             ->with('posts')
             ->where('role', '=', User::ROLE_AUTHOR);
         
-        # Step 2. 
         # Instantiate & Configure Grid
         $grid = new Grid(
             (new GridConfig)
@@ -246,22 +246,25 @@ It's recommended to add facade aliases for "illuminate/html"  (not required by g
                         )
                 ])
         );
-        
-        # Step 3.
-        # Render grid (preferred in view)
-        
+```
+
+#### Step 2. Render grid
+```
         <?php echo $grid->render(); ?>
         
         # Example below will also work as Grid class implements __toString method.
         # Note that you can't forward Exceptions through __toString method on account of PHP limitations.
-        # Therefore you can preliminarily render grid in debug reasons and pass the resutls to a view.
+        # Therefore you can preliminarily render grid in debug reasons and then pass resutls to view.
         <?php echo $grid; ?>
         
-        # And the shortest way:
+        # or shorter
         <?= $grid ?>
-```
-#####Notes
-* Class names in example used without namespaces therefore you must import it before
+        # or using blade syntax (Laravel 5)
+        {!! $grid !!}
+```        
+
+####Notes
+* Class names in example code used without namespaces therefore you must import it before
 * Grids does not includes Twitter Bootstrap css/js files to your layout. You need to do it manually
 Quick links:
 ```html
@@ -296,7 +299,7 @@ Default components hierarchy:
             - Pager
         
 ```
-For adding components to default one, resolve it by name and use addComponent / addComponents methods.
+For adding child components to default one, resolve it by name and use addComponent / addComponents methods.
 
 Example:
 ```php
