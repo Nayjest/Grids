@@ -2,7 +2,6 @@
 
 use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
-use Route;
 
 class ServiceProvider extends BaseServiceProvider
 {
