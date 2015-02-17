@@ -11,20 +11,24 @@ Grids framework for Laravel
 [![Join the chat at https://gitter.im/Nayjest/Grids](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Nayjest/Grids?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ## Features
-* Support of themes (sets of templates for grid components) and templates for individual components
+* Data providers (php array, Eloquent model, DBAL query object)
+* Themes support
+* Individual views for UI components
 * Twitter Bootstrap v3 used by default
-* Filtering
-* Sorting
 * Caching
-* Totals calculation (sum, average value, records count, etc)
-* Pagination
-* Working with different data providers (php array, Eloquent model/Query builder)
 * Smart input handling allows to avoid conflicts with get parameters & easily place few interactive grids on same page
-* Extensibility & flexibility through components support
-* Ready controls allowing to change appearance (dropdown for specifying records per page, control that shows/hides columns, etc)
+* Component architecture
+* Rich variety of components:
+  - CSV export
+  - _Records per page_ dropdown
+  - Show/hide columns UI control
+  - Sorting 
+  - Filtering 
+  - Totals calculation (sum, average value, records count, etc)
+  - Pagination
+  - etc
 
 ## Upcoming features
-* Everything will be a component (filters, columns, etc)
 * Autodetecting columns based on Eloquent model (if not specified)
 * Builtin output formatters for different column types
 * Using simple php arrays to configure grids
@@ -60,7 +64,7 @@ For Laravel 5 you also need to add "illuminate/html":
 },
 ```
 
-Then install dependencies.
+Then install dependencies using following command:
 ```bash    
 php composer.phar install
 ```
@@ -317,10 +321,9 @@ Example:
 ...    
 ```
 
-Note that setComponents method rewrites defaults.
+Note that setComponents method rewrites components structure provided by defaults.
 
 ## License
-
 
 © 2014 &mdash; 2015 Vitalii Stepanenko
 
