@@ -15,6 +15,15 @@ class ServiceProvider extends BaseServiceProvider
     protected $defer = false;
 
     /**
+     * For backward compatibility with Laravel 4
+     * @deprecated
+     * @return string
+     */
+    public function guessPackagePath()
+    {
+        return __DIR__;
+    }
+    /**
      * Bootstrap the application events.
      *
      * @return void
@@ -26,7 +35,6 @@ class ServiceProvider extends BaseServiceProvider
         if (version_compare(Application::VERSION, '5.0.0', '<')) {
             $this->package('nayjest/grids');
         }
-        Route::controller('grids', 'Nayjest\Grids\Controller');
     }
 
     /**
