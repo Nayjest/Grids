@@ -1,8 +1,6 @@
 <?php
 namespace Nayjest\Grids\Components\Base;
 
-use Nayjest\Grids\Grid;
-
 /**
  * Interface IRegistry
  *
