@@ -2,7 +2,6 @@
 namespace Nayjest\Grids;
 
 use Illuminate\Support\Collection;
-use View;
 
 class Filtering
 {
