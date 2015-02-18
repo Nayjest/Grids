@@ -115,7 +115,7 @@ class TotalsRow extends ArrayDataRow implements IRenderableComponent
      */
     public function uses(FieldConfig $field)
     {
-        return in_array($field, $this->fields->toArray()) or $field instanceof IdFieldConfig;
+        return in_array($field, $this->fields->toArray()) || $field instanceof IdFieldConfig;
     }
 
     public function getCellValue($field)
@@ -123,7 +123,7 @@ class TotalsRow extends ArrayDataRow implements IRenderableComponent
         if (!$field instanceof FieldConfig) {
             $field = $this->grid->getConfig()->getColumn($field);
         }
-        if ($this->uses($field) and !$field instanceof IdFieldConfig) {
+        if ($this->uses($field) && !$field instanceof IdFieldConfig) {
             return parent::getCellValue($field);
         } else {
             return null;

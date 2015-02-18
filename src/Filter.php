@@ -69,7 +69,7 @@ class Filter
     public function apply()
     {
         $value = $this->getValue();
-        if (null === $value or '' === $value) {
+        if (null === $value || '' === $value) {
             return;
         }
         if ($func = $this->config->getFilteringFunc()) {

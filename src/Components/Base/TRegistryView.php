@@ -24,7 +24,7 @@ trait TRegistryView
     {
         return $this->getComponents()->filter(
             function (IComponent $component) use ($sectionName) {
-                return $component instanceof IRenderableComponent and $component->getRenderSection() === $sectionName;
+                return $component instanceof IRenderableComponent && $component->getRenderSection() === $sectionName;
             }
         );
     }

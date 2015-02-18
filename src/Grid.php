@@ -98,7 +98,7 @@ class Grid
             $trace = isset($backtrace[$id]) ? $backtrace[$id] : [];
             if (empty($trace['class']) or !$this instanceof $trace['class']) {
                 # may be closure
-                if (isset($trace['file']) and isset($trace['line'])) {
+                if (isset($trace['file']) && isset($trace['line'])) {
                     $str .= $trace['file'] . $trace['line'];
                 }
             }

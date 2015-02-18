@@ -76,7 +76,7 @@ class Filter extends RenderableComponent
     public function prepare()
     {
         $value = $this->getValue();
-        if (null === $value or '' === $value) {
+        if (null === $value || '' === $value) {
             return;
         }
         if ($func = $this->getFilteringFunc()) {
