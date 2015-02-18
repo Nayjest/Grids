@@ -148,7 +148,7 @@ $grid = new Grid(
                     }
                 })
                 # sorting buttons will be added to header, DB query will be modified
-                ->setIsSortable(true)
+                ->setSortable(true)
             ,
             (new FieldConfig)
                 ->setName('status')
@@ -170,17 +170,17 @@ $grid = new Grid(
             (new FieldConfig)
                 ->setName('registration_date')
                 ->setLabel('Registration date')
-                ->setIsSortable(true)
+                ->setSortable(true)
             ,
             (new FieldConfig)
                 ->setName('comments_count')
                 ->setLabel('Comments')
-                ->setIsSortable(true)
+                ->setSortable(true)
             ,
             (new FieldConfig)
                 ->setName('posts_count')
                 ->setLabel('Posts')
-                ->setIsSortable(true)
+                ->setSortable(true)
             ,
         ])
         # Setup additional grid components
