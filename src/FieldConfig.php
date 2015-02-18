@@ -35,6 +35,16 @@ class FieldConfig
 
     protected $is_hidden = false;
 
+    /**
+     * @param string|null $name column unique name for internal usage
+     * @param string|null $label column label
+     */
+    public function __construct($name = null, $label = null)
+    {
+        if ($name) $this->setName($name);
+        if ($label) $this->setLabel($label);
+    }
+
     public function getOrder()
     {
         return $this->order;
@@ -112,7 +122,8 @@ class FieldConfig
      * @param null|string $sortOrder null|Grid::SORT_ASC|Grid::SORT_DESC
      * @return $this
      */
-    public function setSorting($sortOrder)
+    public function
+    setSorting($sortOrder)
     {
         $this->sorting = $sortOrder;
         return $this;
