@@ -20,7 +20,7 @@ trait TRegistry
     }
 
     /**
-     * @return Collection|IComponent[]
+     * @return Collection|ComponentInterface[]
      */
     final public function getComponents()
     {
@@ -32,7 +32,7 @@ trait TRegistry
 
     /**
      * @param string $name
-     * @return null|IComponent
+     * @return null|ComponentInterface
      */
     public function getComponentByName($name)
     {
@@ -45,7 +45,7 @@ trait TRegistry
 
     /**
      * @param string $name
-     * @return null|IComponent
+     * @return null|ComponentInterface
      */
     public function getComponentByNameRecursive($name)
     {
@@ -53,7 +53,7 @@ trait TRegistry
             if ($component->getName() === $name) {
                 return $component;
             }
-            if ($component instanceof TRegistry || $component instanceof IRegistry) {
+            if ($component instanceof TRegistry || $component instanceof RegistryInterface) {
                 if ($res = $component->getComponentByNameRecursive($name)) {
                     return $res;
                 }
@@ -66,18 +66,18 @@ trait TRegistry
     /**
      * @param string|string[] $tagNames
      *
-     * @return Collection|IComponent[]
+     * @return Collection|ComponentInterface[]
      */
     public function getTagged($tagNames)
     {
         return $this->getComponents()->filter(
-            function (IComponent $component) use ($tagNames) {
+            function (ComponentInterface $component) use ($tagNames) {
                 return is_array($tagNames) ? $component->hasTags($tagNames) : $component->hasTag($tagNames);
             }
         );
     }
 
-    public function addComponent(IComponent $component)
+    public function addComponent(ComponentInterface $component)
     {
         $this->getComponents()->push($component);
         $component->attachTo($this);
@@ -85,7 +85,7 @@ trait TRegistry
     }
 
     /**
-     * @param \Illuminate\Support\Collection|IComponent[]|array $components
+     * @param \Illuminate\Support\Collection|ComponentInterface[]|array $components
      * @return $this
      */
     public function setComponents($components)

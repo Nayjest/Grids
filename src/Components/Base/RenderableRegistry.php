@@ -8,7 +8,9 @@ namespace Nayjest\Grids\Components\Base;
  *
  * @package Nayjest\Grids\Components\Base
  */
-class RenderableRegistry implements IRenderableComponent, IRegistry
+class RenderableRegistry implements
+    RenderableComponentInterface,
+    RegistryInterface
 {
     use TComponent;
     use TRegistry;

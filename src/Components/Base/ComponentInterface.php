@@ -4,7 +4,7 @@ namespace Nayjest\Grids\Components\Base;
 use Nayjest\Grids\Grid;
 
 /**
- * Interface IComponent
+ * Interface ComponentInterface
  *
  * Interface of Grid component.
  *
@@ -13,20 +13,20 @@ use Nayjest\Grids\Grid;
  *
  * @package Nayjest\Grids\Components\Base
  */
-interface IComponent extends ITaggable
+interface ComponentInterface extends TaggableInterface
 {
     /**
      * Attaches component to registry
      *
-     * @param IRegistry $parent
+     * @param RegistryInterface $parent
      * @return null
      */
-    public function attachTo(IRegistry $parent);
+    public function attachTo(RegistryInterface $parent);
 
     /**
      * Returns parent object
      *
-     * @return IRegistry
+     * @return RegistryInterface
      */
     public function getParent();
 

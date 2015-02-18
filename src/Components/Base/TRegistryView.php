@@ -23,8 +23,8 @@ trait TRegistryView
     public function getSectionComponents($sectionName)
     {
         return $this->getComponents()->filter(
-            function (IComponent $component) use ($sectionName) {
-                return $component instanceof IRenderableComponent && $component->getRenderSection() === $sectionName;
+            function (ComponentInterface $component) use ($sectionName) {
+                return $component instanceof RenderableComponentInterface && $component->getRenderSection() === $sectionName;
             }
         );
     }

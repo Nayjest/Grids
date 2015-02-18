@@ -2,13 +2,15 @@
 namespace Nayjest\Grids\Components\Base;
 
 /**
- * Interface IRenderableComponent
+ * Interface RenderableComponentInterface
  *
  * Interface for grid components that can be rendered
  *
  * @package Nayjest\Grids\Components\Base
  */
-interface IRenderableComponent extends IRenderable, IComponent
+interface RenderableComponentInterface extends
+    RenderableInterface,
+    ComponentInterface
 {
     /**
      * Returns section (named placeholder in parent object markup) where component must be rendered

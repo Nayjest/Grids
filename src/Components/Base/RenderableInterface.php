@@ -2,13 +2,13 @@
 namespace Nayjest\Grids\Components\Base;
 
 /**
- * Interface IRenderable
+ * Interface RenderableInterface
  *
  * Interface for objects that can be rendered
  *
  * @package Nayjest\Grids\Components\Base
  */
-interface IRenderable
+interface RenderableInterface
 {
     /**
      * Renders object

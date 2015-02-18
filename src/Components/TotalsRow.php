@@ -1,7 +1,7 @@
 <?php
 namespace Nayjest\Grids\Components;
 
-use Nayjest\Grids\Components\Base\IRenderableComponent;
+use Nayjest\Grids\Components\Base\RenderableComponentInterface;
 use Nayjest\Grids\Components\Base\TComponent;
 use Nayjest\Grids\Components\Base\TComponentView;
 use Nayjest\Grids\ArrayDataRow;
@@ -13,7 +13,7 @@ use Nayjest\Grids\Grid;
 use Illuminate\Support\Facades\Event;
 use Exception;
 
-class TotalsRow extends ArrayDataRow implements IRenderableComponent
+class TotalsRow extends ArrayDataRow implements RenderableComponentInterface
 {
     use TComponent {
         TComponent::initialize as protected initializeComponent;

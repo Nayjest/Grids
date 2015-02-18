@@ -8,7 +8,7 @@ namespace Nayjest\Grids\Components\Base;
  *
  * @package Nayjest\Grids\Components\Base
  */
-class RenderableComponent implements IRenderableComponent
+class RenderableComponent implements RenderableComponentInterface
 {
     use TComponent;
     use TComponentView;

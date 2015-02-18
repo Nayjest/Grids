@@ -2,10 +2,10 @@
 namespace Nayjest\Grids\Components\Base;
 
 /**
- * Interface ITaggable
+ * Interface TaggableInterface
  * @package Nayjest\Grids\Components\Base
  */
-interface ITaggable
+interface TaggableInterface
 {
     public function getTags();
 

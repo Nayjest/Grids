@@ -6,8 +6,8 @@ use Nayjest\Grids\Grid;
 /**
  * Class TComponent
  *
- * IComponent interface implementation
- * @see Nayjest\Grids\Components\Base\IComponent
+ * ComponentInterface interface implementation
+ * @see Nayjest\Grids\Components\Base\ComponentInterface
  *
  * @package Nayjest\Grids\Components\Base
  */
@@ -26,10 +26,10 @@ trait TComponent
     /**
      * Attaches component to registry
      *
-     * @param IRegistry $parent
+     * @param RegistryInterface $parent
      * @return null
      */
-    public function attachTo(IRegistry $parent)
+    public function attachTo(RegistryInterface $parent)
     {
         $this->parent = $parent;
     }
@@ -37,7 +37,7 @@ trait TComponent
     /**
      * Returns parent object
      *
-     * @return IRegistry
+     * @return RegistryInterface
      */
     public function getParent()
     {

@@ -2,18 +2,18 @@
 namespace Nayjest\Grids\Components\Base;
 
 /**
- * Interface IRegistry
+ * Interface RegistryInterface
  *
  * Interface of Grid components registry
  *
  * @package Nayjest\Grids\Components\Base
  */
-interface IRegistry
+interface RegistryInterface
 {
     /**
      * Returns collection of attached components
      *
-     * @return \Illuminate\Support\Collection|IComponent[]|array
+     * @return \Illuminate\Support\Collection|ComponentInterface[]|array
      */
     public function getComponents();
 
@@ -21,22 +21,22 @@ interface IRegistry
      * Returns child component with specified name or null if component not found
      *
      * @param string $name
-     * @return IComponent|null
+     * @return ComponentInterface|null
      */
     public function getComponentByName($name);
 
     /**
      * Adds component to collection
      *
-     * @param IComponent $component
+     * @param ComponentInterface $component
      * @return $this
      */
-    public function addComponent(IComponent $component);
+    public function addComponent(ComponentInterface $component);
 
     /**
      * Sets children components collection
      *
-     * @param \Illuminate\Support\Collection|IComponent[]|array $components
+     * @param \Illuminate\Support\Collection|ComponentInterface[]|array $components
      * @return $this
      */
     public function setComponents($components);
@@ -44,7 +44,7 @@ interface IRegistry
     /**
      * Adds components to collection
      *
-     * @param \Illuminate\Support\Collection|IComponent[]|array $components
+     * @param \Illuminate\Support\Collection|ComponentInterface[]|array $components
      * @return $this
      */
     public function addComponents($components);
@@ -55,7 +55,7 @@ interface IRegistry
      * and returns this component as result
      *
      * @param string $class
-     * @return IComponent
+     * @return ComponentInterface
      */
     public function makeComponent($class);
 

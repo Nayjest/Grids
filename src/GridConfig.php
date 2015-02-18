@@ -2,15 +2,15 @@
 namespace Nayjest\Grids;
 
 use Illuminate\Support\Collection;
-use Nayjest\Grids\Components\Base\IRenderableComponent;
+use Nayjest\Grids\Components\Base\RenderableComponentInterface;
 use Nayjest\Grids\Components\Base\TComponent;
 use Nayjest\Grids\Components\Base\TRegistry;
-use Nayjest\Grids\Components\Base\IRegistry;
+use Nayjest\Grids\Components\Base\RegistryInterface;
 use Nayjest\Grids\Components\TFoot;
 use Nayjest\Grids\Components\THead;
 use Nayjest\Grids\Components\Tr;
 
-class GridConfig implements IRegistry
+class GridConfig implements RegistryInterface
 {
     use TRegistry;
     use TComponent;
@@ -38,7 +38,7 @@ class GridConfig implements IRegistry
     protected $row_component;
 
     /**
-     * @return IRenderableComponent
+     * @return RenderableComponentInterface
      */
     public function getRowComponent()
     {
@@ -54,10 +54,10 @@ class GridConfig implements IRegistry
     }
 
     /**
-     * @param IRenderableComponent $rowComponent
+     * @param RenderableComponentInterface $rowComponent
      * @return $this
      */
-    public function setRowComponent(IRenderableComponent $rowComponent)
+    public function setRowComponent(RenderableComponentInterface $rowComponent)
     {
         $this->row_component = $rowComponent;
         $this->addComponent($rowComponent);
