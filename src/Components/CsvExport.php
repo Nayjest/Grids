@@ -4,6 +4,7 @@ namespace Nayjest\Grids\Components;
 
 use App;
 use Event;
+use Illuminate\Foundation\Application;
 use Illuminate\Http\Response;
 use Nayjest\Grids\Components\Base\RenderableComponent;
 use Nayjest\Grids\Components\CsvExport\ForcedExitException;
@@ -83,7 +84,6 @@ class CsvExport extends RenderableComponent
 
     protected function renderCsv()
     {
-        App::error(function(ForcedExitException $e){});
         $f = fopen('php://output', 'w');
 
         header('Content-Type: text/csv');
@@ -115,8 +115,7 @@ class CsvExport extends RenderableComponent
         }
 
         fclose($f);
-
-        throw new ForcedExitException;
+        exit;
     }
 
     protected function escapeString($str)
