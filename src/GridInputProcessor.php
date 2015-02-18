@@ -101,18 +101,26 @@ class GridInputProcessor
         return $this;
     }
 
-    public function getQueryString()
+    public function getQueryString(array $new_params = [])
     {
         $params = $_GET;
         if (!empty($this->input)) {
             $params[$this->getKey()] = $this->input;
         }
+        if (!empty($new_params)) {
+            if (empty($params[$this->getKey()])) {
+                $params[$this->getKey()] = [];
+            }
+            foreach($new_params as $key => $value) {
+                $params[$this->getKey()][$key] = $value;
+            }
+        }
         return http_build_query($params);
     }
 
-    public function getUrl()
+    public function getUrl(array $new_params = [])
     {
-        if (null !== $query_string = $this->getQueryString()) {
+        if (null !== $query_string = $this->getQueryString($new_params)) {
             $query_string = '?' . $query_string;
         }
         $request = Request::instance();

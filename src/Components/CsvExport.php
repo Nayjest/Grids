@@ -2,12 +2,13 @@
 
 namespace Nayjest\Grids\Components;
 
+use App;
 use Event;
 use Illuminate\Http\Response;
 use Nayjest\Grids\Components\Base\RenderableComponent;
-use Nayjest\Grids\Components\THead;
+use Nayjest\Grids\Components\CsvExport\ForcedExitException;
 use Nayjest\Grids\DataProvider;
-use Nayjest\Grids\EloquentDataRow;
+use Nayjest\Grids\DataRow;
 use Nayjest\Grids\Grid;
 
 /**
@@ -47,7 +48,7 @@ class CsvExport extends RenderableComponent
     public function initialize(Grid $grid)
     {
         parent::initialize($grid);
-        Event::listen(Grid::EVENT_CREATE, function (Grid $grid) {
+        Event::listen(Grid::EVENT_PREPARE, function (Grid $grid) {
             $this->grid = $grid;
             if ($grid->getInputProcessor()->getValue(static::INPUT_PARAM, false)) {
                 $this->renderCsv();
@@ -82,48 +83,40 @@ class CsvExport extends RenderableComponent
 
     protected function renderCsv()
     {
+        App::error(function(ForcedExitException $e){});
         $f = fopen('php://output', 'w');
 
-        //@todo: send headers by laravel response class
         header('Content-Type: text/csv');
         header('Content-Disposition: attachment; filename="'. $this->getFileName() .'"');
         header("Pragma: no-cache");
 
         set_time_limit(0);
-        $this->grid->prepare();
-        $this->grid->getConfig()->initialize($this->grid);
-        /**
-         * @var $provider \Nayjest\Grids\EloquentDataProvider
-         */
+
+        /** @var $provider DataProvider */
         $provider = $this->grid->getConfig()->getDataProvider();
-        $query = $provider->getBuilder()->getQuery();
 
         $this->renderHeader($f);
 
         $pageNum = 1;
-        $rowIndex = 2;
-        do {
-            $rows = $query->forPage($pageNum, static::ROWS_PER_TIME)->get();
 
-            foreach($rows as $row) {
-                $output = [];
-                $dataRow = new EloquentDataRow($row, $rowIndex);
-                foreach ($this->grid->getConfig()->getColumns() as $column) {
-                    if (!$column->isHidden()) {
-                        $output[] = $this->escapeString( $column->getValue($dataRow) );
-                    }
+        $provider->setPageSize(static::ROWS_PER_TIME);
+        $provider->setCurrentPage($pageNum);
+        $provider->reset();
+        /** @var DataRow $row */
+        while ($row = $provider->getRow()) {
+            $output = [];
+            foreach ($this->grid->getConfig()->getColumns() as $column) {
+                if (!$column->isHidden()) {
+                    $output[] = $this->escapeString( $column->getValue($row) );
                 }
-                fputcsv($f, $output);
-                $rowIndex++;
             }
-            $pageNum++;
+            fputcsv($f, $output);
 
-        } while(count($rows) == static::ROWS_PER_TIME);
+        }
 
         fclose($f);
 
-        //@todo: make exit throw laravel app
-        exit;
+        throw new ForcedExitException;
     }
 
     protected function escapeString($str)
