@@ -28,7 +28,7 @@ Grids framework for Laravel
   - Pagination
   - etc
 
-## Upcoming features
+## Upcoming Features
 * Autodetecting columns based on Eloquent model (if not specified)
 * Builtin output formatters for different column types
 * Using simple php arrays to configure grids
@@ -80,7 +80,7 @@ For Laravel 5
 php composer.phar require nayjest/grids illuminate/html
 ```
 
-##### Step 2: Laravel setup
+##### Step 2: Laravel Setup
 Add following line to 'providers' section of app/config/app.php file:
 ```php
 'Nayjest\Grids\ServiceProvider',
@@ -99,7 +99,7 @@ It's recommended to add facade aliases for "illuminate/html"  (not required by g
 
 ## Usage
 
-#### Step 1. Instantiate & Configure grid
+#### Step 1. Instantiate & Configure Grid
 
 See example below
 
@@ -248,7 +248,7 @@ $grid = new Grid(
 );
 ```
 
-#### Step 2. Render grid
+#### Step 2. Render Grid
 ```
 <?php echo $grid->render(); ?>
 
@@ -280,7 +280,7 @@ Quick links:
 * Nayjest\Grids\Components\Pager component works only with Laravel 4.X, for Laravel 5 use Nayjest\Grids\Components\Laravel5\Pager
 
 
-## Upgrade guide
+## Upgrade Guide
 
 ### From 0.3.X to 0.4
 
