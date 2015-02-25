@@ -1,6 +1,7 @@
 <?php
 namespace Nayjest\Grids\Build\Setup;
 
+use Closure;
 use Nayjest\Builder\Blueprint;
 use Nayjest\Builder\Instructions\Base\Instruction;
 use Nayjest\Builder\Instructions\Mapping\BuildChildren;
@@ -8,7 +9,6 @@ use Nayjest\Builder\Instructions\Mapping\CustomInstruction;
 use Nayjest\Builder\Instructions\Mapping\CustomMapping;
 use Nayjest\Builder\Scaffold;
 use Nayjest\Grids\Build\Instructions\BuildDataProvider;
-use PhpParser\Node\Expr\Closure;
 
 class Setup {
 
