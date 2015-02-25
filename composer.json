@@ -23,9 +23,17 @@
     "require": {
         "php": ">=5.4.0",
         "illuminate/support": ">=4.2"
+
     },
     "require-dev": {
+        "nayjest/builder": "dev-master"
     },
+    "repositories": [
+        {
+            "url": "git@github.com:Nayjest/Builder.git",
+            "type": "git"
+        }
+    ],
     "suggest": {
         "illuminate/html": "Needed to work with Laravel 5.X"
     },
@@ -39,5 +47,5 @@
         "source": "https://github.com/Nayjest/Grids",
         "issues": "https://github.com/Nayjest/Grids/issues"
     },
-    "minimum-stability": "stable"
+    "minimum-stability": "dev"
 }
