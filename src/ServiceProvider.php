@@ -42,6 +42,7 @@ class ServiceProvider extends BaseServiceProvider
                 $views_path => base_path('resources/views/nayjest/grids')
             ]);
         }
+        class_alias('\\Nayjest\\Grids\\Grids', '\\Grids');
     }
 
     /**

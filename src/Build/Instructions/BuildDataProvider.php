@@ -2,6 +2,7 @@
 
 namespace Nayjest\Grids\Build\Instructions;
 
+use Exception;
 use Nayjest\Builder\Instructions\Base\Instruction;
 use Nayjest\Builder\Scaffold;
 
@@ -9,8 +10,10 @@ class BuildDataProvider extends Instruction
 {
     protected $phase = self::PHASE_PRE_INST;
 
+
     /**
      * @param Scaffold $s
+     * @throws Exception
      */
     public function apply(Scaffold $s)
     {
@@ -18,14 +21,16 @@ class BuildDataProvider extends Instruction
         $s->excludeInput('src');
         $class = null;
         $arg = null;
+
         if (is_object($src)) {
-            if (is_a($src, 'QueryBuilder')) {
+            if (is_a($src, '\Illuminate\Database\Eloquent\Builder')) {
                 $class = '\Nayjest\Grids\EloquentDataProvider';
                 $arg = $src;
             } elseif (is_a($src, '\Doctrine\DBAL\Query\QueryBuilder')) {
                 $class = '\Nayjest\Grids\DbalDataProvider';
                 $arg = $src;
             }
+
         } elseif (is_string($src)) {
             // model name
             if (
@@ -34,12 +39,14 @@ class BuildDataProvider extends Instruction
             ) {
                 $class = '\Nayjest\Grids\EloquentDataProvider';
                 $model = new $src;
-                $arg = $model::newQuery();
+                $arg = $model->newQuery();
             }
         }
         if ($class !== null and $arg !== null) {
             $provider = new $class($arg);
             $s->input['data_provider'] = $provider;
+        } else {
+            throw new Exception("Invalid Data Provider Configuration");
         }
 
     }
