@@ -6,6 +6,15 @@ use Exception;
 use Nayjest\Builder\Instructions\Base\Instruction;
 use Nayjest\Builder\Scaffold;
 
+/**
+ * Class BuildDataProvider
+ *
+ * This class is a build instruction for nayjest/build package
+ * that defines how to setup grids data provider
+ *
+ * @internal
+ * @package Nayjest\Grids\Build\Instructions
+ */
 class BuildDataProvider extends Instruction
 {
     protected $phase = self::PHASE_PRE_INST;

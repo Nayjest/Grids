@@ -17,6 +17,17 @@ use Nayjest\Builder\Scaffold;
 use Nayjest\Grids\Build\Instructions\BuildDataProvider;
 use Nayjest\Grids\EloquentDataProvider;
 
+/**
+ * Class Setup
+ *
+ * This class prepares environment for nayjest/builder package for usage with grids.
+ * Integration with nayjest/builder package allows to construct grids from configuration in form of php array
+ *
+ * @See \Grids::make
+ *
+ * @internal
+ * @package Nayjest\Grids\Build
+ */
 class Setup
 {
 
