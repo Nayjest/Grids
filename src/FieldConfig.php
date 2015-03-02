@@ -86,7 +86,7 @@ class FieldConfig
 
     public function getLabel()
     {
-        return $this->label ? : $this->name;
+        return $this->label ? : ucwords(str_replace(array('-', '_', '.'), ' ', $this->name));
     }
 
     public function setLabel($label)
