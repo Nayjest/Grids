@@ -11,6 +11,8 @@ use Nayjest\Builder\Instructions\Base\Instruction;
 use Nayjest\Builder\Instructions\Mapping\BuildChildren;
 use Nayjest\Builder\Instructions\CustomInstruction;
 use Nayjest\Builder\Instructions\Mapping\CustomMapping;
+use Nayjest\Builder\Instructions\Mapping\Rename;
+use Nayjest\Builder\Instructions\SimpleValueAsField;
 use Nayjest\Builder\Scaffold;
 use Nayjest\Grids\Build\Instructions\BuildDataProvider;
 use Nayjest\Grids\EloquentDataProvider;
@@ -19,8 +21,9 @@ class Setup
 {
 
     const COLUMN_CLASS = 'Nayjest\Grids\FieldConfig';
-    const COMPONENT_CLASS = 'Nayjest\Grids\Components\ComponentInterface';
+    const COMPONENT_CLASS = 'Nayjest\Grids\Components\Base\ComponentInterface';
     const GRID_CLASS = 'Nayjest\Grids\GridConfig';
+    const FILTER_CLASS = 'Nayjest\Grids\FilterConfig';
 
     /**
      * @var BlueprintsCollection
@@ -31,6 +34,7 @@ class Setup
     {
         $this->blueprints = Env::instance()->blueprints();
         $this->blueprints
+            ->add($this->makeFilterBlueprint())
             ->add($this->makeFieldBlueprint())
             ->add($this->makeComponentBlueprint())
             ->add($config_blueprint = $this->makeConfigBlueprint());
@@ -71,7 +75,7 @@ class Setup
 
     protected function makeComponentBlueprint()
     {
-        return new Blueprint(self::COMPONENT_CLASS, [
+        $blueprint = new Blueprint(self::COMPONENT_CLASS, [
 
             new CustomInstruction(function (Scaffold $s) {
                 if ($s->input instanceof Closure) {
@@ -99,20 +103,28 @@ class Setup
                 }
             }, null, Instruction::PHASE_PRE_INST)
         ]);
+        $blueprint->add(new BuildChildren('components', $blueprint));
+        return $blueprint;
+    }
+
+    protected function makeFilterBlueprint()
+    {
+        return new Blueprint(self::FILTER_CLASS, [
+            new SimpleValueAsField('name'),
+            new Rename(0,'name'),
+            new Rename(1,'operator'),
+        ]);
     }
 
     protected function makeFieldBlueprint()
     {
         return new Blueprint(self::COLUMN_CLASS, [
-            new CustomInstruction(function (Scaffold $s) {
-                if (is_string($s->input)) {
-                    $name = $s->input;
-                    $s->input = [
-                        'name' => $name,
-                        'label' => ucwords(str_replace(array('-', '_'), ' ', $name))
-                    ];
-                }
-            }, Instruction::PHASE_PRE_INST),
+            new SimpleValueAsField('name'),
+            new Rename(0,'name'),
+            new BuildChildren(
+                'filters',
+                $this->blueprints->getFor(self::FILTER_CLASS)
+            ),
 
         ]);
     }
