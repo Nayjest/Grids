@@ -26,15 +26,6 @@
         "nayjest/builder": "1.0"
 
     },
-    "require-dev": {
-        "nayjest/builder": "dev-master"
-    },
-    "repositories": [
-        {
-            "url": "git@github.com:Nayjest/Builder.git",
-            "type": "git"
-        }
-    ],
     "suggest": {
         "illuminate/html": "Needed to work with Laravel 5.X"
     },
