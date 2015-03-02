@@ -110,7 +110,7 @@ class CsvExport extends RenderableComponent
                     $output[] = $this->escapeString( $column->getValue($row) );
                 }
             }
-            fputcsv($f, $output);
+            fputcsv($f, $output, static::CSV_DELIMITER);
 
         }
 
@@ -131,7 +131,7 @@ class CsvExport extends RenderableComponent
                 $output[] = $this->escapeString($column->getLabel());
             }
         }
-        fputcsv($f, $output);
+        fputcsv($f, $output, static::CSV_DELIMITER);
     }
 
 }
