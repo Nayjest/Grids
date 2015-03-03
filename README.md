@@ -282,7 +282,7 @@ Quick links:
 
 ## Upgrade Guide
 
-### From 0.3.X to 0.4
+### From 0.3.X to 0.4+
 
 1. Use THead & TFoot instead of Header & Footer components
 2. If you have customized grid view (grid.php), refactor it using changes in default view
