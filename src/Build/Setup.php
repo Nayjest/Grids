@@ -8,6 +8,7 @@ use Nayjest\Builder\BlueprintsCollection;
 use Nayjest\Builder\Builder;
 use Nayjest\Builder\Env;
 use Nayjest\Builder\Instructions\Base\Instruction;
+use Nayjest\Builder\Instructions\Mapping\Build;
 use Nayjest\Builder\Instructions\Mapping\BuildChildren;
 use Nayjest\Builder\Instructions\CustomInstruction;
 use Nayjest\Builder\Instructions\Mapping\CustomMapping;
@@ -54,6 +55,7 @@ class Setup
 
     protected function makeConfigBlueprint()
     {
+        $component_blueprint = $this->blueprints->getFor(self::COMPONENT_CLASS);
 
         $b = new Blueprint(self::GRID_CLASS, [
             new BuildDataProvider(),
@@ -74,8 +76,9 @@ class Setup
             }, Instruction::PHASE_PRE_INST),
             new BuildChildren(
                 'components',
-                $this->blueprints->getFor(self::COMPONENT_CLASS)
+                $component_blueprint
             ),
+            new Build('row_component', $component_blueprint),
             new BuildChildren(
                 'columns',
                 $this->blueprints->getFor(self::COLUMN_CLASS)
