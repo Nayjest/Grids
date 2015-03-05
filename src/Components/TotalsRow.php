@@ -66,8 +66,8 @@ class TotalsRow extends ArrayDataRow implements RenderableComponentInterface
     {
         Event::listen(
             DataProvider::EVENT_FETCH_ROW,
-            function (DataRow $row, DataProvider $provider) use ($provider) {
-                if ($provider !== $provider) return;
+            function (DataRow $row, DataProvider $currentProvider) use ($provider) {
+                if ($currentProvider !== $provider) return;
                 $this->rows_processed++;
                 foreach ($this->fields as $field) {
                     $name = $field->getName();
