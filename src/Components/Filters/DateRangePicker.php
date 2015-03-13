@@ -22,6 +22,8 @@ class DateRangePicker extends Filter
 
     protected $js_options;
 
+    protected $use_clear_button;
+
     protected $template = '*.components.filters.date_range_picker';
 
     /**
@@ -85,6 +87,12 @@ class DateRangePicker extends Filter
         return [$this->getStartValue(), $this->getEndValue()];
     }
 
+    protected function hasValue()
+    {
+        list($start, $end) = $this->getValue();
+        return $start !== null && $start !== '' && $end !== null && $end !== '';
+    }
+
     /**
      * Returns default javascript options
      *
@@ -98,7 +106,7 @@ class DateRangePicker extends Filter
         $carbon = new Carbon();
         $prev_month = Carbon::now()->startOfMonth()->subWeek();
         $today = Carbon::now();
-        return [
+        $res = [
             'format' => 'YYYY-MM-DD',
             'ranges' => [
                 'previous_month' => [
@@ -131,9 +139,15 @@ class DateRangePicker extends Filter
                 ],
 
             ],
-            'startDate' => $this->getStartValue(),
-            'endDate' => $this->getEndValue(),
         ];
+        // will not set dates when '' passed but set default date when null passed
+        if ($this->getStartValue()) {
+            $res['startDate'] = $this->getStartValue();
+        }
+        if ($this->getEndValue()) {
+            $res['endDate'] = $this->getEndValue();
+        }
+        return $res;
     }
 
     public function getDefaultStartValue()

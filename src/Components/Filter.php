@@ -73,12 +73,17 @@ class Filter extends RenderableComponent
         }
     }
 
+    protected function hasValue()
+    {
+        return $this->getValue() !== null and $this->getValue() !== '';
+    }
+
     public function prepare()
     {
-        $value = $this->getValue();
-        if (null === $value || '' === $value) {
+        if (!$this->hasValue()) {
             return;
         }
+        $value = $this->getValue();
         if ($func = $this->getFilteringFunc()) {
             $func($value, $this->grid->getConfig()->getDataProvider());
             return;
