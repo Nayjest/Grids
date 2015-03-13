@@ -11,6 +11,7 @@ use Nayjest\Builder\Instructions\Base\Instruction;
 use Nayjest\Builder\Instructions\Mapping\Build;
 use Nayjest\Builder\Instructions\Mapping\BuildChildren;
 use Nayjest\Builder\Instructions\CustomInstruction;
+use Nayjest\Builder\Instructions\Mapping\CallMethodWith;
 use Nayjest\Builder\Instructions\Mapping\CustomMapping;
 use Nayjest\Builder\Instructions\Mapping\Rename;
 use Nayjest\Builder\Instructions\SimpleValueAsField;
@@ -118,6 +119,11 @@ class Setup
             }, null, Instruction::PHASE_PRE_INST)
         ]);
         $blueprint->add(new BuildChildren('components', $blueprint));
+
+        $blueprint->add(new Rename('component', 'add_component'));
+        $blueprint->add(new Build('add_component', $blueprint));
+        $blueprint->add(new CallMethodWith('add_component','addComponent'));
+
         return $blueprint;
     }
 
@@ -125,6 +131,15 @@ class Setup
     {
         return new Blueprint(self::FILTER_CLASS, [
             new SimpleValueAsField('name'),
+            new CustomMapping('type', function ($type, Scaffold $s) {
+                switch($type) {
+                    case 'select':
+                        $s->class = 'Nayjest\Grids\SelectFilterConfig';
+                        break;
+                    default:
+                        break;
+                }
+            }, null, Instruction::PHASE_PRE_INST),
             new Rename(0,'name'),
             new Rename(1,'operator'),
         ]);
@@ -132,14 +147,15 @@ class Setup
 
     protected function makeFieldBlueprint()
     {
+        $filter_blueprint = $this->blueprints->getFor(self::FILTER_CLASS);
         return new Blueprint(self::COLUMN_CLASS, [
             new SimpleValueAsField('name'),
             new Rename(0,'name'),
-            new BuildChildren(
-                'filters',
-                $this->blueprints->getFor(self::FILTER_CLASS)
-            ),
+            new BuildChildren('filters', $filter_blueprint),
 
+            new Rename('filter', 'add_filter'),
+            new Build('add_filter', $filter_blueprint),
+            new CallMethodWith('add_filter','addFilter'),
         ]);
     }
 
