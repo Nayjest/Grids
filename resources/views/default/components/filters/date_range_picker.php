@@ -23,14 +23,26 @@ $id = uniqid();
             options.format = 'YYYY-MM-DD';
         }
         var cb = function(start, end) {
-            var text = start.format(options.format) + ' — ' + end.format(options.format);
+            var text;
+            if (start.isValid() && end.isValid()) {
+                text = start.format(options.format) + ' — ' + end.format(options.format);
+            } else {
+                text = '';
+            }
             $('#<?=$id?>').val(text);
+        };
+        var update_hidden = function(ev, picker) {
+            $('[name="<?= $component->getStartInputName() ?>"]').val(picker.startDate.format(options.format));
+            $('[name="<?= $component->getEndInputName() ?>"]').val(picker.endDate.format(options.format));
         };
         $('#<?= $id ?>')
             .daterangepicker(options, cb)
-            .on('apply.daterangepicker', function(ev, picker) {
-                $('[name="<?= $component->getStartInputName() ?>"]').val(picker.startDate.format(options.format));
-                $('[name="<?= $component->getEndInputName() ?>"]').val(picker.endDate.format(options.format));
+            .on('apply.daterangepicker', update_hidden)
+            .on('change', function(){
+                if (!$('#<?=$id?>').val()) {
+                    $('[name="<?= $component->getStartInputName() ?>"]').val('');
+                    $('[name="<?= $component->getEndInputName() ?>"]').val('');
+                }
             });
         cb(
             moment("<?= $component->getStartValue() ?>"),
