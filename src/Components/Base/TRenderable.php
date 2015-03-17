@@ -25,7 +25,7 @@ trait TRenderable
         return View::make(
             $this->getTemplate(),
             $this->getViewData()
-        );
+        )->render();
     }
 
     public function getTemplate()

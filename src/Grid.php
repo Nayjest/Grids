@@ -229,7 +229,7 @@ class Grid
         return View::make(
             $this->getFilterTemplate($filter),
             $data
-        );
+        )->render();
     }
 
     public function __toString()
