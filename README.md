@@ -11,13 +11,16 @@ Grids framework for Laravel
 [![Join the chat at https://gitter.im/Nayjest/Grids](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Nayjest/Grids?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ## Features
-* Data providers (php array, Eloquent model, DBAL query object)
+* Data providers (php array, Eloquent model, Doctrine DBAL query object)
 * Themes support
 * Individual views for UI components
 * Twitter Bootstrap v3 used by default
 * Caching
 * Smart input handling allows to avoid conflicts with get parameters & easily place few interactive grids on same page
+* Rich customization facilities
 * Component architecture
+* Declarative approach
+* Constructing grids via strict object oriented API or configuration in php arrays
 * Rich variety of components:
   - CSV export
   - _Records per page_ dropdown
@@ -31,7 +34,6 @@ Grids framework for Laravel
 ## Upcoming Features
 * Autodetecting columns based on Eloquent model (if not specified)
 * Builtin output formatters for different column types
-* Using simple php arrays to configure grids
 * Working with json data sources via ajax
 * Demo application with Laravel 5
 
