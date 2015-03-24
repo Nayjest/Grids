@@ -93,15 +93,46 @@ For Laravel 5 you also need to add "illuminate/html" service provider:
 'Illuminate\Html\HtmlServiceProvider',
 ```
 
-It's recommended to add facade aliases for "illuminate/html"  (not required by grids package):
+You may also add facade aliases to your application configuration:
 ```php
     'Form'  => 'Illuminate\Html\FormFacade',
     'HTML'  => 'Illuminate\Html\HtmlFacade',
+    'Grids'     => 'Nayjest\Grids\Grids',
 ```
+## Demo
+
+Demonstration available [here](http://grids-demo.herokuapp.com/demo/example4)
+
+[Code](https://github.com/Nayjest/grids-demo)
+
+
 
 ## Usage
 
-#### Step 1. Instantiate & Configure Grid
+#### Basic example
+
+In example below grid is configured by php array using [Nayjest/Builder](https://github.com/Nayjest/Builder) package facilities.
+
+```php
+ $cfg = [
+    'src' => 'App\User',
+        'columns' => [
+            'id',
+            'name',
+            'email',
+            'country'
+        ]
+    ];
+echo Grids::make($cfg);
+```
+
+Results available [here](http://grids-demo.herokuapp.com/demo/example1). For more details see [demo application repository](https://github.com/Nayjest/grids-demo/blob/master/app/Http/Controllers/DemoController.php)
+
+#### Advanced example
+
+If you don't like plain arrays, you can construct grids using object oriented api:
+
+##### Step 1. Instantiate & Configure Grid
 
 See example below
 
