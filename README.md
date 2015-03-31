@@ -114,15 +114,15 @@ Demonstration available [here](http://grids-demo.herokuapp.com/demo/example4)
 In example below grid is configured by php array using [Nayjest/Builder](https://github.com/Nayjest/Builder) package facilities.
 
 ```php
- $cfg = [
+$cfg = [
     'src' => 'App\User',
-        'columns' => [
+    'columns' => [
             'id',
             'name',
             'email',
             'country'
-        ]
-    ];
+    ]
+  ];
 echo Grids::make($cfg);
 ```
 
