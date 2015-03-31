@@ -3,6 +3,7 @@
 namespace Nayjest\Grids\Components;
 
 use Nayjest\Grids\Components\Base\RenderableComponent;
+use Nayjest\Grids\Components\Base\RenderableRegistry;
 
 class SortingControl extends RenderableComponent
 {
@@ -10,7 +11,7 @@ class SortingControl extends RenderableComponent
 
     protected $column;
 
-    protected $render_section = HtmlTag::SECTION_END;
+    protected $render_section = RenderableRegistry::SECTION_END;
 
     protected function getViewData()
     {
@@ -39,4 +40,4 @@ class SortingControl extends RenderableComponent
     {
         $this->column = $column;
     }
-} 
+}

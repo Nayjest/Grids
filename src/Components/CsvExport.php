@@ -7,6 +7,7 @@ use Event;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Response;
 use Nayjest\Grids\Components\Base\RenderableComponent;
+use Nayjest\Grids\Components\Base\RenderableRegistry;
 use Nayjest\Grids\Components\CsvExport\ForcedExitException;
 use Nayjest\Grids\DataProvider;
 use Nayjest\Grids\DataRow;
@@ -25,7 +26,7 @@ class CsvExport extends RenderableComponent
 
     protected $template = '*.components.csv_export';
     protected $name = CsvExport::NAME;
-    protected $render_section = THead::SECTION_END;
+    protected $render_section = RenderableRegistry::SECTION_END;
     protected $rows_limit = self::DEFAULT_ROWS_LIMIT;
 
     /**

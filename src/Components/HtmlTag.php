@@ -5,11 +5,6 @@ use Nayjest\Grids\Components\Base\RenderableRegistry;
 
 class HtmlTag extends RenderableRegistry
 {
-    const SECTION_BEGIN = 'begin';
-    const SECTION_END = 'end';
-    const SECTION_BEFORE = 'before';
-    const SECTION_AFTER = 'after';
-
     protected $tag_name;
 
     protected $content;
@@ -126,33 +121,22 @@ class HtmlTag extends RenderableRegistry
     }
 
     /**
-     * Renders tag if no template specified
+     * Renders component.
      *
      * @return string
      */
-    protected function renderWithoutTemplate()
-    {
-        $this->is_rendered = true;
-        return
-            $this->renderComponents(self::SECTION_BEFORE)
-            . $this->renderOpeningTag()
-            . $this->renderComponents(self::SECTION_BEGIN)
-            . $this->getContent()
-            . $this->renderComponents(null)
-            . $this->renderComponents(self::SECTION_END)
-            . $this->renderClosingTag()
-            . $this->renderComponents(self::SECTION_AFTER);
-    }
-
-    /**
-     * Renders component
-     *
-     * @return \Illuminate\View\View|string
-     */
     public function render()
     {
-        return $this->getTemplate() ?
-            $this->renderTemplate() : $this->renderWithoutTemplate();
-
+        if ($this->getTemplate()) {
+            $inner = $this->renderTemplate();
+        } else {
+            $this->is_rendered = true;
+            $inner = $this->renderOpeningTag()
+                . $this->renderComponents(self::SECTION_BEGIN)
+                . $this->getContent()
+                . $this->renderComponents(null)
+                . $this->renderComponents(self::SECTION_END);
+        }
+        return $this->wrapWithOutsideComponents($inner);
     }
 }

@@ -89,6 +89,7 @@ class RenderableRegistry implements
      */
     public function render()
     {
+        $this->is_rendered = true;
         return $this->wrapWithOutsideComponents(
             $this->getTemplate()
                 ? $this->renderTemplate()
