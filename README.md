@@ -122,7 +122,7 @@ $cfg = [
             'email',
             'country'
     ]
-  ];
+];
 echo Grids::make($cfg);
 ```
 
