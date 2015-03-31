@@ -53,7 +53,7 @@ Add nayjest/grids to "require" section of your composer.json
 
 ```javascript
 "require": {
-    "nayjest/grids": "~0.5"
+    "nayjest/grids": "~0.7"
 },
 ```
 
@@ -61,7 +61,7 @@ For Laravel 5 you also need to add "illuminate/html":
 
 ```javascript
 "require": {
-    "nayjest/grids": "~0.5",
+    "nayjest/grids": "~0.7",
     "illuminate/html": "~5"
 },
 ```
@@ -114,15 +114,15 @@ Demonstration available [here](http://grids-demo.herokuapp.com/demo/example4)
 In example below grid is configured by php array using [Nayjest/Builder](https://github.com/Nayjest/Builder) package facilities.
 
 ```php
- $cfg = [
+$cfg = [
     'src' => 'App\User',
-        'columns' => [
+    'columns' => [
             'id',
             'name',
             'email',
             'country'
-        ]
-    ];
+    ]
+];
 echo Grids::make($cfg);
 ```
 

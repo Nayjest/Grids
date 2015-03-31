@@ -43,7 +43,7 @@ class BuildDataProvider extends Instruction
         } elseif (is_string($src)) {
             // model name
             if (
-                class_exists($src, true) and
+                class_exists($src, true) &&
                 is_subclass_of($src, '\Illuminate\Database\Eloquent\Model')
             ) {
                 $class = '\Nayjest\Grids\EloquentDataProvider';
@@ -51,7 +51,7 @@ class BuildDataProvider extends Instruction
                 $arg = $model->newQuery();
             }
         }
-        if ($class !== null and $arg !== null) {
+        if ($class !== null && $arg !== null) {
             $provider = new $class($arg);
             $s->input['data_provider'] = $provider;
         } else {
