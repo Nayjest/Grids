@@ -10,6 +10,10 @@ class OneCellRow extends RenderableRegistry
     public function render()
     {
         $colspan = $this->grid->getConfig()->getColumns()->count();
-        return "\r\n\t<tr>\r\n\t\t<td colspan=$colspan>" . $this->renderComponents() . "\r\n\t\t</td>\r\n\t</tr>";
+        $opening = "<tr><td colspan=\"$colspan\">";
+        $closing = "</td></tr>";
+        return $this->wrapWithOutsideComponents(
+            $opening . $this->renderInnerComponents() . $closing
+        );
     }
 }
