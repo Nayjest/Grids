@@ -21,11 +21,12 @@ class CsvExport extends RenderableComponent
     const INPUT_PARAM = 'csv';
     const CSV_DELIMITER = ';';
     const CSV_EXT = '.csv';
-    const ROWS_PER_TIME = 5000;
+    const DEFAULT_ROWS_LIMIT = 5000;
 
     protected $template = '*.components.csv_export';
     protected $name = CsvExport::NAME;
     protected $render_section = THead::SECTION_END;
+    protected $rows_limit = self::DEFAULT_ROWS_LIMIT;
 
     /**
      * @var Grid
@@ -75,11 +76,36 @@ class CsvExport extends RenderableComponent
         return $this->fileName . static::CSV_EXT;
     }
 
+    /**
+     * @return int
+     */
+    public function getRowsLimit()
+    {
+        return $this->rows_limit;
+    }
+
+    /**
+     * @param int $rows_limit
+     *
+     * @return $this
+     */
+    public function setRowsLimit($rows_limit)
+    {
+        $this->rows_limit = $rows_limit;
+        return $this;
+    }
+
     protected function setCsvHeaders(Response $response)
     {
         $response->header('Content-Type', 'application/csv');
         $response->header('Content-Disposition', 'attachment; filename=' . $this->getFileName());
         $response->header('Pragma', 'no-cache');
+    }
+
+    protected function resetPagination(DataProvider $provider)
+    {
+        $provider->setPageSize($this->getRowsLimit());
+        $provider->setCurrentPage(1);
     }
 
     protected function renderCsv()
@@ -97,10 +123,7 @@ class CsvExport extends RenderableComponent
 
         $this->renderHeader($f);
 
-        $pageNum = 1;
-
-        $provider->setPageSize(static::ROWS_PER_TIME);
-        $provider->setCurrentPage($pageNum);
+        $this->resetPagination($provider);
         $provider->reset();
         /** @var DataRow $row */
         while ($row = $provider->getRow()) {
