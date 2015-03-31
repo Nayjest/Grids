@@ -135,7 +135,8 @@ class HtmlTag extends RenderableRegistry
                 . $this->renderComponents(self::SECTION_BEGIN)
                 . $this->getContent()
                 . $this->renderComponents(null)
-                . $this->renderComponents(self::SECTION_END);
+                . $this->renderComponents(self::SECTION_END)
+                . $this->renderClosingTag();
         }
         return $this->wrapWithOutsideComponents($inner);
     }
