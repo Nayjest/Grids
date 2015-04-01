@@ -13,6 +13,13 @@ use Nayjest\Grids\Grid;
 use Illuminate\Support\Facades\Event;
 use Exception;
 
+/**
+ * Class TotalsRow
+ *
+ * The component for rendering row with totals.
+ *
+ * @package Nayjest\Grids\Components
+ */
 class TotalsRow extends ArrayDataRow implements RenderableComponentInterface
 {
     use TComponent {

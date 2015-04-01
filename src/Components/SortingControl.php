@@ -5,6 +5,14 @@ namespace Nayjest\Grids\Components;
 use Nayjest\Grids\Components\Base\RenderableComponent;
 use Nayjest\Grids\Components\Base\RenderableRegistry;
 
+/**
+ * Class SortingControl
+ *
+ * The component for rendering sorting controls
+ * added to column header automatically when field is sortable.
+ *
+ * @package Nayjest\Grids\Components
+ */
 class SortingControl extends RenderableComponent
 {
     protected $template = '*.components.sorting_control';

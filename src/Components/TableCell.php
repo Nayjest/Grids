@@ -4,6 +4,13 @@ namespace Nayjest\Grids\Components;
 
 use Nayjest\Grids\FieldConfig;
 
+/**
+ * Class TableCell
+ * 
+ * The component for rendering TD html tag inside grid.
+ *
+ * @package Nayjest\Grids\Components
+ */
 class TableCell extends HtmlTag
 {
     protected $tag_name = 'td';

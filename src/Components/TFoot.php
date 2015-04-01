@@ -2,6 +2,13 @@
 namespace Nayjest\Grids\Components;
 use Illuminate\Foundation\Application;
 
+/**
+ * Class TFoot
+ *
+ * The component for rendering TFOOT html tag inside grid.
+ *
+ * @package Nayjest\Grids\Components
+ */
 class TFoot extends HtmlTag
 {
     const NAME = 'tfoot';

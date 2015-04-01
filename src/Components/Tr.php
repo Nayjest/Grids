@@ -3,6 +3,13 @@ namespace Nayjest\Grids\Components;
 
 use Nayjest\Grids\IDataRow;
 
+/**
+ * Class Tr
+ *
+ * The component for rendering TR html tag inside grid.
+ *
+ * @package Nayjest\Grids\Components
+ */
 class Tr extends HtmlTag
 {
     protected $data_row;
