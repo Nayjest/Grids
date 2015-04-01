@@ -3,6 +3,13 @@ namespace Nayjest\Grids\Components;
 
 use Nayjest\Grids\Components\Base\RenderableComponent;
 
+/**
+ * Class ShowingRecords
+ *
+ * Renders text: Showing records $from — $to of $total
+ *
+ * @package Nayjest\Grids\Components
+ */
 class ShowingRecords extends RenderableComponent
 {
 
