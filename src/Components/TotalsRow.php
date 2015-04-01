@@ -16,7 +16,7 @@ use Exception;
 /**
  * Class TotalsRow
  *
- * The component for rendering row with totals.
+ * The component renders row with totals for current page.
  *
  * @package Nayjest\Grids\Components
  */
