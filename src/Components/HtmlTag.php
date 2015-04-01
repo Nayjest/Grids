@@ -54,6 +54,8 @@ class HtmlTag extends RenderableRegistry
     }
 
     /**
+     * Sets content (html inside tag).
+     *
      * @param string $content
      * @return $this
      */
@@ -64,6 +66,8 @@ class HtmlTag extends RenderableRegistry
     }
 
     /**
+     * Returns html inside tag.
+     *
      * @return string|null
      */
     public function getContent()
@@ -96,7 +100,7 @@ class HtmlTag extends RenderableRegistry
     }
 
     /**
-     * Renders opening tag
+     * Renders opening tag.
      *
      * @return string
      */
@@ -111,13 +115,13 @@ class HtmlTag extends RenderableRegistry
     }
 
     /**
-     * Renders closing tag
+     * Renders closing tag.
      *
      * @return string
      */
     public function renderClosingTag()
     {
-        return "</$this->tag_name>";
+        return "</{$this->getTagName()}>";
     }
 
     /**
