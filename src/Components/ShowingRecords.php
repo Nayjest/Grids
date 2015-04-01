@@ -26,10 +26,18 @@ class ShowingRecords extends RenderableComponent
             ->getConfig()
             ->getDataProvider()
             ->getPaginator();
-        $from = $paginator->getFrom();
-        $to = $paginator->getTo();
-        $total = $paginator->getTotal();
-
+        echo(get_class($paginator));
+        # Laravel 4
+        if (method_exists($paginator, 'getFrom')) {
+            $from = $paginator->getFrom();
+            $to = $paginator->getTo();
+            $total = $paginator->getTotal();
+        # Laravel 5
+        } else {
+            $from = $paginator->firstItem();
+            $to = $paginator->lastItem();
+            $total = $paginator->total();
+        }
         return parent::getViewData() + compact('from', 'to', 'total');
     }
 }
