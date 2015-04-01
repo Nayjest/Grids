@@ -2,7 +2,7 @@
 <span data-role="columns-hider">
     <button
         id="<?= $component->getId('btn') ?>"
-        class="btn btn-default"
+        class="btn btn-sm btn-default"
         data-toggle="popover"
         type="button"
         data-placement="bottom"

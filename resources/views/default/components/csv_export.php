@@ -8,4 +8,12 @@ use Nayjest\Grids\Components\CsvExport;
 use Nayjest\Grids\Grid;
 
 ?>
-<a href="<?= $grid->getInputProcessor()->getUrl([CsvExport::INPUT_PARAM => 1]) ?>" class="btn btn-sm btn-info">Csv Export</a>
+<span>
+    <a
+        href="<?= $grid->getInputProcessor()->getUrl([CsvExport::INPUT_PARAM => 1]) ?>"
+        class="btn btn-sm btn-default"
+        >
+        <span class="glyphicon glyphicon-export"></span>
+        CSV Export
+    </a>
+</span>
