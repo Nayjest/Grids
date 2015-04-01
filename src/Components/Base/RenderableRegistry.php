@@ -15,7 +15,7 @@ class RenderableRegistry implements
     use TComponent;
     use TRegistry;
     use TComponentView {
-        TComponentView::render as private renderTemplate;
+        TComponentView::render as protected renderTemplate;
     }
 
     const SECTION_BEGIN = 'begin';
