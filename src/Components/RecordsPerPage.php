@@ -3,6 +3,14 @@ namespace Nayjest\Grids\Components;
 
 use Nayjest\Grids\Components\Base\RenderableComponent;
 
+/**
+ * Class RecordsPerPage
+ *
+ * The component renders control
+ * for switching count of records displayed per page.
+ *
+ * @package Nayjest\Grids\Components
+ */
 class RecordsPerPage extends RenderableComponent
 {
 
