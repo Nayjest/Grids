@@ -23,7 +23,8 @@
     "require": {
         "php": ">=5.4.0",
         "illuminate/support": ">=4.2",
-        "nayjest/builder": "1.1.*"
+        "nayjest/builder": "1.1.*",
+		"maatwebsite/excel": "~2.0.0"
     },
     "suggest": {
         "illuminate/html": "Needed to work with Laravel 5.X"
