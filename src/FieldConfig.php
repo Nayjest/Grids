@@ -35,6 +35,8 @@ class FieldConfig
 
     protected $is_hidden = false;
 
+    protected $is_export_hidden = false;
+
     /**
      * @param string|null $name column unique name for internal usage
      * @param string|null $label column label
@@ -81,6 +83,23 @@ class FieldConfig
     public function show()
     {
         $this->is_hidden = false;
+        return $this;
+    }
+
+    public function isExportHidden()
+    {
+        return $this->is_export_hidden;
+    }
+
+    public function hideOnExport()
+    {
+        $this->is_export_hidden = true;
+        return $this;
+    }
+
+    public function showOnExport()
+    {
+        $this->is_export_hidden = false;
         return $this;
     }
 

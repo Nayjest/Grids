@@ -26,7 +26,8 @@
         "nayjest/builder": "1.1.*"
     },
     "suggest": {
-        "illuminate/html": "Needed to work with Laravel 5.X"
+        "illuminate/html": "Required to work with Laravel 5.X",
+        "maatwebsite/excel": "Required to work with Excel export component"
     },
     "autoload": {
         "psr-4": {

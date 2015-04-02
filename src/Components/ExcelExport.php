@@ -4,7 +4,9 @@ namespace Nayjest\Grids\Components;
 
 use App;
 use Event;
-use Illuminate\Http\Response;
+use Maatwebsite\Excel\Classes\LaravelExcelWorksheet;
+use Maatwebsite\Excel\Excel;
+use Maatwebsite\Excel\Writers\LaravelExcelWriter;
 use Nayjest\Grids\Components\Base\RenderableComponent;
 use Nayjest\Grids\Components\Base\RenderableRegistry;
 use Nayjest\Grids\DataProvider;
@@ -12,20 +14,19 @@ use Nayjest\Grids\DataRow;
 use Nayjest\Grids\Grid;
 
 /**
- * @author: Vitaliy Ofat <i@vitaliy-ofat.com>
+ * @author: Alexander Hofmeister
  */
-class CsvExport extends RenderableComponent
+class ExcelExport extends RenderableComponent
 {
-    const NAME = 'csv_export';
-    const INPUT_PARAM = 'csv';
-    const CSV_DELIMITER = ';';
-    const CSV_EXT = '.csv';
+    const NAME = 'excel_export';
+    const INPUT_PARAM = 'xls';
     const DEFAULT_ROWS_LIMIT = 5000;
 
-    protected $template = '*.components.csv_export';
-    protected $name = CsvExport::NAME;
+    protected $template = '*.components.excel_export';
+    protected $name = ExcelExport::NAME;
     protected $render_section = RenderableRegistry::SECTION_END;
     protected $rows_limit = self::DEFAULT_ROWS_LIMIT;
+    protected $extension = 'xls';
 
     /**
      * @var string
@@ -38,6 +39,11 @@ class CsvExport extends RenderableComponent
     protected $fileName;
 
     /**
+     * @var string
+     */
+    protected $sheetName;
+
+    /**
      * @param Grid $grid
      * @return null|void
      */
@@ -47,7 +53,7 @@ class CsvExport extends RenderableComponent
         Event::listen(Grid::EVENT_PREPARE, function (Grid $grid) {
             $this->grid = $grid;
             if ($grid->getInputProcessor()->getValue(static::INPUT_PARAM, false)) {
-                $this->renderCsv();
+                $this->renderExcel();
             }
         });
     }
@@ -67,7 +73,43 @@ class CsvExport extends RenderableComponent
      */
     public function getFileName()
     {
-        return $this->fileName . static::CSV_EXT;
+        return $this->fileName ?: $this->grid->getConfig()->getName();
+    }
+
+    /**
+     * @param string $name
+     * @return $this
+     */
+    public function setSheetName($name)
+    {
+        $this->sheetName = $name;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSheetName()
+    {
+        return $this->sheetName;
+    }
+
+    /**
+     * @param string $name
+     * @return $this
+     */
+    public function setExtension($name)
+    {
+        $this->extension = $name;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getExtension()
+    {
+        return $this->extension;
     }
 
     /**
@@ -89,33 +131,20 @@ class CsvExport extends RenderableComponent
         return $this;
     }
 
-    protected function setCsvHeaders(Response $response)
-    {
-        $response->header('Content-Type', 'application/csv');
-        $response->header('Content-Disposition', 'attachment; filename=' . $this->getFileName());
-        $response->header('Pragma', 'no-cache');
-    }
-
     protected function resetPagination(DataProvider $provider)
     {
         $provider->setPageSize($this->getRowsLimit());
         $provider->setCurrentPage(1);
     }
 
-    protected function renderCsv()
+    protected function getData()
     {
-        $f = fopen('php://output', 'w');
-
-        header('Content-Type: text/csv');
-        header('Content-Disposition: attachment; filename="'. $this->getFileName() .'"');
-        header("Pragma: no-cache");
-
-        set_time_limit(0);
-
+        // Build array
+        $exportData = [];
         /** @var $provider DataProvider */
         $provider = $this->grid->getConfig()->getDataProvider();
 
-        $this->renderHeader($f);
+        $exportData[] = $this->getHeaderRow();
 
         $this->resetPagination($provider);
         $provider->reset();
@@ -124,15 +153,29 @@ class CsvExport extends RenderableComponent
             $output = [];
             foreach ($this->grid->getConfig()->getColumns() as $column) {
                 if (!$column->isHidden() && !$column->isExportHidden()) {
-                    $output[] = $this->escapeString( $column->getValue($row) );
+
+                    $output[] = $this->escapeString($column->getValue($row));
                 }
             }
-            fputcsv($f, $output, static::CSV_DELIMITER);
-
+            $exportData[] = $output;
         }
+        return $exportData;
+    }
 
-        fclose($f);
-        exit;
+    protected function renderExcel()
+    {
+        $onSheetCreate = function (LaravelExcelWorksheet $sheet) {
+            $sheet->fromArray($this->getData(), null, 'A1', false, false);
+        };
+        $onFileCreate = function (LaravelExcelWriter $excel) use ($onSheetCreate) {
+            $excel->sheet($this->getSheetName(), $onSheetCreate);
+        };
+
+        /** @var Excel $excel */
+        $excel = app('excel');
+        $excel
+            ->create($this->getFileName(), $onFileCreate)
+            ->export($this->getExtension());
     }
 
     protected function escapeString($str)
@@ -140,7 +183,7 @@ class CsvExport extends RenderableComponent
         return str_replace('"', '\'', strip_tags(html_entity_decode($str)));
     }
 
-    protected function renderHeader($f)
+    protected function getHeaderRow()
     {
         $output = [];
         foreach ($this->grid->getConfig()->getColumns() as $column) {
@@ -148,7 +191,6 @@ class CsvExport extends RenderableComponent
                 $output[] = $this->escapeString($column->getLabel());
             }
         }
-        fputcsv($f, $output, static::CSV_DELIMITER);
+        return $output;
     }
-
 }
