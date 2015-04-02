@@ -123,7 +123,7 @@ class CsvExport extends RenderableComponent
         while ($row = $provider->getRow()) {
             $output = [];
             foreach ($this->grid->getConfig()->getColumns() as $column) {
-                if (!$column->isHidden() && !$column->isExportHidden()) {
+                if (!$column->isHidden()) {
                     $output[] = $this->escapeString( $column->getValue($row) );
                 }
             }

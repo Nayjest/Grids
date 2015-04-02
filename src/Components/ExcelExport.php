@@ -11,6 +11,7 @@ use Nayjest\Grids\Components\Base\RenderableComponent;
 use Nayjest\Grids\Components\Base\RenderableRegistry;
 use Nayjest\Grids\DataProvider;
 use Nayjest\Grids\DataRow;
+use Nayjest\Grids\FieldConfig;
 use Nayjest\Grids\Grid;
 
 /**
@@ -42,6 +43,10 @@ class ExcelExport extends RenderableComponent
      * @var string
      */
     protected $sheetName;
+
+    protected $ignored_columns = [];
+
+    protected $is_hidden_columns_exported = false;
 
     /**
      * @param Grid $grid
@@ -137,6 +142,16 @@ class ExcelExport extends RenderableComponent
         $provider->setCurrentPage(1);
     }
 
+    /**
+     * @param FieldConfig $column
+     * @return bool
+     */
+    protected function isColumnExported(FieldConfig $column)
+    {
+        return !in_array($column->getName(), $this->getIgnoredColumns())
+            and ($this->isHiddenColumnsExported() or !$column->isHidden());
+    }
+
     protected function getData()
     {
         // Build array
@@ -152,8 +167,7 @@ class ExcelExport extends RenderableComponent
         while ($row = $provider->getRow()) {
             $output = [];
             foreach ($this->grid->getConfig()->getColumns() as $column) {
-                if (!$column->isHidden() && !$column->isExportHidden()) {
-
+                if ($this->isColumnExported($column)) {
                     $output[] = $this->escapeString($column->getValue($row));
                 }
             }
@@ -187,10 +201,46 @@ class ExcelExport extends RenderableComponent
     {
         $output = [];
         foreach ($this->grid->getConfig()->getColumns() as $column) {
-            if (!$column->isHidden() && !$column->isExportHidden()) {
+            if (!$column->isExportHidden()) {
                 $output[] = $this->escapeString($column->getLabel());
             }
         }
         return $output;
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getIgnoredColumns()
+    {
+        return $this->ignored_columns;
+    }
+
+    /**
+     * @param string[] $ignored_columns
+     * @return $this
+     */
+    public function setIgnoredColumns(array $ignored_columns)
+    {
+        $this->ignored_columns = $ignored_columns;
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isHiddenColumnsExported()
+    {
+        return $this->is_hidden_columns_exported;
+    }
+
+    /**
+     * @param bool $is_hidden_columns_exported
+     * @return $this
+     */
+    public function setHiddenColumnsExported($is_hidden_columns_exported)
+    {
+        $this->is_hidden_columns_exported = $is_hidden_columns_exported;
+        return $this;
     }
 }
