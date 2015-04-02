@@ -4,14 +4,17 @@ namespace Nayjest\Grids\Components;
 
 use App;
 use Event;
-use Maatwebsite\Excel\Facades\Excel;
+use Maatwebsite\Excel\Classes\LaravelExcelWorksheet;
+use Maatwebsite\Excel\Excel;
+use Maatwebsite\Excel\Writers\LaravelExcelWriter;
 use Nayjest\Grids\Components\Base\RenderableComponent;
+use Nayjest\Grids\Components\Base\RenderableRegistry;
 use Nayjest\Grids\DataProvider;
 use Nayjest\Grids\DataRow;
 use Nayjest\Grids\Grid;
 
 /**
- * @author: Vitaliy Ofat <i@vitaliy-ofat.com>
+ * @author: Alexander Hofmeister
  */
 class ExcelExport extends RenderableComponent
 {
@@ -21,14 +24,9 @@ class ExcelExport extends RenderableComponent
 
     protected $template = '*.components.excel_export';
     protected $name = ExcelExport::NAME;
-    protected $render_section = THead::SECTION_END;
+    protected $render_section = RenderableRegistry::SECTION_END;
     protected $rows_limit = self::DEFAULT_ROWS_LIMIT;
     protected $extension = 'xls';
-
-    /**
-     * @var Grid
-     */
-    protected $grid;
 
     /**
      * @var string
@@ -75,7 +73,7 @@ class ExcelExport extends RenderableComponent
      */
     public function getFileName()
     {
-        return $this->fileName;
+        return $this->fileName ?: $this->grid->getConfig()->getName();
     }
 
     /**
@@ -133,22 +131,20 @@ class ExcelExport extends RenderableComponent
         return $this;
     }
 
-
     protected function resetPagination(DataProvider $provider)
     {
         $provider->setPageSize($this->getRowsLimit());
         $provider->setCurrentPage(1);
     }
 
-
-    protected function renderExcel()
+    protected function getData()
     {
         // Build array
         $exportData = [];
         /** @var $provider DataProvider */
         $provider = $this->grid->getConfig()->getDataProvider();
 
-        $exportData[] = $this->renderHeader();
+        $exportData[] = $this->getHeaderRow();
 
         $this->resetPagination($provider);
         $provider->reset();
@@ -158,34 +154,36 @@ class ExcelExport extends RenderableComponent
             foreach ($this->grid->getConfig()->getColumns() as $column) {
                 if (!$column->isHidden() && !$column->isExportHidden()) {
 
-                    $output[] = $this->escapeString( $column->getValue($row) );
+                    $output[] = $this->escapeString($column->getValue($row));
                 }
             }
             $exportData[] = $output;
         }
-
-
-        Excel::create($this->getFileName(), function($excel) use($exportData) {
-
-            $excel->sheet($this->getSheetName(), function($sheet) use($exportData) {
-
-                $sheet->fromArray($exportData,null, 'A1', false, false);
-
-            });
-
-        })->export($this->getExtension());
-
-
-
+        return $exportData;
     }
 
+    protected function renderExcel()
+    {
+        $onSheetCreate = function (LaravelExcelWorksheet $sheet) {
+            $sheet->fromArray($this->getData(), null, 'A1', false, false);
+        };
+        $onFileCreate = function (LaravelExcelWriter $excel) use ($onSheetCreate) {
+            $excel->sheet($this->getSheetName(), $onSheetCreate);
+        };
+
+        /** @var Excel $excel */
+        $excel = app('excel');
+        $excel
+            ->create($this->getFileName(), $onFileCreate)
+            ->export($this->getExtension());
+    }
 
     protected function escapeString($str)
     {
         return str_replace('"', '\'', strip_tags(html_entity_decode($str)));
     }
 
-    protected function renderHeader()
+    protected function getHeaderRow()
     {
         $output = [];
         foreach ($this->grid->getConfig()->getColumns() as $column) {
@@ -195,5 +193,4 @@ class ExcelExport extends RenderableComponent
         }
         return $output;
     }
-
 }

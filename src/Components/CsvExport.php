@@ -4,11 +4,9 @@ namespace Nayjest\Grids\Components;
 
 use App;
 use Event;
-use Illuminate\Foundation\Application;
 use Illuminate\Http\Response;
 use Nayjest\Grids\Components\Base\RenderableComponent;
 use Nayjest\Grids\Components\Base\RenderableRegistry;
-use Nayjest\Grids\Components\CsvExport\ForcedExitException;
 use Nayjest\Grids\DataProvider;
 use Nayjest\Grids\DataRow;
 use Nayjest\Grids\Grid;
@@ -28,11 +26,6 @@ class CsvExport extends RenderableComponent
     protected $name = CsvExport::NAME;
     protected $render_section = RenderableRegistry::SECTION_END;
     protected $rows_limit = self::DEFAULT_ROWS_LIMIT;
-
-    /**
-     * @var Grid
-     */
-    protected $grid;
 
     /**
      * @var string
