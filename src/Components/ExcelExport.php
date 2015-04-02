@@ -156,7 +156,7 @@ class ExcelExport extends RenderableComponent
         while ($row = $provider->getRow()) {
             $output = [];
             foreach ($this->grid->getConfig()->getColumns() as $column) {
-                if (!$column->isHidden()) {
+                if (!$column->isHidden() && !$column->isExportHidden()) {
 
                     $output[] = $this->escapeString( $column->getValue($row) );
                 }
@@ -189,7 +189,7 @@ class ExcelExport extends RenderableComponent
     {
         $output = [];
         foreach ($this->grid->getConfig()->getColumns() as $column) {
-            if (!$column->isHidden()) {
+            if (!$column->isHidden() && !$column->isExportHidden()) {
                 $output[] = $this->escapeString($column->getLabel());
             }
         }
