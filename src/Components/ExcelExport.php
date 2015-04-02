@@ -201,7 +201,7 @@ class ExcelExport extends RenderableComponent
     {
         $output = [];
         foreach ($this->grid->getConfig()->getColumns() as $column) {
-            if (!$column->isExportHidden()) {
+            if ($this->isColumnExported($column)) {
                 $output[] = $this->escapeString($column->getLabel());
             }
         }

@@ -144,7 +144,7 @@ class CsvExport extends RenderableComponent
     {
         $output = [];
         foreach ($this->grid->getConfig()->getColumns() as $column) {
-            if (!$column->isHidden() && !$column->isExportHidden()) {
+            if (!$column->isHidden()) {
                 $output[] = $this->escapeString($column->getLabel());
             }
         }
