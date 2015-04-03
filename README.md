@@ -22,7 +22,7 @@ Grids framework for Laravel
 * Declarative approach
 * Constructing grids via strict object oriented API or configuration in php arrays
 * Rich variety of components:
-  - CSV export
+  - Excel and CSV export
   - _Records per page_ dropdown
   - Show/hide columns UI control
   - Sorting 
