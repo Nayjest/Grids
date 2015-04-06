@@ -26,7 +26,7 @@ class DbalDataProvider extends DataProvider
 
     public function __construct(QueryBuilder $src)
     {
-        $this->src = $src;
+        parent::__construct($src);
     }
 
     public function reset()

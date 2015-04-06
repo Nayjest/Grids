@@ -1,6 +1,7 @@
 <?php
 namespace Nayjest\Grids\Components;
 
+use LogicException;
 use Nayjest\Grids\Components\Base\RenderableComponentInterface;
 use Nayjest\Grids\Components\Base\TComponent;
 use Nayjest\Grids\Components\Base\TComponentView;
@@ -11,7 +12,6 @@ use Nayjest\Grids\FieldConfig;
 use Nayjest\Grids\IdFieldConfig;
 use Nayjest\Grids\Grid;
 use Illuminate\Support\Facades\Event;
-use Exception;
 
 /**
  * Class TotalsRow
@@ -88,17 +88,20 @@ class TotalsRow extends ArrayDataRow implements RenderableComponentInterface
                             $this->src[$name] = $this->rows_processed;
                             break;
                         case self::OPERATION_AVG:
-                            if (empty($this->src["{$name}_sum"])) {
-                                $this->src["{$name}_sum"] = 0;
+                            $key = "{$name}_sum";
+                            if (empty($this->src[$key])) {
+                                $this->src[$key] = 0;
                             }
-                            $this->src["{$name}_sum"] += $row->getCellValue($field);
+                            $this->src[$key] += $row->getCellValue($field);
                             $this->src[$name] = round(
-                                $this->src["{$name}_sum"] / $this->rows_processed,
+                                $this->src[$key] / $this->rows_processed,
                                 2
                             );
                             break;
                         default:
-                            throw new Exception("TotalsRow:Unknown aggregation operation.");
+                            throw new LogicException(
+                                'TotalsRow: Unknown aggregation operation.'
+                            );
                     }
 
                 }
@@ -130,7 +133,7 @@ class TotalsRow extends ArrayDataRow implements RenderableComponentInterface
         if (!$field instanceof FieldConfig) {
             $field = $this->grid->getConfig()->getColumn($field);
         }
-        if ($this->uses($field) && !$field instanceof IdFieldConfig) {
+        if (!$field instanceof IdFieldConfig && $this->uses($field)) {
             return parent::getCellValue($field);
         } else {
             return null;

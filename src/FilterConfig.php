@@ -64,7 +64,7 @@ class FilterConfig
     }
 
     /**
-     * @param callable $func($value, $data_provider)
+     * @param callable $func ($value, $data_provider)
      * @return $this
      */
     public function setFilteringFunc($func)
@@ -101,10 +101,8 @@ class FilterConfig
 
     public function getName()
     {
-        if (null === $this->name) {
-            if ($this->column) {
-                $this->name = $this->column->getName();
-            }
+        if (null === $this->name && $this->column) {
+            $this->name = $this->column->getName();
         }
         return $this->name;
     }

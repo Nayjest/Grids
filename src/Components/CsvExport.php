@@ -108,7 +108,7 @@ class CsvExport extends RenderableComponent
 
         header('Content-Type: text/csv');
         header('Content-Disposition: attachment; filename="'. $this->getFileName() .'"');
-        header("Pragma: no-cache");
+        header('Pragma: no-cache');
 
         set_time_limit(0);
 

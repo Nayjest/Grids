@@ -19,7 +19,7 @@ class EloquentDataProvider extends DataProvider
 
     public function __construct(Builder $src)
     {
-        $this->src = $src;
+        parent::__construct($src);
     }
 
     public function reset()

@@ -1,7 +1,8 @@
 <?php
 namespace Nayjest\Grids;
 
-use \Exception;
+use Exception;
+use RuntimeException;
 
 class ObjectDataRow extends DataRow
 {
@@ -28,7 +29,9 @@ class ObjectDataRow extends DataRow
             try {
                 return $this->src->{$fieldName};
             } catch(Exception $e) {
-                throw new Exception("Can't read '$fieldName' property from DataRow");
+                throw new RuntimeException(
+                    "Can't read '$fieldName' property from DataRow"
+                );
             }
 
         }

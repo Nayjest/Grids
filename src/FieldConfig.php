@@ -25,7 +25,7 @@ class FieldConfig
      */
     protected $is_sortable = false;
 
-    protected $sorting = null;
+    protected $sorting;
 
     /** @var  Collection|FilterConfig[] */
     protected $filters;
@@ -207,10 +207,10 @@ class FieldConfig
 
     /**
      * @todo move to Field instance
-     * @param DataRow $row
+     * @param IDataRow $row
      * @return mixed
      */
-    public function getValue(DataRow $row)
+    public function getValue(IDataRow $row)
     {
         if ($function = $this->getCallback()) {
             return call_user_func($function, $row->getCellValue($this), $row);

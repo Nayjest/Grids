@@ -58,7 +58,6 @@ class Filter
         );
     }
 
-
     protected function getTemplate()
     {
         $filter_tpl = $this->config->getTemplate();
@@ -76,10 +75,9 @@ class Filter
             $func($value, $this->grid->getConfig()->getDataProvider());
             return;
         }
-        if ($this->config->getOperator() === FilterConfig::OPERATOR_LIKE) {
-            if (strpos($value, '%') === false) {
-                $value = "%$value%";
-            }
+        $isLike = $this->config->getOperator() === FilterConfig::OPERATOR_LIKE;
+        if ($isLike && strpos($value, '%') === false) {
+            $value = "%$value%";
         }
         $this->grid->getConfig()->getDataProvider()->filter(
             $this->config->getName(),
@@ -87,5 +85,4 @@ class Filter
             $value
         );
     }
-
-} 
+}

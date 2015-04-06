@@ -2,7 +2,7 @@
 
 namespace Nayjest\Grids\Build\Instructions;
 
-use Exception;
+use LogicException;
 use Nayjest\Builder\Instructions\Base\Instruction;
 use Nayjest\Builder\Scaffold;
 
@@ -22,7 +22,7 @@ class BuildDataProvider extends Instruction
 
     /**
      * @param Scaffold $s
-     * @throws Exception
+     * @throws LogicException
      */
     public function apply(Scaffold $s)
     {
@@ -55,7 +55,7 @@ class BuildDataProvider extends Instruction
             $provider = new $class($arg);
             $s->input['data_provider'] = $provider;
         } else {
-            throw new Exception("Invalid Data Provider Configuration");
+            throw new LogicException('Invalid Data Provider Configuration');
         }
 
     }

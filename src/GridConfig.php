@@ -20,7 +20,7 @@ class GridConfig implements RegistryInterface
     protected $template = 'grids::default';
 
     /** @var FieldConfig[]|Collection */
-    protected $columns = null;
+    protected $columns;
 
     /** @var  DataProvider $data_provider */
     protected $data_provider;

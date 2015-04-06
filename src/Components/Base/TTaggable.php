@@ -40,9 +40,10 @@ trait TTaggable
     public function hasTags(array $tagNames)
     {
         foreach ($tagNames as $tag) {
-            if ($this->hasTag($tag)) continue;
-            return false;
+            if (!$this->hasTag($tag)) {
+                return false;
+            }
         }
         return true;
     }
-} 
+}
