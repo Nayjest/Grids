@@ -2,7 +2,6 @@
 
 namespace Nayjest\Grids\Components;
 
-use App;
 use Event;
 use Illuminate\Http\Response;
 use Nayjest\Grids\Components\Base\RenderableComponent;
