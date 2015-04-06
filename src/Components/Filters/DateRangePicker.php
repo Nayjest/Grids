@@ -18,8 +18,6 @@ use Nayjest\Grids\DataProvider;
  */
 class DateRangePicker extends Filter
 {
-    static $resources_included = false;
-
     protected $js_options;
 
     protected $use_clear_button;
