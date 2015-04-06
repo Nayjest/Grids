@@ -26,7 +26,6 @@ class ShowingRecords extends RenderableComponent
             ->getConfig()
             ->getDataProvider()
             ->getPaginator();
-        echo(get_class($paginator));
         # Laravel 4
         if (method_exists($paginator, 'getFrom')) {
             $from = $paginator->getFrom();
