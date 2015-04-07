@@ -35,7 +35,6 @@ Grids framework for Laravel
 * Autodetecting columns based on Eloquent model (if not specified)
 * Builtin output formatters for different column types
 * Working with json data sources via ajax
-* Demo application with Laravel 5
 
 [Ask for more features](https://github.com/Nayjest/Grids/issues). You are welcome!
 
