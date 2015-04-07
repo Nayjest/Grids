@@ -1,5 +1,4 @@
 /vendor
 composer.phar
 composer.lock
-.idea
 apigen.phar
