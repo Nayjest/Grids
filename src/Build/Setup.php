@@ -65,7 +65,7 @@ class Setup
                 $provider = $s->getInput('data_provider');
                 $is_eloquent = $provider  instanceof EloquentDataProvider;
 
-                if ($is_eloquent and !$s->getInput('columns')) {
+                if ($is_eloquent && !$s->getInput('columns')) {
                     $table = $provider->getBuilder()->getModel()->getTable();
                     $columns = DB
                         ::connection()

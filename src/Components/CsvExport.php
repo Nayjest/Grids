@@ -78,13 +78,13 @@ class CsvExport extends RenderableComponent
     }
 
     /**
-     * @param int $rows_limit
+     * @param int $limit
      *
      * @return $this
      */
-    public function setRowsLimit($rows_limit)
+    public function setRowsLimit($limit)
     {
-        $this->rows_limit = $rows_limit;
+        $this->rows_limit = $limit;
         return $this;
     }
 
@@ -103,7 +103,7 @@ class CsvExport extends RenderableComponent
 
     protected function renderCsv()
     {
-        $f = fopen('php://output', 'w');
+        $file = fopen('php://output', 'w');
 
         header('Content-Type: text/csv');
         header('Content-Disposition: attachment; filename="'. $this->getFileName() .'"');
@@ -114,7 +114,7 @@ class CsvExport extends RenderableComponent
         /** @var $provider DataProvider */
         $provider = $this->grid->getConfig()->getDataProvider();
 
-        $this->renderHeader($f);
+        $this->renderHeader($file);
 
         $this->resetPagination($provider);
         $provider->reset();
@@ -126,20 +126,27 @@ class CsvExport extends RenderableComponent
                     $output[] = $this->escapeString( $column->getValue($row) );
                 }
             }
-            fputcsv($f, $output, static::CSV_DELIMITER);
+            fputcsv($file, $output, static::CSV_DELIMITER);
 
         }
 
-        fclose($f);
+        fclose($file);
         exit;
     }
 
+    /**
+     * @param string $str
+     * @return string
+     */
     protected function escapeString($str)
     {
         return str_replace('"', '\'', strip_tags(html_entity_decode($str)));
     }
 
-    protected function renderHeader($f)
+    /**
+     * @param resource $file
+     */
+    protected function renderHeader($file)
     {
         $output = [];
         foreach ($this->grid->getConfig()->getColumns() as $column) {
@@ -147,7 +154,6 @@ class CsvExport extends RenderableComponent
                 $output[] = $this->escapeString($column->getLabel());
             }
         }
-        fputcsv($f, $output, static::CSV_DELIMITER);
+        fputcsv($file, $output, static::CSV_DELIMITER);
     }
-
 }

@@ -75,7 +75,7 @@ class Filter extends RenderableComponent
 
     protected function hasValue()
     {
-        return $this->getValue() !== null and $this->getValue() !== '';
+        return $this->getValue() !== null && $this->getValue() !== '';
     }
 
     public function prepare()

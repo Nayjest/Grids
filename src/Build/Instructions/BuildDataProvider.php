@@ -19,15 +19,14 @@ class BuildDataProvider extends Instruction
 {
     protected $phase = self::PHASE_PRE_INST;
 
-
     /**
-     * @param Scaffold $s
+     * @param Scaffold $scaffold
      * @throws LogicException
      */
-    public function apply(Scaffold $s)
+    public function apply(Scaffold $scaffold)
     {
-        $src = $s->getInput('src');
-        $s->excludeInput('src');
+        $src = $scaffold->getInput('src');
+        $scaffold->excludeInput('src');
         $class = null;
         $arg = null;
 
@@ -53,10 +52,9 @@ class BuildDataProvider extends Instruction
         }
         if ($class !== null && $arg !== null) {
             $provider = new $class($arg);
-            $s->input['data_provider'] = $provider;
+            $scaffold->input['data_provider'] = $provider;
         } else {
             throw new LogicException('Invalid Data Provider Configuration');
         }
-
     }
 }

@@ -126,13 +126,13 @@ class ExcelExport extends RenderableComponent
     }
 
     /**
-     * @param int $rows_limit
+     * @param int $limit
      *
      * @return $this
      */
-    public function setRowsLimit($rows_limit)
+    public function setRowsLimit($limit)
     {
-        $this->rows_limit = $rows_limit;
+        $this->rows_limit = $limit;
         return $this;
     }
 
@@ -149,7 +149,7 @@ class ExcelExport extends RenderableComponent
     protected function isColumnExported(FieldConfig $column)
     {
         return !in_array($column->getName(), $this->getIgnoredColumns())
-            and ($this->isHiddenColumnsExported() or !$column->isHidden());
+            && ($this->isHiddenColumnsExported() || !$column->isHidden());
     }
 
     protected function getData()
@@ -217,12 +217,12 @@ class ExcelExport extends RenderableComponent
     }
 
     /**
-     * @param string[] $ignored_columns
+     * @param string[] $ignoredColumns
      * @return $this
      */
-    public function setIgnoredColumns(array $ignored_columns)
+    public function setIgnoredColumns(array $ignoredColumns)
     {
-        $this->ignored_columns = $ignored_columns;
+        $this->ignored_columns = $ignoredColumns;
         return $this;
     }
 
@@ -235,12 +235,12 @@ class ExcelExport extends RenderableComponent
     }
 
     /**
-     * @param bool $is_hidden_columns_exported
+     * @param bool $isHiddenColumnsExported
      * @return $this
      */
-    public function setHiddenColumnsExported($is_hidden_columns_exported)
+    public function setHiddenColumnsExported($isHiddenColumnsExported)
     {
-        $this->is_hidden_columns_exported = $is_hidden_columns_exported;
+        $this->is_hidden_columns_exported = $isHiddenColumnsExported;
         return $this;
     }
 }
