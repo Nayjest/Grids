@@ -9,7 +9,7 @@ class IdFieldConfig extends FieldConfig
         $this->setName('ID');
     }
 
-    public function getValue(DataRow $row)
+    public function getValue(IDataRow $row)
     {
         return $row->getId();
     }
