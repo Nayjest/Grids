@@ -33,7 +33,7 @@ class SelectFilterConfig extends FilterConfig
     /**
      * @return bool
      */
-    public function IsSubmittedOnChange()
+    public function isSubmittedOnChange()
     {
         return $this->is_submitted_on_change;
     }
