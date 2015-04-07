@@ -7,14 +7,44 @@ class SelectFilterConfig extends FilterConfig
 
     protected $options = [];
 
+    protected $is_submitted_on_change = false;
+
+    /**
+     * Returns option items of html select tag
+     * @return array
+     */
     public function getOptions()
     {
         return $this->options;
     }
 
-    public function setOptions($options)
+    /**
+     * Sets option items for html select tag
+     *
+     * @param array $options
+     * @return $this
+     */
+    public function setOptions(array $options)
     {
         $this->options = $options;
         return $this;
     }
-} 
+
+    /**
+     * @return bool
+     */
+    public function IsSubmittedOnChange()
+    {
+        return $this->is_submitted_on_change;
+    }
+
+    /**
+     * @param bool $isSubmittedOnChange
+     * @return $this
+     */
+    public function setSubmittedOnChange($isSubmittedOnChange)
+    {
+        $this->is_submitted_on_change = $isSubmittedOnChange;
+        return $this;
+    }
+}
