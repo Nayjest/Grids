@@ -5,7 +5,7 @@ is_array($value) or $value = [];
 $id = uniqid();
 ?>
 <div class="btn-group">
-    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+    <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
         <?= $component->getLabel() ?>
         <span class="caret"></span>
     </button>
@@ -35,11 +35,12 @@ $id = uniqid();
             ?>
             <li>
                 <a href="#" data-target="#collapse<?=$val?>" class="collapsible">
-                    <i class="glyphicon glyphicon-plus"></i>
-                    <?= $label['name'] ?>
+                    <span class="glyphicon glyphicon-collapse-down"></span>
+                    <b><?= $label['name'] ?></b>
                 </a>
 
-                <div class="collapse<?=$class?>" id="collapse<?=$val?>">
+                <div class="collapse<?=$class?>" id="collapse<?=$val?>" style="margin-left: 25px;">
+                    <?php if (count($label['values']) > 1):?>
                     <div>
                         <label>
                             <input
@@ -49,6 +50,7 @@ $id = uniqid();
                             <span><u>Check Group</u></span>
                         </label>
                     </div>
+                    <?php endif ?>
                     <?php foreach($label['values'] as $option_val=>$option_label):?>
                         <div>
                         <label>
@@ -98,7 +100,7 @@ $id = uniqid();
         });
         $('.collapsible').click(function(e){
             $(this).next('.collapse').toggleClass('in');
-            $(this).find('i').toggleClass('glyphicon-plus').toggleClass('glyphicon-minus');
+            $(this).find('i').toggleClass('glyphicon-collapse-down').toggleClass('glyphicon-collapse-up');
             e.preventDefault();
         });
         $('.checkAll').change(function(e){
