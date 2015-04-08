@@ -10,6 +10,8 @@ Grids framework for Laravel
 [![HHVM Status](http://hhvm.h4cc.de/badge/nayjest/grids.svg)](http://hhvm.h4cc.de/package/nayjest/grids)
 [![Join the chat at https://gitter.im/Nayjest/Grids](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Nayjest/Grids?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
+Both Laravel 4 and Laravel 5 are supported.
+
 ## Features
 * Data providers (php array, Eloquent model, Doctrine DBAL query object)
 * Themes support
@@ -35,7 +37,6 @@ Grids framework for Laravel
 * Autodetecting columns based on Eloquent model (if not specified)
 * Builtin output formatters for different column types
 * Working with json data sources via ajax
-* Demo application with Laravel 5
 
 [Ask for more features](https://github.com/Nayjest/Grids/issues). You are welcome!
 
