@@ -8,7 +8,9 @@
         "laravel",
         "database",
         "eloquent",
-        "laravel 5"
+        "bootstrap",
+        "laravel-5",
+        "laravel5"
     ],
     "homepage": "https://github.com/Nayjest/Grids",
     "type": "library",
