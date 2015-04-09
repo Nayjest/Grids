@@ -18,6 +18,8 @@ abstract class DataProvider
     protected $current_page = 1;
 
     /**
+     * Constructor.
+     *
      * @param mixed $src data source
      */
     public function __construct($src)
@@ -82,6 +84,7 @@ abstract class DataProvider
      *
      * @param string $fieldName
      * @param $direction
+     * @return $this
      */
     abstract public function orderBy($fieldName, $direction);
 
@@ -127,4 +130,4 @@ abstract class DataProvider
      * @return int
      */
     abstract public function count();
-} 
+}

@@ -3,7 +3,9 @@ namespace Nayjest\Grids;
 
 class ArrayDataRow extends DataRow
 {
-
+    /**
+     * {@inheritdoc}
+     */
     protected function extractCellValue($fieldName)
     {
         if (strpos($fieldName, '.') !== false) {
@@ -21,4 +23,4 @@ class ArrayDataRow extends DataRow
             return $this->src[$fieldName];
         }
     }
-} 
+}

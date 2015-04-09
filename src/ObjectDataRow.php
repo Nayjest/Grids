@@ -6,7 +6,6 @@ use RuntimeException;
 
 class ObjectDataRow extends DataRow
 {
-
     /**
      * @param string $fieldName
      * @return mixed
@@ -36,4 +35,4 @@ class ObjectDataRow extends DataRow
 
         }
     }
-} 
+}

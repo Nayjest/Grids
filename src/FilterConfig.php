@@ -122,5 +122,4 @@ class FilterConfig
     {
         return $this->getName() . '-' . $this->getOperator();
     }
-
-} 
+}

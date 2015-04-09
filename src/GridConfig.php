@@ -155,6 +155,8 @@ class GridConfig implements RegistryInterface
     }
 
     /**
+     * Returns collection of grid columns.
+     *
      * @return FieldConfig[]|Collection
      */
     public function getColumns()
@@ -166,7 +168,9 @@ class GridConfig implements RegistryInterface
     }
 
     /**
-     * @param $name
+     * Returns column by name.
+     *
+     * @param string $name
      * @return null|FieldConfig
      */
     public function getColumn($name)
@@ -213,5 +217,4 @@ class GridConfig implements RegistryInterface
     {
         return $this->page_size;
     }
-
-} 
+}

@@ -8,8 +8,6 @@ use Illuminate\Support\Collection;
 
 class EloquentDataProvider extends DataProvider
 {
-
-
     protected $collection;
 
     protected $paginator;
@@ -17,11 +15,19 @@ class EloquentDataProvider extends DataProvider
     /** @var  $iterator \ArrayIterator */
     protected $iterator;
 
+    /**
+     * Constructor.
+     *
+     * @param Builder $src
+     */
     public function __construct(Builder $src)
     {
         parent::__construct($src);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function reset()
     {
         $this->getIterator()->rewind();
@@ -29,7 +35,7 @@ class EloquentDataProvider extends DataProvider
     }
 
     /**
-     * @return Collection
+     * {@inheritdoc}
      */
     public function getCollection()
     {
@@ -92,17 +98,26 @@ class EloquentDataProvider extends DataProvider
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function count()
     {
         return $this->getCollection()->count();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function orderBy($fieldName, $direction)
     {
         $this->src->orderBy($fieldName, $direction);
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function filter($fieldName, $operator, $value)
     {
         $this->src->where($fieldName, $operator, $value);

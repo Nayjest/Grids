@@ -67,4 +67,4 @@ class Filtering
     {
         return $this->getFilter($filterIdOrConfig)->render();
     }
-} 
+}

@@ -48,3 +48,4 @@ class SelectFilterConfig extends FilterConfig
         return $this;
     }
 }
+

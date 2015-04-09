@@ -8,8 +8,6 @@ use Illuminate\Support\Collection;
 
 class DbalDataProvider extends DataProvider
 {
-
-
     protected $collection;
 
     protected $paginator;
@@ -24,11 +22,19 @@ class DbalDataProvider extends DataProvider
      */
     protected $exec_using_laravel = false;
 
+    /**
+     * Constructor.
+     *
+     * @param QueryBuilder $src
+     */
     public function __construct(QueryBuilder $src)
     {
         parent::__construct($src);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function reset()
     {
         $this->getIterator()->rewind();
@@ -36,7 +42,7 @@ class DbalDataProvider extends DataProvider
     }
 
     /**
-     * @return Collection
+     * {@inheritdoc}
      */
     public function getCollection()
     {

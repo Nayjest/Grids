@@ -5,11 +5,17 @@ use View;
 
 class Filter
 {
-
     protected $config;
 
     protected $column;
 
+    /**
+     * Constructor.
+     *
+     * @param FilterConfig $config
+     * @param FieldConfig $column
+     * @param Grid $grid
+     */
     public function __construct(
         FilterConfig $config,
         FieldConfig $column,
@@ -21,6 +27,11 @@ class Filter
         $this->grid = $grid;
     }
 
+    /**
+     * Returns input name for the filter.
+     *
+     * @return string
+     */
     public function getInputName()
     {
         $key = $this->grid->getInputProcessor()->getKey();
@@ -28,11 +39,21 @@ class Filter
         return "{$key}[filters][{$name}]";
     }
 
+    /**
+     * Returns filter configuration.
+     *
+     * @return FilterConfig
+     */
     public function getConfig()
     {
         return $this->config;
     }
 
+    /**
+     * Returns filters value.
+     *
+     * @return mixed
+     */
     public function getValue()
     {
         $from_input = $this
@@ -46,6 +67,11 @@ class Filter
         }
     }
 
+    /**
+     * Renders filtering control.
+     *
+     * @return string
+     */
     public function render()
     {
         $data = $this->grid->getViewData();
@@ -55,9 +81,14 @@ class Filter
         return View::make(
             $this->getTemplate(),
             $data
-        );
+        )->render();
     }
 
+    /**
+     * Returns name of template for filtering control.
+     *
+     * @return string
+     */
     protected function getTemplate()
     {
         $filter_tpl = $this->config->getTemplate();
@@ -65,6 +96,9 @@ class Filter
         return str_replace('*.', "$grid_tpl.filters.", $filter_tpl);
     }
 
+    /**
+     * Applies filtering to data source.
+     */
     public function apply()
     {
         $value = $this->getValue();

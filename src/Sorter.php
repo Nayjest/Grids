@@ -51,4 +51,4 @@ class Sorter
                 ->orderBy($sort[0], $sort[1]);
         }
     }
-} 
+}

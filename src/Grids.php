@@ -4,6 +4,13 @@ namespace Nayjest\Grids;
 use Nayjest\Builder\Env;
 use Nayjest\Grids\Build\Setup;
 
+/**
+ * Class Grids
+ *
+ * Facade for constructing grids using configurations.
+ *
+ * @package Nayjest\Grids
+ */
 class Grids {
     protected static $builder;
 
@@ -32,5 +39,4 @@ class Grids {
         self::getBuilder();
         return Env::instance()->blueprints();
     }
-
 }

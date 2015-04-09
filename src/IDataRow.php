@@ -17,4 +17,4 @@ interface IDataRow
      * @return mixed
      */
     public function getCellValue($field);
-} 
+}

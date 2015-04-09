@@ -6,11 +6,15 @@ use Illuminate\Support\Collection;
 class FieldConfig
 {
     /**
+     * Field name.
+     *
      * @var string
      */
     protected $name;
 
     /**
+     * Text label that will be rendered in table header.
+     *
      * @var string
      */
     protected $label;
@@ -36,13 +40,19 @@ class FieldConfig
     protected $is_hidden = false;
 
     /**
+     * Constructor.
+     *
      * @param string|null $name column unique name for internal usage
      * @param string|null $label column label
      */
     public function __construct($name = null, $label = null)
     {
-        if ($name) $this->setName($name);
-        if ($label) $this->setLabel($label);
+        if ($name) {
+            $this->setName($name);
+        }
+        if ($label) {
+            $this->setLabel($label);
+        }
     }
 
     public function getOrder()
@@ -56,51 +66,95 @@ class FieldConfig
         return $this;
     }
 
+    /**
+     * Returns field name.
+     *
+     * @return string
+     */
     public function getName()
     {
         return $this->name;
     }
 
+    /**
+     * Sets field name.
+     *
+     * @param string $name
+     * @return $this
+     */
     public function setName($name)
     {
         $this->name = $name;
         return $this;
     }
 
+    /**
+     * Returns true if column is hidden.
+     *
+     * @return bool
+     */
     public function isHidden()
     {
         return $this->is_hidden;
     }
 
+    /**
+     * Makes column hidden.
+     *
+     * @return $this
+     */
     public function hide()
     {
         $this->is_hidden = true;
         return $this;
     }
 
+    /**
+     * Makes column visible.
+     *
+     * @return $this
+     */
     public function show()
     {
         $this->is_hidden = false;
         return $this;
     }
 
+    /**
+     * Returns text label that will be rendered in table header.
+     *
+     * @return string
+     */
     public function getLabel()
     {
         return $this->label ? : ucwords(str_replace(array('-', '_', '.'), ' ', $this->name));
     }
 
+    /**
+     * Sets text label that will be rendered in table header.
+     *
+     * @param string $label
+     * @return $this
+     */
     public function setLabel($label)
     {
         $this->label = $label;
         return $this;
     }
 
+    /**
+     * Returns true if column is sortable (sorting controls must be rendered).
+     *
+     * @return bool
+     */
     public function isSortable()
     {
         return $this->is_sortable;
     }
 
     /**
+     * Allows to enable or disable sorting controls for column.
+     *
      * @param boolean $isSortable
      * @return $this
      */
@@ -111,6 +165,8 @@ class FieldConfig
     }
 
     /**
+     * Returns current sorting order or null if table rows are not sorted using this column.
+     *
      * @return null|string null|Grid::SORT_ASC|Grid::SORT_DESC
      */
     public function getSorting()
@@ -119,27 +175,41 @@ class FieldConfig
     }
 
     /**
+     * Allows to specify sorting by this column for data rows.
+     *
      * @param null|string $sortOrder null|Grid::SORT_ASC|Grid::SORT_DESC
      * @return $this
      */
-    public function
-    setSorting($sortOrder)
+    public function setSorting($sortOrder)
     {
         $this->sorting = $sortOrder;
         return $this;
     }
 
+    /**
+     * Returns true if data rows are sorted ascending using this column.
+     *
+     * @return bool
+     */
     public function isSortedAsc()
     {
         return $this->sorting === Grid::SORT_ASC;
     }
 
+    /**
+     * Returns true if data rows are sorted descending using this column.
+     *
+     * @return bool
+     */
     public function isSortedDesc()
     {
         return $this->sorting === Grid::SORT_DESC;
     }
 
     /**
+     * Allows to set callback function that will render
+     * content of table cells for this column.
+     *
      * @param callable $callback
      * @return $this
      */
@@ -150,7 +220,10 @@ class FieldConfig
     }
 
     /**
-     * @return callable
+     * Returns function that will render
+     * content of table cells for this column if specified.
+     *
+     * @return callable|null
      */
     public function getCallback()
     {
@@ -158,6 +231,8 @@ class FieldConfig
     }
 
     /**
+     * Allows to specify filtering controls for column.
+     *
      * @param Collection|FilterConfig[] $filters
      * @return $this
      */
@@ -171,6 +246,12 @@ class FieldConfig
         return $this;
     }
 
+    /**
+     * Allows to add filtering control to column.
+     *
+     * @param FilterConfig $filter
+     * @return $this
+     */
     public function addFilter(FilterConfig $filter)
     {
         $this->getFilters()->push($filter);
@@ -179,6 +260,9 @@ class FieldConfig
     }
 
     /**
+     * Creates instance of filtering control configuration
+     * and binds it to the column.
+     *
      * @param string $class
      * @return FilterConfig
      */
@@ -189,12 +273,19 @@ class FieldConfig
         return $filter;
     }
 
+    /**
+     * Returns true if any filtering controls specified for the column.
+     *
+     * @return bool
+     */
     public function hasFilters()
     {
         return !$this->getFilters()->isEmpty();
     }
 
     /**
+     * Returns list of filtering controls specified for the column.
+     *
      * @return Collection|FilterConfig[]
      */
     public function getFilters()
@@ -218,5 +309,4 @@ class FieldConfig
             return $row->getCellValue($this);
         }
     }
-
 }
