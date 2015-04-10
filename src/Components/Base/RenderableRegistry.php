@@ -97,3 +97,4 @@ class RenderableRegistry implements
         );
     }
 }
+

@@ -89,4 +89,4 @@ class Filter extends RenderableComponent
             return;
         }
     }
-} 
+}

@@ -129,5 +129,4 @@ trait TRegistry
             $component->prepare();
         }
     }
-
 }

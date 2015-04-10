@@ -43,6 +43,8 @@ class TotalsRow extends ArrayDataRow implements RenderableComponentInterface
     protected $rows_processed = 0;
 
     /**
+     * Constructor.
+     *
      * @param array|string[] $fieldNames
      */
     public function __construct(array $fieldNames = [])
@@ -69,6 +71,13 @@ class TotalsRow extends ArrayDataRow implements RenderableComponentInterface
         );
     }
 
+    /**
+     * Creates listener for grid.dp.fetch_row event.
+     *
+     * The listener will perform totals calculation.
+     *
+     * @param DataProvider $provider
+     */
     protected function listen(DataProvider $provider)
     {
         Event::listen(
@@ -110,6 +119,12 @@ class TotalsRow extends ArrayDataRow implements RenderableComponentInterface
         );
     }
 
+    /**
+     * Performs component initialization.
+     *
+     * @param Grid $grid
+     * @return null
+     */
     public function initialize(Grid $grid)
     {
         $this->initializeComponent($grid);
@@ -117,9 +132,12 @@ class TotalsRow extends ArrayDataRow implements RenderableComponentInterface
         $this->listen(
             $this->grid->getConfig()->getDataProvider()
         );
+        return null;
     }
 
     /**
+     * Returns true if the component uses specified column for totals calculation.
+     *
      * @param FieldConfig $field
      * @return bool
      */
@@ -128,6 +146,10 @@ class TotalsRow extends ArrayDataRow implements RenderableComponentInterface
         return in_array($field, $this->fields->toArray()) || $field instanceof IdFieldConfig;
     }
 
+    /**
+     * @param FieldConfig|string $field
+     * @return mixed|null
+     */
     public function getCellValue($field)
     {
         if (!$field instanceof FieldConfig) {
@@ -141,6 +163,8 @@ class TotalsRow extends ArrayDataRow implements RenderableComponentInterface
     }
 
     /**
+     * Returns count of processed rows.
+     *
      * @return int
      */
     public function getRowsProcessed()
@@ -149,7 +173,10 @@ class TotalsRow extends ArrayDataRow implements RenderableComponentInterface
     }
 
     /**
-     * @param array $fieldNames
+     * Allows to specify list of fields
+     * which will be used for totals calculation.
+     *
+     * @param array|string[] $fieldNames
      * @return $this
      */
     public function setFieldNames(array $fieldNames)
@@ -159,7 +186,9 @@ class TotalsRow extends ArrayDataRow implements RenderableComponentInterface
     }
 
     /**
-     * @return array
+     * Returns list of fields which are used for totals calculation.
+     *
+     * @return array|string[]
      */
     public function getFieldNames()
     {
@@ -184,7 +213,6 @@ class TotalsRow extends ArrayDataRow implements RenderableComponentInterface
         return $this->field_operations;
     }
 
-
     /**
      * @param string $fieldName
      * @return string
@@ -193,6 +221,4 @@ class TotalsRow extends ArrayDataRow implements RenderableComponentInterface
     {
         return isset($this->field_operations[$fieldName])?$this->field_operations[$fieldName]:self::OPERTATION_SUM;
     }
-
-
 }

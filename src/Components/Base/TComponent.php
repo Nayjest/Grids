@@ -91,5 +91,4 @@ trait TComponent
             $this->prepareComponents();
         }
     }
-
 }

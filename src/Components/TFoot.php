@@ -13,6 +13,11 @@ class TFoot extends HtmlTag
 {
     const NAME = 'tfoot';
 
+    /**
+     * Returns default set of child components.
+     *
+     * @return \Nayjest\Grids\Components\Base\ComponentInterface[]
+     */
     protected function getDefaultComponents()
     {
         if (version_compare(Application::VERSION, '5', '<')) {

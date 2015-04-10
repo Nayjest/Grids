@@ -18,6 +18,11 @@ class TableCell extends HtmlTag
     /** @var  FieldConfig */
     protected $column;
 
+    /**
+     * Constructor.
+     *
+     * @param FieldConfig $column
+     */
     public function __construct(FieldConfig $column) {
 
         $this->setColumn($column);
@@ -56,4 +61,5 @@ class TableCell extends HtmlTag
         $this->column = $column;
         return $this;
     }
-} 
+}
+

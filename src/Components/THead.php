@@ -13,9 +13,9 @@ class THead extends HtmlTag
     const NAME = 'thead';
 
     /**
-     * Components in registry by default
+     * Returns default set of child components.
      *
-     * @return array
+     * @return \Nayjest\Grids\Components\Base\ComponentInterface[]
      */
     protected function getDefaultComponents()
     {

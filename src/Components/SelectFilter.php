@@ -17,5 +17,4 @@ class SelectFilter extends Filter
         $this->variants = $variants;
         return $this;
     }
-
-} 
+}

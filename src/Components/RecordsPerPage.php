@@ -74,4 +74,4 @@ class RecordsPerPage extends RenderableComponent
         if (!$value || !is_numeric($value)) return;
         $this->grid->getConfig()->getDataProvider()->setPageSize($value);
     }
-} 
+}

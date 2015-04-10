@@ -3,6 +3,13 @@ namespace Nayjest\Grids\Components;
 
 use Nayjest\Grids\FieldConfig;
 
+/**
+ * Class ColumnHeader
+ *
+ * The component for rendering column header
+ *
+ * @package Nayjest\Grids\Components
+ */
 class ColumnHeader extends TableCell
 {
     protected $tag_name = 'th';

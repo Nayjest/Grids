@@ -85,6 +85,11 @@ class DateRangePicker extends Filter
         return [$this->getStartValue(), $this->getEndValue()];
     }
 
+    /**
+     * Returns true if non-empty value specified for the filter.
+     *
+     * @return bool
+     */
     protected function hasValue()
     {
         list($start, $end) = $this->getValue();

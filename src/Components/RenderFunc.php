@@ -29,5 +29,4 @@ class RenderFunc extends RenderableComponent
     {
         return call_user_func($this->func, $this->grid, $this);
     }
-
 }

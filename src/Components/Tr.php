@@ -12,9 +12,12 @@ use Nayjest\Grids\IDataRow;
  */
 class Tr extends HtmlTag
 {
+    /** @var IDataRow  */
     protected $data_row;
 
     /**
+     * Returns data row.
+     *
      * @return IDataRow
      */
     public function getDataRow()
@@ -23,6 +26,8 @@ class Tr extends HtmlTag
     }
 
     /**
+     * Allows to set data row.
+     *
      * @param IDataRow $dataRow
      * @return $this
      */
@@ -33,7 +38,7 @@ class Tr extends HtmlTag
     }
 
     /**
-     * Renders row cells
+     * Renders row cells.
      *
      * @return string
      */
@@ -51,7 +56,7 @@ class Tr extends HtmlTag
     }
 
     /**
-     * Returns tag content
+     * Returns tag content.
      *
      * @return null|string
      */
@@ -59,5 +64,4 @@ class Tr extends HtmlTag
     {
         return $this->getDataRow() ? $this->renderCells() : parent::getContent();
     }
-
 }

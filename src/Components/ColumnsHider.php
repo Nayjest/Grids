@@ -103,5 +103,4 @@ class ColumnsHider extends RenderableComponent
             }
         }
     }
-
 }

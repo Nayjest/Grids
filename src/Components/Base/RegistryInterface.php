@@ -58,5 +58,4 @@ interface RegistryInterface
      * @return ComponentInterface
      */
     public function makeComponent($class);
-
 }

@@ -29,8 +29,8 @@ class Pager extends RenderableComponent
         }
     }
 
-    public function render() {
-
+    public function render()
+    {
         $result = (string)$this->links();
         return $result;
     }
@@ -39,6 +39,7 @@ class Pager extends RenderableComponent
     {
         $this->pagination_factory->setPageName("$this->input_key.page");
     }
+
     protected function setupPaginationForLinks()
     {
         $this->pagination_factory->setPageName("{$this->input_key}[page]");

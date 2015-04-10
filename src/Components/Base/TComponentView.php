@@ -32,5 +32,4 @@ trait TComponentView
         $this->render_section = $sectionName;
         return $this;
     }
-
 }

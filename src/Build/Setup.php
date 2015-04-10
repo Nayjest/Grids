@@ -158,6 +158,4 @@ class Setup
             new CallMethodWith('add_filter','addFilter'),
         ]);
     }
-
-
 }

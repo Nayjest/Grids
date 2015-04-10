@@ -49,3 +49,4 @@ class SortingControl extends RenderableComponent
         $this->column = $column;
     }
 }
+
