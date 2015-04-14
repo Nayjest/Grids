@@ -3,6 +3,7 @@ namespace Nayjest\Grids\Build;
 
 use Closure;
 use DB;
+use LogicException;
 use Nayjest\Builder\Blueprint;
 use Nayjest\Builder\BlueprintsCollection;
 use Nayjest\Builder\Builder;
@@ -23,7 +24,7 @@ use Nayjest\Grids\EloquentDataProvider;
  * Class Setup
  *
  * This class prepares environment for nayjest/builder package for usage with grids.
- * Integration with nayjest/builder package allows to construct grids from configuration in form of php array
+ * Integration with nayjest/builder package allows to construct grids from configuration in form of php array.
  *
  * @See \Grids::make
  *
@@ -32,7 +33,6 @@ use Nayjest\Grids\EloquentDataProvider;
  */
 class Setup
 {
-
     const COLUMN_CLASS = 'Nayjest\Grids\FieldConfig';
     const COMPONENT_CLASS = 'Nayjest\Grids\Components\Base\ComponentInterface';
     const GRID_CLASS = 'Nayjest\Grids\GridConfig';
@@ -43,6 +43,11 @@ class Setup
      */
     protected $blueprints;
 
+    /**
+     * Creates blueprints required to construct grids from configuration.
+     *
+     * @return Builder
+     */
     public function run()
     {
         $this->blueprints = Env::instance()->blueprints();
@@ -54,9 +59,26 @@ class Setup
         return new Builder($config_blueprint);
     }
 
+    /**
+     * Creates main blueprint of grid configuration.
+     *
+     * @return Blueprint
+     */
     protected function makeConfigBlueprint()
     {
         $component_blueprint = $this->blueprints->getFor(self::COMPONENT_CLASS);
+        if (!$component_blueprint) {
+            throw new LogicException(
+                'Blueprint for grid components must be created before main blueprint.'
+            );
+        }
+
+        $column_blueprint = $this->blueprints->getFor(self::COLUMN_CLASS);
+        if (!$column_blueprint) {
+            throw new LogicException(
+                'Blueprint for grid columns must be created before main blueprint.'
+            );
+        }
 
         $b = new Blueprint(self::GRID_CLASS, [
             new BuildDataProvider(),
@@ -82,12 +104,17 @@ class Setup
             new Build('row_component', $component_blueprint),
             new BuildChildren(
                 'columns',
-                $this->blueprints->getFor(self::COLUMN_CLASS)
+                $column_blueprint
             ),
         ]);
         return $b;
     }
 
+    /**
+     * Creates blueprint for grid components.
+     *
+     * @return Blueprint
+     */
     protected function makeComponentBlueprint()
     {
         $blueprint = new Blueprint(self::COMPONENT_CLASS, [
@@ -127,6 +154,11 @@ class Setup
         return $blueprint;
     }
 
+    /**
+     * Creates blueprint for filters.
+     *
+     * @return Blueprint
+     */
     protected function makeFilterBlueprint()
     {
         return new Blueprint(self::FILTER_CLASS, [
@@ -145,9 +177,19 @@ class Setup
         ]);
     }
 
+    /**
+     * Creates blueprint for grid columns.
+     *
+     * @return Blueprint
+     */
     protected function makeFieldBlueprint()
     {
         $filter_blueprint = $this->blueprints->getFor(self::FILTER_CLASS);
+        if (!$filter_blueprint) {
+            throw new LogicException(
+                'Blueprint for grid filters must be created before grid columns blueprint.'
+            );
+        }
         return new Blueprint(self::COLUMN_CLASS, [
             new SimpleValueAsField('name'),
             new Rename(0,'name'),
