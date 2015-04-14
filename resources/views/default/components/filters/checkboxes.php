@@ -1,7 +1,7 @@
 <?php
 /** @var Nayjest\Grids\Components\SelectFilter $component */
 $value = $component->getValue();
-is_array($value) or $value = [];
+if (!is_array($value)) $value = [];
 $id = uniqid();
 ?>
 <div class="btn-group">
