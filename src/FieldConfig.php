@@ -298,10 +298,10 @@ class FieldConfig
 
     /**
      * @todo move to Field instance
-     * @param IDataRow $row
+     * @param DataRowInterface $row
      * @return mixed
      */
-    public function getValue(IDataRow $row)
+    public function getValue(DataRowInterface $row)
     {
         if ($function = $this->getCallback()) {
             return call_user_func($function, $row->getCellValue($this), $row);

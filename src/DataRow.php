@@ -4,11 +4,11 @@ namespace Nayjest\Grids;
 /**
  * Class DataRow
  *
- * Abstract class for IDataRow implementations
+ * Abstract class for DataRowInterface implementations
  *
  * @package Nayjest\Grids
  */
-abstract class DataRow implements IDataRow
+abstract class DataRow implements DataRowInterface
 {
 
     /** @var  mixed row data */

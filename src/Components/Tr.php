@@ -1,7 +1,7 @@
 <?php
 namespace Nayjest\Grids\Components;
 
-use Nayjest\Grids\IDataRow;
+use Nayjest\Grids\DataRowInterface;
 
 /**
  * Class Tr
@@ -12,13 +12,13 @@ use Nayjest\Grids\IDataRow;
  */
 class Tr extends HtmlTag
 {
-    /** @var IDataRow  */
+    /** @var DataRowInterface  */
     protected $data_row;
 
     /**
      * Returns data row.
      *
-     * @return IDataRow
+     * @return DataRowInterface
      */
     public function getDataRow()
     {
@@ -28,10 +28,10 @@ class Tr extends HtmlTag
     /**
      * Allows to set data row.
      *
-     * @param IDataRow $dataRow
+     * @param DataRowInterface $dataRow
      * @return $this
      */
-    public function setDataRow(IDataRow $dataRow)
+    public function setDataRow(DataRowInterface $dataRow)
     {
         $this->data_row = $dataRow;
         return $this;
