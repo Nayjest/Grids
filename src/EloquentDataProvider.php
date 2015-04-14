@@ -123,5 +123,4 @@ class EloquentDataProvider extends DataProvider
         $this->src->where($fieldName, $operator, $value);
         return $this;
     }
-
-} 
+}

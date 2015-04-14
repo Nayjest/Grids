@@ -70,4 +70,4 @@ abstract class DataRow implements IDataRow
         $fieldName = $field instanceof FieldConfig ? $field->getName() : $field;
         return $this->extractCellValue($fieldName);
     }
-} 
+}

@@ -52,3 +52,4 @@ $id = uniqid();
 </script>
 <?= Form::hidden($component->getStartInputName(), $component->getStartValue()) ?>
 <?= Form::hidden($component->getEndInputName(), $component->getEndValue()) ?>
+

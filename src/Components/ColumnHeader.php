@@ -26,4 +26,4 @@ class ColumnHeader extends TableCell
         }
         return parent::setColumn($column);
     }
-} 
+}
