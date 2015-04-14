@@ -47,10 +47,10 @@ class FieldConfig
      */
     public function __construct($name = null, $label = null)
     {
-        if ($name) {
+        if ($name !== null) {
             $this->setName($name);
         }
-        if ($label) {
+        if ($label !== null) {
             $this->setLabel($label);
         }
     }
