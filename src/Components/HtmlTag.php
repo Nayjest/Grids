@@ -28,6 +28,8 @@ class HtmlTag extends RenderableRegistry
     }
 
     /**
+     * Allows to specify HTML tag.
+     *
      * @param string $name
      * @return $this
      */
@@ -38,6 +40,8 @@ class HtmlTag extends RenderableRegistry
     }
 
     /**
+     * Returns HTML tag.
+     *
      * @return string
      */
     public function getTagName()
@@ -45,6 +49,11 @@ class HtmlTag extends RenderableRegistry
         return $this->tag_name ?: $this->suggestTagName();
     }
 
+    /**
+     * Suggests tag name by class name.
+     *
+     * @return string
+     */
     private function suggestTagName()
     {
         $class_name = get_class($this);
@@ -125,9 +134,7 @@ class HtmlTag extends RenderableRegistry
     }
 
     /**
-     * Renders component.
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function render()
     {

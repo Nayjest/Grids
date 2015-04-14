@@ -39,13 +39,21 @@ class TableCell extends HtmlTag
         return $this->attributes;
     }
 
+    /**
+     * Returns component name.
+     * By default it's column_{$column_name}
+     *
+     * @return string|null
+     */
     public function getName()
     {
         return $this->name ? : 'column_' . $this->column->getName();
     }
 
     /**
-     * @return mixed
+     * Returns associated column.
+     *
+     * @return FieldConfig $column
      */
     public function getColumn()
     {

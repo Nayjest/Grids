@@ -25,6 +25,9 @@ class RenderFunc extends RenderableComponent
         $this->func = $func;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function render()
     {
         return call_user_func($this->func, $this->grid, $this);

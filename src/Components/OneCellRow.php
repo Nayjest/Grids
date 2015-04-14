@@ -7,6 +7,9 @@ class OneCellRow extends RenderableRegistry
 {
     protected $name = 'one_cell_row';
 
+    /**
+     * {@inheritdoc}
+     */
     public function render()
     {
         $colspan = $this->grid->getConfig()->getColumns()->count();

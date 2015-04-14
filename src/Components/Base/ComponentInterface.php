@@ -16,7 +16,7 @@ use Nayjest\Grids\Grid;
 interface ComponentInterface extends TaggableInterface
 {
     /**
-     * Attaches component to registry
+     * Attaches component to registry.
      *
      * @param RegistryInterface $parent
      * @return null
@@ -24,14 +24,14 @@ interface ComponentInterface extends TaggableInterface
     public function attachTo(RegistryInterface $parent);
 
     /**
-     * Returns parent object
+     * Returns parent object.
      *
      * @return RegistryInterface
      */
     public function getParent();
 
     /**
-     * Initializes component with grid
+     * Initializes component with grid.
      *
      * @param Grid $grid
      * @return null
@@ -39,21 +39,21 @@ interface ComponentInterface extends TaggableInterface
     public function initialize(Grid $grid);
 
     /**
-     * Performs all required operations before rendering component
+     * Performs all required operations before rendering component.
      *
      * @return mixed
      */
     public function prepare();
 
     /**
-     * Returns component name
+     * Returns component name.
      *
      * @return string|null
      */
     public function getName();
 
     /**
-     * Sets component name
+     * Sets component name.
      *
      * @param string $name
      * @return $this

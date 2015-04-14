@@ -20,6 +20,8 @@ trait TRegistry
     }
 
     /**
+     * Returns child components.
+     *
      * @return Collection|ComponentInterface[]
      */
     final public function getComponents()
@@ -31,6 +33,8 @@ trait TRegistry
     }
 
     /**
+     * Finds child component by name.
+     *
      * @param string $name
      * @return null|ComponentInterface
      */
@@ -44,6 +48,8 @@ trait TRegistry
     }
 
     /**
+     * Finds child component by name recursively.
+     *
      * @param string $name
      * @return null|ComponentInterface
      */
@@ -65,7 +71,6 @@ trait TRegistry
 
     /**
      * @param string|string[] $tagNames
-     *
      * @return Collection|ComponentInterface[]
      */
     public function getTagged($tagNames)
@@ -77,6 +82,12 @@ trait TRegistry
         );
     }
 
+    /**
+     * Adds component to the collection of child components.
+     *
+     * @param ComponentInterface $component
+     * @return $this
+     */
     public function addComponent(ComponentInterface $component)
     {
         $this->getComponents()->push($component);
@@ -85,6 +96,8 @@ trait TRegistry
     }
 
     /**
+     * Allows to specify collection of child components.
+     *
      * @param \Illuminate\Support\Collection|ComponentInterface[]|array $components
      * @return $this
      */
@@ -98,6 +111,8 @@ trait TRegistry
     }
 
     /**
+     * Adds set of components to the collection of child components.
+     *
      * @param  Collection|\Illuminate\Support\Contracts\ArrayableInterface|array  $components
      * @return $this
      */
@@ -109,6 +124,12 @@ trait TRegistry
         return $this;
     }
 
+    /**
+     * Creates component, adds it to child components collection and returns it.
+     *
+     * @param string $class
+     * @return ComponentInterface
+     */
     public function makeComponent($class)
     {
         $component = new $class;
@@ -116,6 +137,11 @@ trait TRegistry
         return $component;
     }
 
+    /**
+     * Initializes child components.
+     *
+     * @param Grid $grid
+     */
     public function initializeComponents(Grid $grid)
     {
         foreach ($this->getComponents() as $component) {
@@ -123,6 +149,9 @@ trait TRegistry
         }
     }
 
+    /**
+     * Prepares child components for rendering.
+     */
     public function prepareComponents()
     {
         foreach ($this->getComponents() as $component) {

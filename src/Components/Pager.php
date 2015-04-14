@@ -29,6 +29,9 @@ class Pager extends RenderableComponent
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function render()
     {
         $result = (string)$this->links();

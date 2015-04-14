@@ -24,7 +24,7 @@ trait TComponent
     protected $name;
 
     /**
-     * Attaches component to registry
+     * Attaches component to registry.
      *
      * @param RegistryInterface $parent
      * @return null
@@ -35,7 +35,7 @@ trait TComponent
     }
 
     /**
-     * Returns parent object
+     * Returns parent object.
      *
      * @return RegistryInterface
      */
@@ -45,7 +45,7 @@ trait TComponent
     }
 
     /**
-     * Initializes component with grid
+     * Initializes component with grid.
      *
      * @param Grid $grid
      * @return null
@@ -59,7 +59,7 @@ trait TComponent
     }
 
     /**
-     * Returns component name
+     * Returns component name.
      *
      * @return string|null
      */
@@ -69,7 +69,7 @@ trait TComponent
     }
 
     /**
-     * Sets component name
+     * Sets component name.
      *
      * @param string $name
      * @return $this
@@ -81,7 +81,7 @@ trait TComponent
     }
 
     /**
-     * Performs all required operations before rendering component
+     * Performs all required operations before rendering component.
      *
      * @return mixed
      */

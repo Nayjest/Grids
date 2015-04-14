@@ -4,6 +4,7 @@ namespace Nayjest\Grids\Components;
 
 use Nayjest\Grids\Components\Base\RenderableComponent;
 use Nayjest\Grids\Components\Base\RenderableRegistry;
+use Nayjest\Grids\FieldConfig;
 
 /**
  * Class SortingControl
@@ -21,6 +22,9 @@ class SortingControl extends RenderableComponent
 
     protected $render_section = RenderableRegistry::SECTION_END;
 
+    /**
+     * {@inheritdoc}
+     */
     protected function getViewData()
     {
         return parent::getViewData() + [
@@ -28,13 +32,20 @@ class SortingControl extends RenderableComponent
         ];
     }
 
-    public function __construct($column)
+    /**
+     * Constructor.
+     *
+     * @param FieldConfig $column
+     */
+    public function __construct(FieldConfig $column)
     {
         $this->column = $column;
     }
 
     /**
-     * @return mixed
+     * Returns associated column.
+     *
+     * @return FieldConfig
      */
     public function getColumn()
     {
@@ -42,11 +53,12 @@ class SortingControl extends RenderableComponent
     }
 
     /**
-     * @param mixed $column
+     * Sets associated column.
+     *
+     * @param FieldConfig $column
      */
-    public function setColumn($column)
+    public function setColumn(FieldConfig $column)
     {
         $this->column = $column;
     }
 }
-
