@@ -17,6 +17,11 @@ class GridInputProcessor
      */
     protected $input;
 
+    /**
+     * Constructor.
+     *
+     * @param Grid $grid
+     */
     public function __construct(Grid $grid)
     {
         $this->grid = $grid;
@@ -28,16 +33,31 @@ class GridInputProcessor
         $this->input = Input::get($this->getKey(), []);
     }
 
+    /**
+     * Returns input related to grid.
+     *
+     * @return array
+     */
     public function getInput()
     {
         return $this->input;
     }
 
+    /**
+     * Returns input key for grid parameters.
+     *
+     * @return string
+     */
     public function getKey()
     {
         return $this->grid->getConfig()->getName();
     }
 
+    /**
+     * Returns sorting parameters passed to input.
+     *
+     * @return mixed
+     */
     public function getSorting()
     {
         return $_ =& $this->input['sort'];
@@ -56,6 +76,13 @@ class GridInputProcessor
         return $html;
     }
 
+    /**
+     * Returns UID for current grid state.
+     *
+     * Currently used as key for caching.
+     *
+     * @return string
+     */
     public function getUniqueRequestId()
     {
         $cookies_str = '';
@@ -76,6 +103,12 @@ class GridInputProcessor
         return $this;
     }
 
+    /**
+     * Returns input value for filter.
+     *
+     * @param string $filterName
+     * @return mixed
+     */
     public function getFilterValue($filterName)
     {
         if (isset($this->input['filters'][$filterName])) {
@@ -85,7 +118,13 @@ class GridInputProcessor
         }
     }
 
-
+    /**
+     * Returns value of input parameter related to grid.
+     *
+     * @param string $key
+     * @param $default
+     * @return mixed
+     */
     public function getValue($key, $default = null)
     {
         if (isset($this->input[$key])) {
@@ -101,6 +140,12 @@ class GridInputProcessor
         return $this;
     }
 
+    /**
+     * Returns current query string extended by specified GET parameters.
+     *
+     * @param array $new_params
+     * @return string
+     */
     public function getQueryString(array $new_params = [])
     {
         $params = $_GET;
@@ -111,13 +156,19 @@ class GridInputProcessor
             if (empty($params[$this->getKey()])) {
                 $params[$this->getKey()] = [];
             }
-            foreach($new_params as $key => $value) {
+            foreach ($new_params as $key => $value) {
                 $params[$this->getKey()][$key] = $value;
             }
         }
         return http_build_query($params);
     }
 
+    /**
+     * Returns current URL extended by specified GET parameters.
+     *
+     * @param array $new_params
+     * @return string
+     */
     public function getUrl(array $new_params = [])
     {
         if (null !== $query_string = $this->getQueryString($new_params)) {
@@ -125,8 +176,8 @@ class GridInputProcessor
         }
         $request = Request::instance();
         return $request->getSchemeAndHttpHost()
-            . $request->getBaseUrl()
-            . $request->getPathInfo()
-            . $query_string;
+        . $request->getBaseUrl()
+        . $request->getPathInfo()
+        . $query_string;
     }
 }

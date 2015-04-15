@@ -12,9 +12,12 @@ use Nayjest\Grids\Build\Setup;
  * @package Nayjest\Grids
  */
 class Grids {
+
     protected static $builder;
 
     /**
+     * Returns builder instance.
+     *
      * @return \Nayjest\Builder\Builder
      */
     protected static function getBuilder()
@@ -26,6 +29,12 @@ class Grids {
         return self::$builder;
     }
 
+    /**
+     * Creates grid using configuration.
+     *
+     * @param array $config
+     * @return Grid
+     */
     public static function make(array $config)
     {
         $builder = self::getBuilder();
@@ -34,6 +43,12 @@ class Grids {
         return $grid;
     }
 
+    /**
+     * Returns collection containing
+     * blueprints required to construct grids from configuration.
+     *
+     * @return \Nayjest\Builder\BlueprintsCollection
+     */
     public static function blueprints()
     {
         self::getBuilder();

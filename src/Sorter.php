@@ -8,11 +8,23 @@ class Sorter
      */
     protected $grid;
 
+    /**
+     * Constructor.
+     * 
+     * @param Grid $grid
+     */
     public function __construct(Grid $grid)
     {
         $this->grid = $grid;
     }
 
+    /**
+     * Returns URL for sorting control.
+     *
+     * @param FieldConfig $column
+     * @param $direction
+     * @return string
+     */
     public function link(FieldConfig $column, $direction)
     {
         return (new GridInputProcessor($this->grid))
@@ -20,6 +32,9 @@ class Sorter
             ->getUrl();
     }
 
+    /**
+     * Applies sorting to data provider.
+     */
     public function apply()
     {
         $input = $this->grid->getInputProcessor()->getInput();

@@ -10,7 +10,8 @@ class SelectFilterConfig extends FilterConfig
     protected $is_submitted_on_change = false;
 
     /**
-     * Returns option items of html select tag
+     * Returns option items of html select tag.
+     *
      * @return array
      */
     public function getOptions()
@@ -19,7 +20,7 @@ class SelectFilterConfig extends FilterConfig
     }
 
     /**
-     * Sets option items for html select tag
+     * Sets option items for html select tag.
      *
      * @param array $options
      * @return $this
@@ -31,6 +32,9 @@ class SelectFilterConfig extends FilterConfig
     }
 
     /**
+     * Returns true if form must be submitted immediately
+     * when filter value selected.
+     *
      * @return bool
      */
     public function isSubmittedOnChange()
@@ -39,6 +43,8 @@ class SelectFilterConfig extends FilterConfig
     }
 
     /**
+     * Allows to submit form immediately when filter value selected.
+     *
      * @param bool $isSubmittedOnChange
      * @return $this
      */
