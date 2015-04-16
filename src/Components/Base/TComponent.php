@@ -6,7 +6,8 @@ use Nayjest\Grids\Grid;
 /**
  * Class TComponent
  *
- * ComponentInterface interface implementation
+ * ComponentInterface interface implementation.
+ *
  * @see Nayjest\Grids\Components\Base\ComponentInterface
  *
  * @package Nayjest\Grids\Components\Base

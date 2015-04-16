@@ -107,6 +107,8 @@ class Grid
     }
 
     /**
+     * Returns true if columns must be sorted.
+     *
      * @return bool
      */
     protected function needToSortColumns()
@@ -119,6 +121,9 @@ class Grid
         return false;
     }
 
+    /**
+     * Sorts columns according to its order.
+     */
     protected function sortColumns()
     {
         $this->config->getColumns()->sort(function (FieldConfig $a, FieldConfig $b) {
@@ -127,6 +132,8 @@ class Grid
     }
 
     /**
+     * Returns data sorting manager.
+     *
      * @return Sorter
      */
     public function getSorter()
@@ -138,6 +145,8 @@ class Grid
     }
 
     /**
+     * Returns instance of GridInputProcessor.
+     *
      * @return GridInputProcessor
      */
     public function getInputProcessor()
@@ -167,7 +176,9 @@ class Grid
     }
 
     /**
-     * @return View
+     * Renders grid.
+     *
+     * @return View|string
      */
     public function render()
     {
@@ -198,6 +209,8 @@ class Grid
     }
 
     /**
+     * Returns footer component.
+     *
      * @return TFoot|null
      */
     public function footer()
@@ -206,6 +219,8 @@ class Grid
     }
 
     /**
+     * Returns header component.
+     *
      * @return THead|null
      */
     public function header()
@@ -213,6 +228,11 @@ class Grid
         return $this->getConfig()->getComponentByName('thead');
     }
 
+    /**
+     * Returns data filtering manager.
+     *
+     * @return Filtering
+     */
     public function getFiltering()
     {
         if ($this->filtering === null) {
@@ -221,6 +241,12 @@ class Grid
         return $this->filtering;
     }
 
+    /**
+     * Renders filtering control.
+     *
+     * @param FilterConfig $filter
+     * @return string
+     */
     public function renderFilter(FilterConfig $filter)
     {
         $data = $this->getViewData();
@@ -232,6 +258,11 @@ class Grid
         )->render();
     }
 
+    /**
+     * Renders grid object when it is treated like a string.
+     *
+     * @return string
+     */
     public function __toString()
     {
         return (string)$this->render();

@@ -5,6 +5,13 @@ use Input;
 use Request;
 use Form;
 
+/**
+ * Class GridInputProcessor
+ *
+ * This class manages input processing for grid.
+ *
+ * @package Nayjest\Grids
+ */
 class GridInputProcessor
 {
     /**
@@ -95,6 +102,11 @@ class GridInputProcessor
         return md5($cookies_str . $this->getKey() . json_encode($this->getInput()));
     }
 
+    /**
+     * @param FieldConfig $column
+     * @param $direction
+     * @return $this
+     */
     public function setSorting(FieldConfig $column, $direction)
     {
         $this->input['sort'] = [
@@ -134,6 +146,11 @@ class GridInputProcessor
         }
     }
 
+    /**
+     * @param string $key
+     * @param mixed $value
+     * @return $this
+     */
     public function setValue($key, $value)
     {
         $this->input[$key] = $value;

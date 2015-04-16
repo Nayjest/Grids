@@ -8,7 +8,7 @@ use Nayjest\Grids\DataProvider;
 /**
  * Class DateRangePicker
  *
- * Date Range Picker for Bootstrap
+ * Date Range Picker for Bootstrap.
  * https://github.com/dangrossman/bootstrap-daterangepicker
  *
  * This component does not includes javascript & styles required to work with bootstrap-daterangepicker.

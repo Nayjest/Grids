@@ -28,7 +28,7 @@ abstract class DataProvider
     }
 
     /**
-     * Sets the internal pointer first element
+     * Sets the internal pointer first element.
      *
      * @return $this
      */
@@ -39,7 +39,7 @@ abstract class DataProvider
     }
 
     /**
-     * Sets page size
+     * Sets page size.
      *
      * @param int $pageSize
      * @return $this
@@ -51,7 +51,7 @@ abstract class DataProvider
     }
 
     /**
-     * Sets current page number. Page numeration starts from 1
+     * Sets current page number. Page numeration starts from 1.
      *
      * @param int $currentPage
      */
@@ -61,7 +61,7 @@ abstract class DataProvider
     }
 
     /**
-     * Returns current page number (starting from 1 by default)
+     * Returns current page number (starting from 1 by default).
      *
      * @return int
      */
@@ -71,7 +71,7 @@ abstract class DataProvider
     }
 
     /**
-     * @return int row id starting from 1, considering pagination
+     * @return int row id starting from 1, considering pagination.
      */
     protected function getRowId()
     {
@@ -80,7 +80,7 @@ abstract class DataProvider
     }
 
     /**
-     * Sets data sorting
+     * Sets data sorting.
      *
      * @param string $fieldName
      * @param $direction
@@ -89,7 +89,7 @@ abstract class DataProvider
     abstract public function orderBy($fieldName, $direction);
 
     /**
-     * Performs filtering
+     * Performs filtering.
      *
      * @param string $fieldName
      * @param string $operator
@@ -99,7 +99,7 @@ abstract class DataProvider
     abstract public function filter($fieldName, $operator, $value);
 
     /**
-     * Returns collection of raw data items
+     * Returns collection of raw data items.
      *
      * @return \Illuminate\Support\Collection
      */
@@ -124,7 +124,8 @@ abstract class DataProvider
     abstract public function getRow();
 
     /**
-     * Count of records on current page
+     * Returns count of records on current page.
+     *
      * @todo rename to something like recordsOnPage
      * @deprecated
      * @return int

@@ -3,6 +3,13 @@ namespace Nayjest\Grids;
 
 use Illuminate\Support\Collection;
 
+/**
+ * Class FieldConfig
+ *
+ * This class describes grid column.
+ *
+ * @package Nayjest\Grids
+ */
 class FieldConfig
 {
     /**
@@ -55,11 +62,26 @@ class FieldConfig
         }
     }
 
+    /**
+     * Returns column order.
+     *
+     * This property used to to identify column position in grid.
+     *
+     * @return int
+     */
     public function getOrder()
     {
         return $this->order;
     }
 
+    /**
+     * Sets column order.
+     *
+     * This property used to to identify column position in grid.
+     *
+     * @param $order
+     * @return $this
+     */
     public function setOrder($order)
     {
         $this->order = $order;
@@ -165,7 +187,8 @@ class FieldConfig
     }
 
     /**
-     * Returns current sorting order or null if table rows are not sorted using this column.
+     * Returns current sorting order
+     * or null if table rows are not sorted using this column.
      *
      * @return null|string null|Grid::SORT_ASC|Grid::SORT_DESC
      */

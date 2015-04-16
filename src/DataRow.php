@@ -18,7 +18,7 @@ abstract class DataRow implements DataRowInterface
     protected $id;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param $src
      * @param int $id
@@ -60,7 +60,7 @@ abstract class DataRow implements DataRowInterface
     abstract protected function extractCellValue($fieldName);
 
     /**
-     * Returns value of specified column from row
+     * Returns value of specified column from row.
      *
      * @param FieldConfig|string $field
      * @return mixed

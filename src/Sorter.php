@@ -1,6 +1,13 @@
 <?php
 namespace Nayjest\Grids;
 
+/**
+ * Class Sorter
+ *
+ * Data sorting manager.
+ *
+ * @package Nayjest\Grids
+ */
 class Sorter
 {
     /**

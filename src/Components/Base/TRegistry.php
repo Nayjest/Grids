@@ -9,10 +9,11 @@ trait TRegistry
     protected $components;
 
     /**
-     * Components in registry by default
+     * Returns default child components.
      *
-     * Override this method
-     * @return array
+     * Override this method.
+     *
+     * @return \Illuminate\Support\Collection|ComponentInterface[]|array
      */
     protected function getDefaultComponents()
     {
@@ -125,7 +126,8 @@ trait TRegistry
     }
 
     /**
-     * Creates component, adds it to child components collection and returns it.
+     * Creates component,
+     * adds it to child components collection and returns it.
      *
      * @param string $class
      * @return ComponentInterface

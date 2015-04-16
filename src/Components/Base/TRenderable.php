@@ -7,6 +7,7 @@ use View;
  * Trait TRenderable
  *
  * Default implementation of rendering facilities for grid component, etc.
+ *
  * @todo Avoid usage of Laravel Facade aliases (?)
  * @todo Absence of getViewData isn't convenient (?)
  *

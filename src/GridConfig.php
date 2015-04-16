@@ -66,9 +66,10 @@ class GridConfig implements RegistryInterface
     }
 
     /**
-     * Components in registry by default
+     * Returns default child components.
      *
-     * @return array
+     *
+     * @return \Illuminate\Support\Collection|Components\Base\ComponentInterface[]|array
      */
     protected function getDefaultComponents()
     {
@@ -183,17 +184,35 @@ class GridConfig implements RegistryInterface
 
     }
 
+    /**
+     * Returns cache expiration time in minutes.
+     *
+     * @return int
+     */
     public function getCachingTime()
     {
         return $this->caching_time;
     }
 
+    /**
+     * Sets cache expiration time in minutes.
+     *
+     * @param int $minutes
+     *
+     * @return $this
+     */
     public function setCachingTime($minutes)
     {
         $this->caching_time = $minutes;
         return $this;
     }
 
+    /**
+     * Adds column to grid.
+     *
+     * @param FieldConfig $column
+     * @return $this
+     */
     public function addColumn(FieldConfig $column)
     {
         if ($this->columns === null) {
@@ -204,6 +223,8 @@ class GridConfig implements RegistryInterface
     }
 
     /**
+     * Sets maximal quantity of rows per page.
+     *
      * @param int $pageSize
      * @return $this
      */
@@ -213,6 +234,11 @@ class GridConfig implements RegistryInterface
         return $this;
     }
 
+    /**
+     * Returns maximal quantity of rows per page.
+     *
+     * @return int
+     */
     public function getPageSize()
     {
         return $this->page_size;
