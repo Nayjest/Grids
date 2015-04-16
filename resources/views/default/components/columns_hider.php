@@ -1,5 +1,5 @@
 <?php /** @var Nayjest\Grids\Components\ColumnsHider $component */ ?>
-<span data-role="columns-hider">
+<span data-role="columns-hider" id="<?= $component->getId('container') ?>" >
     <button
         id="<?= $component->getId('btn') ?>"
         class="btn btn-sm btn-default"
@@ -11,8 +11,11 @@
         Columns
         <span class="caret"></span>
     </button>
-    <div id="<?= $component->getId('menu-content') ?>" style="display: none">
-        <ul>
+    <div
+        id="<?= $component->getId('menu-content') ?>"
+        style="display: none"
+        >
+        <ul style="list-style-type: none; padding:0; margin:0">
             <li>
                 <label>
                     <input type="checkbox" name="all">
@@ -74,16 +77,27 @@
 
         // popover
         var menu = $('#<?= $component->getId('menu-content') ?>').html();
-        $('#<?= $component->getId('btn') ?>').popover({
+        var $btn = $('#<?= $component->getId('btn') ?>');
+        $btn.popover({
             content: menu,
             html: true
+        });
+
+        // hides the popover when clicking outside
+        $('body').on('click', function (e) {
+            if (
+                !$btn.is(e.target)
+                && $btn.has(e.target).length === 0
+                && $('#<?= $component->getId('container') ?>>.popover').has(e.target).length === 0
+            ) {
+                $btn.popover('hide');
+            }
         });
 
         // column hider
         var ColumnHider = function (switcherSelector, tableSelector) {
             this.switcherSelector = switcherSelector;
             this.tableSelector = tableSelector;
-            //this.cookiePath = "{{ parse_url(URL::current())['path'] }}";
         };
         ColumnHider.prototype.defaultValues = <?= json_encode($component->getColumnsVisibility()) ?>;
         ColumnHider.prototype.getValues = function () {
