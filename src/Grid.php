@@ -234,23 +234,6 @@ class Grid
     }
 
     /**
-     * Renders filtering control.
-     *
-     * @param FilterConfig $filter
-     * @return string
-     */
-    public function renderFilter(FilterConfig $filter)
-    {
-        $data = $this->getViewData();
-        $data['column'] = $filter->getAttachedColumn();
-        $data['filter'] = $filter;
-        return View::make(
-            $this->getFilterTemplate($filter),
-            $data
-        )->render();
-    }
-
-    /**
      * Renders grid object when it is treated like a string.
      *
      * @return string
