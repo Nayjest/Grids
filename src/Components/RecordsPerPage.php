@@ -26,6 +26,8 @@ class RecordsPerPage extends RenderableComponent
     protected $template = '*.components.records_per_page';
 
     /**
+     * Returns variants.
+     *
      * @return array|int[]
      */
     public function getVariants()
@@ -34,6 +36,8 @@ class RecordsPerPage extends RenderableComponent
     }
 
     /**
+     * Sets variants.
+     *
      * @param array|int[] $variants
      * @return $this
      */
@@ -44,6 +48,8 @@ class RecordsPerPage extends RenderableComponent
     }
 
     /**
+     * Returns name of related input.
+     *
      * @return string
      */
     public function getInputName()
@@ -53,6 +59,9 @@ class RecordsPerPage extends RenderableComponent
     }
 
     /**
+     * Returns current value from input.
+     * Default grids pre-configured page size will be returned if there is no input.
+     *
      * @return int|null
      */
     public function getValue()
@@ -68,6 +77,9 @@ class RecordsPerPage extends RenderableComponent
         }
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function prepare()
     {
         $value = $this->getValue();

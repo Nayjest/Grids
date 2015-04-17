@@ -11,7 +11,12 @@ use Nayjest\Grids\DataRow;
 use Nayjest\Grids\Grid;
 
 /**
+ * Class CsvExport
+ *
+ * The component provides control for exporting data to CSV.
+ *
  * @author: Vitaliy Ofat <i@vitaliy-ofat.com>
+ * @package Nayjest\Grids\Components
  */
 class CsvExport extends RenderableComponent
 {

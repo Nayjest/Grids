@@ -2,7 +2,6 @@
 
 namespace Nayjest\Grids\Components;
 
-use App;
 use Event;
 use Maatwebsite\Excel\Classes\LaravelExcelWorksheet;
 use Maatwebsite\Excel\Excel;
@@ -15,7 +14,12 @@ use Nayjest\Grids\FieldConfig;
 use Nayjest\Grids\Grid;
 
 /**
+ * Class ExcelExport
+ *
+ * The component provides control for exporting data to excel.
+ *
  * @author: Alexander Hofmeister
+ * @package Nayjest\Grids\Components
  */
 class ExcelExport extends RenderableComponent
 {
