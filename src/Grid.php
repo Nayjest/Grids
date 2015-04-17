@@ -64,7 +64,6 @@ class Grid
                 $this->getInputProcessor()->getValue('page', 1)
             );
         $this->getConfig()->prepare();
-        //$this->getInputProcessor()->applyChanges();
         $this->getFiltering()->apply();
         $this->prepareColumns();
         $this->getSorter()->apply();
@@ -96,7 +95,7 @@ class Grid
         $str = '';
         for ($id = 2; $id < $bt_len; $id++) {
             $trace = isset($backtrace[$id]) ? $backtrace[$id] : [];
-            if (empty($trace['class']) or !$this instanceof $trace['class']) {
+            if (empty($trace['class']) || !$this instanceof $trace['class']) {
                 # may be closure
                 if (isset($trace['file'], $trace['line'])) {
                     $str .= $trace['file'] . $trace['line'];
@@ -184,17 +183,10 @@ class Grid
     {
         $key = $this->getInputProcessor()->getUniqueRequestId();
         $caching_time = $this->config->getCachingTime();
-        if ($caching_time and ($output = Cache::get($key))) {
+        if ($caching_time && ($output = Cache::get($key))) {
             return $output;
         } else {
             $this->prepare();
-//        if ($dp = Cache::get($key)) {
-//            $this->config->setDataProvider($dp);
-//        } else {
-//            $dp = $this->config->getDataProvider();
-//            $dp->reset(); # performs query
-//            Cache::put($key, $dp, 5);
-//        }
             $provider = $this->config->getDataProvider();
             $provider->reset();
             $output = View::make(

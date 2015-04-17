@@ -14,7 +14,7 @@ if(method_exists($cfg,'isSubmittedOnChange') && $cfg->isSubmittedOnChange()) {
     >
     <option value="">--//--</option>
     <?php foreach ($filter->getConfig()->getOptions() as $value => $label): ?>
-        <?php $maybe_selected = ($filter->getValue() == $value and $filter->getValue() !== '' and $filter->getValue() !== null) ? 'selected="selected"':'' ?>
+        <?php $maybe_selected = ($filter->getValue() == $value && $filter->getValue() !== '' and $filter->getValue() !== null) ? 'selected="selected"':'' ?>
         <option <?= $maybe_selected ?> value="<?= $value ?>">
             <?= $label ?>
         </option>
