@@ -13,7 +13,8 @@ class ServiceProvider extends BaseServiceProvider
     protected $defer = false;
 
     /**
-     * For backward compatibility with Laravel 4
+     * This method required for backward compatibility with Laravel 4.
+     * 
      * @deprecated
      * @return string
      */
