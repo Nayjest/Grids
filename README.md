@@ -147,6 +147,8 @@ $query = (new User)
     ->with('posts')
     ->where('role', '=', User::ROLE_AUTHOR);
 
+
+			
 # Instantiate & Configure Grid
 $grid = new Grid(
     (new GridConfig)
@@ -283,6 +285,27 @@ $grid = new Grid(
         ])
 );
 ```
+
+# For Eager Loading of Relationships, use this syntax:
+    $query = Customer
+			->leftJoin('country', 'customers.Country', '=','country.id' )
+			->select('customers.*')
+			->addSelect('country.name as country_name')
+
+	And in the Filter config:
+
+	(new FieldConfig)
+		->setName('country_name')
+		->setLabel('Country')
+		->setSortable(true)
+		->addFilter(
+			(new FilterConfig)
+				->setOperator(FilterConfig::OPERATOR_EQ)
+				->setFilteringFunc(function($val, EloquentDataProvider $provider) {
+					$provider->getBuilder()->where('country.name', '=', $val);
+				})
+		)
+	,
 
 #### Step 2. Render Grid
 ```
