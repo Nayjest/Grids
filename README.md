@@ -286,7 +286,7 @@ $grid = new Grid(
 );
 ```
 
-# For Eager Loading of Relationships, use this syntax:
+##### For Eager Loading of Relationships, use this syntax:
     $query = Customer
 			->leftJoin('country', 'customers.Country', '=','country.id' )
 			->select('customers.*')
