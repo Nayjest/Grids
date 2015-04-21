@@ -328,27 +328,29 @@ Following example demonstrates, how to construct grid that displays data from Cu
 ```php
 // building query with join
 $query = Customer
-    ::leftJoin('country', 'customers.Country', '=','country.id' )
+    ::leftJoin('countries', 'customers.country_id', '=','countries.id' )
     ->select('customers.*')
-    ->addSelect('country.name as country_name')
+    // Column alias 'country_name' used to avoid naming conflicts, suggest that customers table also has 'name' column.
+    ->addSelect('countries.name as country_name')
 ...  
 ///   "Country" column config:
 	(new FieldConfig)
 	        /// Grid column displaying country name must be named according to SQl alias: column_name
 		->setName('country_name')
 		->setLabel('Country')
-		->setSortable(true)
 		// If you use MySQL, grid filters for column_name in this case may not work,
 		// becouse MySQL don't allows to specify column aliases in WHERE SQL section.
 		// To fix filtering for aliased columns, you need to override 
-		// filtering function to use 'country.name' in SQL instead of 'country_name'
+		// filtering function to use 'countries.name' in SQL instead of 'country_name'
 		->addFilter(
 			(new FilterConfig)
 				->setOperator(FilterConfig::OPERATOR_EQ)
 				->setFilteringFunc(function($val, EloquentDataProvider $provider) {
-					$provider->getBuilder()->where('country.name', '=', $val);
+					$provider->getBuilder()->where('countries.name', '=', $val);
 				})
 		)
+		// Sorting will work by default becouse MySQL allows to use column aliases in ORDER BY SQL section.
+		->setSortable(true)
 	,
 ...
 ```
