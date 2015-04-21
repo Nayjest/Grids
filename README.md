@@ -286,27 +286,6 @@ $grid = new Grid(
 );
 ```
 
-##### For Eager Loading of Relationships, use this syntax:
-    $query = Customer
-			->leftJoin('country', 'customers.Country', '=','country.id' )
-			->select('customers.*')
-			->addSelect('country.name as country_name')
-
-	And in the Filter config:
-
-	(new FieldConfig)
-		->setName('country_name')
-		->setLabel('Country')
-		->setSortable(true)
-		->addFilter(
-			(new FilterConfig)
-				->setOperator(FilterConfig::OPERATOR_EQ)
-				->setFilteringFunc(function($val, EloquentDataProvider $provider) {
-					$provider->getBuilder()->where('country.name', '=', $val);
-				})
-		)
-	,
-
 #### Step 2. Render Grid
 ```
 <?php echo $grid->render(); ?>
@@ -322,7 +301,7 @@ $grid = new Grid(
 {!! $grid !!}
 ```        
 
-####Notes
+#### Notes
 * Class names in example code used without namespaces therefore you must import it before
 * Grids does not includes Twitter Bootstrap css/js files to your layout. You need to do it manually
 Quick links:
@@ -338,6 +317,41 @@ Quick links:
 ```
 * Nayjest\Grids\Components\Pager component works only with Laravel 4.X, for Laravel 5 use Nayjest\Grids\Components\Laravel5\Pager
 
+##### Working with related Eloquent models
+
+If you need to render data from related Eloquent models, the recommendation is to use joins 
+instead of fetching data from related models becouse in this case filters/sorting will not work.
+Grids sorting and filters changes Laravel query object, but Laravel makes additional queries to get data for related models, so it's impossible to use filters/sorting with related models.
+
+Following example demonstrates, how to construct grid that displays data from Customer model and related Country model.
+
+```php
+// building query with join
+$query = Customer
+    ::leftJoin('country', 'customers.Country', '=','country.id' )
+    ->select('customers.*')
+    ->addSelect('country.name as country_name')
+...  
+///   "Country" column config:
+	(new FieldConfig)
+	        /// Grid column displaying country name must be named according to SQl alias: column_name
+		->setName('country_name')
+		->setLabel('Country')
+		->setSortable(true)
+		// If you use MySQL, grid filters for column_name in this case may not work,
+		// becouse MySQL don't allows to specify column aliases in WHERE SQL section.
+		// To fix filtering for aliased columns, you need to override 
+		// filtering function to use 'country.name' in SQL instead of 'country_name'
+		->addFilter(
+			(new FilterConfig)
+				->setOperator(FilterConfig::OPERATOR_EQ)
+				->setFilteringFunc(function($val, EloquentDataProvider $provider) {
+					$provider->getBuilder()->where('country.name', '=', $val);
+				})
+		)
+	,
+...
+```
 
 ## Upgrade Guide
 
