@@ -4,6 +4,7 @@ namespace Nayjest\Grids;
 use DB;
 use Doctrine\DBAL\Query\QueryBuilder;
 use Event;
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Collection;
 
 class DbalDataProvider extends DataProvider
@@ -69,12 +70,23 @@ class DbalDataProvider extends DataProvider
     {
         if (!$this->paginator) {
             $items = $this->getCollection()->toArray();
-            $this->paginator = \Paginator::make(
-                $items,
-                $this->getTotalRowsCount(),
-                $this->page_size
-            );
-
+            if (version_compare(Application::VERSION, '5.0.0', '<')) {
+                $this->paginator = \Paginator::make(
+                    $items,
+                    $this->getTotalRowsCount(),
+                    $this->page_size
+                );
+            } else {
+                $this->paginator = new \Illuminate\Pagination\LengthAwarePaginator(
+                    $items,
+                    $this->getTotalRowsCount(),
+                    $this->page_size,
+                    $this->getCurrentPage(),
+                    [
+                        'path' => \Illuminate\Pagination\Paginator::resolveCurrentPath()
+                    ]
+                );
+            }
         }
         return $this->paginator;
     }
