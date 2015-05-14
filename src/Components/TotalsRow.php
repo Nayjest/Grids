@@ -51,14 +51,8 @@ class TotalsRow extends ArrayDataRow implements RenderableComponentInterface
     {
         $this->template = '*.components.totals';
         $this->name = 'totals';
-
-        $this->field_names = $fieldNames;
+        $this->setFieldNames($fieldNames);
         $this->id = 'Totals';
-        $this->src = [];
-        foreach ($this->field_names as $name) {
-            $this->src[$name] = 0;
-        }
-
     }
 
     protected function provideFields()
@@ -182,6 +176,10 @@ class TotalsRow extends ArrayDataRow implements RenderableComponentInterface
     public function setFieldNames(array $fieldNames)
     {
         $this->field_names = $fieldNames;
+        $this->src = [];
+        foreach ($this->field_names as $name) {
+            $this->src[$name] = 0;
+        }
         return $this;
     }
 
