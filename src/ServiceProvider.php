@@ -13,7 +13,8 @@ class ServiceProvider extends BaseServiceProvider
     protected $defer = false;
 
     /**
-     * For backward compatibility with Laravel 4
+     * This method required for backward compatibility with Laravel 4.
+     * 
      * @deprecated
      * @return string
      */
@@ -21,6 +22,7 @@ class ServiceProvider extends BaseServiceProvider
     {
         return __DIR__;
     }
+
     /**
      * Bootstrap the application events.
      *
@@ -42,7 +44,9 @@ class ServiceProvider extends BaseServiceProvider
                 $views_path => base_path('resources/views/nayjest/grids')
             ]);
         }
-        class_alias('\\Nayjest\\Grids\\Grids', '\\Grids');
+        if (!class_exists('Grids')) {
+            class_alias('\\Nayjest\\Grids\\Grids', '\\Grids');
+        }
     }
 
     /**

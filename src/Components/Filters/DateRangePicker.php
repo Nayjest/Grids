@@ -51,6 +51,7 @@ class DateRangePicker extends Filter
     public function setJsOptions($options)
     {
         $this->js_options = $options;
+        return $this;
     }
 
     public function getStartValue()
