@@ -115,7 +115,7 @@ class HtmlTag extends RenderableRegistry
      */
     public function renderOpeningTag()
     {
-        /** @var \Illuminate\Html\HtmlBuilder $html */
+        /** @var \Collective\Html\HtmlBuilder $html */
         $html = app('html');
         return '<'
         . $this->getTagName()

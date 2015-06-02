@@ -93,13 +93,13 @@ Add following line to 'providers' section of app/config/app.php file:
 For Laravel 5 you also need to add "illuminate/html" service provider:
 ```php
 'Nayjest\Grids\ServiceProvider',
-'Illuminate\Html\HtmlServiceProvider',
+'Collective\Html\HtmlServiceProvider',
 ```
 
 You may also add facade aliases to your application configuration:
 ```php
     'Form'  => 'Illuminate\Html\FormFacade',
-    'HTML'  => 'Illuminate\Html\HtmlFacade',
+    'HTML'  => 'Collective\Html\HtmlFacade',
     'Grids'     => 'Nayjest\Grids\Grids',
 ```
 ## Demo
