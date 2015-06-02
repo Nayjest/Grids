@@ -45,7 +45,7 @@ Both Laravel 4 and Laravel 5 are supported.
 ## Requirements
 
 * Laravel 4.X / 5.X
-* illuminate/html package if you use Laravel5.X
+* laravelcollective/html package if you use Laravel5.X
 * php 5.4+
 
 ## Installation
@@ -60,12 +60,12 @@ Add nayjest/grids to "require" section of your composer.json
 },
 ```
 
-For Laravel 5 you also need to add "illuminate/html":
+For Laravel 5 you also need to add "laravelcollective/html":
 
 ```javascript
 "require": {
     "nayjest/grids": "~0.8",
-    "illuminate/html": "~5"
+    "laravelcollective/html": "~5.0"
 },
 ```
 
