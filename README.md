@@ -357,7 +357,21 @@ $query = Customer
 
 ## Upgrade Guide
 
-### From 0.3.X to 0.4+
+### From 0.8 to 0.9
+
+Grids starting from v 0.9.0 uses "laravelcollective\html" instead of outdated "illuminate\html".
+
+You may continue to use illuminate\html, but it's recommended to replace it to laravelcollective\html.
+
+1. Replace illuminate\html to laravelcollective\html in composer.json
+
+2. Replace class aliases section in config/app.php ('Illuminate\Html\HtmlFacade' to 'Collective\Html\FormFacade' and 'Illuminate\Html\HtmlFacade' to 'Collective\Html\HtmlFacade')
+
+3. Replace 'Illuminate\Html\HtmlServiceProvider' to 'Collective\Html\HtmlServiceProvider'
+
+4. Run composer update
+
+### From 0.3 to 0.4
 
 1. Use THead & TFoot instead of Header & Footer components
 2. If you have customized grid view (grid.php), refactor it using changes in default view
