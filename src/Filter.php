@@ -5,8 +5,10 @@ use View;
 
 class Filter
 {
+    /** @var FilterConfig */
     protected $config;
 
+    /** @var FieldConfig */
     protected $column;
 
     /**
