@@ -49,7 +49,9 @@ class CsvExport extends RenderableComponent
     {
         parent::initialize($grid);
         Event::listen(Grid::EVENT_PREPARE, function (Grid $grid) {
-            $this->grid = $grid;
+            if ($this->grid !== $grid) {
+                return;
+            }
             if ($grid->getInputProcessor()->getValue(static::INPUT_PARAM, false)) {
                 $this->renderCsv();
             }
