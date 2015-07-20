@@ -12,7 +12,7 @@ use Nayjest\Grids\Components\TotalsRow;
             if ($component->uses($column)):
                 $label = '';
                 switch($component->getFieldOperation($column->getName())) {
-                    case \Nayjest\Grids\Components\TotalsRow::OPERTATION_SUM:
+                    case \Nayjest\Grids\Components\TotalsRow::OPERATION_SUM:
                         $label = '∑';
                         break;
                     case \Nayjest\Grids\Components\TotalsRow::OPERATION_COUNT:

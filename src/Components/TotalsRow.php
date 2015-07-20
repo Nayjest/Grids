@@ -84,7 +84,7 @@ class TotalsRow extends ArrayDataRow implements RenderableComponentInterface
                     $operation = $this->getFieldOperation($name);
                     switch($operation) {
 
-                        case self::OPERTATION_SUM:
+                        case self::OPERATION_SUM:
                             $this->src[$name] += $row->getCellValue($field);
                             break;
                         case self::OPERATION_COUNT:
