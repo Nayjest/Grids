@@ -27,7 +27,7 @@ class TotalsRow extends ArrayDataRow implements RenderableComponentInterface
     }
     use TComponentView;
 
-    const OPERTATION_SUM = 'sum';
+    const OPERATION_SUM = 'sum';
     const OPERATION_AVG = 'avg';
     const OPERATION_COUNT = 'count';
     //const OPERATION_MAX = 'max';
