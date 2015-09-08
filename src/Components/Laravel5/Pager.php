@@ -37,6 +37,9 @@ class Pager extends RenderableComponent
         $paginator->setPageName("{$this->input_key}[page]");
     }
 
+    /**
+     * Renders pagination links & returns rendered html.
+     */
     protected function links()
     {
         /** @var  Paginator $paginator */
