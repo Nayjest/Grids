@@ -430,3 +430,7 @@ If you discover any security related issues, please email mail@vitaliy.in instea
 Licensed under the MIT License. 
 
 Please see [License File](LICENSE) for more information.
+
+##
+
+[![Flag Counter](http://s07.flagcounter.com/count/0LAb/bg_FFFFFF/txt_000000/border_FFFFFF/columns_8/maxflags_8/viewers_0/labels_0/pageviews_0/flags_0/percent_1/)](http://info.flagcounter.com/0LAb)
