@@ -1,8 +1,14 @@
 <form>
 <?php
 /** @var Nayjest\Grids\DataProvider $data **/
-/** @var Nayjest\Grids\Grid $grid **/ 
+/** @var Nayjest\Grids\Grid $grid **/
 ?>
+<?php
+    /** Creates a hidden field for grid identification **/
+    if(!empty($grid->getConfig()->getGridName())){
+?>
+<input type="hidden" name="grid_name" value="<?= $grid->getConfig()->getGridName() ?>" />
+<?php } ?>
 <table class="table table-striped" id="<?= $grid->getConfig()->getName() ?>">
 <?= $grid->header() ? $grid->header()->render() : '' ?>
 <?php # ========== TABLE BODY ========== ?>
