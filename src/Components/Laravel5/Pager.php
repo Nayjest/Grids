@@ -50,7 +50,7 @@ class Pager extends RenderableComponent
         if (isset($input['page'])) {
             unset($input['page']);
         }
-        return $paginator->appends($this->input_key, $input)->render();
+        return str_replace('/?', '?',$paginator->appends($this->input_key, $input)->render());
     }
 
     public function initialize(Grid $grid)
