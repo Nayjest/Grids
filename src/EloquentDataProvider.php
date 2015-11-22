@@ -120,6 +120,29 @@ class EloquentDataProvider extends DataProvider
      */
     public function filter($fieldName, $operator, $value)
     {
+        switch ($operator) {
+            case "eq":
+                $operator = '=';
+                break;
+            case "n_eq":
+                $operator = '<>';    
+                break;
+            case "gt":
+                $operator = '>';    
+                 break;
+            case "lt":
+                $operator = '<';    
+                break;
+            case "ls_e":
+                $operator = '<=';    
+                break;
+            case "gt_e":
+                $operator = '>=';    
+                break;
+            default:
+                $operator = 'like';
+                break;
+        }
         $this->src->where($fieldName, $operator, $value);
         return $this;
     }
