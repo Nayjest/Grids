@@ -4,12 +4,12 @@ namespace Nayjest\Grids;
 class FilterConfig
 {
     const OPERATOR_LIKE = 'like';
-    const OPERATOR_EQ = '=';
-    const OPERATOR_NOT_EQ = '<>';
-    const OPERATOR_GT = '>';
-    const OPERATOR_LS = '<';
-    const OPERATOR_LSE = '<=';
-    const OPERATOR_GTE = '>=';
+    const OPERATOR_EQ = 'eq';
+    const OPERATOR_NOT_EQ = 'n_eq';
+    const OPERATOR_GT = 'gt';
+    const OPERATOR_LS = 'lt';
+    const OPERATOR_LSE = 'ls_e';
+    const OPERATOR_GTE = 'gt_e';
 
 
     /** @var  FieldConfig */
