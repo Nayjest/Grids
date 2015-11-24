@@ -177,9 +177,6 @@ class DbalDataProvider extends DataProvider
             case "gt_e":
                 $operator = '>=';    
                 break;
-            default:
-                $operator = 'like';
-                break;
         }
         $this->src->andWhere("$fieldName $operator :$fieldName");
         $this->src->setParameter($fieldName, $value);
