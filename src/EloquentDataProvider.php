@@ -139,9 +139,6 @@ class EloquentDataProvider extends DataProvider
             case "gt_e":
                 $operator = '>=';    
                 break;
-            default:
-                $operator = 'like';
-                break;
         }
         $this->src->where($fieldName, $operator, $value);
         return $this;
