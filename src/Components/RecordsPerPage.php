@@ -14,7 +14,7 @@ use Nayjest\Grids\Components\Base\RenderableComponent;
 class RecordsPerPage extends RenderableComponent
 {
 
-    protected $name = 'records_per_page';
+    protected $name = 'Records per page';
 
     protected $variants = [
         50,
