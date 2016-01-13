@@ -53,6 +53,29 @@ class DateRangePicker extends Filter
         $this->js_options = $options;
         return $this;
     }
+    
+    /**
+     * Returns true if form must be submitted immediately
+     * when filter value selected.
+     *
+     * @return bool
+     */
+    public function isSubmittedOnChange()
+    {
+        return $this->is_submitted_on_change;
+    }
+    
+    /**
+     * Allows to submit form immediately when filter value selected.
+     *
+     * @param bool $isSubmittedOnChange
+     * @return $this
+     */
+    public function setSubmittedOnChange($isSubmittedOnChange)
+    {
+        $this->is_submitted_on_change = $isSubmittedOnChange;
+        return $this;
+    }
 
     public function getStartValue()
     {
