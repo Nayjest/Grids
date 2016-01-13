@@ -23,6 +23,8 @@ class DateRangePicker extends Filter
     protected $use_clear_button;
 
     protected $template = '*.components.filters.date_range_picker';
+    
+    protected $is_submitted_on_change = false;
 
     /**
      * Returns javascript options
