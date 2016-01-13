@@ -82,7 +82,7 @@ php composer.phar require nayjest/grids
 ```
 For Laravel 5
 ```bash    
-php composer.phar require nayjest/grids illuminate/html
+php composer.phar require nayjest/grids laravelcollective/html
 ```
 
 ##### Step 2: Laravel Setup
