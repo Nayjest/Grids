@@ -34,6 +34,9 @@ $id = uniqid();
         var update_hidden = function(ev, picker) {
             $('[name="<?= $component->getStartInputName() ?>"]').val(picker.startDate.format(options.format));
             $('[name="<?= $component->getEndInputName() ?>"]').val(picker.endDate.format(options.format));
+            <?php if(method_exists($component, 'isSubmittedOnChange') && $component->isSubmittedOnChange()): ?>
+                $('form').submit();
+            <?php endif ?>
         };
         $('#<?= $id ?>')
             .daterangepicker(options, cb)
@@ -44,6 +47,14 @@ $id = uniqid();
                     $('[name="<?= $component->getEndInputName() ?>"]').val('');
                 }
             });
+        <?php if(method_exists($component, 'isSubmittedOnChange') && $component->isSubmittedOnChange()): ?>
+        $('form').submit( function() {
+            $.ajax({
+                async: false,
+                type: 'GET'
+            });
+        });
+        <?php endif ?>
         cb(
             moment("<?= $component->getStartValue() ?>"),
             moment("<?= $component->getEndValue() ?>")
