@@ -41,7 +41,7 @@ class ServiceProvider extends BaseServiceProvider
             $this->loadViewsFrom($views_path, 'grids');
             $this->loadTranslationsFrom($pkg_path . '/resources/lang', 'grids');
             $this->publishes([
-                $views_path => base_path('resources/views/nayjest/grids')
+                $views_path => resource_path('views/vendor/grids')
             ]);
         }
         if (!class_exists('Grids')) {
