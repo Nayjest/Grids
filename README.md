@@ -13,6 +13,16 @@ Grids framework for Laravel
 
 Both Laravel 4 and Laravel 5 are supported.
 
+**Announcement: Further development moved to [presentation framework](https://github.com/presentation-framework/presentation-framework), [grids](https://github.com/presentation-framework/grids) and [laravel integration package](https://github.com/presentation-framework/laravel).**
+
+- If you need heavy stability, use this package
+- If you need better architecture & new features & don't afraid of API changes, try new repositories (anyway, presentation-framework & related packages uses [semantic versioning](http://semver.org/), so there will be no backward-incompatible changes in minor releases).
+- This package (nayjest/grids) still will receive bugfixes
+- Pull-requests from 3rd-party contributors containing new features that doesn't broke backward compatibility still can be accepted to this repository. 
+
+
+
+
 ## Features
 * Data providers (php array, Eloquent model, Doctrine DBAL query object)
 * Themes support
