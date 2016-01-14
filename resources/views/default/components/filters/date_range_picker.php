@@ -49,7 +49,6 @@ $id = uniqid();
                     $('[name="<?= $component->getEndInputName() ?>"]').val('');
                 }
             });
-        <?php endif ?>
         cb(
             moment("<?= $component->getStartValue() ?>"),
             moment("<?= $component->getEndValue() ?>")
