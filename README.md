@@ -44,7 +44,7 @@ Both Laravel 4 and Laravel 5 are supported.
   - Pagination
   - etc
 
-## Upcoming Features
+## Upcoming Features (moved to presentation/grids)
 * Autodetecting columns based on Eloquent model (if not specified)
 * Builtin output formatters for different column types
 * Working with json data sources via ajax
