@@ -139,6 +139,13 @@ class EloquentDataProvider extends DataProvider
             case "gt_e":
                 $operator = '>=';    
                 break;
+            case "in":
+                if (!is_array($value)) {
+                    $operator = '=';
+                    break;
+                }
+                $this->src->whereIn($fieldName, $value);
+                return $this;
         }
         $this->src->where($fieldName, $operator, $value);
         return $this;

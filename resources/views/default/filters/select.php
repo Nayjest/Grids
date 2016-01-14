@@ -9,14 +9,19 @@ if (method_exists($cfg, 'isSubmittedOnChange') && $cfg->isSubmittedOnChange()) {
 ?>
 <select
     class="form-control input-sm"
-    name="<?= $filter->getInputName() ?>"
+    name="<?= $filter->getInputName() ?><?= $cfg->isMultipleMode() ? '[]' : '' ?>"
     <?= $onchange ?>
+    <?= ($size = $cfg->getSize()) ? 'size="'.$size.'"' : '' ?>
+    <?= ($cfg->isMultipleMode()) ? 'multiple="multiple"' : '' ?>
     >
-    <option value="">--//--</option>
+    <?= (!$cfg->isMultipleMode()) ? '<option value="">--//--</option>' : '' ?>
     <?php foreach ($filter->getConfig()->getOptions() as $value => $label): ?>
         <?php
         $maybe_selected = (
-            $filter->getValue() == $value
+            (
+                (is_array($filter->getValue()) && in_array($value, $filter->getValue())) ||
+                $filter->getValue() == $value
+            )
             && $filter->getValue() !== ''
             && $filter->getValue() !== null
         ) ? 'selected="selected"' : ''
