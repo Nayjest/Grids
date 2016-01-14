@@ -23,6 +23,8 @@ class DateRangePicker extends Filter
     protected $use_clear_button;
 
     protected $template = '*.components.filters.date_range_picker';
+    
+    protected $is_submitted_on_change = false;
 
     /**
      * Returns javascript options
@@ -51,6 +53,29 @@ class DateRangePicker extends Filter
     public function setJsOptions($options)
     {
         $this->js_options = $options;
+        return $this;
+    }
+    
+    /**
+     * Returns true if form must be submitted immediately
+     * when filter value selected.
+     *
+     * @return bool
+     */
+    public function isSubmittedOnChange()
+    {
+        return $this->is_submitted_on_change;
+    }
+    
+    /**
+     * Allows to submit form immediately when filter value selected.
+     *
+     * @param bool $isSubmittedOnChange
+     * @return $this
+     */
+    public function setSubmittedOnChange($isSubmittedOnChange)
+    {
+        $this->is_submitted_on_change = $isSubmittedOnChange;
         return $this;
     }
 

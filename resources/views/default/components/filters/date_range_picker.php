@@ -31,13 +31,18 @@ $id = uniqid();
             }
             $('#<?=$id?>').val(text);
         };
-        var update_hidden = function(ev, picker) {
-            $('[name="<?= $component->getStartInputName() ?>"]').val(picker.startDate.format(options.format));
-            $('[name="<?= $component->getEndInputName() ?>"]').val(picker.endDate.format(options.format));
+        var onApplyDate = function(ev, picker) {
+            var start = $('[name="<?= $component->getStartInputName() ?>"]');
+            start.val(picker.startDate.format(options.format));
+            var end = $('[name="<?= $component->getEndInputName() ?>"]');
+            end.val(picker.endDate.format(options.format));
+            <?php if($component->isSubmittedOnChange()): ?>
+            	end.get(0).form.submit();
+            <?php endif ?>
         };
         $('#<?= $id ?>')
             .daterangepicker(options, cb)
-            .on('apply.daterangepicker', update_hidden)
+            .on('apply.daterangepicker', onApplyDate)
             .on('change', function(){
                 if (!$('#<?=$id?>').val()) {
                     $('[name="<?= $component->getStartInputName() ?>"]').val('');
