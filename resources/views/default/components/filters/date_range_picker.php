@@ -32,9 +32,9 @@ $id = uniqid();
             $('#<?=$id?>').val(text);
         };
         var onApplyDate = function(ev, picker) {
-            var start = $('[name="<?= $component->getStartInputName() ?>"]')
+            var start = $('[name="<?= $component->getStartInputName() ?>"]');
             start.val(picker.startDate.format(options.format));
-            var end = $('[name="<?= $component->getEndInputName() ?>"]')
+            var end = $('[name="<?= $component->getEndInputName() ?>"]');
             end.val(picker.endDate.format(options.format));
             <?php if($component->isSubmittedOnChange()): ?>
             	end.get(0).form.submit();
