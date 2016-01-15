@@ -4,6 +4,7 @@ namespace Nayjest\Grids;
 class FilterConfig
 {
     const OPERATOR_LIKE = 'like';
+    const OPERATOR_LIKE_R = 'like_r';
     const OPERATOR_EQ = 'eq';
     const OPERATOR_NOT_EQ = 'n_eq';
     const OPERATOR_GT = 'gt';
