@@ -10,6 +10,7 @@ class FilterConfig
     const OPERATOR_LS = 'lt';
     const OPERATOR_LSE = 'ls_e';
     const OPERATOR_GTE = 'gt_e';
+    const OPERATOR_IN = 'in';
 
 
     /** @var  FieldConfig */

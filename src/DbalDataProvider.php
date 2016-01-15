@@ -177,6 +177,12 @@ class DbalDataProvider extends DataProvider
             case "gt_e":
                 $operator = '>=';    
                 break;
+            case "in":
+                $operator = 'IN';
+                if (!is_array($value)) {
+                    $operator = '=';
+                }
+                break;
         }
         $this->src->andWhere("$fieldName $operator :$fieldName");
         $this->src->setParameter($fieldName, $value);
