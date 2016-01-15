@@ -111,12 +111,23 @@ class Filter
             $func($value, $this->grid->getConfig()->getDataProvider());
             return;
         }
-        if (strpos($value, '%') === false) {
-            $operator = $this->config->getOperator();
-            if ($operator === FilterConfig::OPERATOR_LIKE) {
-                $value = "%$value%";
-            } else if ($operator === FilterConfig::OPERATOR_LIKE_R) {
-                $value .= '%';
+        $operator = $this->config->getOperator();
+        if ($operator === FilterConfig::OPERATOR_LIKE || $operator === FilterConfig::OPERATOR_LIKE_R) {
+            // Search for non-escaped wildcards
+            $found = false;
+            for ($i = 0; $i < mb_strlen($value); $i++) {
+                if (in_array(mb_substr($value, $i, 1), ['%', '_']) && $i > 0 && mb_substr($value, $i - 1, 1) != '\\') {
+                    $found = true;
+                    break;
+                }
+            }
+            // If none are found, insert wildcards to improve user experience
+            if (!$found) {
+                if ($operator === FilterConfig::OPERATOR_LIKE) {
+                    $value = "%$value%";
+                } else if ($operator === FilterConfig::OPERATOR_LIKE_R) {
+                    $value .= '%';
+                }
             }
         }
         $this->grid->getConfig()->getDataProvider()->filter(
