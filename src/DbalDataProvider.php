@@ -178,6 +178,7 @@ class DbalDataProvider extends DataProvider
                 $operator = '>=';    
                 break;
             case "in":
+                // may be broken, @see https://github.com/Nayjest/Grids/issues/109
                 $operator = 'IN';
                 if (!is_array($value)) {
                     $operator = '=';
