@@ -185,8 +185,9 @@ class DbalDataProvider extends DataProvider
                 }
                 break;
         }
-        $this->src->andWhere("$fieldName $operator :$fieldName");
-        $this->src->setParameter($fieldName, $value);
+        $parameterName = str_replace(".", "_", $fieldName); // @see https://github.com/Nayjest/Grids/issues/111
+        $this->src->andWhere("$fieldName $operator :$parameterName");
+        $this->src->setParameter($parameterName, $value);
         return $this;
     }
 
