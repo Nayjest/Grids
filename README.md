@@ -367,7 +367,11 @@ $query = Customer
 
 ## Upgrade Guide
 
-### From 0.8 to 0.9
+### From 0.9.X to 1.X
+
+There are full backward compatibility between 0.9.X and 1.X branches.
+
+### From 0.8.X to 0.9.X
 
 Grids starting from v 0.9.0 uses "laravelcollective\html" instead of outdated "illuminate\html".
 
@@ -381,7 +385,7 @@ You may continue to use illuminate\html, but it's recommended to replace it to l
 
 4. Run composer update
 
-### From 0.3 to 0.4
+### From 0.3.X to 0.4.X
 
 1. Use THead & TFoot instead of Header & Footer components
 2. If you have customized grid view (grid.php), refactor it using changes in default view
