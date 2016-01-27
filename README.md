@@ -439,7 +439,7 @@ If you discover any security related issues, please email mail@vitaliy.in instea
 
 ## License
 
-© 2014 &mdash; 2015 Vitalii Stepanenko
+© 2014&mdash;2016 Vitalii Stepanenko
 
 Licensed under the MIT License. 
 
