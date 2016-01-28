@@ -73,7 +73,7 @@ class RecordsPerPage extends RenderableComponent
         if ($from_input === null) {
             return $this->grid->getConfig()->getPageSize();
         } else {
-            return $from_input;
+            return (int) $from_input;
         }
     }
 
