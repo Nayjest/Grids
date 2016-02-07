@@ -11,7 +11,8 @@ use Nayjest\Grids\Build\Setup;
  *
  * @package Nayjest\Grids
  */
-class Grids {
+class Grids
+{
 
     protected static $builder;
 

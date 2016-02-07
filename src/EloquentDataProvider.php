@@ -125,19 +125,19 @@ class EloquentDataProvider extends DataProvider
                 $operator = '=';
                 break;
             case "n_eq":
-                $operator = '<>';    
+                $operator = '<>';
                 break;
             case "gt":
-                $operator = '>';    
-                 break;
+                $operator = '>';
+                break;
             case "lt":
-                $operator = '<';    
+                $operator = '<';
                 break;
             case "ls_e":
-                $operator = '<=';    
+                $operator = '<=';
                 break;
             case "gt_e":
-                $operator = '>=';    
+                $operator = '>=';
                 break;
             case "in":
                 if (!is_array($value)) {

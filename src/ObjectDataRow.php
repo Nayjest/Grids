@@ -27,7 +27,7 @@ class ObjectDataRow extends DataRow
         } else {
             try {
                 return $this->src->{$fieldName};
-            } catch(Exception $e) {
+            } catch (Exception $e) {
                 throw new RuntimeException(
                     "Can't read '$fieldName' property from DataRow"
                 );

@@ -21,7 +21,9 @@ class RenderFunc extends RenderableComponent
      */
     public function __construct($func = null)
     {
-        if ($func) $this->setFunc($func);
+        if ($func) {
+            $this->setFunc($func);
+        }
     }
 
     /**

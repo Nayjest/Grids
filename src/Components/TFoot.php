@@ -1,5 +1,6 @@
 <?php
 namespace Nayjest\Grids\Components;
+
 use Illuminate\Foundation\Application;
 
 /**

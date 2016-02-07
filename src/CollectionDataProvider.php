@@ -76,9 +76,8 @@ class CollectionDataProvider extends DataProvider
 
     public function getRow()
     {
-        if(!$this->iterator)
-        {
-          $this->getIterator();
+        if (!$this->iterator) {
+            $this->getIterator();
         }
 
         if ($this->index < $this->count()) {
@@ -106,11 +105,10 @@ class CollectionDataProvider extends DataProvider
      */
     public function orderBy($fieldName, $direction)
     {
-        if($direction === Grid::SORT_ASC){
-          $this->src->sortBy($fieldName);
-        }
-        else{
-          $this->src->sortByDesc($fieldName);
+        if ($direction === Grid::SORT_ASC) {
+            $this->src->sortBy($fieldName);
+        } else {
+            $this->src->sortByDesc($fieldName);
         }
         
         return $this;

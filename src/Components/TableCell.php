@@ -23,7 +23,8 @@ class TableCell extends HtmlTag
      *
      * @param FieldConfig $column
      */
-    public function __construct(FieldConfig $column) {
+    public function __construct(FieldConfig $column)
+    {
 
         $this->setColumn($column);
     }

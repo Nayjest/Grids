@@ -138,10 +138,10 @@ class Setup
                     $s->class = $type;
                 } else {
                     $s->class = 'Nayjest\Grids\Components\\' . str_replace(
-                            ' ',
-                            '',
-                            ucwords(str_replace(array('-', '_'), ' ', $type))
-                        );
+                        ' ',
+                        '',
+                        ucwords(str_replace(array('-', '_'), ' ', $type))
+                    );
                 }
             }, null, Instruction::PHASE_PRE_INST)
         ]);
@@ -149,7 +149,7 @@ class Setup
 
         $blueprint->add(new Rename('component', 'add_component'));
         $blueprint->add(new Build('add_component', $blueprint));
-        $blueprint->add(new CallMethodWith('add_component','addComponent'));
+        $blueprint->add(new CallMethodWith('add_component', 'addComponent'));
 
         return $blueprint;
     }
@@ -164,7 +164,7 @@ class Setup
         return new Blueprint(self::FILTER_CLASS, [
             new SimpleValueAsField('name'),
             new CustomMapping('type', function ($type, Scaffold $s) {
-                switch($type) {
+                switch ($type) {
                     case 'select':
                         $s->class = 'Nayjest\Grids\SelectFilterConfig';
                         break;
@@ -172,8 +172,8 @@ class Setup
                         break;
                 }
             }, null, Instruction::PHASE_PRE_INST),
-            new Rename(0,'name'),
-            new Rename(1,'operator'),
+            new Rename(0, 'name'),
+            new Rename(1, 'operator'),
         ]);
     }
 
@@ -192,12 +192,12 @@ class Setup
         }
         return new Blueprint(self::COLUMN_CLASS, [
             new SimpleValueAsField('name'),
-            new Rename(0,'name'),
+            new Rename(0, 'name'),
             new BuildChildren('filters', $filter_blueprint),
 
             new Rename('filter', 'add_filter'),
             new Build('add_filter', $filter_blueprint),
-            new CallMethodWith('add_filter','addFilter'),
+            new CallMethodWith('add_filter', 'addFilter'),
         ]);
     }
 }

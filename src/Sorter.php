@@ -17,7 +17,7 @@ class Sorter
 
     /**
      * Constructor.
-     * 
+     *
      * @param Grid $grid
      */
     public function __construct(Grid $grid)

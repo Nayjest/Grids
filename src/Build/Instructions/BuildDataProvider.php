@@ -41,8 +41,7 @@ class BuildDataProvider extends Instruction
 
         } elseif (is_string($src)) {
             // model name
-            if (
-                class_exists($src, true) &&
+            if (class_exists($src, true) &&
                 is_subclass_of($src, '\Illuminate\Database\Eloquent\Model')
             ) {
                 $class = '\Nayjest\Grids\EloquentDataProvider';
@@ -58,4 +57,3 @@ class BuildDataProvider extends Instruction
         }
     }
 }
-
