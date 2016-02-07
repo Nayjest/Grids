@@ -6,7 +6,7 @@ use Nayjest\Grids\FieldConfig;
 
 /**
  * Class TableCell
- * 
+ *
  * The component for rendering TD html tag inside grid.
  *
  * @package Nayjest\Grids\Components
@@ -36,6 +36,23 @@ class TableCell extends HtmlTag
         if ($this->column->isHidden()) {
             $this->attributes['style'] = 'display:none;';
         }
+
+        if ($this->column->isHiddenXs()) {
+            $this->attributes['class'] .= ' hidden-xs';
+        }
+
+        if ($this->column->isHiddenSm()) {
+            $this->attributes['class'] .= ' hidden-sm';
+        }
+
+        if ($this->column->isHiddenMd()) {
+            $this->attributes['class'] .= ' hidden-md';
+        }
+
+        if ($this->column->isHiddenLg()) {
+            $this->attributes['class'] .= ' hidden-lg';
+        }
+
         return $this->attributes;
     }
 
@@ -70,4 +87,3 @@ class TableCell extends HtmlTag
         return $this;
     }
 }
-

@@ -55,7 +55,7 @@ class CollectionDataProvider extends DataProvider
      */
     public function getPaginationFactory()
     {
-        return $this->src;//$this->src->getQuery()->getConnection()->getPaginator();
+        return $this->getPaginator();//$this->src->getQuery()->getConnection()->getPaginator();
     }
 
     protected function getIterator()
@@ -76,6 +76,11 @@ class CollectionDataProvider extends DataProvider
 
     public function getRow()
     {
+        if(!$this->iterator)
+        {
+          $this->getIterator();
+        }
+
         if ($this->index < $this->count()) {
             $this->index++;
             $item = $this->iterator->current();
@@ -101,7 +106,6 @@ class CollectionDataProvider extends DataProvider
      */
     public function orderBy($fieldName, $direction)
     {
-        $this->src->orderBy($fieldName, $direction);
         return $this;
     }
 
@@ -110,7 +114,7 @@ class CollectionDataProvider extends DataProvider
      */
     public function filter($fieldName, $operator, $value)
     {
-        switch ($operator) {
+        /*switch ($operator) {
             case "eq":
                 $operator = '=';
                 break;
@@ -137,7 +141,7 @@ class CollectionDataProvider extends DataProvider
                 $this->src->whereIn($fieldName, $value);
                 return $this;
         }
-        $this->src->where($fieldName, $operator, $value);
+        $this->src->where($fieldName, $operator, $value); */
         return $this;
     }
 }
