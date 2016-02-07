@@ -106,6 +106,13 @@ class CollectionDataProvider extends DataProvider
      */
     public function orderBy($fieldName, $direction)
     {
+        if($direction === Grid::SORT_ASC){
+          $this->src->sortBy($fieldName);
+        }
+        else{
+          $this->src->sortByDesc($fieldName);
+        }
+        
         return $this;
     }
 
@@ -114,34 +121,9 @@ class CollectionDataProvider extends DataProvider
      */
     public function filter($fieldName, $operator, $value)
     {
-        /*switch ($operator) {
-            case "eq":
-                $operator = '=';
-                break;
-            case "n_eq":
-                $operator = '<>';
-                break;
-            case "gt":
-                $operator = '>';
-                 break;
-            case "lt":
-                $operator = '<';
-                break;
-            case "ls_e":
-                $operator = '<=';
-                break;
-            case "gt_e":
-                $operator = '>=';
-                break;
-            case "in":
-                if (!is_array($value)) {
-                    $operator = '=';
-                    break;
-                }
-                $this->src->whereIn($fieldName, $value);
-                return $this;
-        }
-        $this->src->where($fieldName, $operator, $value); */
+        /*
+            Currently no filter support on CollectionDataProvider
+        */
         return $this;
     }
 }
