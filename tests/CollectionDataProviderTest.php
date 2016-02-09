@@ -26,7 +26,7 @@ class CollectionDataProviderTest extends TestCase
      *
      * @return \Nayjest\Grids\CollectionDataProvider
      */
-    public function test_create_CollectionDataProvider()
+    public function testCreateCollectionDataProvider()
     {
         $this->assertInstanceOf(CollectionDataProvider::class,$this->getTestCollectionDataProvider());
     }
@@ -37,7 +37,7 @@ class CollectionDataProviderTest extends TestCase
      *
      * @return \Illuminate\Pagination\Paginator
      */
-    public function test_CollectionDataProvider_has_paginator()
+    public function testCollectionDataProviderHasPaginator()
     {
       $this->assertInstanceOf(Paginator::class,$this->getTestCollectionDataProvider()->getPaginator());
     }
@@ -47,7 +47,7 @@ class CollectionDataProviderTest extends TestCase
      *
      * @return Illuminate\Database\Eloquent\Collection
      */
-    public function test_CollectionDataProvider_has_collection()
+    public function testCollectionDataProviderHasCollection()
     {
       $this->assertInstanceOf(Collection::class,$this->getTestCollectionDataProvider()->getCollection());
     }
@@ -58,7 +58,7 @@ class CollectionDataProviderTest extends TestCase
      *
      * @return \Nayjest\Grids\CollectionDataProvider
      */
-    public function test_reset()
+    public function testReset()
     {
         $this->assertInstanceOf(CollectionDataProvider::class,$this->getTestCollectionDataProvider()->reset());
     }
@@ -68,7 +68,7 @@ class CollectionDataProviderTest extends TestCase
      *
      * @return Illuminate\Pagination\Paginator
      */
-    public function test_getPaginationFactory()
+    public function testGetPaginationFactory()
     {
         $this->assertInstanceOf(Paginator::class,$this->getTestCollectionDataProvider()->getPaginationFactory());
     }
@@ -79,7 +79,7 @@ class CollectionDataProviderTest extends TestCase
      *
      * @return \Nayjest\Grids\EloquentDataRow
      */
-    public function test_getRow()
+    public function testGetRow()
     {
         $this->assertInstanceOf(EloquentDataRow::class,$this->getTestCollectionDataProvider()->getRow());
     }
@@ -90,7 +90,7 @@ class CollectionDataProviderTest extends TestCase
      *
      * @return Int
      */
-    public function test_count()
+    public function testCount()
     {
         $this->assertEquals(3,$this->getTestCollectionDataProvider()->count());
     }
@@ -101,7 +101,7 @@ class CollectionDataProviderTest extends TestCase
      *
      * @return \Nayjest\Grids\CollectionDataProvider
      */
-    public function test_orderby()
+    public function testOrderby()
     {
         $this->assertInstanceOf(CollectionDataProvider::class,$this->getTestCollectionDataProvider()->orderBy('name','asc'));
     }
@@ -111,7 +111,7 @@ class CollectionDataProviderTest extends TestCase
      *
      * @return \Nayjest\Grids\CollectionDataProvider
      */
-    public function test_filter()
+    public function testFilter()
     {
         $this->assertInstanceOf(CollectionDataProvider::class,$this->getTestCollectionDataProvider()->filter('name','cat','hat'));
     }
