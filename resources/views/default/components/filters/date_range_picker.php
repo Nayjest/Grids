@@ -25,7 +25,7 @@ $id = uniqid();
         var cb = function(start, end) {
             var text;
             if (start.isValid() && end.isValid()) {
-                text = start.format(options.format) + ' — ' + end.format(options.format);
+                text = start.format(options.format) + '—' + end.format(options.format);
             } else {
                 text = '';
             }
