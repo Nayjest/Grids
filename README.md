@@ -13,10 +13,12 @@ Grids framework for Laravel
 
 Both Laravel 4 and Laravel 5 are supported.
 
-**Announcement: Further development moved to [view-components](https://github.com/view-components/view-components), [grids](https://github.com/view-components/grids) and [laravel integration package](https://github.com/view-components/laravel).**
+**Announcement: Further development moved to [view-components/grids](https://github.com/view-components/grids). 
+
+Use it together with [view-components/eloquent-data-processing](https://github.com/view-components/eloquent-data-processing) in Laravel applications.**
 
 - If you need heavy stability, use this package
-- If you need better architecture & new features & don't afraid of API changes, try new repositories (anyway, presentation-framework & related packages uses [semantic versioning](http://semver.org/), so there will be no backward-incompatible changes in minor releases).
+- If you need better architecture & new features & don't afraid of API changes, try new repositories (anyway, view-components & related packages uses [semantic versioning](http://semver.org/), so there will be no backward-incompatible changes in minor releases).
 - This package (nayjest/grids) still will receive bugfixes
 - Pull-requests from 3rd-party contributors containing new features that doesn't broke backward compatibility still can be accepted to this repository. 
 
@@ -44,7 +46,7 @@ Both Laravel 4 and Laravel 5 are supported.
   - Pagination
   - etc
 
-## Upcoming Features (moved to presentation/grids)
+## Upcoming Features (moved to view-components/grids)
 * Autodetecting columns based on Eloquent model (if not specified)
 * Builtin output formatters for different column types
 * Working with json data sources via ajax
