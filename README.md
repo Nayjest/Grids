@@ -13,7 +13,7 @@ Grids framework for Laravel
 
 Both Laravel 4 and Laravel 5 are supported.
 
-**Announcement: Further development moved to [view-components/grids](https://github.com/view-components/grids). **
+**Announcement: Further development moved to [view-components/grids](https://github.com/view-components/grids).**
 
 **Use it together with [view-components/eloquent-data-processing](https://github.com/view-components/eloquent-data-processing) in Laravel applications.**
 
