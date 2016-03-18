@@ -6,7 +6,7 @@ use Event;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Collection;
 
-class EloquentDataProvider extends DataProvider
+class CollectionDataProvider extends DataProvider
 {
     protected $collection;
 
@@ -20,7 +20,7 @@ class EloquentDataProvider extends DataProvider
      *
      * @param Builder $src
      */
-    public function __construct(Builder $src)
+    public function __construct(Collection $src)
     {
         parent::__construct($src);
     }
@@ -39,23 +39,13 @@ class EloquentDataProvider extends DataProvider
      */
     public function getCollection()
     {
-        if (!$this->collection) {
-            $paginator = $this->getPaginator();
-            if (version_compare(Application::VERSION, '5', '<')) {
-                $this->collection = $paginator->getCollection();
-            } else {
-                $this->collection = Collection::make(
-                    $this->getPaginator()->items()
-                );
-            }
-        }
-        return $this->collection;
+        return $this->src;
     }
 
     public function getPaginator()
     {
         if (!$this->paginator) {
-            $this->paginator = $this->src->paginate($this->page_size);
+            $this->paginator = new \Illuminate\Pagination\Paginator($this->src, $this->src->count());
         }
         return $this->paginator;
     }
@@ -65,7 +55,7 @@ class EloquentDataProvider extends DataProvider
      */
     public function getPaginationFactory()
     {
-        return $this->src->getQuery()->getConnection()->getPaginator();
+        return $this->getPaginator();//$this->src->getQuery()->getConnection()->getPaginator();
     }
 
     protected function getIterator()
@@ -86,6 +76,10 @@ class EloquentDataProvider extends DataProvider
 
     public function getRow()
     {
+        if (!$this->iterator) {
+            $this->getIterator();
+        }
+
         if ($this->index < $this->count()) {
             $this->index++;
             $item = $this->iterator->current();
@@ -111,7 +105,12 @@ class EloquentDataProvider extends DataProvider
      */
     public function orderBy($fieldName, $direction)
     {
-        $this->src->orderBy($fieldName, $direction);
+        if ($direction === Grid::SORT_ASC) {
+            $this->src->sortBy($fieldName);
+        } else {
+            $this->src->sortByDesc($fieldName);
+        }
+        
         return $this;
     }
 
@@ -120,34 +119,9 @@ class EloquentDataProvider extends DataProvider
      */
     public function filter($fieldName, $operator, $value)
     {
-        switch ($operator) {
-            case "eq":
-                $operator = '=';
-                break;
-            case "n_eq":
-                $operator = '<>';
-                break;
-            case "gt":
-                $operator = '>';
-                break;
-            case "lt":
-                $operator = '<';
-                break;
-            case "ls_e":
-                $operator = '<=';
-                break;
-            case "gt_e":
-                $operator = '>=';
-                break;
-            case "in":
-                if (!is_array($value)) {
-                    $operator = '=';
-                    break;
-                }
-                $this->src->whereIn($fieldName, $value);
-                return $this;
-        }
-        $this->src->where($fieldName, $operator, $value);
+        /*
+            Currently no filter support on CollectionDataProvider
+        */
         return $this;
     }
 }

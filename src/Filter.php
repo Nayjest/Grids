@@ -22,8 +22,8 @@ class Filter
         FilterConfig $config,
         FieldConfig $column,
         Grid $grid
-    )
-    {
+    ) {
+    
         $this->config = $config;
         $this->column = $column;
         $this->grid = $grid;

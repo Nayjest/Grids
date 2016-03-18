@@ -20,7 +20,7 @@ Both Laravel 4 and Laravel 5 are supported.
 - If you need heavy stability, use this package
 - If you need better architecture & new features & don't afraid of API changes, try new repositories (anyway, view-components & related packages uses [semantic versioning](http://semver.org/), so there will be no backward-incompatible changes in minor releases).
 - This package (nayjest/grids) still will receive bugfixes
-- Pull-requests from 3rd-party contributors containing new features that doesn't broke backward compatibility still can be accepted to this repository. 
+- Pull-requests from 3rd-party contributors containing new features that doesn't broke backward compatibility still can be accepted to this repository.
 
 
 
@@ -40,8 +40,8 @@ Both Laravel 4 and Laravel 5 are supported.
   - Excel and CSV export
   - _Records per page_ dropdown
   - Show/hide columns UI control
-  - Sorting 
-  - Filtering 
+  - Sorting
+  - Filtering
   - Totals calculation (sum, average value, records count, etc)
   - Pagination
   - etc
@@ -160,7 +160,7 @@ $query = (new User)
     ->where('role', '=', User::ROLE_AUTHOR);
 
 
-			
+
 # Instantiate & Configure Grid
 $grid = new Grid(
     (new GridConfig)
@@ -170,7 +170,7 @@ $grid = new Grid(
         # See all supported data providers in sources
         ->setDataProvider(new EloquentDataProvider($query))
         # Setup caching, value in minutes, turned off in debug mode
-        ->setCachingTime(5) 
+        ->setCachingTime(5)
         # Setup table columns
         ->setColumns([
             # simple results numbering, not related to table PK or any obtained data
@@ -179,16 +179,16 @@ $grid = new Grid(
                 ->setName('login')
                 # will be displayed in table heder
                 ->setLabel('Login')
-                # That's all what you need for filtering. 
-                # It will create controls, process input 
+                # That's all what you need for filtering.
+                # It will create controls, process input
                 # and filter results (in case of EloquentDataProvider -- modify SQL query)
                 ->addFilter(
                     (new FilterConfig)
                         ->setName('login')
                         ->setOperator(FilterConfig::OPERATOR_LIKE)
                 )
-                # optional, 
-                # use to prettify output in table cell 
+                # optional,
+                # use to prettify output in table cell
                 # or print any data located not in results field matching column name
                 ->setCallback(function ($val, EloquentDataRow $row) {
                     if ($val) {
@@ -207,6 +207,9 @@ $grid = new Grid(
                     (new SelectFilterConfig)
                         ->setOptions(User::getStatuses())
                 )
+                #hide on mobile devices... can be used with other bootstrap sizes
+                #as well (hideXs hideMd hideSm hideLg)
+                ->hideXs()
             ,
             (new FieldConfig)
                 ->setName('country')
@@ -260,7 +263,7 @@ $grid = new Grid(
                                     'registration_ip',
                                 ])
                             ,
-                            # Submit button for filters. 
+                            # Submit button for filters.
                             # Place it anywhere in the grid (grid is rendered inside form by default).
                             (new HtmlTag)
                                 ->setTagName('button')
@@ -288,7 +291,7 @@ $grid = new Grid(
                     ])
                 )
                 ->addComponent(
-                    # Renders row containing one cell 
+                    # Renders row containing one cell
                     # with colspan attribute equal to the table columns count
                     (new OneCellRow)
                         # Pagination control
@@ -331,7 +334,7 @@ Quick links:
 
 ##### Working with related Eloquent models
 
-If you need to render data from related Eloquent models, the recommendation is to use joins 
+If you need to render data from related Eloquent models, the recommendation is to use joins
 instead of fetching data from related models becouse in this case filters/sorting will not work.
 Grids sorting and filters changes Laravel query object, but Laravel makes additional queries to get data for related models, so it's impossible to use filters/sorting with related models.
 
@@ -352,7 +355,7 @@ $query = Customer
 		->setLabel('Country')
 		// If you use MySQL, grid filters for column_name in this case may not work,
 		// becouse MySQL don't allows to specify column aliases in WHERE SQL section.
-		// To fix filtering for aliased columns, you need to override 
+		// To fix filtering for aliased columns, you need to override
 		// filtering function to use 'countries.name' in SQL instead of 'country_name'
 		->addFilter(
 			(new FilterConfig)
@@ -402,7 +405,7 @@ Default components hierarchy:
     - TFoot
         - OneCellRow
             - Pager
-        
+
 ```
 For adding child components to default one, resolve it by name and use addComponent / addComponents methods.
 
@@ -443,7 +446,7 @@ If you discover any security related issues, please email mail@vitaliy.in instea
 
 © 2014&mdash;2016 Vitalii Stepanenko
 
-Licensed under the MIT License. 
+Licensed under the MIT License.
 
 Please see [License File](LICENSE) for more information.
 

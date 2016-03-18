@@ -29,7 +29,7 @@ trait TComponentView
     public function getTemplate()
     {
         $grid_tpl = $this->grid->getConfig()->getTemplate();
-        return str_replace('*.',"$grid_tpl.", $this->template);
+        return str_replace('*.', "$grid_tpl.", $this->template);
     }
 
     /**

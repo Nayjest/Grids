@@ -1,7 +1,6 @@
 <?php
 namespace Nayjest\Grids\Components\Base;
 
-
 trait TTaggable
 {
     protected $tags = [];
@@ -47,4 +46,3 @@ trait TTaggable
         return true;
     }
 }
-

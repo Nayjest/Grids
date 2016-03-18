@@ -152,4 +152,3 @@ class HtmlTag extends RenderableRegistry
         return $this->wrapWithOutsideComponents($inner);
     }
 }
-

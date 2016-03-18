@@ -123,7 +123,7 @@
         }
 
         ColumnHider.prototype.getColumnElements = function (name) {
-            return $('[class="column-' + name + '"]');
+            return $('.column-' + name);
         };
 
         ColumnHider.prototype.saveValues = function() {
@@ -139,7 +139,7 @@
             if(name === 'all') {
                 $.each(this.getValues(), function(i){
                     me.getValues()[i] = value;
-                    $('input[name="'+i+'"]').prop('checked', value);
+                    $('input[name='+i+']').prop('checked', value);
                     me.updateColumnVisibility(i, value);
                 });
             } else {

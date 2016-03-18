@@ -97,7 +97,7 @@ class ColumnsHider extends RenderableComponent
     {
         parent::prepare();
         $visible = $this->getColumnsVisibility();
-        foreach($this->grid->getConfig()->getColumns() as $column) {
+        foreach ($this->grid->getConfig()->getColumns() as $column) {
             if (!$visible[$column->getName()]) {
                 $column->hide();
             }

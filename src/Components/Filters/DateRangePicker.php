@@ -224,7 +224,7 @@ class DateRangePicker extends Filter
 
     protected function getDefaultFilteringFunc()
     {
-        return function($value, DataProvider $provider) {
+        return function ($value, DataProvider $provider) {
             $provider->filter($this->getName(), '>=', $value[0]);
             $provider->filter($this->getName(), '<=', $value[1]);
         };

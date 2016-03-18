@@ -45,6 +45,11 @@ class FieldConfig
     protected $callback;
 
     protected $is_hidden = false;
+    protected $is_hiddenXs = false;
+    protected $is_hiddenSm = false;
+    protected $is_hiddenMd = false;
+    protected $is_hiddenLg = false;
+
 
     /**
      * Constructor.
@@ -121,6 +126,47 @@ class FieldConfig
     }
 
     /**
+     * Returns true if column is hidden on xs.
+     *
+     * @return bool
+     */
+    public function isHiddenXs()
+    {
+        return $this->is_hiddenXs;
+    }
+
+    /**
+     * Returns true if column is hidden on sm.
+     *
+     * @return bool
+     */
+    public function isHiddenSm()
+    {
+        return $this->is_hiddenSm;
+    }
+
+    /**
+     * Returns true if column is hidden on md.
+     *
+     * @return bool
+     */
+    public function isHiddenMd()
+    {
+        return $this->is_hiddenMd;
+    }
+
+
+    /**
+     * Returns true if column is hidden on lg.
+     *
+     * @return bool
+     */
+    public function isHiddenLg()
+    {
+        return $this->is_hiddenLg;
+    }
+
+    /**
      * Makes column hidden.
      *
      * @return $this
@@ -128,6 +174,50 @@ class FieldConfig
     public function hide()
     {
         $this->is_hidden = true;
+        return $this;
+    }
+
+    /**
+     * Makes column hidden on xs screens.
+     *
+     * @return $this
+     */
+    public function hideXs()
+    {
+        $this->is_hiddenXs = true;
+        return $this;
+    }
+
+    /**
+     * Makes column hidden on sm screens.
+     *
+     * @return $this
+     */
+    public function hideSm()
+    {
+        $this->is_hiddenSm = true;
+        return $this;
+    }
+
+    /**
+     * Makes column hidden on md screens.
+     *
+     * @return $this
+     */
+    public function hideMd()
+    {
+        $this->is_hiddenMd = true;
+        return $this;
+    }
+
+    /**
+     * Makes column hidden on lg screens.
+     *
+     * @return $this
+     */
+    public function hideLg()
+    {
+        $this->is_hiddenLg = true;
         return $this;
     }
 

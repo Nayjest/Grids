@@ -32,7 +32,7 @@ class RecordsPerPage extends RenderableComponent
      */
     public function getVariants()
     {
-        return array_combine(array_values($this->variants),array_values($this->variants));
+        return array_combine(array_values($this->variants), array_values($this->variants));
     }
 
     /**
@@ -83,7 +83,9 @@ class RecordsPerPage extends RenderableComponent
     public function prepare()
     {
         $value = $this->getValue();
-        if (!$value || !is_numeric($value)) return;
+        if (!$value || !is_numeric($value)) {
+            return;
+        }
         $this->grid->getConfig()->getDataProvider()->setPageSize($value);
     }
 }

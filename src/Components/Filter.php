@@ -1,7 +1,6 @@
 <?php
 namespace Nayjest\Grids\Components;
 
-
 use Nayjest\Grids\Components\Base\RenderableComponent;
 
 class Filter extends RenderableComponent

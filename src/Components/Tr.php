@@ -46,7 +46,7 @@ class Tr extends HtmlTag
     {
         $row = $this->getDataRow();
         $out = '';
-        foreach($this->grid->getConfig()->getColumns() as $column) {
+        foreach ($this->grid->getConfig()->getColumns() as $column) {
             $component = new TableCell($column);
             $component->initialize($this->grid);
             $component->setContent($column->getValue($row));

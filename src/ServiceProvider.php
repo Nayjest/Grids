@@ -14,7 +14,7 @@ class ServiceProvider extends BaseServiceProvider
 
     /**
      * This method required for backward compatibility with Laravel 4.
-     * 
+     *
      * @deprecated
      * @return string
      */
