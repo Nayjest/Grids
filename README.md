@@ -1,7 +1,7 @@
 Grids
 =====
 
-Data Grids Framework for Laravel
+### `Data Grids Framework for Laravel`
 
 [![Codacy Badge](https://www.codacy.com/project/badge/4c6955da466a45c1a64972bbfb81fcb7)](https://www.codacy.com/public/mail_2/Grids)
 [![Code Climate](https://codeclimate.com/github/Nayjest/Grids/badges/gpa.svg)](https://codeclimate.com/github/Nayjest/Grids)
