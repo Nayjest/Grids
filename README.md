@@ -13,15 +13,11 @@ Grids
 
 Both Laravel 4 and Laravel 5 are supported.
 
-**Announcement: Further development moved to [view-components/grids](https://github.com/view-components/grids).**
+**Announcement: Further development moved to [view-components/grids](https://github.com/view-components/grids).** view-components/grids package is framework-agnostic, but it's easy to integrate with Laravel using [view-components/eloquent-data-processing](https://github.com/view-components/eloquent-data-processing) package.
 
-**Use it together with [view-components/eloquent-data-processing](https://github.com/view-components/eloquent-data-processing) in Laravel applications.**
-
-- If you need heavy stability, use this package
-- If you need better architecture & new features & don't afraid of API changes, try new repositories (anyway, view-components & related packages uses [semantic versioning](http://semver.org/), so there will be no backward-incompatible changes in minor releases).
-- This package (nayjest/grids) still will receive bugfixes
-- Pull-requests from 3rd-party contributors containing new features that doesn't broke backward compatibility still can be accepted to this repository. 
-
+- If you need stability, use nayjest/grids
+- If you need more features and flexibility, try view-components/grids
+- Pull-requests from 3rd-party contributors containing new features can be accepted to nayjest/grids just in case when it doesn't break backward compatibility. If you have some radical improvements, please contribute to view-components/grids.
 
 
 
