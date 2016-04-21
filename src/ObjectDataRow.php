@@ -26,7 +26,7 @@ class ObjectDataRow extends DataRow
             return $res;
         } else {
             try {
-                return $this->src->{$fieldName};
+                return htmlspecialchars($this->src->{$fieldName}, ENT_QUOTES, 'UTF-8');
             } catch(Exception $e) {
                 throw new RuntimeException(
                     "Can't read '$fieldName' property from DataRow",
