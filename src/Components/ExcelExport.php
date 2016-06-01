@@ -70,6 +70,8 @@ class ExcelExport extends RenderableComponent
     }
 
     /**
+     * Sets name of exported file.
+     * 
      * @param string $name
      * @return $this
      */
@@ -80,6 +82,8 @@ class ExcelExport extends RenderableComponent
     }
 
     /**
+     * Returns name of exported file.
+     * 
      * @return string
      */
     public function getFileName()
