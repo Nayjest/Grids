@@ -186,7 +186,7 @@ $grid = new Grid(
                 # optional, 
                 # use to prettify output in table cell 
                 # or print any data located not in results field matching column name
-                ->setCallback(function ($val, EloquentDataRow $row) {
+                ->setCallback(function ($val, ObjectDataRow $row) {
                     if ($val) {
                         $icon  = "<span class='glyphicon glyphicon-user'></span>&nbsp;";
                         $user = $row->getSrc();
