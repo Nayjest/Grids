@@ -7,6 +7,7 @@ trait TTaggable
     protected $tags = [];
 
     /**
+     * @deprecated
      * @return array
      */
     public function getTags()
@@ -15,6 +16,7 @@ trait TTaggable
     }
 
     /**
+     * @deprecated
      * @param array $tags
      * @return $this
      */
@@ -25,6 +27,7 @@ trait TTaggable
     }
 
     /**
+     * @deprecated
      * @param string $tagName
      * @return bool
      */
@@ -34,6 +37,7 @@ trait TTaggable
     }
 
     /**
+     * @deprecated
      * @param array|string[] $tagNames
      * @return bool
      */
