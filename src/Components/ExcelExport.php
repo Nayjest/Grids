@@ -52,6 +52,10 @@ class ExcelExport extends RenderableComponent
 
     protected $is_hidden_columns_exported = false;
 
+    protected $on_file_create;
+
+    protected $on_sheet_create;
+
     /**
      * @param Grid $grid
      * @return null|void
@@ -148,6 +152,7 @@ class ExcelExport extends RenderableComponent
 
     protected function resetPagination(DataProvider $provider)
     {
+        $provider->getPaginationFactory()->setPageName('page_unused');
         $provider->setPageSize($this->getRowsLimit());
         $provider->setCurrentPage(1);
     }
@@ -162,7 +167,11 @@ class ExcelExport extends RenderableComponent
             && ($this->isHiddenColumnsExported() || !$column->isHidden());
     }
 
-    protected function getData()
+    /**
+     * @internal
+     * @return array
+     */
+    public function getData()
     {
         // Build array
         $exportData = [];
@@ -173,6 +182,7 @@ class ExcelExport extends RenderableComponent
 
         $this->resetPagination($provider);
         $provider->reset();
+
         /** @var DataRow $row */
         while ($row = $provider->getRow()) {
             $output = [];
@@ -183,22 +193,16 @@ class ExcelExport extends RenderableComponent
             }
             $exportData[] = $output;
         }
+
         return $exportData;
     }
 
     protected function renderExcel()
     {
-        $onSheetCreate = function (LaravelExcelWorksheet $sheet) {
-            $sheet->fromArray($this->getData(), null, 'A1', false, false);
-        };
-        $onFileCreate = function (LaravelExcelWriter $excel) use ($onSheetCreate) {
-            $excel->sheet($this->getSheetName(), $onSheetCreate);
-        };
-
         /** @var Excel $excel */
         $excel = app('excel');
         $excel
-            ->create($this->getFileName(), $onFileCreate)
+            ->create($this->getFileName(), $this->getOnFileCreate())
             ->export($this->getExtension());
     }
 
@@ -251,6 +255,54 @@ class ExcelExport extends RenderableComponent
     public function setHiddenColumnsExported($isHiddenColumnsExported)
     {
         $this->is_hidden_columns_exported = $isHiddenColumnsExported;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOnFileCreate()
+    {
+        if ($this->on_file_create === null) {
+            $this->on_file_create = function (LaravelExcelWriter $excel) {
+                $excel->sheet($this->getSheetName(), $this->getOnSheetCreate());
+            };
+        }
+        return $this->on_file_create;
+    }
+
+    /**
+     * @param callable $onFileCreate
+     *
+     * @return $this
+     */
+    public function setOnFileCreate($onFileCreate)
+    {
+        $this->on_file_create = $onFileCreate;
+        return $this;
+    }
+
+    /**
+     * @return callable
+     */
+    public function getOnSheetCreate()
+    {
+        if ($this->on_sheet_create === null) {
+            $this->on_sheet_create = function (LaravelExcelWorksheet $sheet) {
+                $sheet->fromArray($this->getData(), null, 'A1', false, false);
+            };
+        }
+        return $this->on_sheet_create;
+    }
+
+    /**
+     * @param callable $onSheetCreate
+     *
+     * @return $this
+     */
+    public function setOnSheetCreate($onSheetCreate)
+    {
+        $this->on_sheet_create = $onSheetCreate;
         return $this;
     }
 }

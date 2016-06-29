@@ -104,6 +104,7 @@ class CsvExport extends RenderableComponent
 
     protected function resetPagination(DataProvider $provider)
     {
+        $provider->getPaginationFactory()->setPageName('page_unused');
         $provider->setPageSize($this->getRowsLimit());
         $provider->setCurrentPage(1);
     }
