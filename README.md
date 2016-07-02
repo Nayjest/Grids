@@ -173,7 +173,7 @@ $grid = new Grid(
             new IdFieldConfig,
             (new FieldConfig)
                 ->setName('login')
-                # will be displayed in table heder
+                # will be displayed in table header
                 ->setLabel('Login')
                 # That's all what you need for filtering. 
                 # It will create controls, process input 
