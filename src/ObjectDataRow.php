@@ -18,7 +18,7 @@ class ObjectDataRow extends DataRow
             $parts = explode('.', $fieldName);
             $res = $this->src;
             foreach ($parts as $part) {
-                $res = is_object($res) ? $res->{$part} : $res[$part];
+                $res = data_get($res, $part);
                 if ($res === null) {
                     return $res;
                 }
