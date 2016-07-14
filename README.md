@@ -98,12 +98,20 @@ Add following line to 'providers' section of app/config/app.php file:
 ```php
 'Nayjest\Grids\ServiceProvider',
 ```
+In Laravel 5.2 :
+```php
+Nayjest\Grids\ServiceProvider::class,
+```
 For Laravel 5 you also need to add "illuminate/html" service provider:
 ```php
 'Nayjest\Grids\ServiceProvider',
 'Collective\Html\HtmlServiceProvider',
 ```
-
+In Laravel 5.2 :
+```php
+Nayjest\Grids\ServiceProvider:class::class,
+Collective\Html\HtmlServiceProvider::class,
+```
 You may also add facade aliases to your application configuration:
 ```php
     'Form'  => 'Illuminate\Html\FormFacade',
