@@ -3,6 +3,8 @@
 namespace Nayjest\Grids\Components;
 
 use Event;
+use Paginator;
+use Illuminate\Foundation\Application;
 use Illuminate\Http\Response;
 use Nayjest\Grids\Components\Base\RenderableComponent;
 use Nayjest\Grids\Components\Base\RenderableRegistry;
@@ -104,7 +106,13 @@ class CsvExport extends RenderableComponent
 
     protected function resetPagination(DataProvider $provider)
     {
-        $provider->getPaginationFactory()->setPageName('page_unused');
+        if (version_compare(Application::VERSION, '5.0.0', '<')) {
+            $provider->getPaginationFactory()->setPageName('page_unused');
+        } else {
+            Paginator::currentPageResolver(function () {
+                return 1;
+            });
+        }
         $provider->setPageSize($this->getRowsLimit());
         $provider->setCurrentPage(1);
     }
