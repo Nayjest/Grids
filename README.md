@@ -64,7 +64,7 @@ Add nayjest/grids to "require" section of your composer.json
 
 ```javascript
 "require": {
-    "nayjest/grids": "^1.2"
+    "nayjest/grids": "^1.3.1"
 },
 ```
 
@@ -72,7 +72,7 @@ For Laravel 5 you also need to add "laravelcollective/html":
 
 ```javascript
 "require": {
-    "nayjest/grids": "^1.2",
+    "nayjest/grids": "^1.3.1",
     "laravelcollective/html": "^5"
 },
 ```
