@@ -122,7 +122,7 @@ class CsvExport extends RenderableComponent
         $file = fopen('php://output', 'w');
 
         header('Content-Type: text/csv');
-        header('Content-Disposition: attachment; filename="'. $this->getFileName() .'"');
+        header('Content-Disposition: attachment; filename="' . $this->getFileName() . '"');
         header('Pragma: no-cache');
 
         set_time_limit(0);
@@ -139,7 +139,7 @@ class CsvExport extends RenderableComponent
             $output = [];
             foreach ($this->grid->getConfig()->getColumns() as $column) {
                 if (!$column->isHidden()) {
-                    $output[] = $this->escapeString( $column->getValue($row) );
+                    $output[] = $this->escapeString($column->getValue($row));
                 }
             }
             fputcsv($file, $output, static::CSV_DELIMITER);

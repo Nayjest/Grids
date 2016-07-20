@@ -2,7 +2,7 @@
 /** @var Nayjest\Grids\Components\Filters\DateRangePicker $component */
 $id = uniqid();
 ?>
-<?php if($component->getLabel()): ?>
+<?php if ($component->getLabel()): ?>
     <span>
         <span class="glyphicon glyphicon-calendar"></span>
         <?= $component->getLabel() ?>
@@ -22,16 +22,16 @@ $id = uniqid();
         if (!options.format) {
             options.format = 'YYYY-MM-DD';
         }
-        var cb = function(start, end) {
+        var cb = function (start, end) {
             var text;
-            if (start.isValid() && end.isValid()){
+            if (start.isValid() && end.isValid()) {
                 text = start.format(options.format) + '—' + end.format(options.format);
             } else {
                 text = '';
             }
             $('#<?=$id?>').val(text);
         };
-        var onApplyDate = function(ev, picker){
+        var onApplyDate = function (ev, picker) {
             var start = $('[name="<?= $component->getStartInputName() ?>"]');
             start.val(picker.startDate.format(options.format));
             var end = $('[name="<?= $component->getEndInputName() ?>"]');
@@ -43,8 +43,8 @@ $id = uniqid();
         $('#<?= $id ?>')
             .daterangepicker(options, cb)
             .on('apply.daterangepicker', onApplyDate)
-            .on('change', function() {
-                if (!$('#<?=$id?>').val()){
+            .on('change', function () {
+                if (!$('#<?=$id?>').val()) {
                     $('[name="<?= $component->getStartInputName() ?>"]').val('');
                     $('[name="<?= $component->getEndInputName() ?>"]').val('');
 
@@ -54,7 +54,7 @@ $id = uniqid();
                     <?php endif ?>
                 }
             })
-            .on('cancel.daterangepicker', function() {
+            .on('cancel.daterangepicker', function () {
                 $(this).val('');
                 $(this).trigger("change");
             });
