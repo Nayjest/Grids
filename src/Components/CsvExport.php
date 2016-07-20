@@ -3,7 +3,7 @@
 namespace Nayjest\Grids\Components;
 
 use Event;
-use Paginator;
+use Illuminate\Paginator\Paginator;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Response;
 use Nayjest\Grids\Components\Base\RenderableComponent;
