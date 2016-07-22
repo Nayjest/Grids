@@ -43,11 +43,20 @@ $id = uniqid();
         $('#<?= $id ?>')
             .daterangepicker(options, cb)
             .on('apply.daterangepicker', onApplyDate)
-            .on('change', function(){
-                if (!$('#<?=$id?>').val()) {
-                    $('[name="<?= $component->getStartInputName() ?>"]').val('');
-                    $('[name="<?= $component->getEndInputName() ?>"]').val('');
-                }
+            .on('change', function () {
+              if (!$('#<?=$id?>').val()) {
+                $('[name="<?= $component->getStartInputName() ?>"]').val('');
+                $('[name="<?= $component->getEndInputName() ?>"]').val('');
+
+                <?php if($component->isSubmittedOnChange()): ?>
+                var end = $('[name="<?= $component->getEndInputName() ?>"]');
+                end.get(0).form.submit();
+                <?php endif ?>
+              }
+            })
+            .on('cancel.daterangepicker', function () {
+              $(this).val('');
+              $(this).trigger("change");
             });
         cb(
             moment("<?= $component->getStartValue() ?>"),
