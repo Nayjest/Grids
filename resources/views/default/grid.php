@@ -12,7 +12,7 @@
 <?php endwhile; ?>
 </tbody>
 <?= $grid->footer() ? $grid->footer()->render() : '' ?>
+</table>
 <?php # Hidden input for submitting form by pressing enter if there are no other submits ?>
 <input type="submit" style="display: none;" />
-</table>
 </form>
