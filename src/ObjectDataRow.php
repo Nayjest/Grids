@@ -1,4 +1,5 @@
 <?php
+
 namespace Nayjest\Grids;
 
 use Exception;
