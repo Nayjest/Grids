@@ -8,14 +8,13 @@ class ObjectDataRow extends DataRow
 {
     /**
      * @param string $fieldName
-     * 
+     *
      * @throws Exception
-     * 
+     *
      * @return mixed
      */
     protected function extractCellValue($fieldName)
     {
-
         if (strpos($fieldName, '.') !== false) {
             $parts = explode('.', $fieldName);
             $parts = array_reverse($parts);
@@ -48,7 +47,6 @@ class ObjectDataRow extends DataRow
                     $e
                 );
             }
-
         }
     }
 }
