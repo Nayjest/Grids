@@ -8,8 +8,10 @@ class ObjectDataRow extends DataRow
 {
     /**
      * @param string $fieldName
-     * @return mixed
+     * 
      * @throws Exception
+     * 
+     * @return mixed
      */
     protected function extractCellValue($fieldName)
     {
@@ -25,7 +27,7 @@ class ObjectDataRow extends DataRow
                         return $res;
                     }
                 }
-            } catch(Exception $e) {
+            } catch (Exception $e) {
                 throw new RuntimeException(
                     "Can't read '$fieldName' as '$part' property from DataRow",
                     0,
@@ -39,7 +41,7 @@ class ObjectDataRow extends DataRow
         } else {
             try {
                 return $this->src->{$fieldName};
-            } catch(Exception $e) {
+            } catch (Exception $e) {
                 throw new RuntimeException(
                     "Can't read '$fieldName' property from DataRow",
                     0,
