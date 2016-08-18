@@ -36,7 +36,7 @@
     </div>
 </span>
 <script>
-    $(function () {
+    document.addEventListener("DOMContentLoaded", function () {
 
         var cookie = {
             set: function (name, value, options) {
