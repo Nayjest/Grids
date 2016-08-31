@@ -110,7 +110,7 @@ class GridInputProcessor
     public function setSorting(FieldConfig $column, $direction)
     {
         $this->input['sort'] = [
-            $column->getName() => $direction
+            $column->getSortableName() => $direction
         ];
         return $this;
     }

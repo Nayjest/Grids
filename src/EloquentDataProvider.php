@@ -139,6 +139,10 @@ class EloquentDataProvider extends DataProvider
             }
         }
 
+        if ($this->with !== []) {
+            $this->src->with($this->with);
+        }
+
         return $this->src;
     }
 
@@ -186,8 +190,7 @@ class EloquentDataProvider extends DataProvider
                     ->where($relatedColumnName, $operator, $value);
             };
             $with = [$relationName => $func];
-
-            $this->with = $with;
+            $this->with = array_merge($this->with, $with);
             if (!isset($this->whereHas[$relationName])) {
                 $this->whereHas[$relationName] = [];
             }

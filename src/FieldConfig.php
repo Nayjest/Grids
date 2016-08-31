@@ -36,6 +36,11 @@ class FieldConfig
      */
     protected $is_sortable = false;
 
+    /**
+     * @var string|null
+     */
+    protected $sortable_column;
+
     protected $sorting;
 
     /** @var  Collection|FilterConfig[] */
@@ -110,6 +115,20 @@ class FieldConfig
         $this->name = $name;
 
         return $this;
+    }
+
+    /**
+     * Returns the sortable name.
+     *
+     * @returns string
+     */
+    public function getSortableName()
+    {
+        if ($this->sortable_column) {
+            return $this->sortable_column;
+        }
+
+        return $this->getName();
     }
 
     /**
@@ -217,10 +236,12 @@ class FieldConfig
      * Allows to enable or disable sorting controls for column.
      *
      * @param boolean $isSortable
+     * @param string|null $sortableColumn
      * @return $this
      */
-    public function setSortable($isSortable)
+    public function setSortable($isSortable, $sortableColumn = null)
     {
+        $this->sortable_column = $sortableColumn;
         $this->is_sortable = $isSortable;
 
         return $this;
@@ -230,14 +251,16 @@ class FieldConfig
      * Allows to enable or disable sorting controls for column.
      *
      * @param boolean|null $isSortable
+     * @param string|null $sortableColumn
      * @return $this|boolean
      */
-    public function sortable($isSortable)
+    public function sortable($isSortable, $sortableColumn = null)
     {
         if (is_null($isSortable)) {
             return $this->is_sortable;
         }
 
+        $this->sortable_column = $sortableColumn;
         $this->is_sortable = $isSortable;
 
         return $this;
