@@ -251,7 +251,8 @@ class FieldConfig
      * Allows to enable or disable sorting controls for column.
      *
      * @param boolean|null $isSortable
-     * @param string|null $sortableColumn
+     * @param string|null $sortableColumn by default we use the field name to sort, but in some cases may be different
+     * name, for example, the relation column is 'profile.nickname' and inner join is 'profiles.nickname'.
      * @return $this|boolean
      */
     public function sortable($isSortable, $sortableColumn = null)
