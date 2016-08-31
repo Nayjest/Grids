@@ -85,6 +85,7 @@ class FieldConfig
     public function setOrder($order)
     {
         $this->order = $order;
+
         return $this;
     }
 
@@ -107,6 +108,7 @@ class FieldConfig
     public function setName($name)
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -123,6 +125,7 @@ class FieldConfig
         }
 
         $this->name = $name;
+
         return $this;
     }
 
@@ -144,6 +147,7 @@ class FieldConfig
     public function hide()
     {
         $this->is_hidden = true;
+
         return $this;
     }
 
@@ -155,6 +159,7 @@ class FieldConfig
     public function show()
     {
         $this->is_hidden = false;
+
         return $this;
     }
 
@@ -165,7 +170,7 @@ class FieldConfig
      */
     public function getLabel()
     {
-        return $this->label ? : ucwords(str_replace(array('-', '_', '.'), ' ', $this->name));
+        return $this->label ?: ucwords(str_replace(['-', '_', '.'], ' ', $this->name));
     }
 
     /**
@@ -177,6 +182,7 @@ class FieldConfig
     public function setLabel($label)
     {
         $this->label = $label;
+
         return $this;
     }
 
@@ -193,6 +199,7 @@ class FieldConfig
         }
 
         $this->label = $label;
+
         return $this;
     }
 
@@ -215,6 +222,24 @@ class FieldConfig
     public function setSortable($isSortable)
     {
         $this->is_sortable = $isSortable;
+
+        return $this;
+    }
+
+    /**
+     * Allows to enable or disable sorting controls for column.
+     *
+     * @param boolean|null $isSortable
+     * @return $this|boolean
+     */
+    public function sortable($isSortable)
+    {
+        if (is_null($isSortable)) {
+            return $this->is_sortable;
+        }
+
+        $this->is_sortable = $isSortable;
+
         return $this;
     }
 
@@ -238,22 +263,24 @@ class FieldConfig
     public function setSorting($sortOrder)
     {
         $this->sorting = $sortOrder;
+
         return $this;
     }
 
     /**
-     * Allows to enable or disable sorting controls for column.
+     * Allows to specify sorting by this column for data rows.
      *
-     * @param string|null $sorting
-     * @return $this|string
+     * @param null|string|boolean $sortOrder null|Grid::SORT_ASC|Grid::SORT_DESC|false
+     * @return $this
      */
-    public function sorting($sorting = null)
+    public function sorting($sortOrder = false)
     {
-        if (is_null($sorting)) {
+        if ($sortOrder === false) {
             return $this->sorting;
         }
 
-        $this->sorting = $sorting;
+        $this->sorting = $sortOrder;
+
         return $this;
     }
 
@@ -287,6 +314,7 @@ class FieldConfig
     public function setCallback($callback)
     {
         $this->callback = $callback;
+
         return $this;
     }
 
@@ -315,6 +343,7 @@ class FieldConfig
         }
 
         $this->callback = $callback;
+
         return $this;
     }
 
@@ -364,6 +393,7 @@ class FieldConfig
     {
         $this->getFilters()->push($filter);
         $filter->attach($this);
+
         return $this;
     }
 
@@ -376,6 +406,7 @@ class FieldConfig
     public function filter(FilterConfig $filter)
     {
         $this->addFilter($filter);
+
         return $this;
     }
 
@@ -390,6 +421,7 @@ class FieldConfig
     {
         $filter = new $class;
         $this->addFilter($filter);
+
         return $filter;
     }
 
@@ -413,6 +445,7 @@ class FieldConfig
         if (null === $this->filters) {
             $this->filters = new Collection();
         }
+
         return $this->filters;
     }
 

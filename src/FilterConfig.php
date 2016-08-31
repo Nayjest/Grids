@@ -40,6 +40,9 @@ class FilterConfig
         return $this;
     }
 
+    /**
+     * @return self|mixed
+     */
     public function operator($operator = null)
     {
         if (is_null($operator)) {
@@ -55,6 +58,9 @@ class FilterConfig
         return $this->column;
     }
 
+    /**
+     * @return self|mixed
+     */
     public function column()
     {
         return $this->getColumn();
@@ -71,6 +77,9 @@ class FilterConfig
         return $this;
     }
 
+    /**
+     * @return self|mixed
+     */
     public function label($label = null)
     {
         if (is_null($label)) {
@@ -127,6 +136,9 @@ class FilterConfig
         return $this->template;
     }
 
+    /**
+     * @return self|mixed
+     */
     public function template($template = null)
     {
         if (is_null($template)) {
@@ -138,6 +150,9 @@ class FilterConfig
     }
 
 
+    /**
+     * @return self|mixed
+     */
     public function getDefaultValue()
     {
         return $this->default_value;
@@ -173,6 +188,9 @@ class FilterConfig
         return $this;
     }
 
+    /**
+     * @return self|mixed
+     */
     public function name($name = null)
     {
         if (is_null($name)) {
@@ -193,6 +211,9 @@ class FilterConfig
         return $this->getName() . '-' . $this->getOperator();
     }
 
+    /**
+     * @return string
+     */
     public function id()
     {
         return $this->getId();
