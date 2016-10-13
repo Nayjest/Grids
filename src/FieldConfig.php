@@ -44,6 +44,11 @@ class FieldConfig
     /** @var  callable */
     protected $callback;
 
+    /**
+     * @var array
+     */
+    protected $attributes = [];
+
     protected $is_hidden = false;
 
     /**
@@ -331,5 +336,23 @@ class FieldConfig
         } else {
             return $row->getCellValue($this);
         }
+    }
+
+    /**
+     * @param array $attributes
+     * @return $this
+     */
+    public function setAttributes($attributes)
+    {
+        $this->attributes = $attributes;
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getAttributes()
+    {
+        return $this->attributes;
     }
 }

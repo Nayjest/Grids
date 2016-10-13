@@ -26,6 +26,7 @@ class TableCell extends HtmlTag
     public function __construct(FieldConfig $column) {
 
         $this->setColumn($column);
+        $this->setAttributes($column->getAttributes());
     }
 
     public function getAttributes()
