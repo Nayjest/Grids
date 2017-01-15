@@ -17,6 +17,8 @@ class GridConfig implements RegistryInterface
 
     const SECTION_DO_NOT_RENDER = 'not_render';
 
+    protected $grid_name;
+
     protected $template = 'grids::default';
 
     /** @var FieldConfig[]|Collection */
@@ -242,5 +244,27 @@ class GridConfig implements RegistryInterface
     public function getPageSize()
     {
         return $this->page_size;
+    }
+
+    /**
+     * [sets the name of the grid for identification]
+     * @method setGridName
+     * @author Rohit Agarwal
+     * @param  [string]      $name [description]
+     */
+    public function setGridName($name)
+    {
+        $this->grid_name = $name;
+    }
+
+    /**
+     * [returns the name of the grid for identification]
+     * @method getGridName
+     * @author Rohit Agarwal
+     * @return [string]      [description]
+     */
+    public function getGridName()
+    {
+        return $this->grid_name;
     }
 }
