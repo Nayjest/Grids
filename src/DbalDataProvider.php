@@ -158,24 +158,27 @@ class DbalDataProvider extends DataProvider
 
     public function filter($fieldName, $operator, $value)
     {
-         switch ($operator) {
+        switch ($operator) {
+            case 'like_r':
+                $operator = 'like';
+                break;
             case "eq":
                 $operator = '=';
                 break;
             case "n_eq":
-                $operator = '<>';    
+                $operator = '<>';
                 break;
             case "gt":
-                $operator = '>';    
-                 break;
+                $operator = '>';
+                break;
             case "lt":
-                $operator = '<';    
+                $operator = '<';
                 break;
             case "ls_e":
-                $operator = '<=';    
+                $operator = '<=';
                 break;
             case "gt_e":
-                $operator = '>=';    
+                $operator = '>=';
                 break;
             case "in":
                 // may be broken, @see https://github.com/Nayjest/Grids/issues/109
