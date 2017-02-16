@@ -111,6 +111,22 @@ class FieldConfig
     }
 
     /**
+     * Sets field name.
+     *
+     * @param string|null $name
+     * @return $this|string
+     */
+    public function name($name = null)
+    {
+        if (is_null($name)) {
+            return $this->name;
+        }
+
+        $this->name = $name;
+        return $this;
+    }
+
+    /**
      * Returns true if column is hidden.
      *
      * @return bool
@@ -165,6 +181,22 @@ class FieldConfig
     }
 
     /**
+     * Sets text label that will be rendered in table header.
+     *
+     * @param string|null $label
+     * @return $this|string
+     */
+    public function label($label = null)
+    {
+        if (is_null($label)) {
+            return $this->label;
+        }
+
+        $this->label = $label;
+        return $this;
+    }
+
+    /**
      * Returns true if column is sortable (sorting controls must be rendered).
      *
      * @return bool
@@ -206,6 +238,22 @@ class FieldConfig
     public function setSorting($sortOrder)
     {
         $this->sorting = $sortOrder;
+        return $this;
+    }
+
+    /**
+     * Allows to enable or disable sorting controls for column.
+     *
+     * @param string|null $sorting
+     * @return $this|string
+     */
+    public function sorting($sorting = null)
+    {
+        if (is_null($sorting)) {
+            return $this->sorting;
+        }
+
+        $this->sorting = $sorting;
         return $this;
     }
 
@@ -254,6 +302,23 @@ class FieldConfig
     }
 
     /**
+     * Allows to set callback function that will render
+     * content of table cells for this column.
+     *
+     * @param string|null $callback
+     * @return $this|callable|null
+     */
+    public function callback($callback = null)
+    {
+        if (is_null($callback)) {
+            return $this->callback;
+        }
+
+        $this->callback = $callback;
+        return $this;
+    }
+
+    /**
      * Allows to specify filtering controls for column.
      *
      * @param Collection|FilterConfig[] $filters
@@ -261,6 +326,26 @@ class FieldConfig
      */
     public function setFilters($filters)
     {
+        $this->filters = Collection::make($filters);
+        foreach ($this->filters as $filterConfig) {
+            $filterConfig->attach($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Allows to specify filtering controls for column.
+     *
+     * @param Collection|FilterConfig[]|null $filters
+     * @return $this|Collection|FilterConfig[]
+     */
+    public function filters($filters = null)
+    {
+        if (is_null($filters)) {
+            return $this->filters;
+        }
+
         $this->filters = Collection::make($filters);
         foreach ($this->filters as $filterConfig) {
             $filterConfig->attach($this);
@@ -279,6 +364,18 @@ class FieldConfig
     {
         $this->getFilters()->push($filter);
         $filter->attach($this);
+        return $this;
+    }
+
+    /**
+     * Allows to add filtering control to column.
+     *
+     * @param FilterConfig $filter
+     * @return $this
+     */
+    public function filter(FilterConfig $filter)
+    {
+        $this->addFilter($filter);
         return $this;
     }
 
