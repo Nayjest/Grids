@@ -1,27 +1,14 @@
 {
-    "name": "nayjest/grids",
-    "description": "Grids for Laravel 4 & Laravel 5 frameworks",
-    "keywords": [
-        "grid",
-        "tables",
-        "html",
-        "laravel",
-        "database",
-        "eloquent",
-        "bootstrap",
-        "laravel-5",
-        "laravel5"
-    ],
-    "homepage": "https://github.com/Nayjest/Grids",
+    "name": "rebelmonk/laravel-grid",
+    "description": "A customized packages based on laravel grid by nayjest",
     "type": "library",
-    "license": "MIT",
     "authors": [
         {
-            "name": "Vitalii [Nayjest] Stepanenko",
-            "email": "mail@vitaliy.in",
-            "role": "Developer"
+            "name": "Rebel Wizard",
+            "email": "therebelwizard@gmail.com"
         }
     ],
+    "minimum-stability": "dev",
     "require": {
         "php": ">=5.4.0",
         "illuminate/support": ">=4.2",
@@ -35,11 +22,5 @@
         "psr-4": {
             "Nayjest\\Grids\\": "src/"
         }
-    },
-    "support": {
-        "email": "mail@vitaliy.in",
-        "source": "https://github.com/Nayjest/Grids",
-        "issues": "https://github.com/Nayjest/Grids/issues"
-    },
-    "minimum-stability": "dev"
+    }
 }
