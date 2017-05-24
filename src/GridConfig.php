@@ -243,4 +243,23 @@ class GridConfig implements RegistryInterface
     {
         return $this->page_size;
     }
+    /**
+     * Returns maximal quantity of rows per page.
+     *
+     * @return int
+     */
+    public function getPageSize()
+    {
+        return $this->page_size;
+    }
+
+    public function setDefaultSort($columnName, $direction)
+    {
+        $this->defaultSort = [$columnName, $direction];
+    }
+
+    public function getDefaultSort()
+    {
+        return $this->defaultSort;
+    }
 }
