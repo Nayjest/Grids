@@ -182,6 +182,7 @@ class GridInputProcessor
 
     /**
      * Returns current URL extended by specified GET parameters.
+     * URL contains only the query string, browsers will add the current location when linked to it.
      *
      * @param array $new_params
      * @return string
@@ -191,10 +192,6 @@ class GridInputProcessor
         if (null !== $query_string = $this->getQueryString($new_params)) {
             $query_string = '?' . $query_string;
         }
-        $request = Request::instance();
-        return $request->getSchemeAndHttpHost()
-        . $request->getBaseUrl()
-        . $request->getPathInfo()
-        . $query_string;
+        return $query_string;
     }
 }
