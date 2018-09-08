@@ -11,6 +11,9 @@
                     class="column-<?= $column->getName() ?>"
                     <?= $column->isHidden()?'style="display:none"':'' ?>
                     >
+                    <div class="column-label">
+                        <?= $column->getLabel() ?>
+                    </div>
                     <?php if ($column->hasFilters()): ?>
                         <?php foreach($column->getFilters() as $filter): ?>
                             <?= $grid->getFiltering()->render($filter) ?>
