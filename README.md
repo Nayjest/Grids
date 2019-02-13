@@ -106,7 +106,7 @@ For Laravel 5 you also need to add "illuminate/html" service provider:
 
 You may also add facade aliases to your application configuration:
 ```php
-    'Form'  => 'Collective\Html\FormFacade',
+    'Form'  => 'Illuminate\Html\FormFacade',
     'HTML'  => 'Collective\Html\HtmlFacade',
     'Grids'     => 'Nayjest\Grids\Grids',
 ```

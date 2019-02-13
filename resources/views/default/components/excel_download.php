@@ -4,17 +4,17 @@
  *
  * @var $grid Nayjest\Grids\Grid
  */
-use Nayjest\Grids\Components\ExcelExport;
+use Nayjest\Grids\Components\ExcelDownload;
 ?>
-<span>
+<span style="visibility:hidden">
     <a
         href="<?= $grid
             ->getInputProcessor()
-            ->getUrl([ExcelExport::INPUT_PARAM => 1])
+            ->getUrl(['dld' => 1]);
         ?>"
         class="btn btn-sm btn-default"
-        >
-        <span class="glyphicon glyphicon-export"></span>
-        Excel Exportttttttttttt
+    >
+        <span class="glyphicon glyphicon-download"></span>
+        Excel Download
     </a>
 </span>

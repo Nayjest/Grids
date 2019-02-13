@@ -197,4 +197,12 @@ class GridInputProcessor
         . $request->getPathInfo()
         . $query_string;
     }
+
+    public function getUrlWithoutParams()
+    {
+        $request = Request::instance();
+        return $request->getSchemeAndHttpHost()
+            . $request->getBaseUrl()
+            . $request->getPathInfo();
+    }
 }
