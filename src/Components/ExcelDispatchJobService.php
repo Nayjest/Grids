@@ -2,9 +2,15 @@
 
 namespace Nayjest\Grids\Components;
 
+use App\Components\Grid\ExtendedTableRow;
+use App\Components\Grid\GridsToComponents;
+use App\Http\Controllers\SupportersController;
+use App\Topic;
+use App\User;
 use Event;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Classes\LaravelExcelWorksheet;
 use Maatwebsite\Excel\Excel;
 use Maatwebsite\Excel\Writers\LaravelExcelWriter;
@@ -44,7 +50,13 @@ class ExcelDispatchJobService extends RenderableComponent
 
     protected $data;
 
+    protected $userId;
+
+    protected $className;
+
     protected $config;
+
+
 
     /**
      * @var string
@@ -67,6 +79,8 @@ class ExcelDispatchJobService extends RenderableComponent
     /**
      * @return mixed
      */
+
+
     public function getConfig()
     {
         return $this->config;
@@ -80,9 +94,66 @@ class ExcelDispatchJobService extends RenderableComponent
         $this->config = $config;
         return $this;
     }
-
-    public function __construct()
+    /**
+     * @return mixed
+     */
+    public function getClassName()
     {
+        return $this->className;
+    }
+
+    /**
+     * @param mixed $config
+     */
+    public function setClassName($className)
+    {
+        $this->className = $className;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUserId()
+    {
+        return $this->userId;
+    }
+
+    /**
+     * @param mixed $config
+     */
+    public function setUserId($userId)
+    {
+        $this->userId = $userId;
+        return $this;
+    }
+
+    public function __construct($userId, $showId, $sheetName, $extension, $ignored_columns, $is_hidden_columns_exported, $rows_limit)
+    {
+        $this->setUserId($userId);
+        $this->setSheetName($sheetName);
+        $this->setExtension($extension);
+        $this->setIgnoredColumns($ignored_columns);
+        $this->setHiddenColumnsExported($is_hidden_columns_exported);
+        $this->setRowsLimit($rows_limit);
+
+        $user = User::find($this->userId);
+
+        $controllers = GridsToComponents::getGridsControllers();
+        $className = 'App\\Http\\Controllers\\' . $controllers[$sheetName];
+
+        if($sheetName == 'topicQuestionsGrid') {
+            $topic = Topic::find($showId);
+            $this->config = $className::getQuestionsGridConfig($topic);
+        }
+        else{
+            $this->config = $className::getGridConfig($user);
+        }
+
+        $grid = (new Grid($this->config->setRowComponent(new ExtendedTableRow(function ($model) {
+            return $className::getRowAttributes($model);
+        }))));
+
         $this->renderExcel();
     }
 
@@ -230,7 +301,7 @@ class ExcelDispatchJobService extends RenderableComponent
         $excel = app('excel');
         $excel
             ->create($this->getFileName(), $this->getOnFileCreate())
-            ->save('xlsx',Storage::disk('local')->getDriver()->getAdapter()->getPathPrefix() . 'public/excels/');
+            ->store('xlsx',Storage::disk('local')->getDriver()->getAdapter()->getPathPrefix() . 'public/excels/');
     }
 
     protected function escapeString($str)
