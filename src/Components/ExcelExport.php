@@ -12,6 +12,7 @@ class ExcelExport extends RenderableComponent
     private $baseName;
     private $date;
     private $config;
+    private $showId;
 
     const NAME = 'excel_export';
     protected $template = '*.components.excel_export';
@@ -55,10 +56,10 @@ class ExcelExport extends RenderableComponent
     public function initialize(Grid $grid)
     {
         parent::initialize($grid);
+        $this->showId = substr(url()->current(), strrpos(url()->current(), '/' )+1);
         Event::listen(Grid::EVENT_PREPARE, function (Grid $grid) {
-        $this->config = $grid->getConfig();
             if ($grid->getInputProcessor()->getValue(static::INPUT_PARAM, false)) {
-                dispatch(new ExportExcel($this->getDate(), $this->getBaseName(), $this->config));
+                dispatch((new ExportExcel($this->getDate(), $grid->getConfig()->getName(), auth()->user()->id, $this->showId))->onQueue('default'));
             }
         });
     }
