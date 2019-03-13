@@ -22,9 +22,12 @@ $gridName = $grid->getConfig()->getName();
         myFunction();
     })
     function myFunction() {
-        setInterval(function () {
-            var visibility = $.get("/check/<?=$gridName?>",function(){}).then(function(visibility){
+        let interval = setInterval(function () {
+            let visibility = $.get("/check/<?=$gridName?>",function(){}).then(function(visibility){
                 $(".button-visibility").css("visibility",visibility.visibility);
+                if(visibility.visibility == "hidden"){
+                    clearInterval(interval);
+                }
             });
         }, 10000);
     }
