@@ -122,7 +122,7 @@ class DbalDataProvider extends DataProvider
             $item = $this->iterator->current();
             $this->iterator->next();
             $row = new ObjectDataRow($item, $this->getRowId());
-            Event::fire(self::EVENT_FETCH_ROW, [$row, $this]);
+            Event::dispatch(self::EVENT_FETCH_ROW, [$row, $this]);
             return $row;
         } else {
             return null;

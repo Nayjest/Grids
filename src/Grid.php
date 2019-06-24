@@ -38,7 +38,7 @@ class Grid
         }
 
         $this->initializeComponents();
-        Event::fire(self::EVENT_CREATE, $this);
+        Event::dispatch(self::EVENT_CREATE, $this);
     }
 
     /**
@@ -67,7 +67,7 @@ class Grid
         $this->getFiltering()->apply();
         $this->prepareColumns();
         $this->getSorter()->apply();
-        Event::fire(self::EVENT_PREPARE, $this);
+        Event::dispatch(self::EVENT_PREPARE, $this);
         $this->prepared = true;
     }
 
