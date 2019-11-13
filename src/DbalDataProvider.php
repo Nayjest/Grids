@@ -4,7 +4,6 @@ namespace Nayjest\Grids;
 use DB;
 use Doctrine\DBAL\Query\QueryBuilder;
 use Event;
-use App;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Collection;
 
@@ -97,7 +96,7 @@ class DbalDataProvider extends DataProvider
      */
     public function getPaginationFactory()
     {
-        return App::make('paginator');
+        return \App::make('paginator');
     }
 
     protected function getIterator()
@@ -124,7 +123,7 @@ class DbalDataProvider extends DataProvider
             $this->iterator->next();
             $row = new ObjectDataRow($item, $this->getRowId());
 
-            if (preg_match('/5.8.*/', App::VERSION())) {
+            if (version_compare(Application::VERSION, '5.8', '>')) {
                 Event::dispatch(self::EVENT_FETCH_ROW, [$row, $this]);
             } else {
                 Event::fire(self::EVENT_FETCH_ROW, [$row, $this]);

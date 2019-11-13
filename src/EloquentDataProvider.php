@@ -92,7 +92,7 @@ class EloquentDataProvider extends DataProvider
             $this->iterator->next();
             $row = new EloquentDataRow($item, $this->getRowId());
 
-            if (preg_match('/5.8.*/', App::VERSION())) {
+            if (version_compare(Application::VERSION, '5.8', '>')) {
                 Event::dispatch(self::EVENT_PREPARE, $this);
             } else {
                 Event::fire(self::EVENT_PREPARE, $this);

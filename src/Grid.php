@@ -6,6 +6,7 @@ use Cache;
 use Nayjest\Grids\Components\TFoot;
 use Nayjest\Grids\Components\THead;
 use View;
+use Illuminate\Foundation\Application;
 
 class Grid
 {
@@ -39,7 +40,7 @@ class Grid
 
         $this->initializeComponents();
 
-        if (preg_match('/5.8.*/', App::VERSION())) {
+        if (version_compare(Application::VERSION, '5.8', '>')) {
             Event::dispatch(self::EVENT_CREATE, $this);
         } else {
             Event::fire(self::EVENT_CREATE, $this);
@@ -73,7 +74,7 @@ class Grid
         $this->prepareColumns();
         $this->getSorter()->apply();
 
-        if (preg_match('/5.8.*/', App::VERSION())) {
+        if (version_compare(Application::VERSION, '5.8', '>')) {
             Event::dispatch(self::EVENT_PREPARE, $this);
         } else {
             Event::fire(self::EVENT_PREPARE, $this);
