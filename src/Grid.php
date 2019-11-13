@@ -38,7 +38,12 @@ class Grid
         }
 
         $this->initializeComponents();
-        Event::dispatch(self::EVENT_CREATE, $this);
+
+        if (preg_match('/5.8.*/', App::VERSION())) {
+            Event::dispatch(self::EVENT_CREATE, $this);
+        } else {
+            Event::fire(self::EVENT_CREATE, $this);
+        }
     }
 
     /**
@@ -67,7 +72,13 @@ class Grid
         $this->getFiltering()->apply();
         $this->prepareColumns();
         $this->getSorter()->apply();
-        Event::dispatch(self::EVENT_PREPARE, $this);
+
+        if (preg_match('/5.8.*/', App::VERSION())) {
+            Event::dispatch(self::EVENT_PREPARE, $this);
+        } else {
+            Event::fire(self::EVENT_PREPARE, $this);
+        }
+
         $this->prepared = true;
     }
 
