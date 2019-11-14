@@ -123,7 +123,7 @@ class DbalDataProvider extends DataProvider
             $this->iterator->next();
             $row = new ObjectDataRow($item, $this->getRowId());
 
-            if (version_compare(Application::VERSION, '5.8', '>')) {
+            if (version_compare(Application::VERSION, '5.8', '>=')) {
                 Event::dispatch(self::EVENT_FETCH_ROW, [$row, $this]);
             } else {
                 Event::fire(self::EVENT_FETCH_ROW, [$row, $this]);

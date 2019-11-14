@@ -40,7 +40,7 @@ class Grid
 
         $this->initializeComponents();
 
-        if (version_compare(Application::VERSION, '5.8', '>')) {
+        if (version_compare(Application::VERSION, '5.8', '>=')) {
             Event::dispatch(self::EVENT_CREATE, $this);
         } else {
             Event::fire(self::EVENT_CREATE, $this);
@@ -74,7 +74,7 @@ class Grid
         $this->prepareColumns();
         $this->getSorter()->apply();
 
-        if (version_compare(Application::VERSION, '5.8', '>')) {
+        if (version_compare(Application::VERSION, '5.8', '>=')) {
             Event::dispatch(self::EVENT_PREPARE, $this);
         } else {
             Event::fire(self::EVENT_PREPARE, $this);
