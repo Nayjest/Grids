@@ -437,7 +437,7 @@ If you discover any security related issues, please email mail@vitaliy.in instea
 
 ## License
 
-© 2014&mdash;2017 Vitalii Stepanenko
+© 2014&mdash;2019 Vitalii Stepanenko
 
 Licensed under the MIT License. 
 
