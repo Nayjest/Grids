@@ -6,6 +6,7 @@ use Cache;
 use Nayjest\Grids\Components\TFoot;
 use Nayjest\Grids\Components\THead;
 use View;
+use Illuminate\Foundation\Application;
 
 class Grid
 {
@@ -38,7 +39,12 @@ class Grid
         }
 
         $this->initializeComponents();
-        Event::fire(self::EVENT_CREATE, $this);
+
+        if (version_compare(Application::VERSION, '5.8', '>=')) {
+            Event::dispatch(self::EVENT_CREATE, $this);
+        } else {
+            Event::fire(self::EVENT_CREATE, $this);
+        }
     }
 
     /**
@@ -67,7 +73,13 @@ class Grid
         $this->getFiltering()->apply();
         $this->prepareColumns();
         $this->getSorter()->apply();
-        Event::fire(self::EVENT_PREPARE, $this);
+
+        if (version_compare(Application::VERSION, '5.8', '>=')) {
+            Event::dispatch(self::EVENT_PREPARE, $this);
+        } else {
+            Event::fire(self::EVENT_PREPARE, $this);
+        }
+
         $this->prepared = true;
     }
 
