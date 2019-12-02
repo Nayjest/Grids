@@ -11,7 +11,7 @@ Grids
 [![HHVM Status](http://hhvm.h4cc.de/badge/nayjest/grids.svg)](http://hhvm.h4cc.de/package/nayjest/grids)
 [![Join the chat at https://gitter.im/Nayjest/Grids](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Nayjest/Grids?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-Both Laravel 4 and Laravel 5 are supported.
+Laravel 4.X, Laravel 5.X and Laravel 6 are supported.
 
 **Announcement: Further development moved to [view-components/grids](https://github.com/view-components/grids).** view-components/grids package is framework-agnostic, but it's easy to integrate with Laravel using [view-components/eloquent-data-processing](https://github.com/view-components/eloquent-data-processing) package.
 
@@ -52,7 +52,7 @@ Both Laravel 4 and Laravel 5 are supported.
 
 ## Requirements
 
-* Laravel 4.X / 5.X
+* Laravel 4.X / 5.X / 6.X
 * laravelcollective/html package if you use Laravel5.X
 * php 5.4+
 
@@ -64,7 +64,7 @@ Add nayjest/grids to "require" section of your composer.json
 
 ```javascript
 "require": {
-    "nayjest/grids": "^1.3.1"
+    "nayjest/grids": "^2.0.0"
 },
 ```
 
@@ -72,7 +72,7 @@ For Laravel 5 you also need to add "laravelcollective/html":
 
 ```javascript
 "require": {
-    "nayjest/grids": "^1.3.1",
+    "nayjest/grids": "^2.0.0",
     "laravelcollective/html": "^5"
 },
 ```
@@ -88,7 +88,7 @@ For Laravel 4
 ```bash    
 php composer.phar require nayjest/grids
 ```
-For Laravel 5
+For Laravel 5 / Laravel 6
 ```bash    
 php composer.phar require nayjest/grids laravelcollective/html
 ```
@@ -98,7 +98,7 @@ Add following line to 'providers' section of app/config/app.php file:
 ```php
 'Nayjest\Grids\ServiceProvider',
 ```
-For Laravel 5 you also need to add "illuminate/html" service provider:
+For Laravel 5 / 6 you also need to add "illuminate/html" service provider:
 ```php
 'Nayjest\Grids\ServiceProvider',
 'Collective\Html\HtmlServiceProvider',
@@ -323,7 +323,7 @@ Quick links:
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 ```
-* Nayjest\Grids\Components\Pager component works only with Laravel 4.X, for Laravel 5 use Nayjest\Grids\Components\Laravel5\Pager
+* Nayjest\Grids\Components\Pager component works only with Laravel 4.X, for Laravel 5 / 6 use Nayjest\Grids\Components\Laravel5\Pager
 
 ##### Working with related Eloquent models
 
