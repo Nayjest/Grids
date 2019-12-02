@@ -365,6 +365,9 @@ $query = Customer
 
 ## Upgrade Guide
 
+### From 1.X to 2.X
+
+There are full backward compatibility between 1.X and 2.X branches.
 ### From 0.9.X to 1.X
 
 There are full backward compatibility between 0.9.X and 1.X branches.
