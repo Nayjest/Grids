@@ -12,13 +12,7 @@ Grids
 
 Laravel 4.X, Laravel 5.X and Laravel 6 are supported.
 
-**Announcement: Further development moved to [view-components/grids](https://github.com/view-components/grids).** view-components/grids package is framework-agnostic, but it's easy to integrate with Laravel using [view-components/eloquent-data-processing](https://github.com/view-components/eloquent-data-processing) package.
-
-- If you need stability, use nayjest/grids
-- If you need more features and flexibility, try view-components/grids
-- Pull-requests from 3rd-party contributors containing new features can be accepted to nayjest/grids just in case when it doesn't break backward compatibility. If you have some radical improvements, please contribute to view-components/grids.
-
-
+- Pull-requests from 3rd-party contributors containing new features can be accepted to nayjest/grids just in case when it doesn't break backward compatibility. If you have some radical improvements, please contribute to [view-components/grids](https://github.com/view-components/grids).
 
 ## Features
 * Data providers (php array, Eloquent model, Doctrine DBAL query object)
@@ -47,7 +41,6 @@ Laravel 4.X, Laravel 5.X and Laravel 6 are supported.
 * Working with json data sources via ajax
 * Check compatibility with Lumen microframework
 
-[Ask for more features](https://github.com/Nayjest/Grids/issues). You are welcome!
 
 ## Requirements
 
@@ -366,7 +359,8 @@ $query = Customer
 
 ### From 1.X to 2.X
 
-There are full backward compatibility between 1.X and 2.X branches.
+There are full backward compatibility between 1.X and 2.X branches. 
+
 ### From 0.9.X to 1.X
 
 There are full backward compatibility between 0.9.X and 1.X branches.
