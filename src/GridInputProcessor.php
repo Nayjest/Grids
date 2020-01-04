@@ -1,7 +1,6 @@
 <?php
 namespace Nayjest\Grids;
 
-use Input;
 use Request;
 use Form;
 

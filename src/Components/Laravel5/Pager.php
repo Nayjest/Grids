@@ -2,7 +2,7 @@
 namespace Nayjest\Grids\Components\Laravel5;
 
 use Illuminate\Pagination\Paginator;
-use Input;
+use Request;
 use Nayjest\Grids\Components\Base\RenderableComponent;
 use Nayjest\Grids\Grid;
 
@@ -24,7 +24,7 @@ class Pager extends RenderableComponent
     protected function setupPaginationForReading()
     {
         Paginator::currentPageResolver(function () {
-            return Input::get("$this->input_key.page", 1);
+            return Request::get("$this->input_key.page", 1);
         });
     }
 
