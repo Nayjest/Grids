@@ -93,7 +93,7 @@ class EloquentDataProvider extends DataProvider
             $row = new EloquentDataRow($item, $this->getRowId());
 
             if (version_compare(Application::VERSION, '5.8', '>=')) {
-                Event::dispatch(self::EVENT_FETCH_ROW, $this);
+                Event::dispatch(self::EVENT_FETCH_ROW, [$row, $this]);
             } else {
                 Event::fire(self::EVENT_FETCH_ROW, $this);
             }
