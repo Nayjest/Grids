@@ -332,4 +332,21 @@ class FieldConfig
             return $row->getCellValue($this);
         }
     }
+    
+    public function addStyleAttribute($name, $value){
+        $this->styleAttributes = $this->styleAttributes. $name. ':' . $value . ';';
+        return $this;
+    }
+
+    public function getStyleAttributes(){
+        return $this->styleAttributes;
+    }
+
+    public function setFormat($format){
+        $this->format = $format;
+    }
+
+    public function getFormat(){
+        return $this->format;
+    }
 }
