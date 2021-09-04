@@ -47,6 +47,13 @@ class FieldConfig
     protected $is_hidden = false;
 
     /**
+     * HTML Attributes to add to cells
+     * [attributeName => value]
+     * @var array
+     */
+    protected $cell_html_attributes = [];
+
+    /**
      * Constructor.
      *
      * @param string|null $name column unique name for internal usage
@@ -331,5 +338,22 @@ class FieldConfig
         } else {
             return $row->getCellValue($this);
         }
+    }
+
+    /**
+     * @return array
+     */
+    public function getCellHtmlAttributes()
+    {
+        return $this->cell_html_attributes;
+    }
+
+    /**
+     * @param array $cell_html_attributes
+     */
+    public function setCellHtmlAttributes($cell_html_attributes)
+    {
+        $this->cell_html_attributes = $cell_html_attributes;
+        return $this;
     }
 }

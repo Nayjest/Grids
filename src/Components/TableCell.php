@@ -33,6 +33,14 @@ class TableCell extends HtmlTag
         if (empty($this->attributes['class'])) {
             $this->attributes['class'] = 'column-' . $this->getColumn()->getName();
         }
+        if ($this->getColumn()->getCellHtmlAttributes()) {
+            foreach ($this->getColumn()->getCellHtmlAttributes() as $attribute=>$value) {
+                $this->attributes[$attribute] .= (empty($this->attributes[$attribute]) ? '' : ' ') . $value;
+            }
+        }
+        if (empty($this->attributes['data-label'])) {
+            $this->attributes['data-label'] = $this->getColumn()->getLabel();
+        }
         if ($this->column->isHidden()) {
             $this->attributes['style'] = 'display:none;';
         }
