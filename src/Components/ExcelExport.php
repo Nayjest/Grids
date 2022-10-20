@@ -209,6 +209,11 @@ class ExcelExport extends RenderableComponent
     {
         /** @var Excel $excel */
         $excel = app('excel');
+
+        if (!method_exists($excel, 'create')) {
+            throw new \RuntimeException('U are most likely using Maatwebsite/Excel v3 or newer. Use PhpSpreadsheetExport component instead');
+        }
+
         $excel
             ->create($this->getFileName(), $this->getOnFileCreate())
             ->export($this->getExtension());

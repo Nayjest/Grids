@@ -46,7 +46,7 @@ Laravel 4.X, Laravel 5.X and Laravel 6 are supported.
 
 * Laravel 4.X / 5.X / 6.X
 * laravelcollective/html package if you use Laravel5.X
-* php 5.4+
+* php 5.5+
 
 ## Installation
 
@@ -433,7 +433,7 @@ If you discover any security related issues, please email mail@vitaliy.in instea
 
 ## License
 
-© 2014&mdash;2019 Vitalii Stepanenko
+© 2014&mdash;2022 Vitalii Stepanenko
 
 Licensed under the MIT License. 
 
