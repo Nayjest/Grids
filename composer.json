@@ -23,9 +23,12 @@
         }
     ],
     "require": {
-        "php": ">=5.4.0",
+        "php": ">=5.5.0",
         "illuminate/support": ">=4.2",
         "nayjest/builder": "~2"
+    },
+    "require-dev": {
+        "laravel/framework": "^5.5.0"
     },
     "suggest": {
         "laravelcollective/html": "Required to work with Laravel 5.X",
