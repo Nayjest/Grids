@@ -10,6 +10,7 @@ use Nayjest\Grids\Components\Base\RenderableComponent;
 use Nayjest\Grids\Components\Base\RenderableRegistry;
 use Nayjest\Grids\DataProvider;
 use Nayjest\Grids\DataRow;
+use Nayjest\Grids\FieldConfig;
 use Nayjest\Grids\Grid;
 
 /**
@@ -32,6 +33,20 @@ class CsvExport extends RenderableComponent
     protected $name = CsvExport::NAME;
     protected $render_section = RenderableRegistry::SECTION_END;
     protected $rows_limit = self::DEFAULT_ROWS_LIMIT;
+    /**
+     * List of columns names that are not to be exported to CSV file. It is not verified if column name
+     * exists in result data row
+     * 
+     * @var string[]
+     */
+    protected $ignored_columns = [];
+    /**
+     * Flag determining if hidden columns should be rendered into CSV file. By default hidden files
+     * are ignored.
+     * 
+     * @var bool
+     */
+    protected $is_hidden_columns_exported = false;
 
     /**
      * @var string
@@ -97,6 +112,63 @@ class CsvExport extends RenderableComponent
         return $this;
     }
 
+    /**
+     * Returns list of previously set ignored columns
+     * 
+     * @return array|null
+     */
+    public function getIgnoredColumns()
+    {
+        return $this->ignored_columns;
+    }
+
+    /**
+     * Returns flag determining if hidden columns are exported
+     * 
+     * @return bool
+     */
+    public function isHiddenColumnsExported()
+    {
+        return $this->is_hidden_columns_exported;
+    }
+    
+    /**
+     * Sets flag determining if hidden columns should be exported to CSV file. By default
+     * hidden columns are all ignored
+     *
+     * @param bool $isHiddenColumnsExported
+     * @return $this
+     */
+    public function setIsHiddenColumnsExported($isHiddenColumnsExported)
+    {
+        $this->is_hidden_columns_exported = $isHiddenColumnsExported;
+        return $this;
+    }
+
+    /**
+     * Sets list of columns, specified by name, to be ignored on export
+     * 
+     * @param array|null $ignored_columns
+     * @return $this
+     */
+    public function setIgnoredColumns($ignored_columns)
+    {
+        $this->ignored_columns = $ignored_columns;
+        return $this;
+    }
+
+    /**
+     * Helper method determining if provided column should be exported into CSV
+     * 
+     * @param FieldConfig $column
+     * @return bool
+     */
+    protected function isColumnExported($column)
+    {
+        return !in_array($column->getName(), $this->ignored_columns)
+            && ($this->is_hidden_columns_exported || !$column->isHidden());
+    }
+
     protected function setCsvHeaders(Response $response)
     {
         $response->header('Content-Type', 'application/csv');
@@ -138,7 +210,7 @@ class CsvExport extends RenderableComponent
         while ($row = $provider->getRow()) {
             $output = [];
             foreach ($this->grid->getConfig()->getColumns() as $column) {
-                if (!$column->isHidden()) {
+                if ($this->isColumnExported($column)) {
                     $output[] = $this->escapeString( $column->getValue($row) );
                 }
             }
@@ -171,7 +243,7 @@ class CsvExport extends RenderableComponent
     {
         $output = [];
         foreach ($this->grid->getConfig()->getColumns() as $column) {
-            if (!$column->isHidden()) {
+            if ($this->isColumnExported($column)) {
                 $output[] = $this->escapeString($column->getLabel());
             }
         }
