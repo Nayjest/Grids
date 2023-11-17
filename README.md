@@ -10,8 +10,6 @@ Grids
 
 All Laravel versions starting from Laravel 4.X are supported.
 
-- Pull-requests from 3rd-party contributors containing new features can be accepted to nayjest/grids just in case when it doesn't break backward compatibility. If you have some radical improvements, please contribute to [view-components/grids](https://github.com/view-components/grids).
-
 ## Features
 * Data providers (php array, Eloquent model, Doctrine DBAL query object)
 * Themes support
