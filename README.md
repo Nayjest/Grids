@@ -40,7 +40,7 @@ All Laravel versions starting from Laravel 4.X are supported.
 
 ## Requirements
 
-* Laravel 4.X / 5.X / 6.X
+* Laravel 4.X+
 * laravelcollective/html package if you use Laravel5.X
 * php 5.5+
 
