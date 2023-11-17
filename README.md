@@ -8,7 +8,7 @@ Grids
 [![Release](https://img.shields.io/packagist/v/nayjest/grids.svg)](https://packagist.org/packages/nayjest/grids)
 [![Join the chat at https://gitter.im/Nayjest/Grids](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Nayjest/Grids?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-Laravel 4.X, Laravel 5.X and Laravel 6 are supported.
+All Laravel versions starting from Laravel 4.X are supported.
 
 - Pull-requests from 3rd-party contributors containing new features can be accepted to nayjest/grids just in case when it doesn't break backward compatibility. If you have some radical improvements, please contribute to [view-components/grids](https://github.com/view-components/grids).
 
