@@ -36,6 +36,11 @@ class FieldConfig
      */
     protected $is_sortable = false;
 
+    /**
+     * @var string|null
+     */
+    protected $sortable_column;
+
     protected $sorting;
 
     /** @var  Collection|FilterConfig[] */
@@ -90,6 +95,7 @@ class FieldConfig
     public function setOrder($order)
     {
         $this->order = $order;
+
         return $this;
     }
 
@@ -112,6 +118,38 @@ class FieldConfig
     public function setName($name)
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Returns the sortable name.
+     *
+     * @returns string
+     */
+    public function getSortableName()
+    {
+        if ($this->sortable_column) {
+            return $this->sortable_column;
+        }
+
+        return $this->getName();
+    }
+
+    /**
+     * Sets field name.
+     *
+     * @param string|null $name
+     * @return $this|string
+     */
+    public function name($name = null)
+    {
+        if (is_null($name)) {
+            return $this->name;
+        }
+
+        $this->name = $name;
+
         return $this;
     }
 
@@ -133,6 +171,7 @@ class FieldConfig
     public function hide()
     {
         $this->is_hidden = true;
+
         return $this;
     }
 
@@ -144,6 +183,7 @@ class FieldConfig
     public function show()
     {
         $this->is_hidden = false;
+
         return $this;
     }
 
@@ -154,7 +194,7 @@ class FieldConfig
      */
     public function getLabel()
     {
-        return $this->label ? : ucwords(str_replace(array('-', '_', '.'), ' ', $this->name));
+        return $this->label ?: ucwords(str_replace(['-', '_', '.'], ' ', $this->name));
     }
 
     /**
@@ -166,6 +206,24 @@ class FieldConfig
     public function setLabel($label)
     {
         $this->label = $label;
+
+        return $this;
+    }
+
+    /**
+     * Sets text label that will be rendered in table header.
+     *
+     * @param string|null $label
+     * @return $this|string
+     */
+    public function label($label = null)
+    {
+        if (is_null($label)) {
+            return $this->label;
+        }
+
+        $this->label = $label;
+
         return $this;
     }
 
@@ -183,11 +241,34 @@ class FieldConfig
      * Allows to enable or disable sorting controls for column.
      *
      * @param boolean $isSortable
+     * @param string|null $sortableColumn
      * @return $this
      */
-    public function setSortable($isSortable)
+    public function setSortable($isSortable, $sortableColumn = null)
     {
+        $this->sortable_column = $sortableColumn;
         $this->is_sortable = $isSortable;
+
+        return $this;
+    }
+
+    /**
+     * Allows to enable or disable sorting controls for column.
+     *
+     * @param boolean|null $isSortable
+     * @param string|null $sortableColumn by default we use the field name to sort, but in some cases may be different
+     * name, for example, the relation column is 'profile.nickname' and inner join is 'profiles.nickname'.
+     * @return $this|boolean
+     */
+    public function sortable($isSortable, $sortableColumn = null)
+    {
+        if (is_null($isSortable)) {
+            return $this->is_sortable;
+        }
+
+        $this->sortable_column = $sortableColumn;
+        $this->is_sortable = $isSortable;
+
         return $this;
     }
 
@@ -211,6 +292,24 @@ class FieldConfig
     public function setSorting($sortOrder)
     {
         $this->sorting = $sortOrder;
+
+        return $this;
+    }
+
+    /**
+     * Allows to specify sorting by this column for data rows.
+     *
+     * @param null|string|boolean $sortOrder null|Grid::SORT_ASC|Grid::SORT_DESC|false
+     * @return $this
+     */
+    public function sorting($sortOrder = false)
+    {
+        if ($sortOrder === false) {
+            return $this->sorting;
+        }
+
+        $this->sorting = $sortOrder;
+
         return $this;
     }
 
@@ -244,6 +343,7 @@ class FieldConfig
     public function setCallback($callback)
     {
         $this->callback = $callback;
+
         return $this;
     }
 
@@ -256,6 +356,24 @@ class FieldConfig
     public function getCallback()
     {
         return $this->callback;
+    }
+
+    /**
+     * Allows to set callback function that will render
+     * content of table cells for this column.
+     *
+     * @param string|null $callback
+     * @return $this|callable|null
+     */
+    public function callback($callback = null)
+    {
+        if (is_null($callback)) {
+            return $this->callback;
+        }
+
+        $this->callback = $callback;
+
+        return $this;
     }
 
     /**
@@ -275,6 +393,26 @@ class FieldConfig
     }
 
     /**
+     * Allows to specify filtering controls for column.
+     *
+     * @param Collection|FilterConfig[]|null $filters
+     * @return $this|Collection|FilterConfig[]
+     */
+    public function filters($filters = null)
+    {
+        if (is_null($filters)) {
+            return $this->filters;
+        }
+
+        $this->filters = Collection::make($filters);
+        foreach ($this->filters as $filterConfig) {
+            $filterConfig->attach($this);
+        }
+
+        return $this;
+    }
+
+    /**
      * Allows to add filtering control to column.
      *
      * @param FilterConfig $filter
@@ -284,6 +422,20 @@ class FieldConfig
     {
         $this->getFilters()->push($filter);
         $filter->attach($this);
+
+        return $this;
+    }
+
+    /**
+     * Allows to add filtering control to column.
+     *
+     * @param FilterConfig $filter
+     * @return $this
+     */
+    public function filter(FilterConfig $filter)
+    {
+        $this->addFilter($filter);
+
         return $this;
     }
 
@@ -298,6 +450,7 @@ class FieldConfig
     {
         $filter = new $class;
         $this->addFilter($filter);
+
         return $filter;
     }
 
@@ -321,6 +474,7 @@ class FieldConfig
         if (null === $this->filters) {
             $this->filters = new Collection();
         }
+
         return $this->filters;
     }
 

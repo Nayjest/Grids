@@ -52,6 +52,16 @@ abstract class DataRow implements DataRowInterface
     }
 
     /**
+     * Returns row data source.
+     *
+     * @return mixed
+     */
+    public function src()
+    {
+        return $this->getSrc();
+    }
+
+    /**
      * Returns value for specified column.
      *
      * @param string $fieldName

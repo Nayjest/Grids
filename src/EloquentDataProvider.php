@@ -15,6 +15,15 @@ class EloquentDataProvider extends DataProvider
     /** @var  $iterator \ArrayIterator */
     protected $iterator;
 
+    protected $with = [];
+
+    protected $whereHas = [];
+
+    /**
+     * @var Builder
+     */
+    protected $src;
+
     /**
      * Constructor.
      *
@@ -55,7 +64,7 @@ class EloquentDataProvider extends DataProvider
     public function getPaginator()
     {
         if (!$this->paginator) {
-            $this->paginator = $this->src->paginate($this->page_size);
+            $this->paginator = $this->finalSrc()->paginate($this->page_size);
         }
         return $this->paginator;
     }
@@ -65,7 +74,7 @@ class EloquentDataProvider extends DataProvider
      */
     public function getPaginationFactory()
     {
-        return $this->src->getQuery()->getConnection()->getPaginator();
+        return $this->finalSrc()->getQuery()->getConnection()->getPaginator();
     }
 
     protected function getIterator()
@@ -81,7 +90,7 @@ class EloquentDataProvider extends DataProvider
      */
     public function getBuilder()
     {
-        return $this->src;
+        return $this->finalSrc();
     }
 
     public function getRow()
@@ -122,6 +131,28 @@ class EloquentDataProvider extends DataProvider
     }
 
     /**
+     * @return Builder
+     */
+    public function finalSrc()
+    {
+        if ($this->whereHas !== []) {
+            foreach ($this->whereHas as $relation => $funcs) {
+                $this->src->whereHas($relation, function($query) use ($funcs) {
+                    foreach ($funcs as $func) {
+                        call_user_func($func, $query);
+                    }
+                });
+            }
+        }
+
+        if ($this->with !== []) {
+            $this->src->with($this->with);
+        }
+
+        return $this->src;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function filter($fieldName, $operator, $value)
@@ -131,29 +162,49 @@ class EloquentDataProvider extends DataProvider
                 $operator = '=';
                 break;
             case "n_eq":
-                $operator = '<>';    
+                $operator = '<>';
                 break;
             case "gt":
-                $operator = '>';    
-                 break;
+                $operator = '>';
+                break;
             case "lt":
-                $operator = '<';    
+                $operator = '<';
                 break;
             case "ls_e":
-                $operator = '<=';    
+                $operator = '<=';
                 break;
             case "gt_e":
-                $operator = '>=';    
+                $operator = '>=';
                 break;
             case "in":
                 if (!is_array($value)) {
                     $operator = '=';
-                    break;
                 }
-                $this->src->whereIn($fieldName, $value);
-                return $this;
+                break;
         }
-        $this->src->where($fieldName, $operator, $value);
+
+        if (strpos($fieldName, '.') !== false) {
+            $fieldNameParts = explode('.', $fieldName);
+            $relationName = $fieldNameParts[0];
+            $endFor = count($fieldNameParts) - 1;
+            for ($i = 1;$i < $endFor;$i++) {
+                $relationName .= '.' . $fieldNameParts[$i];
+            }
+            $relatedColumnName = $fieldNameParts[$i];
+            $func = function ($query) use ($relationName, $relatedColumnName, $operator, $value) {
+                $query
+                    ->where($relatedColumnName, $operator, $value);
+            };
+            $with = [$relationName => $func];
+            $this->with = array_merge($this->with, $with);
+            if (!isset($this->whereHas[$relationName])) {
+                $this->whereHas[$relationName] = [];
+            }
+            $this->whereHas[$relationName][] = $func;
+        } else {
+            $this->src->where($fieldName, $operator, $value);
+        }
+
         return $this;
     }
 }

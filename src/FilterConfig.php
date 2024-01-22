@@ -40,9 +40,30 @@ class FilterConfig
         return $this;
     }
 
+    /**
+     * @return self|mixed
+     */
+    public function operator($operator = null)
+    {
+        if (is_null($operator)) {
+            return $this->operator;
+        }
+
+        $this->operator = $operator;
+        return $this;
+    }
+
     public function getColumn()
     {
         return $this->column;
+    }
+
+    /**
+     * @return self|mixed
+     */
+    public function column()
+    {
+        return $this->getColumn();
     }
 
     public function getLabel()
@@ -52,6 +73,19 @@ class FilterConfig
 
     public function setLabel($label)
     {
+        $this->label = $label;
+        return $this;
+    }
+
+    /**
+     * @return self|mixed
+     */
+    public function label($label = null)
+    {
+        if (is_null($label)) {
+            return $this->label;
+        }
+
         $this->label = $label;
         return $this;
     }
@@ -74,6 +108,20 @@ class FilterConfig
         return $this;
     }
 
+    /**
+     * @param callable $func ($value, $data_provider)
+     * @return $this
+     */
+    public function filteringFunc($func = null)
+    {
+        if (is_null($func)) {
+            return $this->filtering_func;
+        }
+
+        $this->filtering_func = $func;
+        return $this;
+    }
+
     public function setTemplate($template)
     {
         $this->template = $template;
@@ -88,7 +136,23 @@ class FilterConfig
         return $this->template;
     }
 
+    /**
+     * @return self|mixed
+     */
+    public function template($template = null)
+    {
+        if (is_null($template)) {
+            return $this->template;
+        }
 
+        $this->template = $template;
+        return $this;
+    }
+
+
+    /**
+     * @return self|mixed
+     */
     public function getDefaultValue()
     {
         return $this->default_value;
@@ -96,6 +160,16 @@ class FilterConfig
 
     public function setDefaultValue($value)
     {
+        $this->default_value = $value;
+        return $this;
+    }
+
+    public function defaultValue($value = null)
+    {
+        if (is_null($value)) {
+            return $this->default_value;
+        }
+
         $this->default_value = $value;
         return $this;
     }
@@ -114,6 +188,19 @@ class FilterConfig
         return $this;
     }
 
+    /**
+     * @return self|mixed
+     */
+    public function name($name = null)
+    {
+        if (is_null($name)) {
+            return $this->getName();
+        }
+
+        $this->name = $name;
+        return $this;
+    }
+
     public function attach(FieldConfig $column)
     {
         $this->column = $column;
@@ -122,5 +209,13 @@ class FilterConfig
     public function getId()
     {
         return $this->getName() . '-' . $this->getOperator();
+    }
+
+    /**
+     * @return string
+     */
+    public function id()
+    {
+        return $this->getId();
     }
 }
